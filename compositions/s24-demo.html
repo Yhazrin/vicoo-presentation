@@ -1,0 +1,292 @@
+<div data-composition-id="s24-demo">
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,800;1,700&family=Inter:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500&display=swap');
+
+    .s24-canvas { width: 1920px; height: 1080px; background: #F5F0E8; position: relative; overflow: hidden; font-family: "Inter", sans-serif; }
+
+    /* Brand header */
+    .s24-brand-header { position: absolute; top: 40px; left: 50%; transform: translateX(-50%); display: flex; align-items: center; gap: 10px; padding: 10px 20px 10px 14px; background: rgba(255,255,255,0.82); backdrop-filter: blur(20px); border: 1px solid rgba(212,207,196,0.55); border-radius: 9999px; box-shadow: 0 4px 24px rgba(26,26,22,0.06); z-index: 20; }
+    .s24-logo-box { width: 34px; height: 34px; border-radius: 8px; background: #1A1A16; display: flex; align-items: center; justify-content: center; }
+    .s24-logo-text { font-size: 13px; font-weight: 800; color: #F5F0E8; letter-spacing: 0.02em; }
+    .s24-brand-name { font-size: 13px; font-weight: 700; color: #1A1A16; letter-spacing: 0.12em; }
+
+    /* Section label */
+    .s24-header { position: absolute; top: 110px; left: 50%; transform: translateX(-50%); text-align: center; opacity: 0; z-index: 10; }
+    .s24-header h2 { font-family: "IBM Plex Mono", monospace; font-size: 10px; font-weight: 500; letter-spacing: 0.3em; color: #B8B2A7; text-transform: uppercase; }
+
+    /* Globe area — centered left */
+    .s24-globe-wrap {
+      position: absolute;
+      top: 50%;
+      left: 46%;
+      transform: translate(-50%, -52%);
+      width: 560px;
+      height: 560px;
+    }
+
+    /* SVG Wireframe Globe */
+    .s24-globe-svg {
+      width: 560px;
+      height: 560px;
+      overflow: visible;
+    }
+
+    /* Info panel — right side */
+    .s24-info-panel {
+      position: absolute;
+      top: 50%;
+      right: 80px;
+      transform: translateY(-52%);
+      width: 380px;
+      background: rgba(255,255,255,0.76);
+      backdrop-filter: blur(20px);
+      border: 1px solid rgba(212,207,196,0.45);
+      border-radius: 20px;
+      padding: 28px 32px;
+      opacity: 0;
+      z-index: 15;
+    }
+    .s24-info-title {
+      font-family: "IBM Plex Mono", monospace;
+      font-size: 9px;
+      font-weight: 500;
+      letter-spacing: 0.25em;
+      color: #B8B2A7;
+      text-transform: uppercase;
+      margin-bottom: 20px;
+    }
+    .s24-product-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 14px;
+      padding: 14px 0;
+      border-bottom: 1px solid rgba(212,207,196,0.3);
+    }
+    .s24-product-item:last-child { border-bottom: none; }
+    .s24-product-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: rgba(26,26,22,0.3);
+      border: 1.5px solid rgba(26,26,22,0.5);
+      margin-top: 5px;
+      flex-shrink: 0;
+    }
+    .s24-product-body { flex: 1; }
+    .s24-product-name { font-family: "Inter", sans-serif; font-size: 14px; font-weight: 700; color: #1A1A16; }
+    .s24-product-id { font-family: "IBM Plex Mono", monospace; font-size: 10px; color: #8A857E; margin-top: 2px; }
+    .s24-product-co2 { font-family: "Inter", sans-serif; font-size: 22px; font-weight: 800; color: #1A1A16; margin-top: 6px; }
+    .s24-product-reduction { font-family: "IBM Plex Mono", monospace; font-size: 10px; color: #8A857E; margin-top: 2px; }
+    .s24-product-route { font-family: "IBM Plex Mono", monospace; font-size: 10px; color: #B8B2A7; margin-top: 4px; }
+
+    /* Trace hint */
+    .s24-trace-hint {
+      position: absolute;
+      bottom: 80px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 12px 24px;
+      background: rgba(255,255,255,0.76);
+      backdrop-filter: blur(20px);
+      border: 1px solid rgba(212,207,196,0.45);
+      border-radius: 9999px;
+      opacity: 0;
+    }
+    .s24-trace-hint-text { font-family: "IBM Plex Mono", monospace; font-size: 11px; color: #8A857E; }
+    .s24-trace-hint code {
+      font-family: "IBM Plex Mono", monospace;
+      font-size: 11px;
+      color: #1A1A16;
+      background: rgba(26,26,22,0.06);
+      padding: 2px 8px;
+      border-radius: 4px;
+    }
+
+    /* PiP windows */
+    .s24-pip { position: absolute; bottom: 60px; right: 60px; display: flex; gap: 14px; opacity: 0; z-index: 20; }
+    .s24-face {
+      width: 86px;
+      height: 86px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.88);
+      backdrop-filter: blur(20px);
+      border: 1px solid rgba(212,207,196,0.5);
+      box-shadow: 0 8px 40px rgba(26,26,22,0.10);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: "Inter", sans-serif;
+      font-size: 30px;
+      font-weight: 700;
+      color: #1A1A16;
+    }
+    .s24-face-label {
+      font-family: "IBM Plex Mono", monospace;
+      font-size: 10px;
+      color: #8A857E;
+      text-align: center;
+      margin-top: 6px;
+    }
+    .s24-pip-item { display: flex; flex-direction: column; align-items: center; }
+  </style>
+  <div class="s24-canvas">
+    <!-- Brand Header -->
+    <div class="s24-brand-header">
+      <div class="s24-logo-box"><span class="s24-logo-text">V</span></div>
+      <span class="s24-brand-name">VICOO</span>
+    </div>
+
+    <div class="s24-header"><h2>Supply Chain Traceability</h2></div>
+
+    <!-- Globe SVG -->
+    <div class="s24-globe-wrap">
+      <svg class="s24-globe-svg" viewBox="0 0 560 560" xmlns="http://www.w3.org/2000/svg">
+        <!-- Outer ring -->
+        <circle cx="280" cy="280" r="270" fill="none" stroke="rgba(26,26,22,0.10)" stroke-width="1"/>
+        <!-- Equator -->
+        <ellipse cx="280" cy="280" rx="270" ry="80" fill="none" stroke="rgba(26,26,22,0.07)" stroke-width="0.8" transform="rotate(-20 280 280)"/>
+        <!-- Meridian rings -->
+        <ellipse cx="280" cy="280" rx="270" ry="60" fill="none" stroke="rgba(26,26,22,0.06)" stroke-width="0.8"/>
+        <ellipse cx="280" cy="280" rx="200" ry="270" fill="none" stroke="rgba(26,26,22,0.06)" stroke-width="0.8"/>
+        <ellipse cx="280" cy="280" rx="120" ry="270" fill="none" stroke="rgba(26,26,22,0.05)" stroke-width="0.8"/>
+        <!-- Lat grid lines -->
+        <path d="M 10 200 Q 280 160 550 200" fill="none" stroke="rgba(26,26,22,0.05)" stroke-width="0.8"/>
+        <path d="M 10 280 Q 280 250 550 280" fill="none" stroke="rgba(26,26,22,0.05)" stroke-width="0.8"/>
+        <path d="M 10 360 Q 280 400 550 360" fill="none" stroke="rgba(26,26,22,0.05)" stroke-width="0.8"/>
+        <!-- Route 1: Xinjiang → Shandong → Guangzhou (Rust) -->
+        <path class="s24-r1" d="M 160 110 Q 220 200 320 250" fill="none" stroke="rgba(26,26,22,0.25)" stroke-width="1.5"/>
+        <path class="s24-r1a" d="M 320 250 Q 400 300 430 380" fill="none" stroke="rgba(26,26,22,0.25)" stroke-width="1.5"/>
+        <!-- Route 2: Shandong → Jiangsu → Zhejiang (Sage) -->
+        <path class="s24-r2" d="M 180 320 Q 260 260 350 280" fill="none" stroke="rgba(26,26,22,0.25)" stroke-width="1.5"/>
+        <path class="s24-r2a" d="M 350 280 Q 420 290 450 330" fill="none" stroke="rgba(26,26,22,0.25)" stroke-width="1.5"/>
+        <!-- Route 3: Yunnan → Yunnan → Chengdu (Sepia) -->
+        <path class="s24-r3" d="M 220 380 Q 280 340 340 360" fill="none" stroke="rgba(26,26,22,0.25)" stroke-width="1.5"/>
+        <path class="s24-r3a" d="M 340 360 Q 380 380 420 420" fill="none" stroke="rgba(26,26,22,0.25)" stroke-width="1.5"/>
+        <!-- Nodes -->
+        <circle class="s24-node" cx="160" cy="110" r="5" fill="rgba(26,26,22,0.4)" stroke="rgba(26,26,22,0.6)" stroke-width="1.5"/>
+        <circle class="s24-node" cx="320" cy="250" r="5" fill="rgba(26,26,22,0.4)" stroke="rgba(26,26,22,0.6)" stroke-width="1.5"/>
+        <circle class="s24-node" cx="430" cy="380" r="5" fill="rgba(26,26,22,0.4)" stroke="rgba(26,26,22,0.6)" stroke-width="1.5"/>
+        <circle class="s24-node" cx="180" cy="320" r="5" fill="rgba(26,26,22,0.4)" stroke="rgba(26,26,22,0.6)" stroke-width="1.5"/>
+        <circle class="s24-node" cx="350" cy="280" r="5" fill="rgba(26,26,22,0.4)" stroke="rgba(26,26,22,0.6)" stroke-width="1.5"/>
+        <circle class="s24-node" cx="450" cy="330" r="5" fill="rgba(26,26,22,0.4)" stroke="rgba(26,26,22,0.6)" stroke-width="1.5"/>
+        <circle class="s24-node" cx="220" cy="380" r="5" fill="rgba(26,26,22,0.4)" stroke="rgba(26,26,22,0.6)" stroke-width="1.5"/>
+        <circle class="s24-node" cx="340" cy="360" r="5" fill="rgba(26,26,22,0.4)" stroke="rgba(26,26,22,0.6)" stroke-width="1.5"/>
+        <circle class="s24-node" cx="420" cy="420" r="5" fill="rgba(26,26,22,0.4)" stroke="rgba(26,26,22,0.6)" stroke-width="1.5"/>
+        <!-- Animated particles (will be animated via GSAP) -->
+        <circle class="s24-particle s24-p1" cx="160" cy="110" r="4" fill="rgba(26,26,22,0.7)"/>
+        <circle class="s24-particle s24-p2" cx="180" cy="320" r="4" fill="rgba(26,26,22,0.7)"/>
+        <circle class="s24-particle s24-p3" cx="220" cy="380" r="4" fill="rgba(26,26,22,0.7)"/>
+      </svg>
+    </div>
+
+    <!-- Info panel -->
+    <div class="s24-info-panel">
+      <div class="s24-info-title">3 Products · 9 Supply Chain Stages</div>
+      <div class="s24-product-item">
+        <div class="s24-product-dot"></div>
+        <div class="s24-product-body">
+          <div class="s24-product-name">Playful Garden Tee</div>
+          <div class="s24-product-id">TH-2026-001 · Rust</div>
+          <div class="s24-product-co2">8.2kg CO₂</div>
+          <div class="s24-product-reduction">75% less than traditional (33.4kg)</div>
+          <div class="s24-product-route">新疆棉花 → 山东纺织 → 广州制造</div>
+        </div>
+      </div>
+      <div class="s24-product-item">
+        <div class="s24-product-dot"></div>
+        <div class="s24-product-body">
+          <div class="s24-product-name">Starlit Dream Hoodie</div>
+          <div class="s24-product-id">TH-2026-002 · Sage</div>
+          <div class="s24-product-co2">10.5kg CO₂</div>
+          <div class="s24-product-reduction">75% less than traditional (42.0kg)</div>
+          <div class="s24-product-route">山东棉花 → 江苏纺织 → 浙江制造</div>
+        </div>
+      </div>
+      <div class="s24-product-item">
+        <div class="s24-product-dot"></div>
+        <div class="s24-product-body">
+          <div class="s24-product-name">Rainbow Doodle Dress</div>
+          <div class="s24-product-id">TH-2026-003 · Sepia</div>
+          <div class="s24-product-co2">6.8kg CO₂</div>
+          <div class="s24-product-reduction">76% less than traditional (28.0kg)</div>
+          <div class="s24-product-route">云南大麻 → 云南纺织 → 成都工坊</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Trace hint -->
+    <div class="s24-trace-hint">
+      <div class="s24-trace-hint-text">Search:</div>
+      <code>VICOO-2026-SP-001</code>
+    </div>
+
+    <!-- PiP -->
+    <div class="s24-pip">
+      <div class="s24-pip-item">
+        <div class="s24-face">黄</div>
+        <div class="s24-face-label">Huang Tian</div>
+      </div>
+      <div class="s24-pip-item">
+        <div class="s24-face">杨</div>
+        <div class="s24-face-label">Yang Haoze</div>
+      </div>
+    </div>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/MotionPathPlugin.min.js"></script>
+  <script>
+  (function(){
+    var tl = gsap.timeline({ paused: true });
+    tl.to('.s24-brand-header', { opacity: 1, duration: 0.6, ease: 'power2.out' }, 0.2);
+    tl.to('.s24-header', { opacity: 1, duration: 0.6 }, 0.5);
+    tl.to('.s24-globe-wrap', { opacity: 1, duration: 1.0, ease: 'power2.out' }, 0.8);
+    tl.to('.s24-info-panel', { opacity: 1, x: 0, duration: 0.7, ease: 'power3.out' }, 1.2);
+    tl.to('.s24-trace-hint', { opacity: 1, duration: 0.6 }, 1.6);
+    tl.to('.s24-pip', { opacity: 1, duration: 0.6, ease: 'power3.out' }, 1.9);
+
+    // Particle animation along SVG paths
+    gsap.to('.s24-p1', {
+      motionPath: {
+        path: '.s24-r1',
+        align: '.s24-r1',
+        alignOrigin: [0.5, 0.5],
+        autoRotate: false
+      },
+      duration: 3.2,
+      repeat: -1,
+      yoyo: true,
+      ease: 'none'
+    });
+    gsap.to('.s24-p2', {
+      motionPath: {
+        path: '.s24-r2',
+        align: '.s24-r2',
+        alignOrigin: [0.5, 0.5],
+        autoRotate: false
+      },
+      duration: 2.8,
+      repeat: -1,
+      yoyo: true,
+      ease: 'none'
+    });
+    gsap.to('.s24-p3', {
+      motionPath: {
+        path: '.s24-r3',
+        align: '.s24-r3',
+        alignOrigin: [0.5, 0.5],
+        autoRotate: false
+      },
+      duration: 3.6,
+      repeat: -1,
+      yoyo: true,
+      ease: 'none'
+    });
+
+    window.__timelines = window.__timelines || {};
+    window.__timelines['s24-demo'] = tl;
+  })();
+  </script>
+</div>

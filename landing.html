@@ -1,0 +1,347 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>VICOO × UNIQLO — Presentation</title>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,800;1,700&family=Inter:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet"/>
+  <style>
+    :root {
+      --color-paper: #F5F0E8;
+      --color-aged-stock: #EDE6D6;
+      --color-warm-gray: #D4CFC4;
+      --color-muted-gray: #B8B2A7;
+      --color-ink: #1A1A16;
+      --color-ink-faded: #4A4540;
+      --color-rust: #8B3A2A;
+      --color-sage: #3F4F45;
+      --color-sepia-on-dark: #B5A595;
+      --radius-capsule: 9999px;
+      --radius-xl: 24px;
+      --shadow-glass: 0 4px 24px rgba(26,26,22,0.06), 0 1px 4px rgba(26,26,22,0.04);
+      --shadow-glass-hover: 0 8px 40px rgba(26,26,22,0.10), 0 2px 8px rgba(26,26,22,0.06);
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      width: 100vw;
+      height: 100vh;
+      background: var(--color-paper);
+      font-family: 'Inter', -apple-system, sans-serif;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    /* Composition root */
+    #root {
+      width: 1920px;
+      height: 1080px;
+      position: relative;
+      overflow: hidden;
+      transform-origin: top left;
+    }
+
+    /* Ambient background */
+    .bg-wash {
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse at 30% 20%, rgba(237,230,214,0.8) 0%, transparent 55%),
+        radial-gradient(ellipse at 75% 75%, rgba(237,230,214,0.5) 0%, transparent 50%);
+    }
+
+    /* Top brand bar */
+    .top-bar {
+      position: absolute;
+      top: 40px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 10px 20px 10px 14px;
+      background: rgba(255,255,255,0.82);
+      backdrop-filter: blur(20px);
+      border: 1px solid rgba(212,207,196,0.55);
+      border-radius: var(--radius-capsule);
+      box-shadow: var(--shadow-glass);
+    }
+    .top-bar-logo {
+      width: 34px;
+      height: 34px;
+      border-radius: 8px;
+      background: var(--color-ink);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .top-bar-name {
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      color: var(--color-ink);
+      text-transform: uppercase;
+    }
+    .top-bar-sep {
+      width: 1px;
+      height: 20px;
+      background: var(--color-warm-gray);
+    }
+    .top-bar-partner {
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.15em;
+      color: var(--color-muted-gray);
+      text-transform: uppercase;
+    }
+
+    /* Center stage */
+    .center-stage {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 0;
+    }
+
+    /* Lockup block */
+    .lockup {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0;
+    }
+    .lockup-uniqlo {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 13px;
+      font-weight: 400;
+      letter-spacing: 0.25em;
+      color: #8A857E;
+      margin-bottom: 20px;
+    }
+    .lockup-vicoo {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-style: italic;
+      font-weight: 800;
+      font-size: 120px;
+      letter-spacing: -0.02em;
+      color: var(--color-ink);
+      line-height: 0.88;
+    }
+
+    /* Divider */
+    .lockup-divider {
+      width: 0;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--color-warm-gray), transparent);
+      margin: 44px 0 36px;
+    }
+
+    /* Play button — large capsule */
+    .play-btn {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      padding: 18px 40px;
+      background: var(--color-ink);
+      border: none;
+      border-radius: var(--radius-capsule);
+      cursor: pointer;
+      box-shadow: var(--shadow-glass-hover);
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+    .play-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 16px 56px rgba(26,26,22,0.16);
+    }
+    .play-btn:active {
+      transform: translateY(0);
+    }
+    .play-btn-icon {
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      background: var(--color-paper);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+    .play-btn-icon svg {
+      width: 8px;
+      height: 10px;
+      margin-left: 2px;
+      fill: var(--color-ink);
+    }
+    .play-btn-label {
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.2em;
+      color: var(--color-paper);
+      text-transform: uppercase;
+    }
+
+    /* Tagline */
+    .lockup-tagline {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 12px;
+      font-weight: 400;
+      letter-spacing: 0.2em;
+      color: #8A857E;
+      text-transform: uppercase;
+    }
+
+    /* Bottom footer brand */
+    .bottom-brand {
+      position: absolute;
+      bottom: 48px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 14px;
+      padding: 36px 64px;
+      background: var(--color-ink);
+      border-radius: 24px;
+      box-shadow: 0 16px 64px rgba(26,26,22,0.18);
+    }
+    .bottom-brand-name {
+      font-family: 'Playfair Display', serif;
+      font-style: italic;
+      font-size: 42px;
+      font-weight: 700;
+      letter-spacing: 0.02em;
+      color: var(--color-paper);
+    }
+    .bottom-brand-lockup {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+    .bottom-brand-sep {
+      width: 32px;
+      height: 1px;
+      background: var(--color-sepia-on-dark);
+    }
+    .bottom-brand-tag {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 10px;
+      font-weight: 400;
+      letter-spacing: 0.25em;
+      color: var(--color-sepia-on-dark);
+      text-transform: uppercase;
+    }
+
+    /* Scale to fit viewport */
+    @media (aspect-ratio: 16/9) {
+      #root {
+        width: 100vw;
+        height: 56.25vw;
+      }
+    }
+    @media (max-aspect-ratio: 16/9) {
+      #root {
+        height: 100vh;
+        width: 177.78vh;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div id="root">
+    <!-- Ambient wash -->
+    <div class="bg-wash"></div>
+
+    <!-- Top brand bar -->
+    <div class="top-bar">
+      <div class="top-bar-logo">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+          <circle cx="12" cy="12" r="10" stroke="#F5F0E8" stroke-width="1.5"/>
+          <circle cx="12" cy="12" r="4" fill="#F5F0E8"/>
+        </svg>
+      </div>
+      <span class="top-bar-name">VICOO</span>
+      <div class="top-bar-sep"></div>
+      <span class="top-bar-partner">× UNIQLO</span>
+    </div>
+
+    <!-- Center stage -->
+    <div class="center-stage">
+      <div class="lockup">
+        <div class="lockup-uniqlo">× UNIQLO</div>
+        <h1 class="lockup-vicoo">VICOO</h1>
+      </div>
+
+      <div class="lockup-divider"></div>
+
+      <!-- Play button -->
+      <button class="play-btn" id="playBtn">
+        <div class="play-btn-icon">
+          <svg viewBox="0 0 10 12"><path d="M0 0L10 6L0 12V0Z"/></svg>
+        </div>
+        <span class="play-btn-label">Watch Presentation</span>
+      </button>
+
+      <div class="lockup-tagline">Visual · Circle · Ecosystem</div>
+    </div>
+
+    <!-- Bottom brand block -->
+    <div class="bottom-brand">
+      <div class="bottom-brand-name">VICOO × UNIQLO</div>
+      <div class="bottom-brand-lockup">
+        <span class="bottom-brand-tag">Visual Circle</span>
+        <div class="bottom-brand-sep"></div>
+        <span class="bottom-brand-tag">2024</span>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // GSAP entrance timeline
+    var tl = gsap.timeline({ paused: true });
+
+    // Top bar
+    tl.from('.top-bar', { opacity: 0, y: -16, duration: 0.8, ease: 'power3.out' }, 0.3);
+
+    // Lockup
+    tl.from('.lockup-uniqlo', { opacity: 0, y: 12, duration: 0.7, ease: 'power3.out' }, 0.6);
+    tl.from('.lockup-vicoo', { opacity: 0, scale: 0.94, duration: 1.0, ease: 'power3.out' }, 0.85);
+    tl.to('.lockup-divider', { width: 320, duration: 0.9, ease: 'power2.out' }, 1.6);
+
+    // Play button
+    tl.from('.play-btn', { opacity: 0, y: 16, duration: 0.7, ease: 'power3.out' }, 2.0);
+    tl.from('.lockup-tagline', { opacity: 0, duration: 0.7, ease: 'power2.out' }, 2.3);
+
+    // Bottom brand
+    tl.from('.bottom-brand', { opacity: 0, y: 20, duration: 0.8, ease: 'power3.out' }, 2.5);
+
+    tl.play();
+
+    // Play button click → launch presentation
+    document.getElementById('playBtn').addEventListener('click', function() {
+      var btn = this;
+
+      // Ripple feedback
+      gsap.to(btn, { scale: 0.96, duration: 0.1, yoyo: true, repeat: 1, ease: 'power2.inOut', onComplete: function() {
+        // Fade out landing, go to presentation
+        gsap.to('#root', {
+          opacity: 0,
+          scale: 1.02,
+          duration: 0.5,
+          ease: 'power2.in',
+          onComplete: function() {
+            window.location.href = 'index.html';
+          }
+        });
+      }});
+    });
+  </script>
+</body>
+</html>

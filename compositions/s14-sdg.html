@@ -1,0 +1,29 @@
+<div data-composition-id="s14-sdg">
+  <style>
+    .s14-canvas { width: 1920px; height: 1080px; background: #F5F0E8; position: relative; overflow: hidden; font-family: "Inter", -apple-system, BlinkMacSystemFont, sans-serif; }
+    .s14-content { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; z-index: 10; }
+    .s14-badge { width: 140px; height: 140px; border-radius: 24px; background: rgba(255,255,255,0.75); backdrop-filter: blur(20px); border: 1px solid rgba(212,207,196,0.45); box-shadow: 0 4px 24px rgba(26,26,22,0.06); display: flex; flex-direction: column; align-items: center; justify-content: center; opacity: 0; transform: scale(0.5); }
+    .s14-badge-num { font-size: 42px; font-weight: 800; color: #3F4F45; line-height: 1; }
+    .s14-badge-text { font-size: 12px; font-weight: 600; color: #4A4540; letter-spacing: 0.1em; margin-top: 4px; }
+    .s14-title { font-size: 42px; font-weight: 700; color: #3F4F45; margin-top: 32px; letter-spacing: 0.04em; opacity: 0; transform: translateY(20px); }
+    .s14-desc { font-size: 16px; color: #4A4540; margin-top: 20px; max-width: 800px; text-align: center; line-height: 1.8; opacity: 0; }
+  </style>
+  <div class="s14-canvas">
+    <div class="s14-content">
+      <div class="s14-badge"><div class="s14-badge-num">SDG</div><div class="s14-badge-text">12</div></div>
+      <h2 class="s14-title">Sustainable Development Goal 12</h2>
+      <div class="s14-desc">VICOO directly supports SDG12 — Responsible Consumption and Production. A reliable traceability system is essential to reduce environmental impact and rebuild consumer trust.</div>
+    </div>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
+  <script>
+  (function(){
+    var tl = gsap.timeline({ paused: true });
+    tl.to('.s14-badge', { opacity: 1, scale: 1, duration: 0.8, ease: 'power2.out' }, 0.5);
+    tl.to('.s14-title', { opacity: 1, y: 0, duration: 0.7, ease: 'power3.out' }, 1.2);
+    tl.to('.s14-desc', { opacity: 1, duration: 0.6 }, 1.8);
+    window.__timelines = window.__timelines || {};
+    window.__timelines['s14-sdg'] = tl;
+  })();
+  </script>
+</div>

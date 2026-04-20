@@ -1,0 +1,70 @@
+<template id="s3-leader-template">
+<div data-composition-id="s3-leader" data-width="1920" data-height="1080" data-duration="5" data-start="0">
+  <div class="s3-canvas">
+    <!-- Brand Header -->
+    <div class="brand-header" style="opacity: 0;">
+      <div class="brand-header-logo">
+        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="12" cy="12" r="10" stroke="#F5F0E8" stroke-width="1.5"/>
+          <circle cx="12" cy="12" r="4" fill="#F5F0E8"/>
+        </svg>
+      </div>
+      <span class="brand-header-text">VICOO</span>
+      <div class="brand-header-divider"></div>
+      <span class="brand-header-partner">× UNIQLO</span>
+    </div>
+
+    <div class="s3-content">
+      <div class="s3-intro">
+        <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><circle cx="6" cy="6" r="5" stroke="currentColor" stroke-width="1.2"/><circle cx="6" cy="6" r="2" fill="currentColor"/></svg>
+        Presenting
+      </div>
+
+      <!-- White glass disc avatar (not glowing gradient ball) -->
+      <div class="s3-avatar">
+        <div class="s3-avatar-initials">刘</div>
+      </div>
+
+      <h2 class="s3-name"><span>刘</span>XX</h2>
+
+      <div class="s3-role">
+        <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><rect x="1" y="3" width="10" height="7" rx="1.5" stroke="currentColor" stroke-width="1.2"/><path d="M4 3V2.5C4 1.67 4.67 1 5.5 1H6.5C7.33 1 8 1.67 8 2.5V3" stroke="currentColor" stroke-width="1.2"/></svg>
+        SixSeven Team Leader
+      </div>
+
+      <div class="s3-team">Group 7 · <span>Six</span> Software Engineers</div>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
+  <script>
+  (function(){
+    var tl = gsap.timeline({ paused: true });
+
+    // Brand header
+    tl.to('.brand-header', { opacity: 1, duration: 0.8, ease: 'power2.out' }, 0.3);
+
+    // Intro label
+    tl.to('.s3-intro', { opacity: 1, duration: 0.6 }, 0.6);
+
+    // White glass disc avatar — no glow, no bounce, just fade + scale
+    tl.to('.s3-avatar', { opacity: 1, scale: 1, duration: 0.9, ease: 'power3.out' }, 1.0);
+
+    // Name
+    tl.to('.s3-name', { opacity: 1, y: 0, duration: 0.8, ease: 'power3.out' }, 1.5);
+
+    // Role
+    tl.to('.s3-role', { opacity: 1, duration: 0.6 }, 2.2);
+
+    // Team
+    tl.to('.s3-team', { opacity: 1, duration: 0.6 }, 2.6);
+
+    // Fade out
+    tl.to('.s3-content', { opacity: 0, y: -16, duration: 0.6 }, 4.5);
+
+    window.__timelines = window.__timelines || {};
+    window.__timelines['s3-leader'] = tl;
+  })();
+  </script>
+</div>
+</template>

@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=1920, height=1080" />
+  <title>VICOO × UNIQLO - Complete Presentation</title>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Noto+Sans+SC:wght@400;500;700&display=swap" rel="stylesheet"/>
+  <style>
+    :root {
+      --color-paper: #F5F0E8;
+      --color-aged-stock: #EDE6D6;
+      --color-warm-gray: #D4CFC4;
+      --color-muted-gray: #B8B2A7;
+      --color-ink: #1A1A16;
+      --color-ink-faded: #4A4540;
+      --color-ink-light: #6B665C;
+      --color-rust: #8B3A2A;
+      --color-sage: #3F4F45;
+      --color-sepia-on-dark: #B5A595;
+      --radius-capsule: 9999px;
+      --radius-xl: 24px;
+      --shadow-glass: 0 4px 24px rgba(26,26,22,0.06), 0 1px 4px rgba(26,26,22,0.04);
+      --shadow-glass-hover: 0 8px 40px rgba(26,26,22,0.10), 0 2px 8px rgba(26,26,22,0.06);
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html, body { width: 100vw; height: 100vh; overflow: hidden; background: var(--color-ink); font-family: 'Inter', 'Noto Sans SC', sans-serif; }
+    body { display: flex; align-items: center; justify-content: center; }
+    #stage { width: 1920px; height: 1080px; position: relative; transform-origin: center center; flex-shrink: 0; overflow: hidden; }
+
+    /* Each scene container — stacked absolutely, all start invisible */
+    .scene { position: absolute; top: 0; left: 0; width: 1920px; height: 1080px; }
+
+    /* Transition wipe overlay */
+    #wipe {
+      position: absolute;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: var(--color-paper);
+      z-index: 50;
+      pointer-events: none;
+      /* Start off-screen right */
+      transform: translateX(100%);
+    }
+  </style>
+</head>
+<body>
+  <div id="stage">
+    <div id="wipe"></div>
+    <div id="scene-0" class="scene"></div>
+    <div id="scene-1" class="scene"></div>
+    <div id="scene-2" class="scene"></div>
+    <div id="scene-3" class="scene"></div>
+    <div id="scene-4" class="scene"></div>
+    <div id="scene-5" class="scene"></div>
+    <div id="scene-6" class="scene"></div>
+    <div id="scene-7" class="scene"></div>
+    <div id="scene-8" class="scene"></div>
+    <div id="scene-9" class="scene"></div>
+    <div id="scene-10" class="scene"></div>
+    <div id="scene-11" class="scene"></div>
+    <div id="scene-12" class="scene"></div>
+    <div id="scene-13" class="scene"></div>
+    <div id="scene-14" class="scene"></div>
+    <div id="scene-15" class="scene"></div>
+    <div id="scene-16" class="scene"></div>
+    <div id="scene-17" class="scene"></div>
+    <div id="scene-18" class="scene"></div>
+    <div id="scene-19" class="scene"></div>
+    <div id="scene-20" class="scene"></div>
+    <div id="scene-21" class="scene"></div>
+    <div id="scene-22" class="scene"></div>
+    <div id="scene-23" class="scene"></div>
+    <div id="scene-24" class="scene"></div>
+    <div id="scene-25" class="scene"></div>
+    <div id="scene-26" class="scene"></div>
+  </div>
+
+<script>
+// ─── CONFIG ───────────────────────────────────────────────────────────────────
+var SCENES = [
+  { id: 's0-cover',         start: 0,   dur: 6   },
+  { id: 's1-stats',         start: 6,   dur: 5   },
+  { id: 's2-goal',          start: 11,  dur: 5   },
+  { id: 's3-leader',        start: 16,  dur: 9   },
+  { id: 's4-team-header',   start: 25,  dur: 5   },
+  { id: 's5-wang',          start: 30,  dur: 5   },
+  { id: 's6-yang',          start: 35,  dur: 5   },
+  { id: 's7-huang',         start: 40,  dur: 5   },
+  { id: 's8-li',            start: 45,  dur: 5   },
+  { id: 's9-liu',           start: 50,  dur: 5   },
+  { id: 's10-ma',           start: 55,  dur: 5   },
+  { id: 's11-vision-header',start: 60,  dur: 5   },
+  { id: 's12-pain1',        start: 65,  dur: 7   },
+  { id: 's13-pain2',        start: 72,  dur: 8   },
+  { id: 's14-sdg',          start: 80,  dur: 8   },
+  { id: 's15-solution-header',start:88, dur: 7   },
+  { id: 's16-cotton-trace', start: 95,  dur: 20  },
+  { id: 's17-tech',         start: 115, dur: 15  },
+  { id: 's18-challenges-header',start:130,dur:5   },
+  { id: 's19-challenge1',   start: 135, dur: 8   },
+  { id: 's20-challenge2',   start: 143, dur: 7   },
+  { id: 's21-future-header',start: 150, dur: 5   },
+  { id: 's22-future-plan',  start: 155, dur: 15  },
+  { id: 's23-confidence',   start: 170, dur: 10  },
+  { id: 's24-demo',         start: 180, dur: 70  },
+  { id: 's25-closing',      start: 250, dur: 10  },
+  { id: 's26-thankyou',     start: 260, dur: 5   }
+];
+
+var sceneTl = {};    // sceneId → inner composition timeline
+var currentIdx = -1;
+var pendingIdx = -1;  // queued scene while transitioning
+var mainTl = null;      // master time tracker
+var isTransitioning = false;
+
+// ─── LOAD SCENE ────────────────────────────────────────────────────────────────
+function loadScene(sceneId, el) {
+  return fetch('compositions/' + sceneId + '.html')
+    .then(function(r) { return r.text(); })
+    .then(function(html) {
+      el.innerHTML = html;
+      // Execute scripts so they register their timelines
+      var scripts = el.querySelectorAll('script');
+      scripts.forEach(function(s) {
+        var ns = document.createElement('script');
+        if (s.src) ns.src = s.src;
+        ns.textContent = s.textContent;
+        s.parentNode.replaceChild(ns, s);
+      });
+    });
+}
+
+// ─── ACTIVATE SCENE ─────────────────────────────────────────────────────────
+function activateScene(idx) {
+  if (isTransitioning) { pendingIdx = idx; return; }
+  if (idx === currentIdx) return;
+
+  var prevIdx = currentIdx;
+  var wipe = document.getElementById('wipe');
+  var W = 120;        // slide offset px
+  var DUR = 0.38;     // transition seconds
+
+  isTransitioning = true;
+
+  // Kill any in-progress tweens on elements we touch
+  gsap.killTweensOf('#scene-' + idx);
+  if (prevIdx >= 0) gsap.killTweensOf('#scene-' + prevIdx);
+  gsap.killTweensOf(wipe);
+
+  // Set initial state for new scene
+  if (idx === 0) {
+    gsap.set('#scene-' + idx, { x: 0, opacity: 1, scale: 1 });
+  } else {
+    var dir = (idx % 2 === 1) ? 'left' : 'right';
+    gsap.set('#scene-' + idx, { x: dir === 'left' ? W : -W, opacity: 1, scale: 0.97 });
+  }
+
+  // Wipe starts off-screen right
+  gsap.set(wipe, { x: '100%' });
+
+  // ── Phase 1: Wipe sweeps IN from right, covering everything ──
+  gsap.to(wipe, { x: '0%', duration: DUR * 0.45, ease: 'power2.inOut',
+    onComplete: function() {
+
+      // ── Phase 2: Old exits, new slides in under wipe ──
+      if (prevIdx >= 0) {
+        gsap.to('#scene-' + prevIdx, {
+          x: (idx % 2 === 1) ? -W : W,
+          opacity: 0, scale: 0.95,
+          duration: DUR * 0.55, ease: 'power2.inOut'
+        });
+      }
+
+      gsap.to('#scene-' + idx, {
+        x: 0, opacity: 1, scale: 1,
+        duration: DUR * 0.55, ease: 'power3.out'
+      });
+
+      // ── Phase 3: Wipe sweeps OUT to left, revealing new ──
+      gsap.to(wipe, { x: '-100%', duration: DUR * 0.4, ease: 'power2.inOut',
+        onComplete: function() {
+          // Clean up previous
+          if (prevIdx >= 0) {
+            gsap.set('#scene-' + prevIdx, { x: 0, opacity: 0, scale: 1 });
+            if (sceneTl[SCENES[prevIdx].id]) {
+              sceneTl[SCENES[prevIdx].id].pause().time(0);
+            }
+          }
+          currentIdx = idx;
+          isTransitioning = false;
+
+          // Start composition's inner timeline
+          var compId = SCENES[idx].id;
+          if (sceneTl[compId]) {
+            sceneTl[compId].time(0).play();
+          } else {
+            // If no inner timeline, just ensure it stays visible
+            gsap.set('#scene-' + idx, { opacity: 1 });
+          }
+
+          // Drain any queued scene switch
+          if (pendingIdx !== -1 && pendingIdx !== idx) {
+            var q = pendingIdx;
+            pendingIdx = -1;
+            activateScene(q);
+          }
+        }
+      });
+    }
+  });
+
+  // Reset new scene's inner timeline to 0 so it plays fresh each time shown
+  if (sceneTl[SCENES[idx].id]) {
+    sceneTl[SCENES[idx].id].time(0).pause();
+  }
+}
+
+// ─── PLAYBACK LOOP ──────────────────────────────────────────────────────────
+function tick() {
+  if (!mainTl) return;
+  var t = mainTl.time();
+
+  // Find active scene for current time
+  var targetIdx = 0;
+  for (var i = SCENES.length - 1; i >= 0; i--) {
+    if (t >= SCENES[i].start) { targetIdx = i; break; }
+  }
+
+  if (targetIdx !== currentIdx) {
+    activateScene(targetIdx);
+  }
+
+  requestAnimationFrame(tick);
+}
+
+// ─── INIT ───────────────────────────────────────────────────────────────────
+function init() {
+  var elems = SCENES.map(function(s, i) { return document.getElementById('scene-' + i); });
+
+  // Load all scenes in parallel
+  Promise.all(SCENES.map(function(s, i) {
+    return loadScene(s.id, elems[i]).then(function() {
+      // Extract inner timeline from the composition root
+      var root = elems[i].firstElementChild;
+      if (root && root.getAttribute) {
+        var cid = root.getAttribute('data-composition-id');
+        if (cid && window.__timelines && window.__timelines[cid]) {
+          sceneTl[cid] = window.__timelines[cid];
+          sceneTl[cid].pause().time(0); // start paused
+        }
+      }
+    });
+  })).then(function() {
+    // Build master timeline (just for time tracking, no scene tweens)
+    mainTl = gsap.timeline({ paused: true, repeat: -1 });
+
+    // Total duration
+    var last = SCENES[SCENES.length - 1];
+    var totalDur = last.start + last.dur;
+
+    // ── Show scene 0 immediately ──
+    gsap.set('#scene-0', { x: 0, opacity: 1, scale: 1 });
+    currentIdx = 0;
+    if (sceneTl[SCENES[0].id]) {
+      sceneTl[SCENES[0].id].time(0).play();
+    }
+
+    mainTl.to({}, { duration: totalDur }); // just advances time
+
+    mainTl.play();
+    tick(); // start the scene-switching loop
+  });
+}
+
+document.addEventListener('DOMContentLoaded', init);
+
+// ─── RESPONSIVE SCALE ───────────────────────────────────────────────────────
+(function() {
+  var stage = document.getElementById('stage');
+  var W = 1920, H = 1080;
+  function resize() {
+    var ww = window.innerWidth, wh = window.innerHeight;
+    stage.style.transform = 'scale(' + Math.min(ww/W, wh/H) + ')';
+  }
+  window.addEventListener('resize', resize);
+  resize();
+})();
+</script>
+</body>
+</html>

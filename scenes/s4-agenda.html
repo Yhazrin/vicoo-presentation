@@ -1,0 +1,78 @@
+<template id="s4-agenda-template">
+<div data-composition-id="s4-agenda" data-width="1920" data-height="1080" data-duration="4" data-start="0">
+  <div class="s4-canvas">
+    <!-- Brand Header -->
+    <div class="brand-header" style="top: 60px; opacity: 0;">
+      <div class="brand-header-logo">
+        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="12" cy="12" r="10" stroke="#F5F0E8" stroke-width="1.5"/>
+          <circle cx="12" cy="12" r="4" fill="#F5F0E8"/>
+        </svg>
+      </div>
+      <span class="brand-header-text">VICOO</span>
+      <div class="brand-header-divider"></div>
+      <span class="brand-header-partner">× UNIQLO</span>
+    </div>
+
+    <div class="s4-header">
+      <div class="s4-header-label">
+        <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><rect x="1.5" y="1.5" width="9" height="9" rx="2" stroke="currentColor" stroke-width="1.2"/><path d="M4 6H8M4 4H8M4 8H6" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg>
+        Today's Agenda
+      </div>
+      <h2>Agenda</h2>
+    </div>
+
+    <div class="s4-items">
+      <div class="s4-item">
+        <div class="s4-item-num">01</div>
+        <div>
+          <div class="s4-item-text">Project Vision</div>
+          <div class="s4-item-sub">Core philosophy and goals of VICOO × Uniqlo</div>
+        </div>
+      </div>
+      <div class="s4-item">
+        <div class="s4-item-num">02</div>
+        <div>
+          <div class="s4-item-text">Current Progress</div>
+          <div class="s4-item-sub">Platform features, tech architecture &amp; metrics</div>
+        </div>
+      </div>
+      <div class="s4-item">
+        <div class="s4-item-num">03</div>
+        <div>
+          <div class="s4-item-text">Partnership Proposal</div>
+          <div class="s4-item-sub">How Uniqlo can lead in sustainable development</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="s4-progress">
+      <div class="s4-dot active"></div>
+      <div class="s4-dot"></div>
+      <div class="s4-dot"></div>
+      <div class="s4-dot"></div>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
+  <script>
+  (function(){
+    var tl = gsap.timeline({ paused: true });
+
+    // Brand header
+    tl.to('.brand-header', { opacity: 1, duration: 0.8, ease: 'power2.out' }, 0.3);
+
+    // Header
+    tl.to('.s4-header', { opacity: 1, duration: 0.6 }, 0.4);
+
+    // Items stagger in
+    tl.to('.s4-item:nth-child(1)', { opacity: 1, x: 0, duration: 0.6, ease: 'power3.out' }, 0.7);
+    tl.to('.s4-item:nth-child(2)', { opacity: 1, x: 0, duration: 0.6, ease: 'power3.out' }, 1.1);
+    tl.to('.s4-item:nth-child(3)', { opacity: 1, x: 0, duration: 0.6, ease: 'power3.out' }, 1.5);
+
+    window.__timelines = window.__timelines || {};
+    window.__timelines['s4-agenda'] = tl;
+  })();
+  </script>
+</div>
+</template>

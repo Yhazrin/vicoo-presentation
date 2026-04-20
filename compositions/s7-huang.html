@@ -1,0 +1,33 @@
+<div data-composition-id="s7-huang">
+  <style>
+    .s7-canvas { width: 1920px; height: 1080px; background: #F5F0E8; position: relative; overflow: hidden; font-family: "Inter", -apple-system, BlinkMacSystemFont, sans-serif; }
+    .s7-num { position: absolute; top: 60px; right: 80px; font-size: 140px; font-weight: 800; color: rgba(139,115,85,0.06); letter-spacing: 0.05em; z-index: 5; }
+    .s7-content { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 20px; z-index: 10; }
+    .s7-avatar { width: 120px; height: 120px; border-radius: 50%; background: rgba(255,255,255,0.88); backdrop-filter: blur(20px); border: 1px solid rgba(212,207,196,0.5); box-shadow: 0 8px 40px rgba(26,26,22,0.10); display: flex; align-items: center; justify-content: center; opacity: 0; transform: scale(0.5); }
+    .s7-avatar-initials { font-size: 48px; font-weight: 700; color: #1A1A16; }
+    .s7-name { font-size: 48px; font-weight: 700; color: #1A1A16; letter-spacing: 0.04em; opacity: 0; transform: translateY(20px); }
+    .s7-role { font-size: 10px; font-weight: 700; letter-spacing: 0.2em; color: #4A4540; text-transform: uppercase; opacity: 0; }
+    .s7-quote { font-size: 16px; color: #4A4540; max-width: 700px; text-align: center; line-height: 1.7; opacity: 0; margin-top: 12px; }
+  </style>
+  <div class="s7-canvas">
+    <div class="s7-num">03</div>
+    <div class="s7-content">
+      <div class="s7-avatar"><div class="s7-avatar-initials">黄</div></div>
+      <h2 class="s7-name">Huang Tian</h2>
+      <div class="s7-role">Backend Developer</div>
+      <div class="s7-quote">"I'm Huang Tian, the Backend Developer. I build stable APIs and ensure the traceability data flows seamlessly."</div>
+    </div>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
+  <script>
+  (function(){
+    var tl = gsap.timeline({ paused: true });
+    tl.to('.s7-avatar', { opacity: 1, scale: 1, duration: 0.7, ease: 'power2.out' }, 0.4);
+    tl.to('.s7-name', { opacity: 1, y: 0, duration: 0.7, ease: 'power3.out' }, 0.8);
+    tl.to('.s7-role', { opacity: 1, duration: 0.5 }, 1.3);
+    tl.to('.s7-quote', { opacity: 1, duration: 0.6 }, 1.8);
+    window.__timelines = window.__timelines || {};
+    window.__timelines['s7-huang'] = tl;
+  })();
+  </script>
+</div>

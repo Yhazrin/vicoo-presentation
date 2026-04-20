@@ -1,0 +1,47 @@
+<div data-composition-id="s19-challenge1">
+  <style>
+    .s19-canvas { width: 1920px; height: 1080px; background: #F5F0E8; position: relative; overflow: hidden; font-family: "Inter", -apple-system, BlinkMacSystemFont, sans-serif; }
+    .s19-content { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; padding: 0 180px; z-index: 10; }
+    .s19-visual { position: relative; width: 400px; height: 400px; opacity: 0; transform: scale(0.8); }
+    .s19-circle { position: absolute; inset: 0; border-radius: 50%; border: 2px dashed rgba(139,58,42,0.3); animation: s19-spin 20s linear infinite; }
+    .s19-circle-inner { position: absolute; inset: 40px; border-radius: 50%; border: 2px dashed rgba(139,58,42,0.2); animation: s19-spin 15s linear infinite reverse; }
+    .s19-icon { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 80px; height: 80px; background: rgba(255,255,255,0.75); backdrop-filter: blur(20px); border: 1px solid rgba(212,207,196,0.45); border-radius: 24px; display: flex; align-items: center; justify-content: center; }
+    .s19-icon svg { width: 36px; height: 36px; }
+    @keyframes s19-spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+    .s19-info { max-width: 600px; opacity: 0; transform: translateX(40px); }
+    .s19-label { font-size: 10px; font-weight: 700; letter-spacing: 0.2em; color: #8B3A2A; margin-bottom: 16px; text-transform: uppercase; }
+    .s19-title { font-size: 36px; font-weight: 700; color: #1A1A16; margin-bottom: 20px; }
+    .s19-desc { font-size: 16px; color: #4A4540; line-height: 1.8; }
+    .s19-tags { display: flex; gap: 12px; margin-top: 24px; }
+    .s19-tag { padding: 8px 16px; background: rgba(255,255,255,0.80); backdrop-filter: blur(12px); border: 1px solid rgba(212,207,196,0.6); border-radius: 9999px; font-size: 12px; color: #4A4540; font-weight: 500; }
+  </style>
+  <div class="s19-canvas">
+    <div class="s19-content">
+      <div class="s19-visual">
+        <div class="s19-circle"></div>
+        <div class="s19-circle-inner"></div>
+        <div class="s19-icon"><svg viewBox="0 0 24 24" fill="none" stroke="#8B3A2A" stroke-width="2"><path d="M4 4h16v16H4z"/><path d="M4 12h16M12 4v16"/></svg></div>
+      </div>
+      <div class="s19-info">
+        <div class="s19-label">Challenge 01</div>
+        <div class="s19-title">Data Inconsistency</div>
+        <div class="s19-desc">Supplier data comes in multiple formats — Excel sheets, PDFs, handwritten forms. Normalizing this into a unified structure consumed significant development time.</div>
+        <div class="s19-tags">
+          <div class="s19-tag">Multi-format Data</div>
+          <div class="s19-tag">Manual Entry Errors</div>
+          <div class="s19-tag">Legacy Systems</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
+  <script>
+  (function(){
+    var tl = gsap.timeline({ paused: true });
+    tl.to('.s19-visual', { opacity: 1, scale: 1, duration: 0.8, ease: 'power2.out' }, 0.5);
+    tl.to('.s19-info', { opacity: 1, x: 0, duration: 0.8, ease: 'power3.out' }, 1.2);
+    window.__timelines = window.__timelines || {};
+    window.__timelines['s19-challenge1'] = tl;
+  })();
+  </script>
+</div>

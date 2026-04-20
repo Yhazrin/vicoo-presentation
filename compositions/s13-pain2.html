@@ -1,0 +1,34 @@
+<div data-composition-id="s13-pain2">
+  <style>
+    .s13-canvas { width: 1920px; height: 1080px; background: #F5F0E8; position: relative; overflow: hidden; font-family: "Inter", -apple-system, BlinkMacSystemFont, sans-serif; }
+    .s13-content { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 0 180px; z-index: 10; }
+    .s13-stat { font-size: 160px; font-weight: 800; color: #8B3A2A; line-height: 1; letter-spacing: -0.03em; opacity: 0; transform: scale(0.8); }
+    .s13-label { font-size: 22px; color: #1A1A16; margin-top: 20px; letter-spacing: 0.05em; font-weight: 500; opacity: 0; }
+    .s13-desc { font-size: 16px; color: #4A4540; margin-top: 40px; max-width: 800px; text-align: center; line-height: 1.8; opacity: 0; }
+    .s13-tags { display: flex; gap: 16px; margin-top: 32px; opacity: 0; }
+    .s13-tag { padding: 10px 20px; background: rgba(255,255,255,0.80); backdrop-filter: blur(12px); border: 1px solid rgba(212,207,196,0.6); border-radius: 9999px; font-size: 12px; font-weight: 700; letter-spacing: 0.05em; color: #4A4540; text-transform: uppercase; }
+  </style>
+  <div class="s13-canvas">
+    <div class="s13-content">
+      <div class="s13-stat">60%</div>
+      <div class="s13-label">of Consumers Expect Clear Sourcing Information</div>
+      <div class="s13-desc">Yet most products remain untraceable, creating a trust gap. VICOO bridges this divide — if you can trace it, you can trust it.</div>
+      <div class="s13-tags">
+        <div class="s13-tag">Consumer Trust Crisis</div>
+        <div class="s13-tag">Regulatory Pressure</div>
+      </div>
+    </div>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
+  <script>
+  (function(){
+    var tl = gsap.timeline({ paused: true });
+    tl.to('.s13-stat', { opacity: 1, scale: 1, duration: 0.8, ease: 'power2.out' }, 0.5);
+    tl.to('.s13-label', { opacity: 1, duration: 0.6 }, 1.2);
+    tl.to('.s13-desc', { opacity: 1, duration: 0.6 }, 1.8);
+    tl.to('.s13-tags', { opacity: 1, duration: 0.6 }, 2.5);
+    window.__timelines = window.__timelines || {};
+    window.__timelines['s13-pain2'] = tl;
+  })();
+  </script>
+</div>

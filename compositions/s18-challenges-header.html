@@ -1,0 +1,35 @@
+<div data-composition-id="s18-challenges-header">
+  <style>
+    .s18-canvas { width: 1920px; height: 1080px; background: #F5F0E8; position: relative; overflow: hidden; font-family: "Inter", -apple-system, BlinkMacSystemFont, sans-serif; }
+    .s18-brand-header { position: absolute; top: 40px; left: 50%; transform: translateX(-50%); display: flex; align-items: center; gap: 12px; padding: 10px 20px 10px 16px; background: rgba(255,255,255,0.82); backdrop-filter: blur(20px); border: 1px solid rgba(212,207,196,0.55); border-radius: 9999px; box-shadow: 0 4px 24px rgba(26,26,22,0.06); z-index: 20; }
+    .s18-logo-box { width: 32px; height: 32px; border-radius: 8px; background: #1A1A16; display: flex; align-items: center; justify-content: center; }
+    .s18-logo-text { font-size: 12px; font-weight: 800; color: #F5F0E8; letter-spacing: 0.05em; }
+    .s18-brand-name { font-size: 14px; font-weight: 700; color: #1A1A16; letter-spacing: 0.1em; }
+    .s18-content { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; z-index: 10; }
+    .s18-label { font-size: 11px; font-weight: 700; letter-spacing: 0.5em; color: #B8B2A7; text-transform: uppercase; margin-bottom: 24px; opacity: 0; }
+    .s18-title { font-size: 56px; font-weight: 800; color: #1A1A16; letter-spacing: 0.04em; opacity: 0; transform: translateY(30px); }
+    .s18-speakers { font-size: 14px; color: #4A4540; margin-top: 16px; letter-spacing: 0.15em; opacity: 0; }
+  </style>
+  <div class="s18-canvas">
+    <div class="s18-brand-header">
+      <div class="s18-logo-box"><span class="s18-logo-text">V</span></div>
+      <span class="s18-brand-name">VICOO</span>
+    </div>
+    <div class="s18-content">
+      <div class="s18-label">Section Four</div>
+      <h1 class="s18-title">Development Challenges</h1>
+      <div class="s18-speakers">Ma · Li</div>
+    </div>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
+  <script>
+  (function(){
+    var tl = gsap.timeline({ paused: true });
+    tl.to('.s18-label', { opacity: 1, duration: 0.6 }, 0.5);
+    tl.to('.s18-title', { opacity: 1, y: 0, duration: 0.8, ease: 'power3.out' }, 0.8);
+    tl.to('.s18-speakers', { opacity: 1, duration: 0.5 }, 1.3);
+    window.__timelines = window.__timelines || {};
+    window.__timelines['s18-challenges-header'] = tl;
+  })();
+  </script>
+</div>

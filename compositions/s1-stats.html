@@ -1,0 +1,53 @@
+<div data-composition-id="s1-stats">
+  <style>
+    .s1-canvas { width: 1920px; height: 1080px; background: #F5F0E8; position: relative; overflow: hidden; font-family: "Inter", -apple-system, BlinkMacSystemFont, sans-serif; }
+    .s1-content { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; z-index: 10; }
+    .s1-traceable { display: inline-flex; align-items: center; gap: 8px; padding: 12px 24px; background: rgba(63,79,69,0.1); border-radius: 9999px; font-size: 14px; font-weight: 700; color: #3F4F45; letter-spacing: 0.15em; text-transform: uppercase; margin-bottom: 48px; opacity: 0; }
+    .s1-traceable-dot { width: 8px; height: 8px; border-radius: 50%; background: #3F4F45; }
+    .s1-grid { display: flex; gap: 80px; }
+    .s1-stat { text-align: center; opacity: 0; transform: translateY(30px); }
+    .s1-stat-num { font-size: 72px; font-weight: 800; color: #1A1A16; line-height: 1; margin-bottom: 12px; }
+    .s1-stat-num span { color: #8B3A2A; }
+    .s1-stat-label { font-size: 13px; font-weight: 600; color: #4A4540; letter-spacing: 0.15em; text-transform: uppercase; }
+    .s1-divider { width: 1px; height: 80px; background: linear-gradient(to bottom, transparent, #D4CFC8, transparent); }
+  </style>
+  <div class="s1-canvas">
+    <div class="s1-content">
+      <div class="s1-traceable"><span class="s1-traceable-dot"></span>100% Traceable Supply Chain</div>
+      <div class="s1-grid">
+        <div class="s1-stat">
+          <div class="s1-stat-num">2,847<span>+</span></div>
+          <div class="s1-stat-label">Children Empowered</div>
+        </div>
+        <div class="s1-divider"></div>
+        <div class="s1-stat">
+          <div class="s1-stat-num">12,563<span>+</span></div>
+          <div class="s1-stat-label">Artworks Submitted</div>
+        </div>
+        <div class="s1-divider"></div>
+        <div class="s1-stat">
+          <div class="s1-stat-num">¥890K<span>+</span></div>
+          <div class="s1-stat-label">Reinvested in Donations</div>
+        </div>
+        <div class="s1-divider"></div>
+        <div class="s1-stat">
+          <div class="s1-stat-num">5,420<span>+</span></div>
+          <div class="s1-stat-label">Products Sold</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
+  <script>
+  (function(){
+    var tl = gsap.timeline({ paused: true });
+    tl.to('.s1-traceable', { opacity: 1, duration: 0.6 }, 0.3);
+    tl.to('.s1-stat:nth-child(2)', { opacity: 1, y: 0, duration: 0.6, ease: 'power2.out' }, 0.6);
+    tl.to('.s1-stat:nth-child(4)', { opacity: 1, y: 0, duration: 0.6, ease: 'power2.out' }, 0.9);
+    tl.to('.s1-stat:nth-child(6)', { opacity: 1, y: 0, duration: 0.6, ease: 'power2.out' }, 1.2);
+    tl.to('.s1-stat:nth-child(8)', { opacity: 1, y: 0, duration: 0.6, ease: 'power2.out' }, 1.5);
+    window.__timelines = window.__timelines || {};
+    window.__timelines['s1-stats'] = tl;
+  })();
+  </script>
+</div>

@@ -1,0 +1,123 @@
+<div data-composition-id="s16-cotton-trace">
+  <style>
+    .s16-canvas { width: 1920px; height: 1080px; background: #F5F0E8; position: relative; overflow: hidden; font-family: "Inter", -apple-system, BlinkMacSystemFont, sans-serif; }
+    .s16-brand-header { position: absolute; top: 40px; left: 50%; transform: translateX(-50%); display: flex; align-items: center; gap: 12px; padding: 10px 20px 10px 16px; background: rgba(255,255,255,0.82); backdrop-filter: blur(20px); border: 1px solid rgba(212,207,196,0.55); border-radius: 9999px; box-shadow: 0 4px 24px rgba(26,26,22,0.06); z-index: 20; }
+    .s16-logo-box { width: 32px; height: 32px; border-radius: 8px; background: #1A1A16; display: flex; align-items: center; justify-content: center; }
+    .s16-logo-text { font-size: 12px; font-weight: 800; color: #F5F0E8; letter-spacing: 0.05em; }
+    .s16-brand-name { font-size: 14px; font-weight: 700; color: #1A1A16; letter-spacing: 0.1em; }
+    .s16-header { position: absolute; top: 50px; left: 50%; transform: translateX(-50%); text-align: center; opacity: 0; z-index: 10; }
+    .s16-header h2 { font-size: 11px; font-weight: 700; letter-spacing: 0.4em; color: #B8B2A7; }
+    .s16-header p { font-size: 28px; font-weight: 600; color: #1A1A16; margin-top: 8px; }
+    .s16-demo { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -45%); display: flex; gap: 60px; align-items: center; }
+    .s16-phone { width: 280px; height: 560px; background: #1A1A16; border-radius: 40px; padding: 12px; opacity: 0; transform: translateY(30px); box-shadow: 0 30px 80px rgba(26,26,22,0.15); }
+    .s16-phone-screen { width: 100%; height: 100%; background: white; border-radius: 32px; overflow: hidden; display: flex; flex-direction: column; }
+    .s16-phone-header { padding: 16px; background: #1A1A16; color: white; }
+    .s16-phone-title { font-size: 14px; font-weight: 600; }
+    .s16-phone-product { font-size: 11px; opacity: 0.7; margin-top: 2px; }
+    .s16-phone-content { flex: 1; padding: 16px; display: flex; flex-direction: column; gap: 12px; }
+    .s16-product-card { background: rgba(26,26,22,0.04); border-radius: 12px; padding: 12px; border: 1px solid rgba(26,26,22,0.08); }
+    .s16-product-name { font-size: 13px; font-weight: 700; color: #1A1A16; }
+    .s16-product-id { font-size: 10px; color: #4A4540; margin-top: 2px; }
+    .s16-info-row { display: flex; justify-content: space-between; font-size: 11px; color: rgba(26,26,22,0.6); margin-bottom: 6px; }
+    .s16-info-row:last-child { margin-bottom: 0; }
+    .s16-info-row span:last-child { color: #1A1A16; font-weight: 600; }
+    .s16-co2 { display: flex; align-items: center; gap: 8px; margin-top: 8px; padding: 8px; background: rgba(26,26,22,0.04); border-radius: 8px; }
+    .s16-co2-num { font-size: 20px; font-weight: 800; color: #1A1A16; }
+    .s16-co2-text { font-size: 10px; color: #4A4540; line-height: 1.3; }
+    .s16-co2-reduction { color: #1A1A16; font-weight: 600; }
+    .s16-globe-area { width: 400px; height: 400px; position: relative; opacity: 0; }
+    .s16-globe-ring { position: absolute; inset: 0; border-radius: 50%; border: 1px solid rgba(26,26,22,0.12); }
+    .s16-globe-ring-2 { position: absolute; inset: 60px; border-radius: 50%; border: 1px solid rgba(26,26,22,0.08); }
+    .s16-globe-ring-3 { position: absolute; inset: 120px; border-radius: 50%; border: 1px solid rgba(26,26,22,0.06); }
+    .s16-globe-h { position: absolute; top: 50%; left: 0; right: 0; height: 1px; background: rgba(26,26,22,0.08); }
+    .s16-globe-v { position: absolute; left: 50%; top: 0; bottom: 0; width: 1px; background: rgba(26,26,22,0.08); }
+    .s16-globe-node { position: absolute; width: 10px; height: 10px; border-radius: 50%; background: rgba(26,26,22,0.4); border: 2px solid rgba(26,26,22,0.6); }
+    .s16-desc { max-width: 500px; opacity: 0; transform: translateX(30px); }
+    .s16-desc h3 { font-size: 24px; font-weight: 700; color: #1A1A16; margin-bottom: 16px; }
+    .s16-desc p { font-size: 15px; color: #4A4540; line-height: 1.8; margin-bottom: 20px; }
+    .s16-tags { display: flex; gap: 10px; flex-wrap: wrap; }
+    .s16-tag { padding: 8px 16px; background: rgba(255,255,255,0.80); backdrop-filter: blur(12px); border: 1px solid rgba(212,207,196,0.6); border-radius: 9999px; font-size: 12px; font-weight: 600; color: #4A4540; }
+    .s16-flow { position: absolute; bottom: 80px; left: 50%; transform: translateX(-50%); display: flex; gap: 40px; opacity: 0; }
+    .s16-flow-step { display: flex; align-items: center; gap: 12px; }
+    .s16-flow-icon { width: 40px; height: 40px; border-radius: 50%; background: rgba(255,255,255,0.75); backdrop-filter: blur(20px); border: 1px solid rgba(212,207,196,0.45); display: flex; align-items: center; justify-content: center; }
+    .s16-flow-icon svg { width: 20px; height: 20px; }
+    .s16-flow-text { font-size: 13px; color: #4A4540; }
+  </style>
+  <div class="s16-canvas">
+    <div class="s16-brand-header">
+      <div class="s16-logo-box"><span class="s16-logo-text">V</span></div>
+      <span class="s16-brand-name">VICOO</span>
+    </div>
+    <div class="s16-header"><h2>COTTON SOURCE TRACEABILITY</h2><p>Playful Garden Tee (TH-2026-001)</p></div>
+    <div class="s16-demo">
+      <div class="s16-phone">
+        <div class="s16-phone-screen">
+          <div class="s16-phone-header"><div class="s16-phone-title">Product Traceability</div><div class="s16-phone-product">童趣花园T恤</div></div>
+          <div class="s16-phone-content">
+            <div class="s16-product-card">
+              <div class="s16-product-name">Playful Garden Tee</div>
+              <div class="s16-product-id">TH-2026-001</div>
+            </div>
+            <div class="s16-product-card">
+              <div class="s16-info-row"><span>Raw Cotton</span><span>新疆棉花</span></div>
+              <div class="s16-info-row"><span>Fabric</span><span>山东纺织</span></div>
+              <div class="s16-info-row"><span>Manufacturer</span><span>广州制造</span></div>
+            </div>
+            <div class="s16-co2">
+              <div class="s16-co2-num">8.2kg</div>
+              <div class="s16-co2-text">CO2 emissions<br><span class="s16-co2-reduction">75% less than traditional (33.4kg)</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="s16-globe-area">
+        <div class="s16-globe-ring"></div>
+        <div class="s16-globe-ring-2"></div>
+        <div class="s16-globe-ring-3"></div>
+        <div class="s16-globe-h"></div>
+        <div class="s16-globe-v"></div>
+        <div class="s16-globe-node" style="top: 25%; left: 30%;"></div>
+        <div class="s16-globe-node" style="top: 45%; left: 65%;"></div>
+        <div class="s16-globe-node" style="top: 70%; left: 50%;"></div>
+      </div>
+      <div class="s16-desc">
+        <h3>Full Supply Chain Tracing</h3>
+        <p>Every VICOO product comes with a complete journey — from Xinjiang cotton fields to the final garment. Scan to verify GOTS Certified, Fair Trade Verified, Carbon Neutral, and Child-Safe Production.</p>
+        <div class="s16-tags">
+          <div class="s16-tag">GOTS Certified</div>
+          <div class="s16-tag">Fair Trade</div>
+          <div class="s16-tag">Carbon Neutral</div>
+          <div class="s16-tag">Child-Safe</div>
+        </div>
+      </div>
+    </div>
+    <div class="s16-flow">
+      <div class="s16-flow-step">
+        <div class="s16-flow-icon"><svg viewBox="0 0 24 24" fill="none" stroke="#1A1A16" stroke-width="2"><rect x="4" y="4" width="16" height="16" rx="2"/><path d="M8 12h8M12 8v8"/></svg></div>
+        <div class="s16-flow-text">Scan QR</div>
+      </div>
+      <div class="s16-flow-step">
+        <div class="s16-flow-icon"><svg viewBox="0 0 24 24" fill="none" stroke="#1A1A16" stroke-width="2"><circle cx="12" cy="12" r="8"/><path d="M12 8v4l2 2"/></svg></div>
+        <div class="s16-flow-text">View Data</div>
+      </div>
+      <div class="s16-flow-step">
+        <div class="s16-flow-icon"><svg viewBox="0 0 24 24" fill="none" stroke="#1A1A16" stroke-width="2"><path d="M9 12l2 2 4-4"/><circle cx="12" cy="12" r="8"/></svg></div>
+        <div class="s16-flow-text">Verify Origin</div>
+      </div>
+    </div>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
+  <script>
+  (function(){
+    var tl = gsap.timeline({ paused: true });
+    tl.to('.s16-brand-header', { opacity: 1, duration: 0.6 }, 0.2);
+    tl.to('.s16-header', { opacity: 1, duration: 0.6 }, 0.5);
+    tl.to('.s16-phone', { opacity: 1, y: 0, duration: 0.8, ease: 'power3.out' }, 1.0);
+    tl.to('.s16-globe-area', { opacity: 1, duration: 0.8 }, 1.2);
+    tl.to('.s16-desc', { opacity: 1, x: 0, duration: 0.8, ease: 'power3.out' }, 1.5);
+    tl.to('.s16-flow', { opacity: 1, duration: 0.6 }, 2.5);
+    window.__timelines = window.__timelines || {};
+    window.__timelines['s16-cotton-trace'] = tl;
+  })();
+  </script>
+</div>

@@ -1,0 +1,63 @@
+<template id="s0-cover-template">
+<div data-composition-id="s0-cover" data-width="1920" data-height="1080" data-duration="6" data-start="0">
+  <div class="s0-canvas">
+    <!-- Brand Header (VICOO-esp style) -->
+    <div class="brand-header" style="opacity: 0;">
+      <div class="brand-header-logo">
+        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="12" cy="12" r="10" stroke="#F5F0E8" stroke-width="1.5"/>
+          <circle cx="12" cy="12" r="4" fill="#F5F0E8"/>
+        </svg>
+      </div>
+      <span class="brand-header-text">VICOO</span>
+      <div class="brand-header-divider"></div>
+      <span class="brand-header-partner">× UNIQLO</span>
+    </div>
+
+    <!-- Center Content -->
+    <div class="s0-content">
+      <div class="s0-uniqlo">× UNIQLO</div>
+      <h1 class="s0-vicoo"><span>V</span>IC<span>OO</span></h1>
+      <div class="s0-divider"></div>
+      <div class="s0-tagline">Visual · Circle</div>
+      <div class="s0-subtitle">Cross-Platform Ecosystem for Children's Creative Expression</div>
+    </div>
+
+    <!-- Footer Brand Block -->
+    <div class="footer-brand-block" style="opacity: 0; transform: translateX(-50%) translateY(20px);">
+      <div class="footer-brand-name">VICOO <span>×</span> UNIQLO</div>
+      <div class="footer-brand-lockup">
+        <span class="footer-brand-tagline">Visual Circle</span>
+        <div class="footer-brand-divider"></div>
+        <span class="footer-brand-tagline">2024</span>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
+  <script>
+  (function(){
+    var tl = gsap.timeline({ paused: true });
+
+    // Brand header fade in
+    tl.to('.brand-header', { opacity: 1, duration: 0.8, ease: 'power2.out' }, 0.4);
+
+    // Content entrance — refined, no bounce
+    tl.to('.s0-uniqlo', { opacity: 1, y: 0, duration: 0.8, ease: 'power2.out' }, 0.8);
+    tl.to('.s0-vicoo', { opacity: 1, scale: 1, duration: 1.2, ease: 'power3.out' }, 1.2);
+    tl.to('.s0-divider', { opacity: 1, width: 320, duration: 1, ease: 'power2.out' }, 2.2);
+    tl.to('.s0-tagline', { opacity: 1, duration: 0.8 }, 2.8);
+    tl.to('.s0-subtitle', { opacity: 1, duration: 0.8 }, 3.3);
+
+    // Footer brand block
+    tl.to('.footer-brand-block', { opacity: 1, y: 0, duration: 0.8, ease: 'power2.out' }, 4.2);
+
+    // Gentle fade out
+    tl.to('.s0-content', { opacity: 0, y: -20, duration: 0.6 }, 5.5);
+
+    window.__timelines = window.__timelines || {};
+    window.__timelines['s0-cover'] = tl;
+  })();
+  </script>
+</div>
+</template>

@@ -1,0 +1,31 @@
+<div data-composition-id="s26-thankyou">
+  <style>
+    .s26-canvas { width: 1920px; height: 1080px; background: #F5F0E8; position: relative; overflow: hidden; font-family: "Inter", -apple-system, BlinkMacSystemFont, sans-serif; }
+    .s26-footer-brand { position: absolute; bottom: 60px; left: 50%; transform: translateX(-50%); padding: 48px 80px; background: #1A1A16; border-radius: 32px; text-align: center; }
+    .s26-logo-text { font-size: 24px; font-weight: 800; color: #F5F0E8; letter-spacing: 0.1em; }
+    .s26-team { margin-top: 12px; font-size: 14px; color: #B8B2A7; letter-spacing: 0.1em; }
+    .s26-content { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; z-index: 10; }
+    .s26-text { font-size: 72px; font-weight: 800; color: #1A1A16; letter-spacing: 0.05em; opacity: 0; transform: scale(0.8); }
+    .s26-sub { font-size: 18px; color: #4A4540; margin-top: 24px; letter-spacing: 0.3em; opacity: 0; }
+  </style>
+  <div class="s26-canvas">
+    <div class="s26-content">
+      <div class="s26-text">Thank You</div>
+      <div class="s26-sub">VICOO × UNIQLO</div>
+    </div>
+    <div class="s26-footer-brand">
+      <div class="s26-logo-text">VICOO × UNIQLO</div>
+      <div class="s26-team">Wang Jundi · Yang Haoze · Huang Tian · Li Jinhao · Liu Honghao · Ma Qingchuan</div>
+    </div>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
+  <script>
+  (function(){
+    var tl = gsap.timeline({ paused: true });
+    tl.to('.s26-text', { opacity: 1, scale: 1, duration: 0.8, ease: 'power2.out' }, 0.5);
+    tl.to('.s26-sub', { opacity: 1, duration: 0.6 }, 1.2);
+    window.__timelines = window.__timelines || {};
+    window.__timelines['s26-thankyou'] = tl;
+  })();
+  </script>
+</div>

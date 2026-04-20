@@ -1,0 +1,31 @@
+<div data-composition-id="s2-goal">
+  <style>
+    .s2-canvas { width: 1920px; height: 1080px; background: #F5F0E8; position: relative; overflow: hidden; font-family: "Inter", -apple-system, BlinkMacSystemFont, sans-serif; }
+    .s2-content { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 0 200px; z-index: 10; }
+    .s2-quote-mark { font-size: 200px; font-weight: 800; color: rgba(139,58,42,0.08); line-height: 1; margin-bottom: -80px; opacity: 0; }
+    .s2-text { font-size: 42px; font-weight: 600; color: #1A1A16; line-height: 1.5; text-align: center; letter-spacing: -0.01em; opacity: 0; transform: translateY(30px); }
+    .s2-text span { color: #8B3A2A; }
+    .s2-divider { width: 60px; height: 2px; background: #8B3A2A; margin-top: 48px; opacity: 0; }
+    .s2-label { font-size: 11px; font-weight: 700; letter-spacing: 0.3em; color: #B8B2A7; margin-top: 24px; text-transform: uppercase; opacity: 0; }
+  </style>
+  <div class="s2-canvas">
+    <div class="s2-content">
+      <div class="s2-quote-mark">"</div>
+      <div class="s2-text">Every child's artwork is a <span>visual expression</span>. Every circle O represents <span>circularity</span> and <span>sustainability</span>.</div>
+      <div class="s2-divider"></div>
+      <div class="s2-label">VICOO Brand Philosophy</div>
+    </div>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
+  <script>
+  (function(){
+    var tl = gsap.timeline({ paused: true });
+    tl.to('.s2-quote-mark', { opacity: 1, duration: 0.6 }, 0.3);
+    tl.to('.s2-text', { opacity: 1, y: 0, duration: 0.8, ease: 'power3.out' }, 0.6);
+    tl.to('.s2-divider', { opacity: 1, scaleX: 1, duration: 0.6 }, 1.2);
+    tl.to('.s2-label', { opacity: 1, duration: 0.5 }, 1.6);
+    window.__timelines = window.__timelines || {};
+    window.__timelines['s2-goal'] = tl;
+  })();
+  </script>
+</div>

@@ -1,0 +1,98 @@
+<template id="s1-stats-template">
+<div data-composition-id="s1-stats" data-width="1920" data-height="1080" data-duration="5" data-start="0">
+  <div class="s1-canvas">
+    <!-- Brand Header -->
+    <div class="brand-header" style="top: 60px; opacity: 0;">
+      <div class="brand-header-logo">
+        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="12" cy="12" r="10" stroke="#F5F0E8" stroke-width="1.5"/>
+          <circle cx="12" cy="12" r="4" fill="#F5F0E8"/>
+        </svg>
+      </div>
+      <span class="brand-header-text">VICOO</span>
+      <div class="brand-header-divider"></div>
+      <span class="brand-header-partner">× UNIQLO</span>
+    </div>
+
+    <div class="s1-header" style="top: 160px;">
+      <div class="s1-header-caption">
+        <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><circle cx="6" cy="6" r="5" stroke="currentColor" stroke-width="1.2"/><circle cx="6" cy="6" r="2" fill="currentColor"/></svg>
+        Impact at a Glance
+      </div>
+      <h2>VICOO <span>×</span> UNIQLO</h2>
+    </div>
+
+    <div class="s1-stats">
+      <div class="s1-stat">
+        <div class="s1-stat-num"><span class="stat-val" data-target="50000">0</span><span class="plus">+</span></div>
+        <div class="s1-stat-label">Artworks</div>
+      </div>
+      <div class="s1-stat">
+        <div class="s1-stat-num"><span class="stat-val" data-target="120">0</span><span class="plus">+</span></div>
+        <div class="s1-stat-label">Campaigns</div>
+      </div>
+      <div class="s1-stat">
+        <div class="s1-stat-num"><span class="stat-val" data-target="10000">0</span><span class="plus">+</span></div>
+        <div class="s1-stat-label">Products</div>
+      </div>
+      <div class="s1-stat">
+        <div class="s1-stat-num"><span class="stat-val" data-target="30">0</span></div>
+        <div class="s1-stat-label sage-label">
+          <svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M5 1L6.2 3.8L9 4L7 6L7.5 9L5 7.5L2.5 9L3 6L1 4L3.8 3.8L5 1Z" fill="currentColor"/></svg>
+          Countries
+        </div>
+      </div>
+    </div>
+
+    <!-- Footer Brand -->
+    <div class="s1-footer-brand" style="opacity: 0;">
+      <span class="s1-footer-brand-name">VICOO</span>
+      <div class="s1-footer-brand-sep"></div>
+      <span class="s1-footer-brand-partner">× UNIQLO Partnership</span>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
+  <script>
+  (function(){
+    var tl = gsap.timeline({ paused: true });
+
+    // Header + brand header
+    tl.to('.brand-header', { opacity: 1, duration: 0.8, ease: 'power2.out' }, 0.3);
+    tl.to('.s1-header', { opacity: 1, duration: 0.8, ease: 'power2.out' }, 0.5);
+
+    // Stats stagger in — gentle, no bounce
+    tl.to('.s1-stat:nth-child(1)', { opacity: 1, y: 0, duration: 0.7, ease: 'power3.out' }, 0.8);
+    tl.to('.s1-stat:nth-child(2)', { opacity: 1, y: 0, duration: 0.7, ease: 'power3.out' }, 1.0);
+    tl.to('.s1-stat:nth-child(3)', { opacity: 1, y: 0, duration: 0.7, ease: 'power3.out' }, 1.2);
+    tl.to('.s1-stat:nth-child(4)', { opacity: 1, y: 0, duration: 0.7, ease: 'power3.out' }, 1.4);
+
+    // Count up numbers
+    var stats = document.querySelectorAll('.stat-val');
+    stats.forEach(function(el, i) {
+      var target = parseInt(el.getAttribute('data-target'));
+      var obj = { val: 0 };
+      tl.to(obj, {
+        val: target,
+        duration: 1.8,
+        ease: 'power2.out',
+        onUpdate: function() {
+          el.textContent = Math.round(obj.val).toLocaleString();
+        }
+      }, 0.8 + i * 0.15);
+    });
+
+    // Footer brand
+    tl.to('.s1-footer-brand', { opacity: 1, duration: 0.6, ease: 'power2.out' }, 3.8);
+
+    // Fade out
+    tl.to('.s1-header', { opacity: 0, y: -16, duration: 0.4 }, 4.5);
+    tl.to('.s1-stat', { opacity: 0, y: -16, duration: 0.4, stagger: 0.05 }, 4.5);
+    tl.to('.s1-footer-brand', { opacity: 0, duration: 0.4 }, 4.5);
+
+    window.__timelines = window.__timelines || {};
+    window.__timelines['s1-stats'] = tl;
+  })();
+  </script>
+</div>
+</template>

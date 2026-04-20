@@ -29,17 +29,14 @@
     body { display: flex; align-items: center; justify-content: center; }
     #stage { width: 1920px; height: 1080px; position: relative; transform-origin: center center; flex-shrink: 0; overflow: hidden; }
 
-    /* Each scene container — stacked absolutely, all start invisible */
-    .scene { position: absolute; top: 0; left: 0; width: 1920px; height: 1080px; }
+    .scene { position: absolute; top: 0; left: 0; width: 1920px; height: 1080px; opacity: 0; }
 
-    /* Transition wipe overlay */
     #wipe {
       position: absolute;
       top: 0; left: 0; right: 0; bottom: 0;
       background: var(--color-paper);
       z-index: 50;
       pointer-events: none;
-      /* Start off-screen right */
       transform: translateX(100%);
     }
   </style>
@@ -77,7 +74,8 @@
   </div>
 
 <script>
-// ─── CONFIG ───────────────────────────────────────────────────────────────────
+console.log('[INIT] Script starting');
+
 var SCENES = [
   { id: 's0-cover',         start: 0,   dur: 6   },
   { id: 's1-stats',         start: 6,   dur: 5   },
@@ -108,47 +106,50 @@ var SCENES = [
   { id: 's26-thankyou',     start: 260, dur: 5   }
 ];
 
-var sceneTl = {};    // sceneId → inner composition timeline
+var sceneTl = {};
 var currentIdx = -1;
-var pendingIdx = -1;  // queued scene while transitioning
-var mainTl = null;      // master time tracker
+var pendingIdx = -1;
+var mainTl = null;
 var isTransitioning = false;
 
-// ─── LOAD SCENE ────────────────────────────────────────────────────────────────
+console.log('[INIT] SCENES defined, count:', SCENES.length);
+
 function loadScene(sceneId, el) {
+  console.log('[LOAD] Loading:', sceneId);
   return fetch('compositions/' + sceneId + '.html')
     .then(function(r) { return r.text(); })
     .then(function(html) {
       el.innerHTML = html;
-      // Execute scripts so they register their timelines
+      // Execute scripts by eval-ing their textContent in window scope
+      // This ensures window.__timelines gets set by the composition's IIFE
       var scripts = el.querySelectorAll('script');
       scripts.forEach(function(s) {
-        var ns = document.createElement('script');
-        if (s.src) ns.src = s.src;
-        ns.textContent = s.textContent;
-        s.parentNode.replaceChild(ns, s);
+        try {
+          (0, eval)(s.textContent);
+        } catch(e) {
+          console.warn('[LOAD] Script error in', sceneId, e);
+        }
       });
+      console.log('[LOAD] Loaded:', sceneId);
     });
 }
 
-// ─── ACTIVATE SCENE ─────────────────────────────────────────────────────────
 function activateScene(idx) {
   if (isTransitioning) { pendingIdx = idx; return; }
   if (idx === currentIdx) return;
 
   var prevIdx = currentIdx;
   var wipe = document.getElementById('wipe');
-  var W = 120;        // slide offset px
-  var DUR = 0.38;     // transition seconds
+  var W = 120;
+  var DUR = 0.38;
 
+  console.log('[ACTIVATE] Scene:', idx, 'prev:', prevIdx);
   isTransitioning = true;
 
-  // Kill any in-progress tweens on elements we touch
   gsap.killTweensOf('#scene-' + idx);
   if (prevIdx >= 0) gsap.killTweensOf('#scene-' + prevIdx);
   gsap.killTweensOf(wipe);
 
-  // Set initial state for new scene
   if (idx === 0) {
     gsap.set('#scene-' + idx, { x: 0, opacity: 1, scale: 1 });
   } else {
@@ -156,14 +157,10 @@ function activateScene(idx) {
     gsap.set('#scene-' + idx, { x: dir === 'left' ? W : -W, opacity: 1, scale: 0.97 });
   }
 
-  // Wipe starts off-screen right
   gsap.set(wipe, { x: '100%' });
 
-  // ── Phase 1: Wipe sweeps IN from right, covering everything ──
   gsap.to(wipe, { x: '0%', duration: DUR * 0.45, ease: 'power2.inOut',
     onComplete: function() {
-
-      // ── Phase 2: Old exits, new slides in under wipe ──
       if (prevIdx >= 0) {
         gsap.to('#scene-' + prevIdx, {
           x: (idx % 2 === 1) ? -W : W,
@@ -171,16 +168,12 @@ function activateScene(idx) {
           duration: DUR * 0.55, ease: 'power2.inOut'
         });
       }
-
       gsap.to('#scene-' + idx, {
         x: 0, opacity: 1, scale: 1,
         duration: DUR * 0.55, ease: 'power3.out'
       });
-
-      // ── Phase 3: Wipe sweeps OUT to left, revealing new ──
       gsap.to(wipe, { x: '-100%', duration: DUR * 0.4, ease: 'power2.inOut',
         onComplete: function() {
-          // Clean up previous
           if (prevIdx >= 0) {
             gsap.set('#scene-' + prevIdx, { x: 0, opacity: 0, scale: 1 });
             if (sceneTl[SCENES[prevIdx].id]) {
@@ -190,16 +183,14 @@ function activateScene(idx) {
           currentIdx = idx;
           isTransitioning = false;
 
-          // Start composition's inner timeline
           var compId = SCENES[idx].id;
+          console.log('[ACTIVATE] Playing timeline for:', compId, 'exists:', !!sceneTl[compId]);
           if (sceneTl[compId]) {
             sceneTl[compId].time(0).play();
           } else {
-            // If no inner timeline, just ensure it stays visible
             gsap.set('#scene-' + idx, { opacity: 1 });
           }
 
-          // Drain any queued scene switch
           if (pendingIdx !== -1 && pendingIdx !== idx) {
             var q = pendingIdx;
             pendingIdx = -1;
@@ -210,72 +201,75 @@ function activateScene(idx) {
     }
   });
 
-  // Reset new scene's inner timeline to 0 so it plays fresh each time shown
   if (sceneTl[SCENES[idx].id]) {
     sceneTl[SCENES[idx].id].time(0).pause();
   }
 }
 
-// ─── PLAYBACK LOOP ──────────────────────────────────────────────────────────
 function tick() {
   if (!mainTl) return;
   var t = mainTl.time();
 
-  // Find active scene for current time
   var targetIdx = 0;
   for (var i = SCENES.length - 1; i >= 0; i--) {
     if (t >= SCENES[i].start) { targetIdx = i; break; }
   }
 
   if (targetIdx !== currentIdx) {
+    console.log('[TICK] Switch to:', targetIdx, 'at t:', t.toFixed(2));
     activateScene(targetIdx);
   }
 
   requestAnimationFrame(tick);
 }
 
-// ─── INIT ───────────────────────────────────────────────────────────────────
 function init() {
+  console.log('[INIT] Starting init');
   var elems = SCENES.map(function(s, i) { return document.getElementById('scene-' + i); });
 
-  // Load all scenes in parallel
   Promise.all(SCENES.map(function(s, i) {
-    return loadScene(s.id, elems[i]).then(function() {
-      // Extract inner timeline from the composition root
-      var root = elems[i].firstElementChild;
-      if (root && root.getAttribute) {
+    return loadScene(s.id, elems[i]);
+  })).then(function() {
+    console.log('[INIT] All loaded. sceneTl entries:', Object.keys(sceneTl).length);
+    console.log('[INIT] __timelines keys:', Object.keys(window.__timelines || {}));
+
+    // Extract timelines from window.__timelines into sceneTl
+    SCENES.forEach(function(s, i) {
+      var el = elems[i];
+      var root = el.querySelector('[data-composition-id]');
+      if (root) {
         var cid = root.getAttribute('data-composition-id');
         if (cid && window.__timelines && window.__timelines[cid]) {
           sceneTl[cid] = window.__timelines[cid];
-          sceneTl[cid].pause().time(0); // start paused
+          sceneTl[cid].pause().time(0);
+          console.log('[INIT] Registered timeline:', cid);
         }
       }
     });
-  })).then(function() {
-    // Build master timeline (just for time tracking, no scene tweens)
-    mainTl = gsap.timeline({ paused: true, repeat: -1 });
 
-    // Total duration
+    console.log('[INIT] After registration, sceneTl entries:', Object.keys(sceneTl).length);
+
+    mainTl = gsap.timeline({ paused: true, repeat: -1 });
     var last = SCENES[SCENES.length - 1];
     var totalDur = last.start + last.dur;
 
-    // ── Show scene 0 immediately ──
     gsap.set('#scene-0', { x: 0, opacity: 1, scale: 1 });
     currentIdx = 0;
-    if (sceneTl[SCENES[0].id]) {
-      sceneTl[SCENES[0].id].time(0).play();
+
+    var firstId = SCENES[0].id;
+    console.log('[INIT] First scene:', firstId, 'timeline:', !!sceneTl[firstId]);
+    if (sceneTl[firstId]) {
+      sceneTl[firstId].time(0).play();
     }
 
-    mainTl.to({}, { duration: totalDur }); // just advances time
-
+    mainTl.to({}, { duration: totalDur });
     mainTl.play();
-    tick(); // start the scene-switching loop
+    tick();
   });
 }
 
 document.addEventListener('DOMContentLoaded', init);
 
-// ─── RESPONSIVE SCALE ───────────────────────────────────────────────────────
 (function() {
   var stage = document.getElementById('stage');
   var W = 1920, H = 1080;

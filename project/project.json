@@ -16,10 +16,10 @@
   "updatedAt": "2026-06-06T12:30:00.000Z",
   "contentGraphPath": ".html-video/projects/proj_6ee4e1be-bbf/content-graph.json",
   "frames": [
-    { "graphNodeId": "cover_blackred", "htmlPath": ".html-video/projects/proj_6ee4e1be-bbf/frames/01-cover_blackred.html", "durationSec": 4, "order": 0 },
-    { "graphNodeId": "story_hook", "htmlPath": ".html-video/projects/proj_6ee4e1be-bbf/frames/02-story_hook.html", "durationSec": 5, "order": 1 },
+    { "graphNodeId": "cover_blackred", "htmlPath": ".html-video/projects/proj_6ee4e1be-bbf/frames/01-cover_blackred.html", "durationSec": 5, "order": 0 },
+    { "graphNodeId": "story_hook", "htmlPath": ".html-video/projects/proj_6ee4e1be-bbf/frames/02-story_hook.html", "durationSec": 6, "order": 1 },
     { "graphNodeId": "header_unfold", "htmlPath": ".html-video/projects/proj_6ee4e1be-bbf/frames/02-header_unfold.html", "durationSec": 4, "order": 2 },
-    { "graphNodeId": "hero_product", "htmlPath": ".html-video/projects/proj_6ee4e1be-bbf/frames/03-hero_product.html", "durationSec": 5, "order": 3 },
+    { "graphNodeId": "hero_product", "htmlPath": ".html-video/projects/proj_6ee4e1be-bbf/frames/03-hero_product.html", "durationSec": 6, "order": 3 },
     { "graphNodeId": "artist_portrait", "htmlPath": ".html-video/projects/proj_6ee4e1be-bbf/frames/46-artist_portrait.html", "durationSec": 5, "order": 4 },
     { "graphNodeId": "uniqlo_partnership", "htmlPath": ".html-video/projects/proj_6ee4e1be-bbf/frames/32-uniqlo_partnership.html", "durationSec": 5, "order": 5 },
     { "graphNodeId": "marquee_strip", "htmlPath": ".html-video/projects/proj_6ee4e1be-bbf/frames/04-marquee_strip.html", "durationSec": 5, "order": 6 },
@@ -30,7 +30,7 @@
     { "graphNodeId": "web_platform", "htmlPath": ".html-video/projects/proj_6ee4e1be-bbf/frames/56-web_platform.html", "durationSec": 5, "order": 11 },
     { "graphNodeId": "android_app", "htmlPath": ".html-video/projects/proj_6ee4e1be-bbf/frames/49-android_app.html", "durationSec": 5, "order": 12 },
     { "graphNodeId": "wechat_mini", "htmlPath": ".html-video/projects/proj_6ee4e1be-bbf/frames/50-wechat_mini.html", "durationSec": 5, "order": 13 },
-    { "graphNodeId": "closing_redbar", "htmlPath": ".html-video/projects/proj_6ee4e1be-bbf/frames/08-closing_redbar.html", "durationSec": 4, "order": 14 },
+    { "graphNodeId": "closing_redbar", "htmlPath": ".html-video/projects/proj_6ee4e1be-bbf/frames/08-closing_redbar.html", "durationSec": 5, "order": 14 },
     { "graphNodeId": "brand_meaning", "htmlPath": ".html-video/projects/proj_6ee4e1be-bbf/frames/09-brand_meaning.html", "durationSec": 5, "order": 15 },
     { "graphNodeId": "brand_story", "htmlPath": ".html-video/projects/proj_6ee4e1be-bbf/frames/29-brand_story.html", "durationSec": 6, "order": 16 },
     { "graphNodeId": "values_visual", "htmlPath": ".html-video/projects/proj_6ee4e1be-bbf/frames/45-values_visual.html", "durationSec": 5, "order": 17 },
@@ -72,7 +72,7 @@
     { "graphNodeId": "stats_summary", "htmlPath": ".html-video/projects/proj_6ee4e1be-bbf/frames/34-stats_summary.html", "durationSec": 5, "order": 53 },
     { "graphNodeId": "vision", "htmlPath": ".html-video/projects/proj_6ee4e1be-bbf/frames/35-vision.html", "durationSec": 6, "order": 54 },
     { "graphNodeId": "cta", "htmlPath": ".html-video/projects/proj_6ee4e1be-bbf/frames/30-cta.html", "durationSec": 6, "order": 55 },
-    { "graphNodeId": "credits", "htmlPath": ".html-video/projects/proj_6ee4e1be-bbf/frames/31-credits.html", "durationSec": 5, "order": 56 }
+    { "graphNodeId": "credits", "htmlPath": ".html-video/projects/proj_6ee4e1be-bbf/frames/31-credits.html", "durationSec": 6, "order": 56 }
   ],
   "lastPreviewHtmlPath": ".html-video/projects/proj_6ee4e1be-bbf/frames/01-cover_blackred.html",
   "lastOutputMp4Path": "/Users/yanghaoze/Desktop/PROJECT/VICOO-esp/videos/vicoo-promo-tmp.mp4",

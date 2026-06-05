@@ -62,7 +62,7 @@
 </head>
 <body>
   <div class="stage">
-    <div class="page" data-composition-id="cover_blackred" data-start="0" data-duration="4" data-width="1920" data-height="1080">
+    <div class="page" data-composition-id="cover_blackred" data-start="0" data-duration="5" data-width="1920" data-height="1080">
       <div class="grid"></div>
       <div class="red-bar"></div>
 
@@ -115,11 +115,11 @@
       // Exit — wordmark morphs up-left, the rest fades (set up xfade into header)
       tl.to('.vicoo .word', {
         y: -260, x: -640, scale: 0.16, duration: 0.6, ease: 'power3.inOut'
-      }, 3.2);
-      tl.to('.sweep', { scaleX: 0, transformOrigin: 'right center', duration: 0.4, ease: 'power2.in' }, 3.4);
-      tl.to('.tagline', { y: 20, opacity: 0, duration: 0.4, ease: 'power2.in' }, 3.4);
-      tl.to('.corner', { y: -10, opacity: 0, duration: 0.4, stagger: 0.04, ease: 'power2.in' }, 3.4);
-      tl.to('.hint', { x: 30, opacity: 0, duration: 0.3, ease: 'power2.in' }, 3.4);
+      }, 4.2);
+      tl.to('.sweep', { scaleX: 0, transformOrigin: 'right center', duration: 0.4, ease: 'power2.in' }, 4.4);
+      tl.to('.tagline', { y: 20, opacity: 0, duration: 0.4, ease: 'power2.in' }, 4.4);
+      tl.to('.corner', { y: -10, opacity: 0, duration: 0.4, stagger: 0.04, ease: 'power2.in' }, 4.4);
+      tl.to('.hint', { x: 30, opacity: 0, duration: 0.3, ease: 'power2.in' }, 4.4);
 
       window.addEventListener('load', () => tl.play());
     })();

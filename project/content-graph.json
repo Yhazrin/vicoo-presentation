@@ -3,10 +3,10 @@
   "intent": "promo",
   "synopsis": "VICOO 56-frame brand promo covering brand, story hook, artist portrait, UNIQLO partnership, impact preview, web/android/wechat platforms, dual storefronts, search, wishlist, reviews, product detail, traceability globe + deep dive + timeline + material trace + carbon footprint + supply chain map, auth, register, profile, cart, payment, checkout, order tracking, order detail, donation certificate + detail, clothing recycle + environmental impact, campaigns + detail, artwork + gallery, community vote, AI assistant, testimonials, impact stats, values cycle, tech stack, vision, CTA, credits. Uniqlo-style black/white/red with real components and GSAP motion. ~4:45 at 2K@60fps with ffmpeg xfade transitions.",
   "nodes": [
-    { "id": "cover_blackred", "kind": "entity", "label": "Cover", "frameIntent": "brand-cover", "durationSec": 4 },
-    { "id": "story_hook", "kind": "text", "label": "Story Hook", "frameIntent": "emotional-opener", "durationSec": 5 },
+    { "id": "cover_blackred", "kind": "entity", "label": "Cover", "frameIntent": "brand-cover", "durationSec": 5 },
+    { "id": "story_hook", "kind": "text", "label": "Story Hook", "frameIntent": "emotional-opener", "durationSec": 6 },
     { "id": "header_unfold", "kind": "entity", "label": "Header Unfold", "frameIntent": "live-header", "durationSec": 4 },
-    { "id": "hero_product", "kind": "entity", "label": "Hero Product", "frameIntent": "product-card-feature", "durationSec": 5 },
+    { "id": "hero_product", "kind": "entity", "label": "Hero Product", "frameIntent": "product-card-feature", "durationSec": 6 },
     { "id": "artist_portrait", "kind": "entity", "label": "Artist Portrait", "frameIntent": "artist-story", "durationSec": 5 },
     { "id": "uniqlo_partnership", "kind": "entity", "label": "UNIQLO Partnership", "frameIntent": "partnership-detail", "durationSec": 5 },
     { "id": "marquee_strip", "kind": "entity", "label": "Marquee Strip", "frameIntent": "shop-marquee", "durationSec": 5 },
@@ -17,7 +17,7 @@
     { "id": "web_platform", "kind": "entity", "label": "Web Platform", "frameIntent": "browser-mockup", "durationSec": 5 },
     { "id": "android_app", "kind": "entity", "label": "Android App", "frameIntent": "phone-mockup", "durationSec": 5 },
     { "id": "wechat_mini", "kind": "entity", "label": "WeChat Mini Program", "frameIntent": "wechat-mockup", "durationSec": 5 },
-    { "id": "closing_redbar", "kind": "entity", "label": "Closing", "frameIntent": "closing-statement", "durationSec": 4 },
+    { "id": "closing_redbar", "kind": "entity", "label": "Closing", "frameIntent": "closing-statement", "durationSec": 5 },
     { "id": "brand_meaning", "kind": "text", "label": "Brand Etymology", "frameIntent": "vi-coo-split", "durationSec": 5 },
     { "id": "brand_story", "kind": "text", "label": "Brand Origin Story", "frameIntent": "origin-timeline", "durationSec": 6 },
     { "id": "values_visual", "kind": "text", "label": "Values Cycle", "frameIntent": "circular-diagram", "durationSec": 5 },
@@ -59,7 +59,7 @@
     { "id": "stats_summary", "kind": "data", "label": "Impact Summary", "frameIntent": "counter-grid", "durationSec": 5 },
     { "id": "vision", "kind": "text", "label": "Vision", "frameIntent": "future-pillars", "durationSec": 6 },
     { "id": "cta", "kind": "entity", "label": "Call to Action", "frameIntent": "action-grid", "durationSec": 6 },
-    { "id": "credits", "kind": "entity", "label": "Credits", "frameIntent": "credits-grid", "durationSec": 5 }
+    { "id": "credits", "kind": "entity", "label": "Credits", "frameIntent": "credits-grid", "durationSec": 6 }
   ],
   "edges": [
     { "from": "cover_blackred", "to": "story_hook", "kind": "sequence" },

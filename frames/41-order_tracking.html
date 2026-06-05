@@ -34,7 +34,7 @@
   .step.done .dot { background: #E60012; color: #FFFFFF; }
   .step.active .dot { background: #FFFFFF; border: 3px solid #E60012; color: #E60012; box-shadow: 0 0 0 6px rgba(230,0,18,0.1); }
   .step.pending .dot { background: #E0E0E0; color: #AAA; }
-  .step .info .title { font-family: 'Inter', sans-serif; font-weight: 700; font-size: 16px; }
+  .step .info .title { font-family: 'Inter', sans-serif; font-weight: 700; font-size: 14px; }
   .step .info .time { font-family: 'JetBrains Mono', monospace; font-size: 12px; color: #888; margin-top: 4px; }
   .step .info .desc { font-family: 'Noto Sans SC', sans-serif; font-size: 14px; color: #666; margin-top: 4px; }
 
@@ -131,11 +131,12 @@
       gsap.set('.map-placeholder', { opacity: 0, scale: 0.95 });
       gsap.set('.route', { scaleX: 0, transformOrigin: 'left' });
 
-      tl.to('.red-bar', { scaleX: 1, duration: 0.5, ease: 'power3.inOut' }, 0);
+      // Entry
+      tl.to('.red-bar', { scaleX: 1, duration: 0.4, ease: 'power4.inOut' }, 0);
       tl.to('.top > *', { y: 0, opacity: 1, duration: 0.5, stagger: 0.06, ease: 'power2.out' }, 0.1);
       tl.to('.left .kicker', { y: 0, opacity: 1, duration: 0.5, ease: 'power2.out' }, 0.3);
       tl.to('.left h1', { y: 0, opacity: 1, duration: 0.6, ease: 'expo.out' }, 0.5);
-      tl.to('.step', { x: 0, opacity: 1, duration: 0.5, stagger: 0.15, ease: 'power2.out' }, 0.8);
+      tl.to('.step', { x: 0, opacity: 1, duration: 0.5, stagger: 0.12, ease: 'power2.out' }, 0.8);
       tl.to('.map-placeholder', { opacity: 1, scale: 1, duration: 0.6, ease: 'power2.out' }, 1.0);
       tl.to('.route', { scaleX: 1, duration: 1.0, ease: 'power2.inOut' }, 2.0);
 

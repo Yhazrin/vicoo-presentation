@@ -21,11 +21,12 @@
   .headline .red { color: #E60012; }
 
   .carbon-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 32px; max-width: 1200px; }
-  .carbon-card { padding: 32px; background: rgba(255,255,255,0.05); border-top: 4px solid #E60012; text-align: center; }
+  .carbon-card { padding: 32px; background: rgba(255,255,255,0.05); border-top: 4px solid #E60012; text-align: center; position: relative; overflow: hidden; }
   .carbon-card .icon { font-size: 48px; margin-bottom: 16px; }
   .carbon-card .value { font-family: 'Inter', sans-serif; font-weight: 900; font-size: 56px; color: #E60012; line-height: 1; }
   .carbon-card .unit { font-family: 'JetBrains Mono', monospace; font-size: 14px; font-weight: 500; letter-spacing: 0.15em; text-transform: uppercase; color: #888; margin-top: 8px; }
   .carbon-card .label { font-family: 'Noto Sans SC', sans-serif; font-size: 16px; color: rgba(255,255,255,0.7); margin-top: 12px; }
+  .carbon-card .sweep { position: absolute; inset: 0; background: linear-gradient(135deg, rgba(230,0,18,0.1) 0%, transparent 50%); opacity: 0; }
 
   .bar-chart { display: flex; align-items: flex-end; gap: 16px; margin-top: 48px; height: 120px; }
   .bar-item { display: flex; flex-direction: column; align-items: center; gap: 8px; }
@@ -44,18 +45,21 @@
 
         <div class="carbon-grid">
           <div class="carbon-card">
+            <div class="sweep"></div>
             <div class="icon">💧</div>
             <div class="value" data-count="2400">0</div>
             <div class="unit">LITERS</div>
             <div class="label">每件衣服节水（vs 传统工艺）</div>
           </div>
           <div class="carbon-card">
+            <div class="sweep"></div>
             <div class="icon">🌿</div>
             <div class="value" data-count="4.5">0</div>
             <div class="unit">KG CO₂E</div>
             <div class="label">平均碳足迹（行业均值 8.2kg）</div>
           </div>
           <div class="carbon-card">
+            <div class="sweep"></div>
             <div class="icon">♻️</div>
             <div class="value" data-count="98.7">0</div>
             <div class="unit">PERCENT</div>
@@ -86,9 +90,11 @@
       gsap.set('.eyebrow', { y: -20, opacity: 0 });
       gsap.set('.headline', { y: 30, opacity: 0 });
       gsap.set('.carbon-card', { y: 40, opacity: 0, scale: 0.9 });
+      gsap.set('.carbon-card .sweep', { opacity: 0 });
       gsap.set('.bar-item .bar', { scaleY: 0, transformOrigin: 'bottom' });
       gsap.set('.bar-item .bar-label', { opacity: 0 });
 
+      // Entry
       tl.to('.red-bar', { scaleX: 1, duration: 0.5, ease: 'power3.inOut' }, 0);
       tl.to('.eyebrow', { y: 0, opacity: 1, duration: 0.5, ease: 'power2.out' }, 0.2);
       tl.to('.headline', { y: 0, opacity: 1, duration: 0.7, ease: 'expo.out' }, 0.4);
@@ -108,6 +114,10 @@
         }, 1.0);
       });
 
+      // Sweep effect on cards
+      tl.to('.carbon-card .sweep', { opacity: 1, duration: 0.5, stagger: 0.1, ease: 'power2.out' }, 1.5);
+
+      // Bar chart
       tl.to('.bar-item .bar', { scaleY: 1, duration: 0.6, stagger: 0.08, ease: 'power3.out' }, 2.0);
       tl.to('.bar-item .bar-label', { opacity: 1, duration: 0.3, stagger: 0.05 }, 2.5);
 

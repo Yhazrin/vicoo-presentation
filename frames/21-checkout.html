@@ -19,59 +19,54 @@
   .top .rule { flex: 1; height: 1px; background: #1A1A16; }
   .top .meta { font-family: 'JetBrains Mono', monospace; font-size: 13px; font-weight: 500; letter-spacing: 0.18em; text-transform: uppercase; color: #888; }
 
-  /* Steps */
-  .steps { position: absolute; top: 130px; left: 80px; right: 80px; display: flex; align-items: center; gap: 12px; }
-  .steps .step { display: flex; align-items: center; gap: 10px; }
-  .steps .step .n { width: 32px; height: 32px; border-radius: 50%; background: #1A1A16; color: #FFFFFF; display: flex; align-items: center; justify-content: center; font-family: 'Inter', sans-serif; font-weight: 800; font-size: 14px; }
-  .steps .step.done .n { background: #00D26A; }
-  .steps .step.active .n { background: #E60012; transform: scale(1.15); }
-  .steps .step .t { font-family: 'Inter', sans-serif; font-weight: 700; font-size: 14px; }
-  .steps .sep { width: 60px; height: 1px; background: #DDD; }
+  .content { position: absolute; left: 80px; right: 80px; top: 140px; bottom: 80px; display: grid; grid-template-columns: 1.2fr 1fr; gap: 60px; }
 
-  .layout { position: absolute; left: 80px; right: 80px; top: 200px; bottom: 80px; display: grid; grid-template-columns: 1.6fr 1fr; gap: 32px; }
+  .left { display: flex; flex-direction: column; }
+  .left .kicker { font-family: 'JetBrains Mono', monospace; font-size: 12px; font-weight: 500; letter-spacing: 0.2em; text-transform: uppercase; color: #E60012; }
+  .left h1 { font-family: 'Smiley Sans', sans-serif; font-weight: 400; font-size: 52px; line-height: 1.0; letter-spacing: -2px; color: #1A1A16; margin-top: 12px; }
+  .left h1 em { font-style: normal; color: #E60012; }
 
-  /* Form */
-  .form { background: #FFFFFF; border: 1px solid #DDD; padding: 32px; }
-  .form h2 { font-family: 'Smiley Sans', sans-serif; font-weight: 400; font-size: 28px; color: #1A1A16; margin-bottom: 20px; }
-  .form .section { margin-bottom: 24px; }
-  .form .section .lbl { font-family: 'JetBrains Mono', monospace; font-size: 11px; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: #888; margin-bottom: 10px; }
-  .form .row2 { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 10px; }
-  .form .row3 { display: grid; grid-template-columns: 1.5fr 1fr 1fr; gap: 12px; }
-  .form .field { height: 56px; border: 1px solid #1A1A16; padding: 0 16px; font-family: 'Inter', sans-serif; font-weight: 600; font-size: 15px; color: #1A1A16; }
-  .form .select { height: 56px; border: 1px solid #1A1A16; padding: 0 16px; font-family: 'Inter', sans-serif; font-weight: 600; font-size: 15px; background: #FFFFFF; }
+  .steps { display: flex; gap: 16px; margin-top: 32px; }
+  .step { flex: 1; padding: 16px; background: #F5F5F5; text-align: center; position: relative; }
+  .step.active { background: #1A1A16; color: #FFFFFF; }
+  .step .num { font-family: 'Inter', sans-serif; font-weight: 800; font-size: 20px; }
+  .step .lbl { font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase; margin-top: 4px; }
+  .step .line { position: absolute; top: 50%; right: -12px; width: 16px; height: 2px; background: #E0E0E0; }
+  .step.active .line { background: #E60012; }
 
-  .form .shipping { display: flex; flex-direction: column; gap: 8px; }
-  .form .ship { padding: 12px 16px; border: 2px solid #1A1A16; display: flex; align-items: center; gap: 12px; }
-  .form .ship.selected { background: #FFF8E7; border-color: #E60012; }
-  .form .ship .radio { width: 18px; height: 18px; border: 2px solid #1A1A16; border-radius: 50%; display: flex; align-items: center; justify-content: center; }
-  .form .ship.selected .radio { border-color: #E60012; }
-  .form .ship.selected .radio::after { content: ''; width: 8px; height: 8px; background: #E60012; border-radius: 50%; }
-  .form .ship .nm { font-family: 'Inter', sans-serif; font-weight: 700; font-size: 14px; }
-  .form .ship .meta { font-family: 'Inter', sans-serif; font-size: 12px; color: #888; }
-  .form .ship .price { margin-left: auto; font-family: 'Smiley Sans', sans-serif; font-weight: 400; font-size: 18px; }
+  .form-section { margin-top: 32px; }
+  .form-section h3 { font-family: 'Inter', sans-serif; font-weight: 800; font-size: 18px; margin-bottom: 20px; }
+  .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 16px; }
+  .field { }
+  .field label { font-family: 'JetBrains Mono', monospace; font-size: 11px; font-weight: 500; letter-spacing: 0.15em; text-transform: uppercase; color: #888; display: block; margin-bottom: 8px; }
+  .field input, .field select { width: 100%; padding: 14px 16px; border: 2px solid #E0E0E0; font-family: 'Inter', sans-serif; font-size: 14px; transition: border-color 0.3s ease; }
+  .field input:focus, .field select:focus { border-color: #E60012; outline: none; }
 
-  .form .pay { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
-  .form .pay .opt { padding: 12px; border: 2px solid #1A1A16; display: flex; align-items: center; gap: 8px; font-family: 'Inter', sans-serif; font-weight: 700; font-size: 13px; }
-  .form .pay .opt.selected { background: #1A1A16; color: #FFFFFF; }
-  .form .pay .opt .red { color: #E60012; }
+  .payment-methods { display: flex; gap: 12px; margin-top: 20px; }
+  .payment { flex: 1; padding: 16px; border: 2px solid #E0E0E0; text-align: center; cursor: pointer; transition: all 0.3s ease; }
+  .payment.active { border-color: #E60012; background: rgba(230,0,18,0.05); }
+  .payment .icon { font-size: 24px; margin-bottom: 8px; }
+  .payment .name { font-family: 'Inter', sans-serif; font-weight: 700; font-size: 13px; }
 
-  /* Order summary */
-  .summary { background: #F5F5F5; padding: 28px; }
-  .summary h2 { font-family: 'Smiley Sans', sans-serif; font-weight: 400; font-size: 22px; margin-bottom: 20px; }
-  .summary .item { display: flex; align-items: center; gap: 12px; padding: 10px 0; border-bottom: 1px solid #DDD; }
-  .summary .item .img { width: 56px; height: 70px; background: #FFFFFF; flex-shrink: 0; overflow: hidden; }
-  .summary .item .img img { width: 100%; height: 100%; object-fit: cover; }
-  .summary .item .info { flex: 1; }
-  .summary .item .name { font-family: 'Inter', sans-serif; font-weight: 700; font-size: 13px; }
-  .summary .item .qty { font-family: 'JetBrains Mono', monospace; font-size: 11px; color: #888; }
-  .summary .item .price { font-family: 'Smiley Sans', sans-serif; font-weight: 400; font-size: 16px; }
-  .summary .totals { margin-top: 16px; }
-  .summary .totals .row { display: flex; justify-content: space-between; padding: 6px 0; font-family: 'Inter', sans-serif; font-size: 14px; color: #555; }
-  .summary .totals .row strong { color: #1A1A16; }
-  .summary .totals .total { font-family: 'Smiley Sans', sans-serif; font-size: 28px; padding: 12px 0; border-top: 1px solid #1A1A16; margin-top: 8px; }
-  .summary .totals .total .lbl { font-family: 'JetBrains Mono', monospace; font-size: 12px; letter-spacing: 0.15em; text-transform: uppercase; color: #888; margin-right: 8px; }
-  .summary .btn { width: 100%; height: 64px; background: #1A1A16; color: #FFFFFF; font-family: 'Inter', sans-serif; font-weight: 800; font-size: 16px; letter-spacing: 0.15em; text-transform: uppercase; margin-top: 12px; }
-  .summary .btn .red { color: #E60012; }
+  .right { display: flex; flex-direction: column; }
+  .right h3 { font-family: 'Inter', sans-serif; font-weight: 800; font-size: 18px; margin-bottom: 20px; }
+
+  .order-summary { background: #F5F5F5; padding: 24px; flex: 1; }
+  .order-item { display: flex; gap: 16px; padding: 16px 0; border-bottom: 1px solid #E0E0E0; }
+  .order-item .img { width: 60px; height: 60px; background: #E0E0E0; }
+  .order-item .info { flex: 1; }
+  .order-item .info .name { font-family: 'Noto Sans SC', sans-serif; font-weight: 700; font-size: 14px; }
+  .order-item .info .price { font-family: 'Inter', sans-serif; font-weight: 800; font-size: 16px; margin-top: 4px; }
+
+  .order-total { margin-top: 20px; padding-top: 20px; border-top: 2px solid #1A1A16; }
+  .order-total .row { display: flex; justify-content: space-between; margin-bottom: 12px; }
+  .order-total .row .label { font-family: 'Inter', sans-serif; font-size: 14px; color: #888; }
+  .order-total .row .value { font-family: 'Inter', sans-serif; font-weight: 700; font-size: 14px; }
+  .order-total .row.total .label { font-weight: 800; font-size: 16px; color: #1A1A16; }
+  .order-total .row.total .value { font-weight: 900; font-size: 24px; color: #E60012; }
+
+  .btn { width: 100%; padding: 18px; background: #E60012; color: #FFFFFF; border: 0; font-family: 'Inter', sans-serif; font-weight: 800; font-size: 16px; letter-spacing: 0.1em; text-transform: uppercase; cursor: pointer; margin-top: 24px; position: relative; overflow: hidden; }
+  .btn .sweep { position: absolute; inset: 0; background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent); transform: translateX(-100%); }
 </style>
 </head>
 <body>
@@ -81,121 +76,127 @@
       <div class="top">
         <div class="lbl">VICOO · <span class="red">CHECKOUT</span></div>
         <div class="rule"></div>
-        <div class="meta">PP. 16 · /checkout</div>
+        <div class="meta">PP. 17 · /checkout</div>
       </div>
-      <div class="steps">
-        <div class="step done"><div class="n">1</div><div class="t">Cart</div></div>
-        <div class="sep"></div>
-        <div class="step active"><div class="n">2</div><div class="t">Address &amp; Shipping</div></div>
-        <div class="sep"></div>
-        <div class="step"><div class="n">3</div><div class="t">Payment</div></div>
-        <div class="sep"></div>
-        <div class="step"><div class="n">4</div><div class="t">Review</div></div>
-      </div>
-      <div class="layout">
-        <div class="form">
-          <h2>Address &amp; Shipping</h2>
-          <div class="section">
-            <div class="lbl">CONTACT</div>
-            <div class="row2">
-              <input class="field" value="莉华" />
-              <input class="field" value="13800138000" />
+
+      <div class="content">
+        <div class="left">
+          <div class="kicker">CHAPTER 08 · CHECKOUT</div>
+          <h1>Complete your <em>order</em>.</h1>
+
+          <div class="steps">
+            <div class="step active"><div class="num">1</div><div class="lbl">Shipping</div><div class="line"></div></div>
+            <div class="step"><div class="num">2</div><div class="lbl">Payment</div><div class="line"></div></div>
+            <div class="step"><div class="num">3</div><div class="lbl">Review</div><div class="line"></div></div>
+            <div class="step"><div class="num">4</div><div class="lbl">Confirm</div></div>
+          </div>
+
+          <div class="form-section">
+            <h3>Shipping Information</h3>
+            <div class="form-row">
+              <div class="field"><label>Full Name</label><input type="text" placeholder="朱莉华" disabled></div>
+              <div class="field"><label>Phone</label><input type="text" placeholder="138****8888" disabled></div>
+            </div>
+            <div class="form-row">
+              <div class="field"><label>Address</label><input type="text" placeholder="上海市浦东新区..." disabled></div>
+              <div class="field"><label>City</label><input type="text" placeholder="上海" disabled></div>
             </div>
           </div>
-          <div class="section">
-            <div class="lbl">SHIP TO</div>
-            <input class="field" style="width:100%;margin-bottom:10px" value="上海市黄浦区南京东路 100 号" />
-            <div class="row3">
-              <input class="field" value="上海" />
-              <input class="field" value="200002" />
-              <select class="select"><option>中国</option></select>
-            </div>
-          </div>
-          <div class="section">
-            <div class="lbl">SHIPPING METHOD</div>
-            <div class="shipping">
-              <div class="ship selected">
-                <div class="radio"></div>
-                <div class="nm">顺丰速运 · 1-2 天送达</div>
-                <div class="meta">可追踪 · 签收确认</div>
-                <div class="price">FREE</div>
-              </div>
-              <div class="ship">
-                <div class="radio"></div>
-                <div class="nm">京东物流 · 2-3 天送达</div>
-                <div class="meta">可追踪</div>
-                <div class="price">¥0</div>
-              </div>
-            </div>
-          </div>
-          <div class="section">
-            <div class="lbl">PAYMENT METHOD</div>
-            <div class="pay">
-              <div class="opt selected">微信支付</div>
-              <div class="opt">支付宝</div>
-              <div class="opt">Stripe</div>
-              <div class="opt">PayPal</div>
+
+          <div class="form-section">
+            <h3>Payment Method</h3>
+            <div class="payment-methods">
+              <div class="payment active"><div class="icon">💚</div><div class="name">WeChat Pay</div></div>
+              <div class="payment"><div class="icon">🔵</div><div class="name">Alipay</div></div>
+              <div class="payment"><div class="icon">💳</div><div class="name">Stripe</div></div>
+              <div class="payment"><div class="icon">🅿️</div><div class="name">PayPal</div></div>
             </div>
           </div>
         </div>
-        <div class="summary">
-          <h2>Order Summary</h2>
-          <div class="item">
-            <div class="img"><img src="https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?auto=format&fit=crop&w=120&q=80"/></div>
-            <div class="info"><div class="name">春野·儿童画联名有机棉T恤</div><div class="qty">SIZE 110 · × 1</div></div>
-            <div class="price">¥178</div>
+
+        <div class="right">
+          <h3>Order Summary</h3>
+          <div class="order-summary">
+            <div class="order-item">
+              <div class="img"></div>
+              <div class="info"><div class="name">春野·儿童画联名T恤</div><div class="price">¥178</div></div>
+            </div>
+            <div class="order-item">
+              <div class="img"></div>
+              <div class="info"><div class="name">再生羊毛V领针织衫</div><div class="price">¥329</div></div>
+            </div>
+            <div class="order-item">
+              <div class="img"></div>
+              <div class="info"><div class="name">轻量保暖外套</div><div class="price">¥499</div></div>
+            </div>
+
+            <div class="order-total">
+              <div class="row"><div class="label">Subtotal</div><div class="value">¥1,006</div></div>
+              <div class="row"><div class="label">Shipping</div><div class="value">Free</div></div>
+              <div class="row"><div class="label">Donation (28%)</div><div class="value" style="color: #E60012;">¥77</div></div>
+              <div class="row total"><div class="label">TOTAL</div><div class="value">¥1,006</div></div>
+            </div>
+
+            <button class="btn" disabled><div class="sweep"></div>PLACE ORDER →</button>
           </div>
-          <div class="item">
-            <div class="img"><img src="https://images.unsplash.com/photo-1597484662317-9bd7bdda2907?auto=format&fit=crop&w=120&q=80"/></div>
-            <div class="info"><div class="name">云岭·公益插画帆布托特</div><div class="qty">× 1</div></div>
-            <div class="price">¥98</div>
-          </div>
-          <div class="item">
-            <div class="img"><img src="https://images.unsplash.com/photo-1434389677669-e08b4cac3105?auto=format&fit=crop&w=120&q=80"/></div>
-            <div class="info"><div class="name">再生羊毛混纺V领针织衫</div><div class="qty">SIZE M · × 1</div></div>
-            <div class="price">¥329</div>
-          </div>
-          <div class="totals">
-            <div class="row"><span>Subtotal</span><span>¥605</span></div>
-            <div class="row"><span>Shipping</span><span>FREE</span></div>
-            <div class="row"><span>Donation to fund</span><span style="color:#E60012;font-weight:700">+¥77</span></div>
-            <div class="total"><span class="lbl">TOTAL</span>¥605</div>
-          </div>
-          <button class="btn">PLACE ORDER →</button>
         </div>
       </div>
     </div>
   </div>
+
   <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
   <script>
     (function () {
       const tl = gsap.timeline({ paused: true });
       window.__timelines = window.__timelines || {};
       window.__timelines["checkout"] = tl;
+
       gsap.set('.red-bar', { scaleX: 0, transformOrigin: 'left center' });
       gsap.set('.top > *', { y: -20, opacity: 0 });
-      gsap.set('.steps .step .n', { scale: 0 });
-      gsap.set('.form > *', { y: 20, opacity: 0 });
-      gsap.set('.form .field, .form .select', { x: -20, opacity: 0 });
-      gsap.set('.form .ship, .form .pay .opt', { x: -20, opacity: 0 });
-      gsap.set('.summary', { x: 30, opacity: 0 });
-      gsap.set('.summary .item', { x: 20, opacity: 0 });
-      tl.to('.red-bar', { scaleX: 1, duration: 0.5, ease: 'power3.inOut' }, 0);
-      tl.to('.top > *', { y: 0, opacity: 1, duration: 0.5, stagger: 0.06, ease: 'power2.out' }, 0.1);
-      tl.to('.steps .step .n', { scale: 1, duration: 0.4, stagger: 0.1, ease: 'back.out(1.6)' }, 0.5);
-      tl.to('.form > *', { y: 0, opacity: 1, duration: 0.5, stagger: 0.08, ease: 'power2.out' }, 0.8);
-      tl.to('.form .field, .form .select', { x: 0, opacity: 1, duration: 0.4, stagger: 0.04, ease: 'power2.out' }, 1.1);
-      tl.to('.form .ship, .form .pay .opt', { x: 0, opacity: 1, duration: 0.4, stagger: 0.05, ease: 'power2.out' }, 1.5);
-      tl.to('.summary', { x: 0, opacity: 1, duration: 0.6, ease: 'power3.out' }, 1.2);
-      tl.to('.summary .item', { x: 0, opacity: 1, duration: 0.4, stagger: 0.08, ease: 'power2.out' }, 1.5);
-      // pulse the place order button
-      tl.to({}, { duration: 0.4, onStart: () => {
-        gsap.fromTo('.summary .btn', { scale: 1 }, { scale: 1.04, duration: 0.2, yoyo: true, repeat: 1, ease: 'power2.inOut' });
-      }}, 3.5);
+      gsap.set('.left .kicker', { y: 20, opacity: 0 });
+      gsap.set('.left h1', { y: 30, opacity: 0 });
+      gsap.set('.step', { y: 20, opacity: 0, scale: 0.9 });
+      gsap.set('.form-section', { y: 20, opacity: 0 });
+      gsap.set('.payment', { y: 15, opacity: 0, scale: 0.9 });
+      gsap.set('.right > *', { y: 20, opacity: 0 });
+      gsap.set('.order-item', { x: 20, opacity: 0 });
+      gsap.set('.btn .sweep', { x: '-100%' });
+
+      // Entry
+      tl.to('.red-bar', { scaleX: 1, duration: 0.4, ease: 'power4.inOut' }, 0);
+      tl.to('.top > *', { y: 0, opacity: 1, duration: 0.5, stagger: 0.06, ease: 'power3.out' }, 0.1);
+
+      // Left content
+      tl.to('.left .kicker', { y: 0, opacity: 1, duration: 0.5, ease: 'power3.out' }, 0.3);
+      tl.to('.left h1', { y: 0, opacity: 1, duration: 0.6, ease: 'expo.out' }, 0.5);
+
+      // Steps — staggered pop
+      tl.to('.step', { y: 0, opacity: 1, scale: 1, duration: 0.4, stagger: 0.08, ease: 'back.out(1.4)' }, 0.8);
+
+      // Form sections
+      tl.to('.form-section', { y: 0, opacity: 1, duration: 0.5, stagger: 0.15, ease: 'power3.out' }, 1.0);
+
+      // Payment methods
+      tl.to('.payment', { y: 0, opacity: 1, scale: 1, duration: 0.4, stagger: 0.08, ease: 'back.out(1.4)' }, 1.5);
+
+      // Right content
+      tl.to('.right > *', { y: 0, opacity: 1, duration: 0.5, stagger: 0.1, ease: 'power3.out' }, 1.2);
+
+      // Order items — staggered slide
+      tl.to('.order-item', { x: 0, opacity: 1, duration: 0.4, stagger: 0.1, ease: 'power3.out' }, 1.5);
+
+      // Button sweep
+      tl.to('.btn .sweep', { x: '100%', duration: 0.6, ease: 'power2.inOut' }, 2.5);
+
       // Exit
-      tl.to('.summary .item, .summary', { x: 30, opacity: 0, duration: 0.3, ease: 'power2.in' }, 5.2);
-      tl.to('.form > *', { y: 20, opacity: 0, duration: 0.3, ease: 'power2.in' }, 5.3);
-      tl.to('.top', { y: -20, opacity: 0, duration: 0.3, ease: 'power2.in' }, 5.4);
+      tl.to('.right > *', { y: -15, opacity: 0, duration: 0.3, ease: 'power3.in' }, 5.2);
+      tl.to('.form-section', { y: -15, opacity: 0, duration: 0.3, ease: 'power3.in' }, 5.3);
+      tl.to('.step', { y: -15, opacity: 0, duration: 0.3, ease: 'power3.in' }, 5.4);
+      tl.to('.left h1', { y: -20, opacity: 0, duration: 0.3, ease: 'power3.in' }, 5.5);
+      tl.to('.left .kicker', { y: -10, opacity: 0, duration: 0.3, ease: 'power3.in' }, 5.5);
+      tl.to('.top', { y: -20, opacity: 0, duration: 0.3, ease: 'power3.in' }, 5.5);
+      tl.to('.red-bar', { scaleX: 0, transformOrigin: 'right center', duration: 0.3 }, 5.5);
+
       window.addEventListener('load', () => tl.play());
     })();
   </script>

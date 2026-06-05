@@ -1,0 +1,29 @@
+                                 Apache License
+                           Version 2.0, January 2004
+                        http://www.apache.org/licenses/
+
+   Licensed under the Apache License, Version 2.0 (the "License");
+   you may not use this file except in compliance with the License.
+   You may obtain a copy of the License at
+
+       http://www.apache.org/licenses/LICENSE-2.0
+
+   Unless required by applicable law or agreed to in writing, software
+   distributed under the License is distributed on an "AS IS" BASIS,
+   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+   See the License for the specific language governing permissions and
+   limitations under the License.
+
+---
+
+This product includes software developed by the Apache Software Foundation
+(http://www.apache.org/).
+
+The VICOO promo pipeline is built on top of the following Apache-2.0 projects:
+- nexu-io/html-video    https://github.com/nexu-io/html-video
+- heygen-com/hyperframes https://github.com/heygen-com/hyperframes
+- GSAP                   https://gsap.com/  (free for non-commercial use)
+- ffmpeg                 https://ffmpeg.org/  (LGPL/GPL)
+
+The Smiley Sans (得意黑) font is licensed under the SIL Open Font License.
+The product imagery is from Unsplash (Unsplash License, free for commercial use).

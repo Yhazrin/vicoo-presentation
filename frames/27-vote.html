@@ -1,0 +1,166 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<title>VICOO — Community Vote</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Noto+Sans+SC:wght@300;400;500;700;900&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  @font-face { font-family: 'Smiley Sans'; src: url('SmileySans-Oblique.woff2') format('woff2'); font-weight: 400; font-style: normal; font-display: block; }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html, body { width: 2560px; height: 1440px; overflow: hidden; background: #0A0A0A; color: #FFFFFF; font-family: 'Inter', -apple-system, sans-serif; -webkit-font-smoothing: antialiased; }
+  .stage { position: absolute; top: 0; left: 0; width: 1920px; height: 1080px; transform: scale(1.3333333); transform-origin: top left; }
+  .page { position: absolute; inset: 0; }
+  .grid { position: absolute; inset: 0; pointer-events: none; opacity: 0.05; background-image: linear-gradient(to right, #FFF 1px, transparent 1px); background-size: 80px 80px; }
+  .red-bar { position: absolute; top: 0; left: 0; right: 0; height: 8px; background: #E60012; }
+  .top { position: absolute; top: 60px; left: 80px; right: 80px; display: flex; align-items: center; gap: 24px; }
+  .top .lbl { font-family: 'JetBrains Mono', monospace; font-size: 13px; font-weight: 500; letter-spacing: 0.2em; text-transform: uppercase; }
+  .top .lbl .red { color: #E60012; }
+  .top .rule { flex: 1; height: 1px; background: #333; }
+  .top .meta { font-family: 'JetBrains Mono', monospace; font-size: 13px; font-weight: 500; letter-spacing: 0.18em; text-transform: uppercase; color: #888; }
+
+  .heading { position: absolute; top: 130px; left: 80px; right: 80px; }
+  .heading .kicker { font-family: 'JetBrains Mono', monospace; font-size: 12px; font-weight: 500; letter-spacing: 0.2em; text-transform: uppercase; color: #E60012; }
+  .heading h1 { font-family: 'Smiley Sans', sans-serif; font-weight: 400; font-size: 64px; line-height: 0.95; letter-spacing: -2px; color: #FFFFFF; margin-top: 8px; }
+  .heading h1 em { font-style: normal; color: #E60012; }
+  .heading .sub { font-family: 'Noto Sans SC', sans-serif; font-size: 16px; color: #AAA; margin-top: 8px; }
+
+  /* Top 3 podium */
+  .podium { position: absolute; left: 80px; right: 80px; top: 320px; height: 360px; display: grid; grid-template-columns: 1fr 1.2fr 1fr; gap: 16px; align-items: end; }
+  .pod { background: #141414; border: 1px solid #2A2A2A; padding: 20px; position: relative; }
+  .pod.first { border-color: #E60012; height: 360px; }
+  .pod.second { height: 320px; }
+  .pod.third { height: 290px; }
+  .pod .rank { position: absolute; top: -16px; left: 50%; transform: translateX(-50%); width: 48px; height: 48px; background: #E60012; color: #FFFFFF; display: flex; align-items: center; justify-content: center; font-family: 'Smiley Sans', sans-serif; font-size: 22px; }
+  .pod.first .rank { background: #FFD700; color: #1A1A16; }
+  .pod .img { width: 100%; aspect-ratio: 1; background: linear-gradient(135deg, #E8E2D5 0%, #C9BFA9 100%); }
+  .pod.first .img { background: linear-gradient(135deg, #FFD93D 0%, #E60012 50%, #4D96FF 100%); }
+  .pod.second .img { background: linear-gradient(135deg, #6BCB77 0%, #4D96FF 100%); }
+  .pod.third .img { background: linear-gradient(135deg, #FFD93D 0%, #FF6B6B 100%); }
+  .pod .info { margin-top: 12px; }
+  .pod .nm { font-family: 'Noto Sans SC', sans-serif; font-weight: 700; font-size: 15px; line-height: 1.2; }
+  .pod .by { font-family: 'JetBrains Mono', monospace; font-size: 11px; color: #888; margin-top: 4px; }
+  .pod .votes { display: flex; align-items: center; gap: 6px; margin-top: 8px; }
+  .pod .votes .v { font-family: 'Smiley Sans', sans-serif; font-size: 22px; color: #FFFFFF; }
+  .pod .votes .red { color: #E60012; }
+  .pod .votes .lbl { font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: 0.15em; text-transform: uppercase; color: #888; }
+  .pod .vote-btn { margin-top: 12px; width: 100%; height: 40px; background: #E60012; color: #FFFFFF; font-family: 'Inter', sans-serif; font-weight: 800; font-size: 12px; letter-spacing: 0.15em; text-transform: uppercase; }
+  .pod .vote-btn.voted { background: #00D26A; color: #1A1A16; }
+
+  /* Bottom: live ticker */
+  .ticker { position: absolute; left: 80px; right: 80px; bottom: 80px; padding: 16px 24px; background: #141414; border: 1px solid #2A2A2A; display: flex; align-items: center; gap: 16px; }
+  .ticker .lbl { font-family: 'JetBrains Mono', monospace; font-size: 11px; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: #E60012; }
+  .ticker .live { display: flex; align-items: center; gap: 6px; font-family: 'Inter', sans-serif; font-weight: 700; font-size: 12px; }
+  .ticker .live .d { width: 6px; height: 6px; background: #00D26A; border-radius: 50%; }
+  .ticker .stats { display: flex; gap: 24px; margin-left: auto; font-family: 'JetBrains Mono', monospace; font-size: 12px; color: #AAA; }
+  .ticker .stats .v { color: #FFFFFF; font-weight: 800; }
+  .ticker .stats .red { color: #E60012; }
+</style>
+</head>
+<body>
+  <div class="stage">
+    <div class="page" data-composition-id="vote" data-start="0" data-duration="6" data-width="1920" data-height="1080">
+      <div class="grid"></div>
+      <div class="red-bar"></div>
+      <div class="top">
+        <div class="lbl">VICOO · <span class="red">COMMUNITY VOTE</span></div>
+        <div class="rule"></div>
+        <div class="meta">PP. 22 · /vote</div>
+      </div>
+      <div class="heading">
+        <div class="kicker">CHAPTER 08 · TOP 3 THIS WEEK</div>
+        <h1>You <em>vote</em>. We make.</h1>
+        <p class="sub">「云岭童画」社区投票进行中。87 幅作品参选，票数前 20 进入下一季商品开发。</p>
+      </div>
+      <div class="podium">
+        <div class="pod second">
+          <div class="rank">2</div>
+          <div class="img"></div>
+          <div class="info">
+            <div class="nm">「云上的家」</div>
+            <div class="by">王苗苗 · 7 岁</div>
+            <div class="votes"><span class="v red">2,847</span><span class="lbl">VOTES</span></div>
+            <button class="vote-btn voted">✓ VOTED</button>
+          </div>
+        </div>
+        <div class="pod first">
+          <div class="rank">1</div>
+          <div class="img"></div>
+          <div class="info">
+            <div class="nm">「我家的春天」</div>
+            <div class="by">林一一 · 8 岁</div>
+            <div class="votes"><span class="v">3,419</span><span class="lbl">VOTES</span></div>
+            <button class="vote-btn voted">✓ VOTED</button>
+          </div>
+        </div>
+        <div class="pod third">
+          <div class="rank">3</div>
+          <div class="img"></div>
+          <div class="info">
+            <div class="nm">「太阳和鱼」</div>
+            <div class="by">陈星星 · 9 岁</div>
+            <div class="votes"><span class="v red">2,201</span><span class="lbl">VOTES</span></div>
+            <button class="vote-btn">VOTE ↑</button>
+          </div>
+        </div>
+      </div>
+      <div class="ticker">
+        <div class="lbl">● LIVE TICKER</div>
+        <div class="live"><span class="d"></span>12,431 VOTERS · LAST VOTE 2 SEC AGO</div>
+        <div class="stats">
+          <span class="v">87</span><span>ENTRIES</span>
+          <span class="v">3</span><span>DAYS LEFT</span>
+          <span class="v red">+147</span><span>VOTES / HR</span>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
+  <script>
+    (function () {
+      const tl = gsap.timeline({ paused: true });
+      window.__timelines = window.__timelines || {};
+      window.__timelines["vote"] = tl;
+      gsap.set('.red-bar', { scaleX: 0, transformOrigin: 'left center' });
+      gsap.set('.top > *', { y: -20, opacity: 0 });
+      gsap.set('.heading > *', { y: 20, opacity: 0 });
+      gsap.set('.pod', { y: 60, opacity: 0 });
+      gsap.set('.pod .rank', { scale: 0 });
+      gsap.set('.pod .img', { scale: 0.8, opacity: 0 });
+      gsap.set('.pod .vote-btn', { scale: 0 });
+      gsap.set('.ticker', { x: 50, opacity: 0 });
+      tl.to('.red-bar', { scaleX: 1, duration: 0.5, ease: 'power3.inOut' }, 0);
+      tl.to('.top > *', { y: 0, opacity: 1, duration: 0.5, stagger: 0.06, ease: 'power2.out' }, 0.1);
+      tl.to('.heading > *', { y: 0, opacity: 1, duration: 0.5, stagger: 0.08, ease: 'power2.out' }, 0.4);
+      // Podiums rise in 1st -> 2nd -> 3rd order
+      tl.to('.pod.first', { y: 0, opacity: 1, duration: 0.8, ease: 'expo.out' }, 0.8);
+      tl.to('.pod.first .rank', { scale: 1, duration: 0.5, ease: 'back.out(1.7)' }, 1.2);
+      tl.to('.pod.first .img', { scale: 1, opacity: 1, duration: 0.5, ease: 'power2.out' }, 1.3);
+      tl.to('.pod.second', { y: 0, opacity: 1, duration: 0.8, ease: 'expo.out' }, 1.0);
+      tl.to('.pod.second .rank', { scale: 1, duration: 0.5, ease: 'back.out(1.7)' }, 1.4);
+      tl.to('.pod.second .img', { scale: 1, opacity: 1, duration: 0.5, ease: 'power2.out' }, 1.5);
+      tl.to('.pod.third', { y: 0, opacity: 1, duration: 0.8, ease: 'expo.out' }, 1.2);
+      tl.to('.pod.third .rank', { scale: 1, duration: 0.5, ease: 'back.out(1.7)' }, 1.6);
+      tl.to('.pod.third .img', { scale: 1, opacity: 1, duration: 0.5, ease: 'power2.out' }, 1.7);
+      tl.to('.pod .vote-btn', { scale: 1, duration: 0.4, stagger: 0.12, ease: 'back.out(1.5)' }, 1.9);
+      tl.to('.ticker', { x: 0, opacity: 1, duration: 0.6, ease: 'power3.out' }, 2.2);
+      // odometer votes
+      const targets = [3419, 2847, 2201];
+      const els = document.querySelectorAll('.pod .votes .v');
+      targets.forEach((t, i) => {
+        const obj = { v: 0 };
+        tl.to(obj, { v: t, duration: 1.2, ease: 'power2.out',
+          onUpdate: () => { if (els[i]) els[i].innerText = Math.floor(obj.v).toLocaleString(); }
+        }, 2.4 + i * 0.08);
+      });
+      // Exit
+      tl.to('.ticker', { x: 50, opacity: 0, duration: 0.3, ease: 'power2.in' }, 5.2);
+      tl.to('.pod .vote-btn', { scale: 0, duration: 0.3, ease: 'back.in(1.5)' }, 5.3);
+      tl.to('.pod', { y: 60, opacity: 0, duration: 0.3, stagger: 0.08, ease: 'power2.in' }, 5.4);
+      tl.to('.heading > *', { y: -20, opacity: 0, duration: 0.3, ease: 'power2.in' }, 5.5);
+      window.addEventListener('load', () => tl.play());
+    })();
+  </script>
+</body>
+</html>

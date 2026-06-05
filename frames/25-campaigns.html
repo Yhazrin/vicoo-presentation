@@ -1,0 +1,164 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<title>VICOO — Campaigns</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Noto+Sans+SC:wght@300;400;500;700;900&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  @font-face { font-family: 'Smiley Sans'; src: url('SmileySans-Oblique.woff2') format('woff2'); font-weight: 400; font-style: normal; font-display: block; }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html, body { width: 2560px; height: 1440px; overflow: hidden; background: #F5F5F5; color: #1A1A16; font-family: 'Inter', -apple-system, sans-serif; -webkit-font-smoothing: antialiased; }
+  .stage { position: absolute; top: 0; left: 0; width: 1920px; height: 1080px; transform: scale(1.3333333); transform-origin: top left; }
+  .page { position: absolute; inset: 0; }
+  .red-bar { position: absolute; top: 0; left: 0; right: 0; height: 8px; background: #E60012; }
+  .top { position: absolute; top: 60px; left: 80px; right: 80px; display: flex; align-items: center; gap: 24px; }
+  .top .lbl { font-family: 'JetBrains Mono', monospace; font-size: 13px; font-weight: 500; letter-spacing: 0.2em; text-transform: uppercase; }
+  .top .lbl .red { color: #E60012; }
+  .top .rule { flex: 1; height: 1px; background: #1A1A16; }
+  .top .meta { font-family: 'JetBrains Mono', monospace; font-size: 13px; font-weight: 500; letter-spacing: 0.18em; text-transform: uppercase; color: #888; }
+
+  .heading { position: absolute; top: 130px; left: 80px; right: 80px; }
+  .heading .kicker { font-family: 'JetBrains Mono', monospace; font-size: 12px; font-weight: 500; letter-spacing: 0.2em; text-transform: uppercase; color: #E60012; }
+  .heading h1 { font-family: 'Smiley Sans', sans-serif; font-weight: 400; font-size: 64px; line-height: 0.95; letter-spacing: -2px; color: #1A1A16; margin-top: 8px; }
+  .heading h1 em { font-style: normal; color: #E60012; }
+  .heading .sub { font-family: 'Noto Sans SC', sans-serif; font-size: 16px; color: #666; margin-top: 8px; }
+
+  /* Featured campaign (large card) */
+  .featured { position: absolute; left: 80px; right: 80px; top: 290px; height: 380px; background: #FFFFFF; display: grid; grid-template-columns: 1fr 1fr; }
+  .featured .img { background: linear-gradient(135deg, #FFD93D 0%, #E60012 50%, #4D96FF 100%); position: relative; overflow: hidden; }
+  .featured .img .badge { position: absolute; top: 24px; left: 24px; background: #1A1A16; color: #FFFFFF; padding: 8px 16px; font-family: 'JetBrains Mono', monospace; font-size: 12px; font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase; }
+  .featured .img .tag { position: absolute; bottom: 24px; left: 24px; color: #FFFFFF; }
+  .featured .img .tag .lbl { font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; opacity: 0.9; }
+  .featured .img .tag .nm { font-family: 'Smiley Sans', sans-serif; font-size: 36px; margin-top: 4px; }
+  .featured .copy { padding: 40px; display: flex; flex-direction: column; justify-content: center; }
+  .featured .copy h2 { font-family: 'Smiley Sans', sans-serif; font-weight: 400; font-size: 48px; line-height: 0.95; color: #1A1A16; }
+  .featured .copy h2 em { font-style: normal; color: #E60012; }
+  .featured .copy .desc { font-family: 'Noto Sans SC', sans-serif; font-size: 16px; color: #555; line-height: 1.5; margin-top: 16px; }
+  .featured .copy .stats { display: flex; gap: 24px; margin-top: 24px; }
+  .featured .copy .stat .v { font-family: 'Smiley Sans', sans-serif; font-weight: 400; font-size: 28px; color: #1A1A16; }
+  .featured .copy .stat .v.red { color: #E60012; }
+  .featured .copy .stat .l { font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: 0.15em; text-transform: uppercase; color: #888; margin-top: 4px; }
+  .featured .copy .btn { margin-top: 24px; display: inline-block; padding: 12px 24px; background: #1A1A16; color: #FFFFFF; font-family: 'Inter', sans-serif; font-weight: 800; font-size: 13px; letter-spacing: 0.15em; text-transform: uppercase; }
+
+  /* Smaller campaign cards */
+  .grid { position: absolute; left: 80px; right: 80px; top: 690px; bottom: 80px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+  .card { background: #FFFFFF; padding: 0; position: relative; overflow: hidden; display: flex; flex-direction: column; }
+  .card .img { height: 110px; position: relative; }
+  .card .img.c1 { background: linear-gradient(135deg, #6BCB77 0%, #4D96FF 100%); }
+  .card .img.c2 { background: linear-gradient(135deg, #FFD93D 0%, #FF6B6B 100%); }
+  .card .img.c3 { background: linear-gradient(135deg, #C589E8 0%, #FFB6D9 100%); }
+  .card .img .badge { position: absolute; top: 12px; left: 12px; background: rgba(0,0,0,0.6); color: #FFFFFF; padding: 4px 8px; font-family: 'JetBrains Mono', monospace; font-size: 9px; font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase; }
+  .card .body { padding: 16px; flex: 1; display: flex; flex-direction: column; }
+  .card .cat { font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: #E60012; font-weight: 700; }
+  .card h3 { font-family: 'Smiley Sans', sans-serif; font-weight: 400; font-size: 22px; line-height: 1.05; color: #1A1A16; margin-top: 6px; }
+  .card .desc { font-family: 'Noto Sans SC', sans-serif; font-size: 13px; color: #666; line-height: 1.4; margin-top: 8px; }
+  .card .progress { margin-top: 12px; height: 4px; background: #EEE; }
+  .card .progress .fill { height: 100%; background: #E60012; }
+  .card .meta { display: flex; justify-content: space-between; margin-top: 8px; font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: 0.1em; color: #888; }
+  .card .meta .v { color: #1A1A16; font-weight: 700; }
+</style>
+</head>
+<body>
+  <div class="stage">
+    <div class="page" data-composition-id="campaigns" data-start="0" data-duration="6" data-width="1920" data-height="1080">
+      <div class="red-bar"></div>
+      <div class="top">
+        <div class="lbl">VICOO · <span class="red">CAMPAIGNS</span></div>
+        <div class="rule"></div>
+        <div class="meta">PP. 20 · /campaigns</div>
+      </div>
+      <div class="heading">
+        <div class="kicker">CHAPTER 08 · THEMED CAMPAIGNS</div>
+        <h1>Every <em>season</em>, a new art collection.</h1>
+      </div>
+      <div class="featured">
+        <div class="img">
+          <div class="badge">● LIVE · SS26</div>
+          <div class="tag">
+            <div class="lbl">FEATURED CAMPAIGN</div>
+            <div class="nm">「春的色彩」</div>
+          </div>
+        </div>
+        <div class="copy">
+          <h2>Children paint what <em>they wish the world were</em>.</h2>
+          <p class="desc">200 名乡村儿童用画笔记录春天。每一幅作品由编辑精选后，联同 UNIQLO 印制成可穿的公益品。每件销售额的 28% 进入乡村美育基金。</p>
+          <div class="stats">
+            <div class="stat"><div class="v red">200</div><div class="l">PIECES SOLD</div></div>
+            <div class="stat"><div class="v">4</div><div class="l">PARTNER SCHOOLS</div></div>
+            <div class="stat"><div class="v">¥17,800</div><div class="l">DONATED</div></div>
+            <div class="stat"><div class="v">87%</div><div class="l">FUNDED</div></div>
+          </div>
+          <a class="btn">VIEW CAMPAIGN →</a>
+        </div>
+      </div>
+      <div class="grid">
+        <div class="card">
+          <div class="img c1">
+            <div class="badge">UPCOMING</div>
+          </div>
+          <div class="body">
+            <div class="cat">SUMMER 2026</div>
+            <h3>「夏夜萤火」</h3>
+            <div class="desc">3 所山区学校 · 计划 150 件 · 6 月开放投稿</div>
+            <div class="progress"><div class="fill" style="width:0%"></div></div>
+            <div class="meta"><span class="v">0%</span><span>0 / 150</span></div>
+          </div>
+        </div>
+        <div class="card">
+          <div class="img c2">
+            <div class="badge">● CLOSED</div>
+          </div>
+          <div class="body">
+            <div class="cat">WINTER 2025</div>
+            <h3>「冬日暖阳」</h3>
+            <div class="desc">已结束 · 180 件售罄 · ¥32,400 进入基金</div>
+            <div class="progress"><div class="fill" style="width:100%"></div></div>
+            <div class="meta"><span class="v">100%</span><span>180 / 180</span></div>
+          </div>
+        </div>
+        <div class="card">
+          <div class="img c3">
+            <div class="badge">● VOTING OPEN</div>
+          </div>
+          <div class="body">
+            <div class="cat">SPRING 2026 · ROUND 02</div>
+            <h3>「云岭童画」</h3>
+            <div class="desc">社区投票进行中 · 87 幅作品参选 · 票数前 20 入库</div>
+            <div class="progress"><div class="fill" style="width:60%"></div></div>
+            <div class="meta"><span class="v">VOTE</span><span>87 / 87 entries</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
+  <script>
+    (function () {
+      const tl = gsap.timeline({ paused: true });
+      window.__timelines = window.__timelines || {};
+      window.__timelines["campaigns"] = tl;
+      gsap.set('.red-bar', { scaleX: 0, transformOrigin: 'left center' });
+      gsap.set('.top > *', { y: -20, opacity: 0 });
+      gsap.set('.heading > *', { y: 20, opacity: 0 });
+      gsap.set('.featured', { x: -50, opacity: 0 });
+      gsap.set('.featured .img .badge', { scale: 0 });
+      gsap.set('.card', { y: 40, opacity: 0 });
+      tl.to('.red-bar', { scaleX: 1, duration: 0.5, ease: 'power3.inOut' }, 0);
+      tl.to('.top > *', { y: 0, opacity: 1, duration: 0.5, stagger: 0.06, ease: 'power2.out' }, 0.1);
+      tl.to('.heading > *', { y: 0, opacity: 1, duration: 0.5, stagger: 0.08, ease: 'power2.out' }, 0.4);
+      tl.to('.featured', { x: 0, opacity: 1, duration: 0.7, ease: 'power3.out' }, 0.8);
+      tl.to('.featured .img .badge', { scale: 1, duration: 0.5, ease: 'back.out(1.7)' }, 1.4);
+      tl.to('.card', { y: 0, opacity: 1, duration: 0.6, stagger: 0.12, ease: 'power3.out' }, 1.5);
+      // Exit
+      tl.to('.card', { y: 40, opacity: 0, duration: 0.3, stagger: 0.05, ease: 'power2.in' }, 5.2);
+      tl.to('.featured', { x: -50, opacity: 0, duration: 0.4, ease: 'power2.in' }, 5.3);
+      tl.to('.heading > *', { y: -20, opacity: 0, duration: 0.3, ease: 'power2.in' }, 5.4);
+      tl.to('.top', { y: -20, opacity: 0, duration: 0.3, ease: 'power2.in' }, 5.4);
+      tl.to('.red-bar', { scaleX: 0, transformOrigin: 'right center', duration: 0.3 }, 5.5);
+      window.addEventListener('load', () => tl.play());
+    })();
+  </script>
+</body>
+</html>

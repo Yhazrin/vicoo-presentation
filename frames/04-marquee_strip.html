@@ -1,0 +1,302 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<title>VICOO — Marquee Strip (2K · Real Images)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Noto+Sans+SC:wght@300;400;500;700;900&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  @font-face {
+    font-family: 'Smiley Sans';
+    src: url('SmileySans-Oblique.woff2') format('woff2');
+    font-weight: 400; font-style: normal; font-display: block;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html, body {
+    width: 2560px; height: 1440px; overflow: hidden;
+    background: #FFFFFF; color: #1A1A16;
+    font-family: 'Inter', -apple-system, sans-serif;
+    -webkit-font-smoothing: antialiased;
+  }
+  .stage { position: absolute; top: 0; left: 0; width: 1920px; height: 1080px;
+    transform: scale(1.3333333); transform-origin: top left; }
+
+  .page { position: absolute; inset: 0; }
+
+  .top { position: absolute; top: 0; left: 0; right: 0; height: 56px; background: #1A1A16; color: #FFFFFF;
+    display: flex; align-items: center; padding: 0 80px; z-index: 10; }
+  .top .lbl { font-family: 'JetBrains Mono', monospace; font-size: 12px; font-weight: 500;
+    letter-spacing: 0.2em; text-transform: uppercase; }
+  .top .lbl .red { color: #E60012; }
+  .top .center { flex: 1; text-align: center; font-family: 'Inter', sans-serif; font-weight: 700;
+    font-size: 13px; letter-spacing: 0.18em; text-transform: uppercase; }
+  .top .right { font-family: 'JetBrains Mono', monospace; font-size: 12px; font-weight: 500;
+    letter-spacing: 0.15em; }
+
+  .title-row { position: absolute; top: 96px; left: 80px; right: 80px;
+    display: flex; align-items: end; gap: 32px; }
+  .title-row h1 { font-family: 'Inter', sans-serif; font-weight: 900; font-size: 88px;
+    line-height: 0.95; letter-spacing: -3px; color: #1A1A16; }
+  .title-row h1 em { font-style: normal; color: #E60012; }
+  .title-row .filter { display: flex; gap: 8px; margin-left: auto; align-items: center; }
+  .title-row .filter .chip { padding: 10px 18px; border: 2px solid #1A1A16; background: #FFFFFF;
+    font-family: 'Inter', sans-serif; font-weight: 700; font-size: 13px;
+    letter-spacing: 0.05em; text-transform: uppercase; }
+  .title-row .filter .chip.active { background: #1A1A16; color: #FFFFFF; }
+  .title-row .filter .chip.red { background: #E60012; color: #FFFFFF; border-color: #E60012; }
+  .title-row .filter .count { font-family: 'JetBrains Mono', monospace; font-size: 12px;
+    color: #888; margin-left: 8px; letter-spacing: 0.15em; }
+
+  .marquee { position: absolute; left: 0; right: 0; top: 360px; height: 480px; overflow: hidden; }
+  .track { display: flex; gap: 24px; padding: 0 80px; width: max-content; }
+  .card { flex: 0 0 340px; height: 460px; background: #F5F5F5; position: relative; overflow: hidden;
+    border: 2px solid transparent; transition: border-color 0.3s; }
+  .card.featured { border-color: #E60012; }
+  .card .image { position: absolute; top: 16px; left: 16px; right: 16px; height: 280px;
+    background: #FFFFFF; overflow: hidden; }
+  .card .image img { width: 100%; height: 100%; object-fit: cover; }
+  .card .info { position: absolute; bottom: 16px; left: 16px; right: 16px; }
+  .card .cat { font-family: 'JetBrains Mono', monospace; font-size: 10px; font-weight: 500;
+    letter-spacing: 0.18em; text-transform: uppercase; color: #888; }
+  .card .name { font-family: 'Noto Sans SC', sans-serif; font-weight: 700; font-size: 15px;
+    color: #1A1A16; margin-top: 4px; line-height: 1.25; min-height: 2.5em; }
+  .card .byline { font-family: 'Inter', sans-serif; font-size: 11px; color: #888; margin-top: 4px; }
+  .card .byline strong { color: #1A1A16; font-weight: 600; }
+  .card .row { display: flex; align-items: center; justify-content: space-between; margin-top: 12px; }
+  .card .price { font-family: 'Inter', sans-serif; font-weight: 800; font-size: 22px; color: #1A1A16; }
+  .card .price .cur { font-size: 14px; font-weight: 600; }
+  .card .donate { font-family: 'Inter', sans-serif; font-size: 10px; font-weight: 700;
+    color: #E60012; letter-spacing: 0.1em; text-transform: uppercase; }
+  .card .badge { position: absolute; top: 32px; left: 32px; background: #1A1A16; color: #FFFFFF;
+    padding: 6px 12px; font-family: 'JetBrains Mono', monospace; font-size: 10px; font-weight: 700;
+    letter-spacing: 0.15em; text-transform: uppercase; z-index: 5; }
+  .card .badge.red { background: #E60012; }
+  .card .badge.new { background: #00D26A; color: #1A1A16; }
+  .card .stock { position: absolute; top: 32px; right: 32px; background: #FFFFFF; color: #1A1A16;
+    padding: 4px 10px; font-family: 'JetBrains Mono', monospace; font-size: 10px; font-weight: 700;
+    z-index: 5; }
+  .card .stock.low { color: #E60012; }
+
+  .swatches { display: flex; gap: 6px; margin-top: 8px; }
+  .swatches span { width: 14px; height: 14px; border-radius: 50%; border: 1px solid #DDD; }
+
+  .bot { position: absolute; bottom: 0; left: 0; right: 0; height: 64px; background: #F5F5F5;
+    display: flex; align-items: center; padding: 0 80px; gap: 32px; }
+  .bot .lbl { font-family: 'JetBrains Mono', monospace; font-size: 12px; font-weight: 500;
+    letter-spacing: 0.2em; text-transform: uppercase; color: #888; }
+  .bot .lbl .red { color: #E60012; font-weight: 700; }
+  .bot .live { display: flex; align-items: center; gap: 8px; font-family: 'Inter', sans-serif;
+    font-weight: 700; font-size: 12px; letter-spacing: 0.15em; text-transform: uppercase; }
+  .bot .live .dot { width: 8px; height: 8px; border-radius: 50%; background: #E60012;
+    animation: pulse 1.2s ease-in-out infinite; }
+  @keyframes pulse { 0%, 100% { opacity: 1; transform: scale(1); } 50% { opacity: 0.5; transform: scale(0.8); } }
+  .bot .pager { margin-left: auto; font-family: 'JetBrains Mono', monospace; font-size: 12px;
+    color: #888; letter-spacing: 0.15em; }
+  .bot .pager .now { color: #1A1A16; font-weight: 700; }
+  .bot .arrows { display: flex; gap: 8px; }
+  .bot .arrow { width: 36px; height: 36px; border: 2px solid #1A1A16; display: flex;
+    align-items: center; justify-content: center; font-size: 16px; font-weight: 700;
+    background: #FFFFFF; }
+</style>
+</head>
+<body>
+  <div class="stage">
+    <div class="page" data-composition-id="marquee_strip" data-start="0" data-duration="5" data-width="1920" data-height="1080">
+
+      <div class="top">
+        <div class="lbl">VICOO · <span class="red">SS26</span></div>
+        <div class="center">CHILDREN'S ART × SUSTAINABLE APPAREL · LIVE</div>
+        <div class="right">1,284 PRODUCTS · 287 NEW</div>
+      </div>
+
+      <div class="title-row">
+        <h1>New <em>Welfare</em><br/>Collection</h1>
+        <div class="filter">
+          <div class="chip active">All</div>
+          <div class="chip">Tops</div>
+          <div class="chip">Bottoms</div>
+          <div class="chip">Outerwear</div>
+          <div class="chip red">★ Welfare × Art</div>
+          <div class="count">SHOWING 12 / 287</div>
+        </div>
+      </div>
+
+      <div class="marquee">
+        <div class="track" id="track">
+          <div class="card featured">
+            <div class="badge red">WELFARE</div>
+            <div class="image"><img src="https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?auto=format&fit=crop&w=800&q=85" alt=""/></div>
+            <div class="info">
+              <div class="cat">WELFARE × ART</div>
+              <div class="name">春野·儿童画联名有机棉T恤</div>
+              <div class="byline">by <strong>林一一</strong>, 8</div>
+              <div class="row">
+                <div class="price"><span class="cur">¥</span>178</div>
+                <div class="donate">↗ 28% DONATE</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="badge new">NEW</div>
+            <div class="image"><img src="https://images.unsplash.com/photo-1583743814966-8936f5b7be1a?auto=format&fit=crop&w=800&q=85" alt=""/></div>
+            <div class="info">
+              <div class="cat">BASICS</div>
+              <div class="name">有机棉松弛感圆领T恤</div>
+              <div class="byline">GOTS · 320 IN STOCK</div>
+              <div class="row">
+                <div class="price"><span class="cur">¥</span>159</div>
+                <div class="donate" style="color:#888">— REGULAR</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="badge">V-NECK</div>
+            <div class="image"><img src="https://images.unsplash.com/photo-1434389677669-e08b4cac3105?auto=format&fit=crop&w=800&q=85" alt=""/></div>
+            <div class="info">
+              <div class="cat">KNITWEAR</div>
+              <div class="name">再生羊毛混纺V领针织衫</div>
+              <div class="byline">再生羊毛 · 180 IN STOCK</div>
+              <div class="row">
+                <div class="price"><span class="cur">¥</span>329</div>
+                <div class="donate" style="color:#888">— REGULAR</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="badge red">WELFARE</div>
+            <div class="image"><img src="https://images.unsplash.com/photo-1597484662317-9bd7bdda2907?auto=format&fit=crop&w=800&q=85" alt=""/></div>
+            <div class="info">
+              <div class="cat">WELFARE × ART</div>
+              <div class="name">云岭·公益插画帆布托特</div>
+              <div class="byline">by <strong>王苗苗</strong>, 7</div>
+              <div class="row">
+                <div class="price"><span class="cur">¥</span>98</div>
+                <div class="donate">↗ 25% DONATE</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="stock low">ONLY 3 LEFT</div>
+            <div class="image"><img src="https://images.unsplash.com/photo-1551028719-00167b16eac5?auto=format&fit=crop&w=800&q=85" alt=""/></div>
+            <div class="info">
+              <div class="cat">OUTERWEAR</div>
+              <div class="name">轻量便携保暖外套</div>
+              <div class="byline">240 IN STOCK</div>
+              <div class="row">
+                <div class="price"><span class="cur">¥</span>499</div>
+                <div class="donate" style="color:#888">— REGULAR</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="badge">LINEN</div>
+            <div class="image"><img src="https://images.unsplash.com/photo-1594938291221-94f18cbb5660?auto=format&fit=crop&w=800&q=85" alt=""/></div>
+            <div class="info">
+              <div class="cat">TOPS</div>
+              <div class="name">亚麻混纺休闲衬衫</div>
+              <div class="byline">亚麻棉 · 210 IN STOCK</div>
+              <div class="row">
+                <div class="price"><span class="cur">¥</span>289</div>
+                <div class="donate" style="color:#888">— REGULAR</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="badge red">WELFARE</div>
+            <div class="image"><img src="https://images.unsplash.com/photo-1517438476312-10d79c077509?auto=format&fit=crop&w=800&q=85" alt=""/></div>
+            <div class="info">
+              <div class="cat">WELFARE × ART</div>
+              <div class="name">星夜·再生纤维披肩</div>
+              <div class="byline">by <strong>陈星星</strong>, 9</div>
+              <div class="row">
+                <div class="price"><span class="cur">¥</span>228</div>
+                <div class="donate">↗ 27% DONATE</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="badge">DENIM</div>
+            <div class="image"><img src="https://images.unsplash.com/photo-1541099649105-f69ad21f3246?auto=format&fit=crop&w=800&q=85" alt=""/></div>
+            <div class="info">
+              <div class="cat">BOTTOMS</div>
+              <div class="name">经典窄口直筒牛仔裤</div>
+              <div class="byline">350 IN STOCK</div>
+              <div class="row">
+                <div class="price"><span class="cur">¥</span>299</div>
+                <div class="donate" style="color:#888">— REGULAR</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="bot">
+        <div class="lbl"><span class="red">●</span> HORIZONTAL SCROLL</div>
+        <div class="live"><span class="dot"></span>LIVE · 24 PEOPLE VIEWING</div>
+        <div class="pager"><span class="now">01</span> / 36</div>
+        <div class="arrows">
+          <div class="arrow">‹</div>
+          <div class="arrow" style="background:#1A1A16;color:#FFF">›</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
+  <script>
+    (function () {
+      const tl = gsap.timeline({ paused: true });
+      window.__timelines = window.__timelines || {};
+      window.__timelines["marquee_strip"] = tl;
+
+      gsap.set('.top > *', { y: -56, opacity: 0 });
+      gsap.set('.title-row h1', { y: 50, opacity: 0 });
+      gsap.set('.filter .chip', { y: 20, opacity: 0 });
+      gsap.set('.marquee .card', { y: 80, opacity: 0 });
+      gsap.set('.marquee .card .image img', { scale: 1.15, opacity: 0 });
+      gsap.set('.bot > *', { y: 64, opacity: 0 });
+
+      tl.to('.top > *', { y: 0, opacity: 1, duration: 0.5, stagger: 0.08, ease: 'power3.out' }, 0);
+      tl.to('.title-row h1', { y: 0, opacity: 1, duration: 0.8, ease: 'expo.out' }, 0.3);
+      tl.to('.filter .chip', { y: 0, opacity: 1, duration: 0.4, stagger: 0.06, ease: 'power2.out' }, 0.7);
+      tl.to('.marquee .card', { y: 0, opacity: 1, duration: 0.7, stagger: 0.07, ease: 'power3.out' }, 0.9);
+      tl.to('.marquee .card .image img', { scale: 1, opacity: 1, duration: 0.8, stagger: 0.07, ease: 'power2.out' }, 1.1);
+
+      tl.to({}, { duration: 0.3 }, 1.8);
+      const track = document.getElementById('track');
+      gsap.set(track, { x: 0 });
+      const loop = gsap.to(track, { x: '-25%', duration: 9, ease: 'none', repeat: -1 });
+      loop.pause();
+      tl.call(() => loop.play(), [], 2.1);
+
+      tl.to('.bot > *', { y: 0, opacity: 1, duration: 0.5, stagger: 0.06, ease: 'power2.out' }, 1.4);
+
+      const featured = document.querySelector('.card.featured');
+      if (featured) {
+        gsap.set(featured, { transformPerspective: 1000 });
+        const tiltSeq = gsap.timeline({ repeat: 0, delay: 2.4 });
+        tiltSeq.to(featured, { rotationY: 8, rotationX: -4, duration: 0.6, ease: 'power2.out' })
+               .to(featured, { rotationY: -3, rotationX: 2, duration: 0.8, ease: 'sine.inOut' })
+               .to(featured, { rotationY: 0, rotationX: 0, duration: 0.6, ease: 'power3.out' });
+      }
+
+      // Exit — everything fades + slides (handoff to dark counters frame)
+      tl.to('.top', { y: -56, opacity: 0, duration: 0.4, ease: 'power2.in' }, 4.3);
+      tl.to('.title-row h1', { y: -30, opacity: 0, duration: 0.4, ease: 'power2.in' }, 4.3);
+      tl.to('.filter', { y: -20, opacity: 0, duration: 0.4, ease: 'power2.in' }, 4.4);
+      tl.to('.marquee', { y: 60, opacity: 0, duration: 0.4, ease: 'power2.in' }, 4.4);
+      tl.to('.bot', { y: 64, opacity: 0, duration: 0.4, ease: 'power2.in' }, 4.4);
+
+      window.addEventListener('load', () => tl.play());
+    })();
+  </script>
+</body>
+</html>

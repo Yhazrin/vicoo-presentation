@@ -1,0 +1,277 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<title>VICOO — Donation (2K)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Noto+Sans+SC:wght@300;400;500;700;900&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  @font-face {
+    font-family: 'Smiley Sans';
+    src: url('SmileySans-Oblique.woff2') format('woff2');
+    font-weight: 400; font-style: normal; font-display: block;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html, body {
+    width: 2560px; height: 1440px; overflow: hidden;
+    background: #F5F5F5; color: #1A1A16;
+    font-family: 'Inter', -apple-system, sans-serif;
+    -webkit-font-smoothing: antialiased;
+  }
+  .stage { position: absolute; top: 0; left: 0; width: 1920px; height: 1080px;
+    transform: scale(1.3333333); transform-origin: top left; }
+
+  .page { position: absolute; inset: 0; }
+
+  /* Left side: dark impact area — continues the dark theme from counters */
+  .left-side { position: absolute; left: 0; top: 0; width: 720px; height: 1080px;
+    background: #0A0A0A; color: #FFFFFF; padding: 80px 64px; }
+  .left-side .red-bar { position: absolute; top: 0; left: 0; width: 100%; height: 8px; background: #E60012; }
+
+  .left-side .tag { font-family: 'JetBrains Mono', monospace; font-size: 12px; font-weight: 500;
+    letter-spacing: 0.2em; text-transform: uppercase; color: #999; }
+  .left-side .tag .red { color: #E60012; }
+
+  .left-side h1 { font-family: 'Smiley Sans', 'Inter', sans-serif; font-weight: 400;
+    font-size: 100px; line-height: 0.95; letter-spacing: -3px; margin-top: 32px; }
+  .left-side h1 em { font-style: normal; color: #E60012; }
+
+  .left-side .story { margin-top: 56px; }
+  .left-side .story .num { font-family: 'Inter', sans-serif; font-weight: 800; font-size: 18px;
+    color: #E60012; }
+  .left-side .story .quote { font-family: 'Noto Sans SC', sans-serif; font-weight: 400;
+    font-size: 22px; line-height: 1.5; color: #DDD; margin-top: 16px; max-width: 540px; }
+  .left-side .story .by { font-family: 'JetBrains Mono', monospace; font-size: 13px;
+    letter-spacing: 0.15em; text-transform: uppercase; color: #888; margin-top: 16px; }
+  .left-side .story .by strong { color: #FFFFFF; font-weight: 700; }
+
+  .left-side .goal { margin-top: 64px; padding: 24px; background: #141414;
+    border-left: 4px solid #E60012; }
+  .left-side .goal .lbl { font-family: 'JetBrains Mono', monospace; font-size: 11px;
+    letter-spacing: 0.2em; text-transform: uppercase; color: #999; }
+  .left-side .goal .v { font-family: 'Inter', sans-serif; font-weight: 900; font-size: 36px;
+    color: #FFFFFF; margin-top: 8px; }
+  .left-side .goal .v .red { color: #E60012; }
+  .left-side .goal .meta { font-family: 'Inter', sans-serif; font-size: 12px; color: #888;
+    margin-top: 6px; }
+
+  .progress { margin-top: 8px; height: 4px; background: #222; border-radius: 2px; overflow: hidden; }
+  .progress .bar { height: 100%; background: #E60012; }
+
+  /* Right side: donation form */
+  .right-side { position: absolute; left: 720px; top: 0; right: 0; height: 1080px;
+    background: #FFFFFF; padding: 80px; }
+  .right-side .form { max-width: 920px; }
+
+  .step-bar { display: flex; align-items: center; gap: 12px; margin-bottom: 32px; }
+  .step-bar .step { display: flex; align-items: center; gap: 10px; }
+  .step-bar .step .n { width: 28px; height: 28px; border-radius: 50%; background: #1A1A16; color: #FFFFFF;
+    display: flex; align-items: center; justify-content: center; font-family: 'Inter', sans-serif;
+    font-weight: 800; font-size: 13px; }
+  .step-bar .step.done .n { background: #00D26A; }
+  .step-bar .step.active .n { background: #E60012; transform: scale(1.15); }
+  .step-bar .step .t { font-family: 'Inter', sans-serif; font-weight: 700; font-size: 14px;
+    color: #1A1A16; }
+  .step-bar .sep { width: 60px; height: 1px; background: #DDD; }
+
+  .form h2 { font-family: 'Smiley Sans', 'Inter', sans-serif; font-weight: 400;
+    font-size: 44px; letter-spacing: -1px; color: #1A1A16; }
+  .form h2 em { font-style: normal; color: #E60012; }
+  .form .sub { font-family: 'Noto Sans SC', sans-serif; font-size: 16px; color: #666; margin-top: 8px; }
+
+  .amount-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-top: 32px; }
+  .amt { height: 100px; background: #FFFFFF; border: 2px solid #1A1A16; display: flex;
+    flex-direction: column; align-items: center; justify-content: center; cursor: pointer;
+    position: relative; overflow: hidden; }
+  .amt .v { font-family: 'Inter', sans-serif; font-weight: 900; font-size: 32px; color: #1A1A16; }
+  .amt .lbl { font-family: 'JetBrains Mono', monospace; font-size: 10px; font-weight: 500;
+    letter-spacing: 0.18em; text-transform: uppercase; color: #888; margin-top: 4px; }
+  .amt.selected { background: #E60012; border-color: #E60012; }
+  .amt.selected .v { color: #FFFFFF; }
+  .amt.selected .lbl { color: rgba(255,255,255,0.8); }
+
+  .custom-amt { margin-top: 16px; height: 72px; border: 2px solid #1A1A16; display: flex;
+    align-items: center; padding: 0 24px; font-family: 'Inter', sans-serif; font-weight: 700; }
+  .custom-amt .cur { font-size: 28px; color: #1A1A16; margin-right: 12px; }
+  .custom-amt input { flex: 1; font-family: 'Inter', sans-serif; font-weight: 700;
+    font-size: 28px; color: #1A1A16; border: 0; outline: none; background: transparent; }
+
+  .msg { margin-top: 32px; }
+  .msg .lbl { font-family: 'JetBrains Mono', monospace; font-size: 12px; font-weight: 500;
+    letter-spacing: 0.18em; text-transform: uppercase; color: #888; margin-bottom: 8px; }
+  .msg .field { height: 80px; border: 2px solid #1A1A16; padding: 16px 20px;
+    font-family: 'Noto Sans SC', sans-serif; font-size: 18px; color: #1A1A16; }
+
+  .impact-preview { margin-top: 32px; padding: 24px; background: #FFF8E7;
+    border: 2px solid #E60012; display: flex; align-items: center; gap: 24px; }
+  .impact-preview .ic { width: 56px; height: 56px; background: #E60012; color: #FFFFFF;
+    display: flex; align-items: center; justify-content: center; font-size: 24px; font-weight: 700; }
+  .impact-preview .txt { font-family: 'Noto Sans SC', sans-serif; font-size: 15px; color: #1A1A16; }
+  .impact-preview .txt strong { font-weight: 800; color: #E60012; }
+
+  .donate-btn { margin-top: 24px; width: 100%; height: 88px; background: #1A1A16; color: #FFFFFF;
+    border: 0; font-family: 'Inter', sans-serif; font-weight: 900; font-size: 20px;
+    letter-spacing: 0.15em; text-transform: uppercase; cursor: pointer; position: relative;
+    overflow: hidden; }
+  .donate-btn .lbl { position: relative; z-index: 2; }
+  .donate-btn .red-fill { position: absolute; top: 0; left: 0; bottom: 0; width: 100%;
+    background: #E60012; transform: scaleX(0); transform-origin: left center; z-index: 1; }
+
+  .pay-row { margin-top: 16px; display: flex; align-items: center; gap: 12px; }
+  .pay-row .lbl { font-family: 'JetBrains Mono', monospace; font-size: 11px; font-weight: 500;
+    letter-spacing: 0.18em; text-transform: uppercase; color: #888; }
+  .pay-row .pmt { padding: 8px 16px; border: 1px solid #DDD; font-family: 'Inter', sans-serif;
+    font-weight: 700; font-size: 12px; letter-spacing: 0.05em; }
+  .pay-row .pmt.sel { border-color: #E60012; color: #E60012; }
+  .pay-row .pmt .red { color: #E60012; }
+
+  .cert { position: absolute; right: 80px; top: 80px; width: 200px; background: #FFFFFF;
+    border: 2px solid #1A1A16; padding: 16px; transform: rotate(4deg); box-shadow: 4px 4px 0 #E60012; }
+  .cert .lbl { font-family: 'JetBrains Mono', monospace; font-size: 9px; font-weight: 500;
+    letter-spacing: 0.18em; text-transform: uppercase; color: #888; }
+  .cert .no { font-family: 'Inter', sans-serif; font-weight: 900; font-size: 14px;
+    color: #1A1A16; margin-top: 4px; word-break: break-all; }
+  .cert .stamp { position: absolute; bottom: -16px; right: -16px; width: 60px; height: 60px;
+    border: 2px solid #E60012; border-radius: 50%; display: flex; align-items: center;
+    justify-content: center; font-family: 'Inter', sans-serif; font-weight: 800;
+    font-size: 10px; color: #E60012; transform: rotate(-15deg); }
+</style>
+</head>
+<body>
+  <div class="stage">
+    <div class="page" data-composition-id="donation_panel" data-start="0" data-duration="5" data-width="1920" data-height="1080">
+      <div class="left-side">
+        <div class="red-bar"></div>
+        <div class="tag">DONATE · <span class="red">100% TRACEABLE</span></div>
+        <h1>Give back,<br/>see it <em>land</em>.</h1>
+
+        <div class="story">
+          <div class="num">— 林一一, 8 岁</div>
+          <p class="quote">「我画的那朵花，现在穿在别人身上。我妈妈说，这样会有更多小朋友能上学画画。」</p>
+          <div class="by">SPRING · 2026 · <strong>「春的色彩」</strong> 美育项目</div>
+        </div>
+
+        <div class="goal">
+          <div class="lbl">Q2 GOAL · 5月-7月</div>
+          <div class="v">¥284,560 <span class="red">/ ¥500,000</span></div>
+          <div class="progress"><div class="bar" id="prog" style="width: 0%"></div></div>
+          <div class="meta" id="prog-meta">0% · 14 DAYS LEFT · 1,284 BACKERS</div>
+        </div>
+      </div>
+
+      <div class="right-side">
+        <div class="form">
+          <div class="step-bar">
+            <div class="step done"><div class="n">1</div><div class="t">Choose amount</div></div>
+            <div class="sep"></div>
+            <div class="step active"><div class="n">2</div><div class="t">Add message</div></div>
+            <div class="sep"></div>
+            <div class="step"><div class="n">3</div><div class="t">Pay</div></div>
+          </div>
+
+          <h2>Pick an <em>amount</em>.</h2>
+          <p class="sub">每一笔捐赠都进入「VICOO 儿童美育基金」，独立审计可查。</p>
+
+          <div class="amount-grid">
+            <div class="amt"><div class="v">¥30</div><div class="lbl">1 学生 / 月</div></div>
+            <div class="amt selected"><div class="v">¥100</div><div class="lbl">1 学生 / 学期</div></div>
+            <div class="amt"><div class="v">¥500</div><div class="lbl">1 班级 / 月</div></div>
+            <div class="amt"><div class="v">¥2,000</div><div class="lbl">1 学校 / 季度</div></div>
+          </div>
+
+          <div class="custom-amt">
+            <span class="cur">¥</span>
+            <input value="100" />
+          </div>
+
+          <div class="msg">
+            <div class="lbl">MESSAGE (OPTIONAL · PUBLIC ON CERTIFICATE)</div>
+            <div class="field">希望更多小朋友的画能穿到大家身上。— 上海·朱女士</div>
+          </div>
+
+          <div class="impact-preview">
+            <div class="ic">↗</div>
+            <div class="txt">您的 <strong>¥100</strong> 将为 <strong>1 名乡村儿童</strong> 提供 <strong>一学期</strong> 画材与美育课时。</div>
+          </div>
+
+          <button class="donate-btn" id="donate-btn">
+            <span class="red-fill" id="btn-fill"></span>
+            <span class="lbl">DONATE ¥100 NOW</span>
+          </button>
+
+          <div class="pay-row">
+            <div class="lbl">PAYMENT:</div>
+            <div class="pmt sel">微信支付</div>
+            <div class="pmt">支付宝</div>
+            <div class="pmt">Stripe <span class="red">·</span></div>
+            <div class="pmt">PayPal</div>
+          </div>
+        </div>
+
+        <div class="cert">
+          <div class="lbl">CERTIFICATE NO.</div>
+          <div class="no">VICOO-<br/>2026Q2-<br/>128456-<br/>SH</div>
+          <div class="stamp">VERIFIED</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
+  <script>
+    (function () {
+      const tl = gsap.timeline({ paused: true });
+      window.__timelines = window.__timelines || {};
+      window.__timelines["donation_panel"] = tl;
+
+      gsap.set('.left-side .red-bar', { scaleX: 0, transformOrigin: 'left center' });
+      gsap.set('.left-side .tag, .left-side h1, .left-side .story, .left-side .goal',
+        { x: -30, opacity: 0 });
+      gsap.set('.right-side > *', { y: 30, opacity: 0 });
+      gsap.set('.cert', { scale: 0, rotation: 30, transformOrigin: 'center' });
+      gsap.set('.amt', { scale: 0, transformOrigin: 'center' });
+      gsap.set('.step-bar .step .n', { scale: 0 });
+
+      tl.to('.left-side .red-bar', { scaleX: 1, duration: 0.5, ease: 'power3.inOut' }, 0);
+      tl.to('.left-side .tag', { x: 0, opacity: 1, duration: 0.5, ease: 'power2.out' }, 0.2);
+      tl.to('.left-side h1', { x: 0, opacity: 1, duration: 0.8, ease: 'expo.out' }, 0.4);
+      tl.to('.left-side .story', { x: 0, opacity: 1, duration: 0.6, ease: 'power2.out' }, 0.9);
+      tl.to('.left-side .goal', { x: 0, opacity: 1, duration: 0.6, ease: 'power2.out' }, 1.1);
+      tl.to('#prog', { width: '56.9%', duration: 1.2, ease: 'power2.out' }, 1.3);
+      const metaObj = { v: 0 };
+      tl.to(metaObj, {
+        v: 56.9, duration: 1.2, ease: 'power2.out',
+        onUpdate: () => {
+          document.getElementById('prog-meta').innerText =
+            metaObj.v.toFixed(1) + '% · 14 DAYS LEFT · 1,284 BACKERS';
+        }
+      }, 1.3);
+
+      tl.to('.right-side > *', { y: 0, opacity: 1, duration: 0.5, stagger: 0.08, ease: 'power2.out' }, 0.6);
+      tl.to('.step-bar .step .n', {
+        scale: 1, duration: 0.5, stagger: 0.1, ease: 'back.out(1.7)'
+      }, 1.0);
+      tl.to('.amt', { scale: 1, duration: 0.5, stagger: 0.08, ease: 'back.out(1.5)' }, 1.5);
+      tl.to({}, { duration: 0.2, onStart: () => {
+        gsap.fromTo('.amt.selected', { scale: 1 }, { scale: 0.95, duration: 0.15, yoyo: true, repeat: 1, ease: 'power2.inOut' });
+      }}, 2.1);
+      tl.to('.cert', { scale: 1, rotation: 4, duration: 0.8, ease: 'back.out(1.5)' }, 2.3);
+
+      const btn = document.getElementById('donate-btn');
+      const fill = document.getElementById('btn-fill');
+      tl.to({}, { duration: 0.4, onStart: () => {
+        gsap.fromTo(btn, { x: 0, y: 0 }, { x: -3, y: -1, duration: 0.2, yoyo: true, repeat: 1 });
+      }}, 3.0);
+      tl.to(fill, { scaleX: 1, duration: 0.7, ease: 'power3.inOut' }, 3.3);
+      tl.to(btn, { scale: 1.05, duration: 0.2, yoyo: true, repeat: 1, ease: 'power2.inOut' }, 4.0);
+
+      // Exit — split halves slide out
+      tl.to('.left-side', { x: -100, duration: 0.4, ease: 'power2.in' }, 4.4);
+      tl.to('.right-side', { x: 100, duration: 0.4, ease: 'power2.in' }, 4.4);
+
+      window.addEventListener('load', () => tl.play());
+    })();
+  </script>
+</body>
+</html>

@@ -1,0 +1,194 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<title>VICOO — Header Unfold (2K)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Noto+Sans+SC:wght@300;400;500;700;900&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  @font-face {
+    font-family: 'Smiley Sans';
+    src: url('SmileySans-Oblique.woff2') format('woff2');
+    font-weight: 400; font-style: normal; font-display: block;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html, body {
+    width: 2560px; height: 1440px; overflow: hidden;
+    background: #FFFFFF; color: #1A1A16;
+    font-family: 'Inter', -apple-system, sans-serif;
+    -webkit-font-smoothing: antialiased;
+  }
+  .stage { position: absolute; top: 0; left: 0; width: 1920px; height: 1080px;
+    transform: scale(1.3333333); transform-origin: top left; }
+
+  .page { position: absolute; inset: 0; }
+
+  /* Uniqlo-style red header bar — wordmark in top-left matches end of cover */
+  .header { position: absolute; top: 0; left: 0; right: 0;
+    background: #E60012; color: #FFFFFF; height: 88px;
+    display: flex; align-items: center; padding: 0 80px; z-index: 10; }
+  .header .logo { display: flex; align-items: center; gap: 16px; }
+  .header .logo .mark { width: 56px; height: 56px; background: #FFFFFF; color: #E60012;
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Smiley Sans', 'Inter', sans-serif; font-size: 36px; line-height: 1; }
+  .header .logo .name { font-family: 'Smiley Sans', 'Inter', sans-serif; font-size: 26px;
+    color: #FFFFFF; }
+  .header .logo .sep { width: 1px; height: 28px; background: rgba(255,255,255,0.4); margin: 0 8px; }
+  .header .logo .vicoo { font-family: 'Smiley Sans', 'Inter', sans-serif; font-size: 22px; }
+
+  .nav { display: flex; gap: 0; margin-left: 80px; flex: 1; }
+  .nav .item { padding: 0 28px; height: 88px; display: flex; align-items: center;
+    font-family: 'Inter', sans-serif; font-weight: 600; font-size: 15px; letter-spacing: 0.02em;
+    color: rgba(255,255,255,0.85); position: relative; }
+  .nav .item.active { color: #FFFFFF; }
+  .nav .item.active::after { content: ''; position: absolute; bottom: 0; left: 28px; right: 28px;
+    height: 3px; background: #FFFFFF; }
+  .nav .item .dot { width: 6px; height: 6px; background: #FFFFFF; border-radius: 50%;
+    margin-left: 6px; }
+
+  .header .actions { display: flex; align-items: center; gap: 24px; }
+  .header .search { position: relative; width: 280px; height: 44px; background: rgba(255,255,255,0.15);
+    border: 1px solid rgba(255,255,255,0.3); display: flex; align-items: center; padding: 0 16px;
+    color: #FFFFFF; }
+  .header .search::before { content: '⌕'; font-size: 18px; margin-right: 8px; opacity: 0.9; }
+  .header .search input { background: transparent; border: 0; color: #FFFFFF; font: 500 14px Inter;
+    width: 100%; outline: none; }
+  .header .search input::placeholder { color: rgba(255,255,255,0.6); }
+
+  .header .cart { position: relative; padding: 8px 16px; background: #FFFFFF; color: #E60012;
+    font-family: 'Inter', sans-serif; font-weight: 800; font-size: 13px; letter-spacing: 0.1em;
+    text-transform: uppercase; }
+  .header .cart .badge { position: absolute; top: -8px; right: -8px; width: 22px; height: 22px;
+    background: #1A1A16; color: #FFFFFF; border-radius: 50%; display: flex; align-items: center;
+    justify-content: center; font-size: 11px; font-weight: 700; }
+
+  /* breadcrumb below header */
+  .crumb { position: absolute; top: 124px; left: 80px;
+    font-family: 'JetBrains Mono', monospace; font-size: 12px; font-weight: 500;
+    letter-spacing: 0.2em; text-transform: uppercase; color: #888; }
+  .crumb .red { color: #E60012; }
+
+  /* page title area */
+  .stage-content { position: absolute; top: 220px; left: 80px; right: 80px; bottom: 80px; }
+  .stage-content .row { display: flex; align-items: baseline; gap: 24px; margin-bottom: 32px; }
+  .stage-content .row .label { font-family: 'JetBrains Mono', monospace; font-size: 13px; font-weight: 500;
+    letter-spacing: 0.2em; text-transform: uppercase; color: #888; }
+  .stage-content .row .label .red { color: #E60012; }
+  .stage-content h1 { font-family: 'Inter', sans-serif; font-weight: 900; font-size: 110px;
+    line-height: 0.95; color: #1A1A16; letter-spacing: -4px; }
+  .stage-content h1 em { font-style: normal; color: #E60012; }
+  .stage-content .sub { font-family: 'Noto Sans SC', sans-serif; font-weight: 400; font-size: 22px;
+    line-height: 1.5; color: #555; max-width: 900px; margin-top: 32px; }
+
+  /* status bar bottom */
+  .status { position: absolute; bottom: 0; left: 0; right: 0; height: 48px;
+    background: #1A1A16; color: #FFFFFF; display: flex; align-items: center; padding: 0 80px;
+    font-family: 'JetBrains Mono', monospace; font-size: 12px; font-weight: 500;
+    letter-spacing: 0.18em; text-transform: uppercase; }
+  .status .item { display: flex; align-items: center; gap: 8px; margin-right: 40px; }
+  .status .dot { width: 6px; height: 6px; border-radius: 50%; background: #00D26A; }
+  .status .red-dot { width: 6px; height: 6px; border-radius: 50%; background: #E60012; }
+</style>
+</head>
+<body>
+  <div class="stage">
+    <div class="page" data-composition-id="header_unfold" data-start="0" data-duration="4" data-width="1920" data-height="1080">
+
+      <div class="header">
+        <div class="logo">
+          <div class="mark">U</div>
+          <div class="name">UNIQLO</div>
+          <div class="sep"></div>
+          <div class="vicoo">VICOO</div>
+        </div>
+        <div class="nav">
+          <div class="item">WOMEN</div>
+          <div class="item">MEN</div>
+          <div class="item">KIDS</div>
+          <div class="item active">BABY<span class="dot"></span></div>
+          <div class="item">WELFARE × ART</div>
+          <div class="item">CAMPAIGNS</div>
+        </div>
+        <div class="actions">
+          <div class="search"><input placeholder="Search 1,284 products…" /></div>
+          <div class="cart">CART <span class="badge">3</span></div>
+        </div>
+      </div>
+
+      <div class="crumb">SHOP / <span class="red">WELFARE × ART</span> / 春野 2026</div>
+
+      <div class="stage-content">
+        <div class="row"><div class="label"><span class="red">●</span> FEATURED CAMPAIGN</div></div>
+        <h1>Children's art,<br/>worn by <em>everyone</em>.</h1>
+        <p class="sub">把孩子的画变成可穿的、可持续的、每一件都能被验证的衣服。VICOO 联合 UNIQLO「美育公益」项目，让创意进入衣橱，让公益有可追溯的回执。</p>
+      </div>
+
+      <div class="status">
+        <div class="item"><span class="dot"></span>LIVE · SS26</div>
+        <div class="item"><span class="red-dot"></span>3 IN CART</div>
+        <div class="item" style="margin-left:auto">FREE SHIPPING · ¥99+</div>
+        <div class="item" style="margin-right:0">中文 / EN</div>
+      </div>
+
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
+  <script>
+    (function () {
+      const tl = gsap.timeline({ paused: true });
+      window.__timelines = window.__timelines || {};
+      window.__timelines["header_unfold"] = tl;
+
+      // header starts partially in (catches the cover→header xfade smoothly)
+      gsap.set('.header', { y: 0 });
+      gsap.set('.header .logo .name, .header .logo .vicoo', { opacity: 0, y: 8 });
+      gsap.set('.nav .item', { y: 30, opacity: 0 });
+      gsap.set('.header .search', { scaleX: 0, transformOrigin: 'left center', opacity: 0 });
+      gsap.set('.header .cart', { scale: 0, rotation: -90 });
+      gsap.set('.crumb', { y: 20, opacity: 0 });
+      gsap.set('.stage-content .label', { x: -30, opacity: 0 });
+      gsap.set('.stage-content h1', { y: 80, opacity: 0 });
+      gsap.set('.stage-content .sub', { y: 20, opacity: 0 });
+      gsap.set('.status', { y: 48 });
+
+      // Header logos fade in first (continuing from cover)
+      tl.to('.header .logo .name, .header .logo .vicoo', {
+        opacity: 1, y: 0, duration: 0.4, stagger: 0.08, ease: 'power2.out'
+      }, 0);
+
+      tl.to('.nav .item', {
+        y: 0, opacity: 1, duration: 0.5, stagger: 0.06, ease: 'power2.out'
+      }, 0.3);
+
+      tl.to('.header .search', {
+        scaleX: 1, opacity: 1, duration: 0.5, ease: 'power3.out'
+      }, 0.7);
+
+      tl.to('.header .cart', {
+        scale: 1, rotation: 0, duration: 0.7, ease: 'back.out(1.8)'
+      }, 0.8);
+
+      tl.to('.crumb', { y: 0, opacity: 1, duration: 0.5, ease: 'power2.out' }, 1.1);
+      tl.to('.stage-content .label', { x: 0, opacity: 1, duration: 0.5, ease: 'power2.out' }, 1.3);
+
+      tl.to('.stage-content h1', {
+        y: 0, opacity: 1, duration: 0.9, ease: 'expo.out'
+      }, 1.5);
+
+      tl.to('.stage-content .sub', { y: 0, opacity: 1, duration: 0.6, ease: 'power2.out' }, 2.0);
+      tl.to('.status', { y: 0, duration: 0.5, ease: 'power3.out' }, 2.4);
+
+      // Exit — header stays (red bar continues), but title fades, nav shrinks (handoff to hero)
+      tl.to('.stage-content h1', { y: -30, opacity: 0, duration: 0.4, ease: 'power2.in' }, 3.4);
+      tl.to('.stage-content .sub', { y: -10, opacity: 0, duration: 0.3, ease: 'power2.in' }, 3.4);
+      tl.to('.stage-content .row .label', { x: -20, opacity: 0, duration: 0.3 }, 3.4);
+      tl.to('.crumb', { y: -10, opacity: 0, duration: 0.3 }, 3.4);
+      tl.to('.status', { y: 48, duration: 0.4, ease: 'power2.in' }, 3.5);
+
+      window.addEventListener('load', () => tl.play());
+    })();
+  </script>
+</body>
+</html>

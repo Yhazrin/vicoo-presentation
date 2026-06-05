@@ -1,0 +1,110 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<title>VICOO — Brand Meaning</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Noto+Sans+SC:wght@300;400;500;700;900&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  @font-face { font-family: 'Smiley Sans'; src: url('SmileySans-Oblique.woff2') format('woff2'); font-weight: 400; font-style: normal; font-display: block; }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html, body { width: 2560px; height: 1440px; overflow: hidden; background: #FFFFFF; color: #1A1A16; font-family: 'Inter', -apple-system, sans-serif; -webkit-font-smoothing: antialiased; }
+  .stage { position: absolute; top: 0; left: 0; width: 1920px; height: 1080px; transform: scale(1.3333333); transform-origin: top left; }
+  .page { position: absolute; inset: 0; }
+  .red-bar { position: absolute; top: 0; left: 0; right: 0; height: 8px; background: #E60012; }
+  .top { position: absolute; top: 60px; left: 80px; right: 80px; display: flex; align-items: center; gap: 24px; }
+  .top .lbl { font-family: 'JetBrains Mono', monospace; font-size: 13px; font-weight: 500; letter-spacing: 0.2em; text-transform: uppercase; }
+  .top .lbl .red { color: #E60012; }
+  .top .rule { flex: 1; height: 1px; background: #1A1A16; }
+  .top .meta { font-family: 'JetBrains Mono', monospace; font-size: 13px; font-weight: 500; letter-spacing: 0.18em; text-transform: uppercase; color: #888; }
+
+  .heading { position: absolute; top: 140px; left: 80px; right: 80px; }
+  .heading .kicker { font-family: 'JetBrains Mono', monospace; font-size: 13px; font-weight: 500; letter-spacing: 0.2em; text-transform: uppercase; color: #E60012; }
+  .heading h1 { font-family: 'Smiley Sans', sans-serif; font-weight: 400; font-size: 96px; line-height: 0.95; letter-spacing: -3px; color: #1A1A16; margin-top: 16px; max-width: 1100px; }
+  .heading h1 em { font-style: normal; color: #E60012; }
+  .heading .sub { font-family: 'Noto Sans SC', sans-serif; font-weight: 400; font-size: 20px; line-height: 1.5; color: #555; margin-top: 24px; max-width: 900px; }
+
+  .split { position: absolute; left: 80px; right: 80px; top: 460px; display: grid; grid-template-columns: 1fr 1px 1fr; gap: 60px; align-items: center; }
+  .split .rule { background: #1A1A16; height: 380px; transform: scaleY(0); transform-origin: top; }
+  .half .lbl { font-family: 'JetBrains Mono', monospace; font-size: 13px; font-weight: 500; letter-spacing: 0.2em; text-transform: uppercase; color: #E60012; }
+  .half .letters { font-family: 'Smiley Sans', sans-serif; font-weight: 400; font-size: 320px; line-height: 0.85; color: #1A1A16; margin-top: 8px; letter-spacing: -10px; }
+  .half.left .letters { text-align: left; }
+  .half.right .letters { text-align: right; }
+  .half .word { font-family: 'Smiley Sans', sans-serif; font-weight: 400; font-size: 56px; line-height: 1.05; color: #1A1A16; margin-top: 8px; }
+  .half.left .word { text-align: left; }
+  .half.right .word { text-align: right; }
+  .half .desc { font-family: 'Noto Sans SC', sans-serif; font-weight: 400; font-size: 20px; line-height: 1.5; color: #555; margin-top: 24px; max-width: 460px; }
+  .half.left .desc { text-align: left; }
+  .half.right .desc { text-align: right; margin-left: auto; }
+
+  /* Circle motif */
+  .motif { position: absolute; right: 200px; top: 540px; width: 160px; height: 160px; border: 2px solid #E60012; border-radius: 50%; opacity: 0; }
+  .motif::after { content: ''; position: absolute; inset: 12px; border: 1px solid #E60012; border-radius: 50%; opacity: 0.5; }
+  .motif::before { content: ''; position: absolute; left: 50%; top: 50%; width: 12px; height: 12px; background: #E60012; border-radius: 50%; transform: translate(-50%, -50%); }
+</style>
+</head>
+<body>
+  <div class="stage">
+    <div class="page" data-composition-id="brand_meaning" data-start="0" data-duration="5" data-width="1920" data-height="1080">
+      <div class="red-bar"></div>
+      <div class="top">
+        <div class="lbl">VICOO · <span class="red">THE NAME</span></div>
+        <div class="rule"></div>
+        <div class="meta">PP. 03 · ETYMOLOGY</div>
+      </div>
+
+      <div class="heading">
+        <div class="kicker">CHAPTER 02 · AN ETYMOLOGY</div>
+        <h1>Every letter earns its place — <em>Visual</em> on the left, <em>Circle</em> on the right.</h1>
+      </div>
+
+      <div class="split">
+        <div class="half left">
+          <div class="lbl">The First Two</div>
+          <div class="letters">VI</div>
+          <div class="word">Visual</div>
+          <div class="desc">A child's drawing is not decoration. It is the first line of a visual argument — about who they are, what they see, what they wish the world were.</div>
+        </div>
+        <div class="rule"></div>
+        <div class="half right">
+          <div class="lbl">The Last Three</div>
+          <div class="letters">COO</div>
+          <div class="word">Circle</div>
+          <div class="desc">Two round O's — one for the loop of giving and receiving, one for the loop of making and remaking. The circle has no end.</div>
+        </div>
+      </div>
+
+      <div class="motif"></div>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
+  <script>
+    (function () {
+      const tl = gsap.timeline({ paused: true });
+      window.__timelines = window.__timelines || {};
+      window.__timelines["brand_meaning"] = tl;
+      gsap.set('.red-bar', { scaleX: 0, transformOrigin: 'left center' });
+      gsap.set('.top > *', { y: -20, opacity: 0 });
+      gsap.set('.heading > *', { y: 30, opacity: 0 });
+      gsap.set('.split .rule', { scaleY: 0 });
+      gsap.set('.half > *', { y: 20, opacity: 0 });
+      gsap.set('.motif', { scale: 0, rotation: -90 });
+      tl.to('.red-bar', { scaleX: 1, duration: 0.5, ease: 'power3.inOut' }, 0);
+      tl.to('.top > *', { y: 0, opacity: 1, duration: 0.5, stagger: 0.06, ease: 'power2.out' }, 0.1);
+      tl.to('.heading > *', { y: 0, opacity: 1, duration: 0.6, stagger: 0.1, ease: 'power2.out' }, 0.4);
+      tl.to('.split .rule', { scaleY: 1, duration: 0.7, ease: 'power3.inOut' }, 1.1);
+      tl.to('.half > *', { y: 0, opacity: 1, duration: 0.5, stagger: 0.06, ease: 'power2.out' }, 1.3);
+      tl.to('.motif', { scale: 1, rotation: 0, duration: 1.0, ease: 'back.out(1.4)' }, 2.4);
+      // Exit
+      tl.to('.motif', { scale: 0.5, opacity: 0, duration: 0.3, ease: 'power2.in' }, 4.3);
+      tl.to('.half > *', { y: -10, opacity: 0, duration: 0.3, ease: 'power2.in' }, 4.4);
+      tl.to('.heading > *', { y: -20, opacity: 0, duration: 0.3, ease: 'power2.in' }, 4.5);
+      tl.to('.top', { y: -20, opacity: 0, duration: 0.3, ease: 'power2.in' }, 4.5);
+      tl.to('.red-bar', { scaleX: 0, transformOrigin: 'right center', duration: 0.3 }, 4.5);
+      window.addEventListener('load', () => tl.play());
+    })();
+  </script>
+</body>
+</html>

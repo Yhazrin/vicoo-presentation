@@ -1,0 +1,135 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<title>VICOO — 4 Missions</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Noto+Sans+SC:wght@300;400;500;700;900&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  @font-face { font-family: 'Smiley Sans'; src: url('SmileySans-Oblique.woff2') format('woff2'); font-weight: 400; font-style: normal; font-display: block; }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html, body { width: 2560px; height: 1440px; overflow: hidden; background: #F5F5F5; color: #1A1A16; font-family: 'Inter', -apple-system, sans-serif; -webkit-font-smoothing: antialiased; }
+  .stage { position: absolute; top: 0; left: 0; width: 1920px; height: 1080px; transform: scale(1.3333333); transform-origin: top left; }
+  .page { position: absolute; inset: 0; }
+  .red-bar { position: absolute; top: 0; left: 0; right: 0; height: 8px; background: #E60012; }
+  .top { position: absolute; top: 60px; left: 80px; right: 80px; display: flex; align-items: center; gap: 24px; }
+  .top .lbl { font-family: 'JetBrains Mono', monospace; font-size: 13px; font-weight: 500; letter-spacing: 0.2em; text-transform: uppercase; }
+  .top .lbl .red { color: #E60012; }
+  .top .rule { flex: 1; height: 1px; background: #1A1A16; }
+  .top .meta { font-family: 'JetBrains Mono', monospace; font-size: 13px; font-weight: 500; letter-spacing: 0.18em; text-transform: uppercase; color: #888; }
+  .heading { position: absolute; top: 140px; left: 80px; right: 80px; }
+  .heading .kicker { font-family: 'JetBrains Mono', monospace; font-size: 13px; font-weight: 500; letter-spacing: 0.2em; text-transform: uppercase; color: #E60012; }
+  .heading h1 { font-family: 'Smiley Sans', sans-serif; font-weight: 400; font-size: 80px; line-height: 0.95; letter-spacing: -2px; color: #1A1A16; margin-top: 16px; }
+  .heading h1 em { font-style: normal; color: #E60012; }
+  .heading .sub { font-family: 'Noto Sans SC', sans-serif; font-weight: 400; font-size: 18px; color: #666; margin-top: 20px; }
+
+  .panels { position: absolute; left: 80px; right: 80px; top: 440px; bottom: 80px; display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px; }
+  .panel { background: #FFFFFF; border: 2px solid #1A1A16; padding: 32px; position: relative; overflow: hidden; }
+  .panel .num { position: absolute; top: 32px; right: 32px; font-family: 'JetBrains Mono', monospace; font-size: 14px; font-weight: 700; letter-spacing: 0.15em; color: #E60012; }
+  .panel .icon { width: 64px; height: 64px; background: #1A1A16; color: #FFFFFF; display: flex; align-items: center; justify-content: center; font-family: 'Smiley Sans', sans-serif; font-size: 28px; }
+  .panel.red .icon { background: #E60012; }
+  .panel .cat { font-family: 'JetBrains Mono', monospace; font-size: 11px; font-weight: 500; letter-spacing: 0.2em; text-transform: uppercase; color: #888; margin-top: 24px; }
+  .panel .ttl { font-family: 'Smiley Sans', sans-serif; font-weight: 400; font-size: 44px; line-height: 1; color: #1A1A16; margin-top: 8px; letter-spacing: -1px; }
+  .panel .desc { font-family: 'Noto Sans SC', sans-serif; font-weight: 400; font-size: 15px; line-height: 1.5; color: #555; margin-top: 20px; }
+  .panel .list { margin-top: 16px; padding-top: 16px; border-top: 1px solid #EEE; }
+  .panel .list .item { display: flex; align-items: center; gap: 8px; font-family: 'Inter', sans-serif; font-size: 13px; color: #1A1A16; margin-top: 6px; font-weight: 500; }
+  .panel .list .item::before { content: '✓'; color: #E60012; font-weight: 700; }
+  .panel .corner { position: absolute; bottom: 24px; right: 32px; font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: 0.15em; text-transform: uppercase; color: #888; }
+</style>
+</head>
+<body>
+  <div class="stage">
+    <div class="page" data-composition-id="missions" data-start="0" data-duration="6" data-width="1920" data-height="1080">
+      <div class="red-bar"></div>
+      <div class="top">
+        <div class="lbl">VICOO · <span class="red">FOUR PILLARS</span></div>
+        <div class="rule"></div>
+        <div class="meta">PP. 04 · MISSION</div>
+      </div>
+      <div class="heading">
+        <div class="kicker">CHAPTER 03 · WHAT WE BUILD</div>
+        <h1>Four <em>commitments</em>, one platform.</h1>
+        <p class="sub">VICOO 的产品功能围绕四个核心承诺构建：让每个孩子的画都能被穿、被看见、被验证、被循环。</p>
+      </div>
+      <div class="panels">
+        <div class="panel">
+          <div class="num">01 / 04</div>
+          <div class="icon">艺</div>
+          <div class="cat">CREATIVE</div>
+          <div class="ttl">Children's art,<br/>worn by everyone.</div>
+          <div class="desc">画作从纸面走到衣橱，不删改、不裁剪——原作授权印花，有机棉侧缝无感印刷。</div>
+          <div class="list">
+            <div class="item">Themed campaigns · 主题征稿</div>
+            <div class="item">Community vote · 社区投票</div>
+            <div class="item">Editorial curation · 编辑精选</div>
+          </div>
+          <div class="corner">→ /shop · /impact/shop</div>
+        </div>
+        <div class="panel red">
+          <div class="num">02 / 04</div>
+          <div class="icon">⛟</div>
+          <div class="cat">TRACEABLE</div>
+          <div class="ttl">Every material.<br/>Every maker.</div>
+          <div class="desc">纤维来源、染缸、工厂、认证——每一站都入账，扫一扫就能验证，第三方独立审计。</div>
+          <div class="list">
+            <div class="item">5-stage supply chain · 5 站溯源</div>
+            <div class="item">3D globe visualisation · 3D 地球</div>
+            <div class="item">Carbon tracking · 碳排记录</div>
+          </div>
+          <div class="corner">→ /impact/shop/:id</div>
+        </div>
+        <div class="panel">
+          <div class="num">03 / 04</div>
+          <div class="icon">↻</div>
+          <div class="cat">CIRCULAR</div>
+          <div class="ttl">Intake · Resale<br/>Recycle · Reinvest.</div>
+          <div class="desc">二手衣物回收入库、可穿的进入二手市场、不可穿的拆解到纤维——收益进入美育基金。</div>
+          <div class="list">
+            <div class="item">Clothing intake · 衣物回收</div>
+            <div class="item">Resale programme · 二手再售</div>
+            <div class="item">Fibre-to-fibre · 纤维再生</div>
+          </div>
+          <div class="corner">→ /clothing-recycle · /donate-clothing</div>
+        </div>
+        <div class="panel red">
+          <div class="num">04 / 04</div>
+          <div class="icon">♥</div>
+          <div class="cat">CHARITABLE</div>
+          <div class="ttl">28% of every<br/>welfare item returns.</div>
+          <div class="desc">公益店每件商品 22–28% 销售额直接进入「VICOO 儿童美育基金」，独立审计可查。</div>
+          <div class="list">
+            <div class="item">Per-item donation % · 单品捐赠比</div>
+            <div class="item">Traceable certificate · 可追溯证书</div>
+            <div class="item">Tied to a campaign · 关联公益项目</div>
+          </div>
+          <div class="corner">→ /donate · /donation-certificate</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
+  <script>
+    (function () {
+      const tl = gsap.timeline({ paused: true });
+      window.__timelines = window.__timelines || {};
+      window.__timelines["missions"] = tl;
+      gsap.set('.red-bar', { scaleX: 0, transformOrigin: 'left center' });
+      gsap.set('.top > *', { y: -20, opacity: 0 });
+      gsap.set('.heading > *', { y: 30, opacity: 0 });
+      gsap.set('.panel', { y: 60, opacity: 0 });
+      gsap.set('.panel .icon', { scale: 0, rotation: -90 });
+      tl.to('.red-bar', { scaleX: 1, duration: 0.5, ease: 'power3.inOut' }, 0);
+      tl.to('.top > *', { y: 0, opacity: 1, duration: 0.5, stagger: 0.06, ease: 'power2.out' }, 0.1);
+      tl.to('.heading > *', { y: 0, opacity: 1, duration: 0.6, stagger: 0.1, ease: 'power2.out' }, 0.4);
+      tl.to('.panel', { y: 0, opacity: 1, duration: 0.7, stagger: 0.12, ease: 'power3.out' }, 1.0);
+      tl.to('.panel .icon', { scale: 1, rotation: 0, duration: 0.6, stagger: 0.12, ease: 'back.out(1.6)' }, 1.2);
+      // Exit
+      tl.to('.panel', { y: -30, opacity: 0, duration: 0.4, stagger: 0.05, ease: 'power2.in' }, 5.2);
+      tl.to('.heading > *', { y: -20, opacity: 0, duration: 0.3, ease: 'power2.in' }, 5.4);
+      tl.to('.top', { y: -20, opacity: 0, duration: 0.3, ease: 'power2.in' }, 5.4);
+      window.addEventListener('load', () => tl.play());
+    })();
+  </script>
+</body>
+</html>

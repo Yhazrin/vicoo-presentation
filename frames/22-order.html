@@ -1,0 +1,178 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<title>VICOO — Order Detail</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Noto+Sans+SC:wght@300;400;500;700;900&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  @font-face { font-family: 'Smiley Sans'; src: url('SmileySans-Oblique.woff2') format('woff2'); font-weight: 400; font-style: normal; font-display: block; }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html, body { width: 2560px; height: 1440px; overflow: hidden; background: #FFFFFF; color: #1A1A16; font-family: 'Inter', -apple-system, sans-serif; -webkit-font-smoothing: antialiased; }
+  .stage { position: absolute; top: 0; left: 0; width: 1920px; height: 1080px; transform: scale(1.3333333); transform-origin: top left; }
+  .page { position: absolute; inset: 0; }
+  .red-bar { position: absolute; top: 0; left: 0; right: 0; height: 8px; background: #E60012; }
+  .top { position: absolute; top: 60px; left: 80px; right: 80px; display: flex; align-items: center; gap: 24px; }
+  .top .lbl { font-family: 'JetBrains Mono', monospace; font-size: 13px; font-weight: 500; letter-spacing: 0.2em; text-transform: uppercase; }
+  .top .lbl .red { color: #E60012; }
+  .top .rule { flex: 1; height: 1px; background: #1A1A16; }
+  .top .meta { font-family: 'JetBrains Mono', monospace; font-size: 13px; font-weight: 500; letter-spacing: 0.18em; text-transform: uppercase; color: #888; }
+
+  .layout { position: absolute; left: 80px; right: 80px; top: 130px; bottom: 60px; display: grid; grid-template-columns: 1fr 380px; gap: 24px; }
+
+  /* Main: order details */
+  .main { background: #FFFFFF; border: 1px solid #DDD; padding: 32px; }
+  .main .head { display: flex; align-items: start; gap: 16px; padding-bottom: 24px; border-bottom: 1px solid #EEE; }
+  .main .head .left h1 { font-family: 'Smiley Sans', sans-serif; font-weight: 400; font-size: 36px; color: #1A1A16; }
+  .main .head .left .no { font-family: 'JetBrains Mono', monospace; font-size: 12px; letter-spacing: 0.15em; color: #888; margin-top: 4px; }
+  .main .head .right { margin-left: auto; text-align: right; }
+  .main .head .right .status { display: inline-flex; align-items: center; gap: 8px; padding: 8px 16px; background: #00D26A; color: #1A1A16; font-family: 'Inter', sans-serif; font-weight: 800; font-size: 13px; letter-spacing: 0.15em; text-transform: uppercase; }
+  .main .head .right .status .d { width: 8px; height: 8px; background: #1A1A16; border-radius: 50%; }
+  .main .head .right .est { font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: 0.15em; text-transform: uppercase; color: #888; margin-top: 8px; }
+
+  /* Status timeline */
+  .status-tl { margin-top: 24px; padding: 20px 0; }
+  .status-tl .head { font-family: 'JetBrains Mono', monospace; font-size: 12px; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: #888; padding-bottom: 8px; }
+  .status-tl .steps { display: grid; grid-template-columns: repeat(5, 1fr); gap: 0; position: relative; }
+  .status-tl .steps::before { content: ''; position: absolute; top: 14px; left: 0; right: 0; height: 1px; background: #DDD; }
+  .status-tl .step { position: relative; text-align: center; }
+  .status-tl .step .dot { width: 28px; height: 28px; border-radius: 50%; background: #DDD; color: #FFFFFF; display: flex; align-items: center; justify-content: center; margin: 0 auto 8px; font-family: 'Inter', sans-serif; font-weight: 800; font-size: 12px; }
+  .status-tl .step.done .dot { background: #1A1A16; }
+  .status-tl .step.current .dot { background: #E60012; box-shadow: 0 0 0 6px rgba(230,0,18,0.2); }
+  .status-tl .step .nm { font-family: 'Inter', sans-serif; font-weight: 700; font-size: 12px; color: #1A1A16; }
+  .status-tl .step .date { font-family: 'JetBrains Mono', monospace; font-size: 10px; color: #888; margin-top: 2px; }
+
+  /* Items */
+  .main .items { margin-top: 24px; }
+  .main .items .head { font-family: 'JetBrains Mono', monospace; font-size: 12px; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: #888; padding: 8px 0; }
+  .main .item { display: grid; grid-template-columns: 80px 1fr 100px 120px 80px; gap: 16px; align-items: center; padding: 16px 0; border-top: 1px solid #EEE; }
+  .main .item .img { width: 80px; height: 100px; background: #F5F5F5; overflow: hidden; }
+  .main .item .img img { width: 100%; height: 100%; object-fit: cover; }
+  .main .item .name { font-family: 'Noto Sans SC', sans-serif; font-weight: 700; font-size: 14px; }
+  .main .item .meta { font-family: 'JetBrains Mono', monospace; font-size: 11px; color: #888; margin-top: 4px; }
+  .main .item .badge { display: inline-block; margin-top: 4px; padding: 2px 6px; background: #E60012; color: #FFFFFF; font-family: 'JetBrains Mono', monospace; font-size: 9px; font-weight: 700; letter-spacing: 0.1em; }
+  .main .item .qty { font-family: 'Inter', sans-serif; font-weight: 700; font-size: 13px; }
+  .main .item .qty .lbl { font-family: 'JetBrains Mono', monospace; font-size: 10px; color: #888; margin-bottom: 4px; letter-spacing: 0.15em; text-transform: uppercase; }
+  .main .item .price { text-align: right; font-family: 'Smiley Sans', sans-serif; font-size: 22px; }
+  .main .item .price .lbl { font-family: 'JetBrains Mono', monospace; font-size: 10px; color: #888; margin-bottom: 4px; letter-spacing: 0.15em; text-transform: uppercase; }
+
+  /* Side: address + summary */
+  .side { display: flex; flex-direction: column; gap: 16px; }
+  .side .card { background: #FFFFFF; border: 1px solid #DDD; padding: 24px; }
+  .side .card .lbl { font-family: 'JetBrains Mono', monospace; font-size: 11px; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: #888; margin-bottom: 12px; }
+  .side .card .val { font-family: 'Inter', sans-serif; font-weight: 600; font-size: 13px; line-height: 1.6; color: #1A1A16; }
+  .side .card .row { display: flex; justify-content: space-between; padding: 4px 0; font-family: 'Inter', sans-serif; font-size: 13px; }
+  .side .card .row strong { font-weight: 700; }
+  .side .card .row .red { color: #E60012; font-weight: 700; }
+  .side .card .total { font-family: 'Smiley Sans', sans-serif; font-size: 28px; padding: 12px 0; border-top: 1px solid #1A1A16; margin-top: 8px; }
+  .side .card .total .lbl { font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: 0.15em; text-transform: uppercase; color: #888; }
+</style>
+</head>
+<body>
+  <div class="stage">
+    <div class="page" data-composition-id="order" data-start="0" data-duration="6" data-width="1920" data-height="1080">
+      <div class="red-bar"></div>
+      <div class="top">
+        <div class="lbl">VICOO · <span class="red">ORDER</span></div>
+        <div class="rule"></div>
+        <div class="meta">PP. 17 · /orders/:id</div>
+      </div>
+      <div class="layout">
+        <div class="main">
+          <div class="head">
+            <div class="left">
+              <h1>Order #VC-2026-0428-0192</h1>
+              <div class="no">PLACED 2026-04-28 14:32 · 3 ITEMS · ¥605.00</div>
+            </div>
+            <div class="right">
+              <div class="status"><span class="d"></span>SHIPPED</div>
+              <div class="est">EST. DELIVERY · 2026-05-01</div>
+            </div>
+          </div>
+          <div class="status-tl">
+            <div class="head">SHIPMENT STATUS</div>
+            <div class="steps">
+              <div class="step done"><div class="dot">✓</div><div class="nm">Placed</div><div class="date">04-28</div></div>
+              <div class="step done"><div class="dot">✓</div><div class="nm">Paid</div><div class="date">04-28</div></div>
+              <div class="step done"><div class="dot">✓</div><div class="nm">Packed</div><div class="date">04-29</div></div>
+              <div class="step current"><div class="dot">4</div><div class="nm">Shipped</div><div class="date">04-30</div></div>
+              <div class="step"><div class="dot">5</div><div class="nm">Delivered</div><div class="date">--</div></div>
+            </div>
+          </div>
+          <div class="items">
+            <div class="head">3 ITEMS</div>
+            <div class="item">
+              <div class="img"><img src="https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?auto=format&fit=crop&w=200&q=80"/></div>
+              <div class="name">春野·儿童画联名有机棉T恤<div class="meta">SIZE 110 · WHITE · 28% DONATE</div></div>
+              <div class="qty"><div class="lbl">QTY</div>1</div>
+              <div class="price"><div class="lbl">PRICE</div>¥178</div>
+              <div class="price"><div class="lbl">TOTAL</div>¥178</div>
+            </div>
+            <div class="item">
+              <div class="img"><img src="https://images.unsplash.com/photo-1597484662317-9bd7bdda2907?auto=format&fit=crop&w=200&q=80"/></div>
+              <div class="name">云岭·公益插画帆布托特<div class="meta">ONE SIZE · NATURAL · 25% DONATE</div></div>
+              <div class="qty"><div class="lbl">QTY</div>1</div>
+              <div class="price"><div class="lbl">PRICE</div>¥98</div>
+              <div class="price"><div class="lbl">TOTAL</div>¥98</div>
+            </div>
+            <div class="item">
+              <div class="img"><img src="https://images.unsplash.com/photo-1434389677669-e08b4cac3105?auto=format&fit=crop&w=200&q=80"/></div>
+              <div class="name">再生羊毛混纺V领针织衫<div class="meta">SIZE M · TAUPE</div></div>
+              <div class="qty"><div class="lbl">QTY</div>1</div>
+              <div class="price"><div class="lbl">PRICE</div>¥329</div>
+              <div class="price"><div class="lbl">TOTAL</div>¥329</div>
+            </div>
+          </div>
+        </div>
+        <div class="side">
+          <div class="card">
+            <div class="lbl">SHIP TO</div>
+            <div class="val">朱莉华 · 13800138000<br>上海市黄浦区南京东路 100 号<br>200002 · 中国</div>
+          </div>
+          <div class="card">
+            <div class="lbl">TRACKING</div>
+            <div class="val">顺丰速运<br>SF-20260428-1942-CN<br><span style="color:#E60012">● IN TRANSIT · 浦东分拣中心</span></div>
+          </div>
+          <div class="card">
+            <div class="lbl">SUMMARY</div>
+            <div class="row"><span>Subtotal</span><span>¥605</span></div>
+            <div class="row"><span>Shipping</span><span>FREE</span></div>
+            <div class="row"><span>To fund</span><span class="red">+¥77</span></div>
+            <div class="total"><div class="lbl">TOTAL</div>¥605</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
+  <script>
+    (function () {
+      const tl = gsap.timeline({ paused: true });
+      window.__timelines = window.__timelines || {};
+      window.__timelines["order"] = tl;
+      gsap.set('.red-bar', { scaleX: 0, transformOrigin: 'left center' });
+      gsap.set('.top > *', { y: -20, opacity: 0 });
+      gsap.set('.main .head > *', { y: 20, opacity: 0 });
+      gsap.set('.main .head .right .status', { scale: 0 });
+      gsap.set('.status-tl .step .dot', { scale: 0 });
+      gsap.set('.main .item', { x: -20, opacity: 0 });
+      gsap.set('.side .card', { x: 20, opacity: 0 });
+      tl.to('.red-bar', { scaleX: 1, duration: 0.5, ease: 'power3.inOut' }, 0);
+      tl.to('.top > *', { y: 0, opacity: 1, duration: 0.5, stagger: 0.06, ease: 'power2.out' }, 0.1);
+      tl.to('.main .head > *', { y: 0, opacity: 1, duration: 0.5, stagger: 0.08, ease: 'power2.out' }, 0.4);
+      tl.to('.main .head .right .status', { scale: 1, duration: 0.5, ease: 'back.out(1.7)' }, 0.8);
+      tl.to('.status-tl .step .dot', { scale: 1, duration: 0.4, stagger: 0.1, ease: 'back.out(1.5)' }, 1.0);
+      tl.to('.main .item', { x: 0, opacity: 1, duration: 0.4, stagger: 0.1, ease: 'power2.out' }, 1.4);
+      tl.to('.side .card', { x: 0, opacity: 1, duration: 0.5, stagger: 0.1, ease: 'power2.out' }, 1.7);
+      // Exit
+      tl.to('.side .card', { x: 20, opacity: 0, duration: 0.3, ease: 'power2.in' }, 5.2);
+      tl.to('.main .item', { x: -20, opacity: 0, duration: 0.3, ease: 'power2.in' }, 5.3);
+      tl.to('.status-tl .step .dot', { scale: 0, duration: 0.3, ease: 'back.in(1.5)' }, 5.4);
+      tl.to('.main .head > *', { y: 20, opacity: 0, duration: 0.3, ease: 'power2.in' }, 5.4);
+      tl.to('.top', { y: -20, opacity: 0, duration: 0.3, ease: 'power2.in' }, 5.5);
+      window.addEventListener('load', () => tl.play());
+    })();
+  </script>
+</body>
+</html>

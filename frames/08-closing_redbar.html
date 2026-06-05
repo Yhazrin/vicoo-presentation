@@ -7,80 +7,50 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Noto+Sans+SC:wght@300;400;500;700;900&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
 <style>
-  @font-face {
-    font-family: 'Smiley Sans';
-    src: url('SmileySans-Oblique.woff2') format('woff2');
-    font-weight: 400; font-style: normal; font-display: block;
-  }
+  @font-face { font-family: 'Smiley Sans'; src: url('SmileySans-Oblique.woff2') format('woff2'); font-weight: 400; font-style: normal; font-display: block; }
   * { margin: 0; padding: 0; box-sizing: border-box; }
-  html, body {
-    width: 2560px; height: 1440px; overflow: hidden;
-    background: #0A0A0A; color: #FFFFFF;
-    font-family: 'Inter', -apple-system, sans-serif;
-    -webkit-font-smoothing: antialiased;
-  }
-  .stage { position: absolute; top: 0; left: 0; width: 1920px; height: 1080px;
-    transform: scale(1.3333333); transform-origin: top left; }
-
+  html, body { width: 2560px; height: 1440px; overflow: hidden; background: #0A0A0A; color: #FFFFFF; font-family: 'Inter', -apple-system, sans-serif; -webkit-font-smoothing: antialiased; }
+  .stage { position: absolute; top: 0; left: 0; width: 1920px; height: 1080px; transform: scale(1.3333333); transform-origin: top left; }
   .page { position: absolute; inset: 0; }
-  .grid { position: absolute; inset: 0; pointer-events: none; opacity: 0.06;
-    background-image: linear-gradient(to right, #FFF 1px, transparent 1px);
-    background-size: 80px 80px; }
+  .grid { position: absolute; inset: 0; pointer-events: none; opacity: 0.06; background-image: linear-gradient(to right, #FFF 1px, transparent 1px); background-size: 80px 80px; }
 
-  /* continuation red top bar from platforms */
   .red-bar { position: absolute; top: 0; left: 0; right: 0; height: 8px; background: #E60012; }
-
-  .corner { position: absolute; font-family: 'JetBrains Mono', monospace; font-size: 13px;
-    font-weight: 500; letter-spacing: 0.2em; text-transform: uppercase; color: #888; }
+  .corner { position: absolute; font-family: 'JetBrains Mono', monospace; font-size: 13px; font-weight: 500; letter-spacing: 0.2em; text-transform: uppercase; color: #888; }
   .corner.tl { top: 40px; left: 80px; }
   .corner.tr { top: 40px; right: 80px; }
   .corner.bl { bottom: 40px; left: 80px; }
   .corner.br { bottom: 40px; right: 80px; color: #E60012; }
-  .corner.tl::before, .corner.tr::before { content: ''; display: inline-block;
-    width: 32px; height: 1px; background: #E60012; vertical-align: middle; margin-right: 12px; }
+  .corner.tl::before, .corner.tr::before { content: ''; display: inline-block; width: 32px; height: 1px; background: #E60012; vertical-align: middle; margin-right: 12px; }
 
-  .slogan { position: absolute; left: 0; right: 0; top: 50%; transform: translateY(-60%);
-    text-align: center; }
-  .slogan .l1 { font-family: 'Smiley Sans', 'Inter', sans-serif; font-weight: 400;
-    font-size: 240px; line-height: 0.9; letter-spacing: -8px; color: #FFFFFF; }
+  .slogan { position: absolute; left: 0; right: 0; top: 50%; transform: translateY(-60%); text-align: center; }
+  .slogan .l1 { font-family: 'Smiley Sans', 'Inter', sans-serif; font-weight: 400; font-size: 240px; line-height: 0.9; letter-spacing: -8px; color: #FFFFFF; }
   .slogan .l1 .red { color: #E60012; }
-  .slogan .l2 { font-family: 'Noto Sans SC', sans-serif; font-weight: 900;
-    font-size: 60px; line-height: 1.1; letter-spacing: -2px; color: #FFFFFF;
-    margin-top: 32px; }
+  .slogan .l2 { font-family: 'Noto Sans SC', sans-serif; font-weight: 900; font-size: 60px; line-height: 1.1; letter-spacing: -2px; color: #FFFFFF; margin-top: 32px; }
   .slogan .l2 em { font-style: normal; color: #E60012; }
 
-  .sweep { position: absolute; left: 0; right: 0; bottom: 0; height: 320px; background: #E60012;
-    transform: scaleY(0); transform-origin: bottom; }
+  .sweep { position: absolute; left: 0; right: 0; bottom: 0; height: 320px; background: #E60012; transform: scaleY(0); transform-origin: bottom; }
+  .strip { position: absolute; left: 50%; top: 0; bottom: 0; width: 4px; background: #E60012; transform: scaleY(0); transform-origin: top; }
 
-  .strip { position: absolute; left: 50%; top: 0; bottom: 0; width: 4px;
-    background: #E60012; transform: scaleY(0); transform-origin: top; }
-
-  .logos { position: absolute; left: 0; right: 0; bottom: 200px;
-    display: flex; align-items: center; justify-content: center; gap: 48px;
-    z-index: 10; }
+  .logos { position: absolute; left: 0; right: 0; bottom: 200px; display: flex; align-items: center; justify-content: center; gap: 48px; z-index: 10; }
   .logo { display: flex; align-items: center; gap: 12px; }
-  .logo .mark { width: 56px; height: 56px; background: #FFFFFF; color: #E60012;
-    display: flex; align-items: center; justify-content: center;
-    font-family: 'Smiley Sans', 'Inter', sans-serif; font-size: 36px; }
+  .logo .mark { width: 56px; height: 56px; background: #FFFFFF; color: #E60012; display: flex; align-items: center; justify-content: center; font-family: 'Smiley Sans', 'Inter', sans-serif; font-size: 36px; }
   .logo.welfare .mark { background: #E60012; color: #FFFFFF; }
-  .logo .name { font-family: 'Smiley Sans', 'Inter', sans-serif; font-size: 30px;
-    color: #FFFFFF; }
+  .logo .name { font-family: 'Smiley Sans', 'Inter', sans-serif; font-size: 30px; color: #FFFFFF; }
   .logos .sep { width: 1px; height: 32px; background: rgba(255,255,255,0.3); }
 
-  .cta { position: absolute; left: 50%; bottom: 100px; transform: translateX(-50%);
-    display: flex; gap: 16px; z-index: 10; }
-  .btn { padding: 18px 36px; font-family: 'Inter', sans-serif; font-weight: 800;
-    font-size: 14px; letter-spacing: 0.15em; text-transform: uppercase;
-    display: flex; align-items: center; gap: 12px; }
+  .cta { position: absolute; left: 50%; bottom: 100px; transform: translateX(-50%); display: flex; gap: 16px; z-index: 10; }
+  .btn { padding: 18px 36px; font-family: 'Inter', sans-serif; font-weight: 800; font-size: 14px; letter-spacing: 0.15em; text-transform: uppercase; display: flex; align-items: center; gap: 12px; position: relative; overflow: hidden; }
   .btn.primary { background: #FFFFFF; color: #1A1A16; }
+  .btn.primary .sweep { position: absolute; inset: 0; background: linear-gradient(90deg, transparent, rgba(230,0,18,0.2), transparent); transform: translateX(-100%); }
   .btn.ghost { border: 2px solid #FFFFFF; color: #FFFFFF; background: transparent; }
   .btn .arrow { font-size: 18px; }
 
-  .url { position: absolute; left: 50%; bottom: 48px; transform: translateX(-50%);
-    font-family: 'JetBrains Mono', monospace; font-size: 12px; font-weight: 500;
-    letter-spacing: 0.2em; text-transform: uppercase; color: rgba(255,255,255,0.7);
-    z-index: 10; }
+  .url { position: absolute; left: 50%; bottom: 48px; transform: translateX(-50%); font-family: 'JetBrains Mono', monospace; font-size: 12px; font-weight: 500; letter-spacing: 0.2em; text-transform: uppercase; color: rgba(255,255,255,0.7); z-index: 10; }
   .url .red { color: #FFFFFF; font-weight: 700; }
+
+  /* Animated particle dots */
+  .particles { position: absolute; inset: 0; pointer-events: none; }
+  .particle { position: absolute; width: 4px; height: 4px; background: rgba(255,255,255,0.3); border-radius: 50%; }
 </style>
 </head>
 <body>
@@ -91,8 +61,17 @@
       <div class="strip"></div>
       <div class="sweep"></div>
 
+      <div class="particles">
+        <div class="particle" style="top: 20%; left: 10%;"></div>
+        <div class="particle" style="top: 40%; left: 25%;"></div>
+        <div class="particle" style="top: 60%; left: 40%;"></div>
+        <div class="particle" style="top: 30%; left: 60%;"></div>
+        <div class="particle" style="top: 50%; left: 75%;"></div>
+        <div class="particle" style="top: 70%; left: 90%;"></div>
+      </div>
+
       <div class="corner tl">VICOO × UNIQLO · 2026</div>
-      <div class="corner tr">CAMPAIGN FILM · 35S</div>
+      <div class="corner tr">CAMPAIGN FILM · 5:00</div>
       <div class="corner bl">FOR THE NEXT CHILD'S HAND</div>
       <div class="corner br">→ END</div>
 
@@ -114,7 +93,7 @@
       </div>
 
       <div class="cta">
-        <div class="btn primary">SHOP THE COLLECTION <span class="arrow">→</span></div>
+        <div class="btn primary"><div class="sweep"></div>SHOP THE COLLECTION <span class="arrow">→</span></div>
         <div class="btn ghost">DONATE NOW <span class="arrow">♥</span></div>
       </div>
 
@@ -137,29 +116,57 @@
       gsap.set('.sweep', { scaleY: 0 });
       gsap.set('.logos .logo, .logos .sep', { y: 30, opacity: 0 });
       gsap.set('.cta .btn', { y: 30, opacity: 0 });
+      gsap.set('.cta .btn .sweep', { x: '-100%' });
       gsap.set('.url', { y: 20, opacity: 0 });
+      gsap.set('.particle', { scale: 0, opacity: 0 });
 
-      tl.to('.red-bar', { scaleX: 1, duration: 0.5, ease: 'power3.inOut' }, 0);
-      tl.to('.corner', { y: 0, opacity: 1, duration: 0.5, stagger: 0.08, ease: 'power2.out' }, 0.1);
+      // Entry — dramatic reveal
+      tl.to('.red-bar', { scaleX: 1, duration: 0.4, ease: 'power4.inOut' }, 0);
+
+      // Particles fade in
+      tl.to('.particle', { scale: 1, opacity: 1, duration: 0.6, stagger: 0.08, ease: 'back.out(2)' }, 0.1);
+
+      // Corner text
+      tl.to('.corner', { y: 0, opacity: 1, duration: 0.5, stagger: 0.08, ease: 'power3.out' }, 0.2);
+
+      // Center strip grows
       tl.to('.strip', { scaleY: 1, duration: 0.6, ease: 'power3.inOut' }, 0.3);
+
+      // Main slogan — dramatic entrance
       tl.to('.slogan .l1', {
         y: 0, opacity: 1, skewY: 0, duration: 1.0, ease: 'expo.out'
       }, 0.7);
       tl.to('.slogan .l2', {
         y: 0, opacity: 1, duration: 0.8, ease: 'power3.out'
       }, 1.5);
+
+      // Red sweep up
       tl.to('.sweep', { scaleY: 1, duration: 0.7, ease: 'power4.inOut' }, 1.9);
+
+      // Logos pop in
       tl.to('.logos .logo, .logos .sep', {
-        y: 0, opacity: 1, duration: 0.5, stagger: 0.1, ease: 'power2.out'
+        y: 0, opacity: 1, duration: 0.5, stagger: 0.1, ease: 'back.out(1.4)'
       }, 2.3);
+
+      // CTA buttons
       tl.to('.cta .btn', {
-        y: 0, opacity: 1, duration: 0.5, stagger: 0.12, ease: 'power2.out'
+        y: 0, opacity: 1, duration: 0.5, stagger: 0.12, ease: 'back.out(1.4)'
       }, 2.7);
-      tl.to('.url', { y: 0, opacity: 1, duration: 0.4, ease: 'power2.out' }, 3.1);
+
+      // Button sweep effect
+      tl.to('.cta .btn.primary .sweep', { x: '100%', duration: 0.6, ease: 'power2.inOut' }, 3.2);
+
+      // URL
+      tl.to('.url', { y: 0, opacity: 1, duration: 0.4, ease: 'power3.out' }, 3.1);
+
+      // Magnetic hover on primary CTA
       tl.to({}, { duration: 0.3, onStart: () => {
         const cta = document.querySelector('.cta .btn.primary');
         gsap.fromTo(cta, { x: 0, y: 0 }, { x: -4, y: -1, duration: 0.15, yoyo: true, repeat: 1, ease: 'power2.inOut' });
       }}, 3.4);
+
+      // Floating particles
+      tl.to('.particle', { y: -20, duration: 2.0, stagger: 0.2, yoyo: true, repeat: 1, ease: 'sine.inOut' }, 2.0);
 
       window.addEventListener('load', () => tl.play());
     })();

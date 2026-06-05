@@ -22,13 +22,22 @@
   .headline .red { color: #E60012; }
 
   .pillars { display: flex; gap: 24px; margin-top: 60px; max-width: 1400px; }
-  .pillar { flex: 1; padding: 28px; border: 1px solid rgba(255,255,255,0.1); text-align: center; }
+  .pillar { flex: 1; padding: 28px; border: 1px solid rgba(255,255,255,0.1); text-align: center; position: relative; overflow: hidden; }
+  .pillar::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; background: #E60012; transform: scaleX(0); transform-origin: left; }
   .pillar .icon { font-size: 40px; margin-bottom: 12px; }
   .pillar h3 { font-family: 'Inter', sans-serif; font-weight: 800; font-size: 16px; letter-spacing: 0.05em; text-transform: uppercase; }
   .pillar p { font-family: 'Noto Sans SC', sans-serif; font-size: 15px; color: rgba(255,255,255,0.6); margin-top: 8px; line-height: 1.5; }
+  .pillar .glow { position: absolute; inset: 0; background: radial-gradient(circle at center, rgba(230,0,18,0.1) 0%, transparent 70%); opacity: 0; pointer-events: none; }
 
   .closing-line { font-family: 'Noto Sans SC', sans-serif; font-size: 24px; font-weight: 500; color: rgba(255,255,255,0.5); margin-top: 48px; text-align: center; }
   .closing-line em { font-style: normal; color: #E60012; font-weight: 700; }
+
+  /* Decorative corner accents */
+  .accent { position: absolute; width: 60px; height: 1px; background: rgba(230,0,18,0.4); }
+  .accent.tl { top: 120px; left: 80px; }
+  .accent.tr { top: 120px; right: 80px; }
+  .accent.bl { bottom: 120px; left: 80px; }
+  .accent.br { bottom: 120px; right: 80px; }
 </style>
 </head>
 <body>
@@ -36,6 +45,11 @@
     <div class="page" data-composition-id="vision" data-start="0" data-duration="6" data-width="1920" data-height="1080">
       <div class="red-bar"></div>
       <div class="grid"></div>
+
+      <div class="accent tl"></div>
+      <div class="accent tr"></div>
+      <div class="accent bl"></div>
+      <div class="accent br"></div>
 
       <div class="content">
         <div class="eyebrow">THE FUTURE WE'RE BUILDING</div>
@@ -46,21 +60,25 @@
 
         <div class="pillars">
           <div class="pillar">
+            <div class="glow"></div>
             <div class="icon">🌍</div>
             <h3>Global Reach</h3>
             <p>从 32 所学校到 1000 所，让每个角落的孩子都有机会被看见。</p>
           </div>
           <div class="pillar">
+            <div class="glow"></div>
             <div class="icon">♻️</div>
             <h3>Circular Fashion</h3>
             <p>100% 可溯源供应链，零废弃目标，让时尚真正可持续。</p>
           </div>
           <div class="pillar">
+            <div class="glow"></div>
             <div class="icon">🤖</div>
             <h3>AI-Powered</h3>
             <p>智能匹配画作与产品，AI 助手让每个用户都能参与公益。</p>
           </div>
           <div class="pillar">
+            <div class="glow"></div>
             <div class="icon">💡</div>
             <h3>Open Platform</h3>
             <p>开放 API，让更多品牌加入「画作→时装」的循环。</p>
@@ -83,22 +101,43 @@
       gsap.set('.eyebrow', { y: -20, opacity: 0 });
       gsap.set('.headline', { y: 40, opacity: 0, scale: 0.95 });
       gsap.set('.pillar', { y: 30, opacity: 0, scale: 0.9 });
+      gsap.set('.pillar::before', { scaleX: 0 });
+      gsap.set('.pillar .glow', { opacity: 0 });
       gsap.set('.closing-line', { y: 20, opacity: 0 });
+      gsap.set('.accent', { scaleX: 0, transformOrigin: 'center' });
 
-      tl.to('.red-bar', { scaleX: 1, duration: 0.5, ease: 'power3.inOut' }, 0);
-      tl.to('.eyebrow', { y: 0, opacity: 1, duration: 0.5, ease: 'power2.out' }, 0.2);
+      // Entry
+      tl.to('.red-bar', { scaleX: 1, duration: 0.4, ease: 'power4.inOut' }, 0);
+
+      // Accent lines
+      tl.to('.accent', { scaleX: 1, duration: 0.5, stagger: 0.08, ease: 'power3.inOut' }, 0.1);
+
+      // Text reveals
+      tl.to('.eyebrow', { y: 0, opacity: 1, duration: 0.5, ease: 'power3.out' }, 0.2);
       tl.to('.headline', { y: 0, opacity: 1, scale: 1, duration: 0.8, ease: 'expo.out' }, 0.4);
-      tl.to('.pillar', { y: 0, opacity: 1, scale: 1, duration: 0.6, stagger: 0.12, ease: 'back.out(1.2)' }, 1.2);
-      tl.to('.closing-line', { y: 0, opacity: 1, duration: 0.6, ease: 'power2.out' }, 2.5);
+
+      // Pillars — staggered pop with scale
+      tl.to('.pillar', { y: 0, opacity: 1, scale: 1, duration: 0.6, stagger: 0.12, ease: 'back.out(1.4)' }, 1.2);
+
+      // Top bar wipe on each pillar
+      tl.to('.pillar::before', { scaleX: 1, duration: 0.4, stagger: 0.1, ease: 'power3.inOut' }, 1.5);
+
+      // Glow pulse on pillars
+      tl.to('.pillar .glow', { opacity: 1, duration: 0.5, stagger: 0.1, ease: 'power2.out' }, 2.0);
+      tl.to('.pillar .glow', { opacity: 0.5, duration: 1.0, yoyo: true, repeat: 1, ease: 'sine.inOut' }, 2.5);
+
+      // Closing line
+      tl.to('.closing-line', { y: 0, opacity: 1, duration: 0.6, ease: 'power3.out' }, 2.5);
 
       // Gentle pulse on pillars
       tl.to('.pillar', { scale: 1.02, duration: 1.0, yoyo: true, repeat: 1, ease: 'sine.inOut' }, 3.0);
 
       // Exit
-      tl.to('.closing-line', { y: -15, opacity: 0, duration: 0.3, ease: 'power2.in' }, 5.2);
-      tl.to('.pillar', { y: -25, opacity: 0, duration: 0.3, stagger: 0.05, ease: 'power2.in' }, 5.3);
-      tl.to('.headline', { y: -30, opacity: 0, duration: 0.3, ease: 'power2.in' }, 5.4);
-      tl.to('.eyebrow', { y: -15, opacity: 0, duration: 0.3, ease: 'power2.in' }, 5.5);
+      tl.to('.closing-line', { y: -15, opacity: 0, duration: 0.3, ease: 'power3.in' }, 5.2);
+      tl.to('.pillar', { y: -25, opacity: 0, duration: 0.3, stagger: 0.05, ease: 'power3.in' }, 5.3);
+      tl.to('.headline', { y: -30, opacity: 0, duration: 0.3, ease: 'power3.in' }, 5.4);
+      tl.to('.eyebrow', { y: -15, opacity: 0, duration: 0.3, ease: 'power3.in' }, 5.5);
+      tl.to('.accent', { scaleX: 0, duration: 0.3, ease: 'power3.in' }, 5.4);
       tl.to('.red-bar', { scaleX: 0, transformOrigin: 'right center', duration: 0.3 }, 5.5);
 
       window.addEventListener('load', () => tl.play());

@@ -21,15 +21,23 @@
 
   .stats-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 40px; max-width: 1400px; }
   .stat-card { text-align: center; padding: 32px; background: #F5F5F5; position: relative; overflow: hidden; }
-  .stat-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 4px; background: #E60012; }
+  .stat-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 4px; background: #E60012; transform: scaleX(0); transform-origin: left; }
   .stat-card .num { font-family: 'Inter', sans-serif; font-weight: 900; font-size: 64px; line-height: 1; color: #1A1A16; letter-spacing: -3px; }
   .stat-card .num .red { color: #E60012; }
   .stat-card .unit { font-family: 'JetBrains Mono', monospace; font-size: 14px; font-weight: 500; letter-spacing: 0.15em; text-transform: uppercase; color: #888; margin-top: 8px; }
   .stat-card .label { font-family: 'Noto Sans SC', sans-serif; font-size: 16px; color: #555; margin-top: 12px; }
+  .stat-card .glow { position: absolute; inset: 0; background: radial-gradient(circle at center, rgba(230,0,18,0.1) 0%, transparent 70%); opacity: 0; pointer-events: none; }
 
   .bottom-bar { position: absolute; bottom: 60px; left: 0; right: 0; display: flex; justify-content: center; gap: 48px; }
   .bottom-bar .item { font-family: 'JetBrains Mono', monospace; font-size: 12px; font-weight: 500; letter-spacing: 0.15em; text-transform: uppercase; color: #AAA; }
   .bottom-bar .item .red { color: #E60012; font-weight: 700; }
+
+  /* Decorative corner brackets */
+  .bracket { position: absolute; width: 30px; height: 30px; border-color: rgba(230,0,18,0.3); border-style: solid; }
+  .bracket.tl { top: 100px; left: 100px; border-width: 2px 0 0 2px; }
+  .bracket.tr { top: 100px; right: 100px; border-width: 2px 2px 0 0; }
+  .bracket.bl { bottom: 100px; left: 100px; border-width: 0 0 2px 2px; }
+  .bracket.br { bottom: 100px; right: 100px; border-width: 0 2px 2px 0; }
 </style>
 </head>
 <body>
@@ -37,27 +45,36 @@
     <div class="page" data-composition-id="stats_summary" data-start="0" data-duration="5" data-width="1920" data-height="1080">
       <div class="red-bar"></div>
 
+      <div class="bracket tl"></div>
+      <div class="bracket tr"></div>
+      <div class="bracket bl"></div>
+      <div class="bracket br"></div>
+
       <div class="content">
         <div class="eyebrow">IMPACT · 2024 — 2026</div>
         <div class="headline">Every number tells a child's story.</div>
 
         <div class="stats-grid">
           <div class="stat-card">
+            <div class="glow"></div>
             <div class="num" data-count="1284560">0</div>
             <div class="unit">CNY</div>
             <div class="label">累计捐赠金额</div>
           </div>
           <div class="stat-card">
+            <div class="glow"></div>
             <div class="num" data-count="12431">0</div>
             <div class="unit">ARTWORKS</div>
             <div class="label">儿童画作投稿</div>
           </div>
           <div class="stat-card">
+            <div class="glow"></div>
             <div class="num" data-count="4872">0</div>
             <div class="unit">CHILDREN</div>
             <div class="label">参与儿童人数</div>
           </div>
           <div class="stat-card">
+            <div class="glow"></div>
             <div class="num" data-count="32">0</div>
             <div class="unit">SCHOOLS</div>
             <div class="label">合作乡村学校</div>
@@ -85,34 +102,52 @@
       gsap.set('.eyebrow', { y: -20, opacity: 0 });
       gsap.set('.headline', { y: 30, opacity: 0 });
       gsap.set('.stat-card', { y: 40, opacity: 0, scale: 0.9 });
+      gsap.set('.stat-card::before', { scaleX: 0 });
+      gsap.set('.stat-card .glow', { opacity: 0 });
       gsap.set('.bottom-bar .item', { y: 15, opacity: 0 });
+      gsap.set('.bracket', { scale: 0, opacity: 0 });
 
-      tl.to('.red-bar', { scaleX: 1, duration: 0.5, ease: 'power3.inOut' }, 0);
-      tl.to('.eyebrow', { y: 0, opacity: 1, duration: 0.5, ease: 'power2.out' }, 0.2);
+      // Entry
+      tl.to('.red-bar', { scaleX: 1, duration: 0.4, ease: 'power4.inOut' }, 0);
+
+      // Brackets pop in
+      tl.to('.bracket', { scale: 1, opacity: 1, duration: 0.5, stagger: 0.08, ease: 'back.out(2)' }, 0.1);
+
+      // Text reveals
+      tl.to('.eyebrow', { y: 0, opacity: 1, duration: 0.5, ease: 'power3.out' }, 0.2);
       tl.to('.headline', { y: 0, opacity: 1, duration: 0.7, ease: 'expo.out' }, 0.4);
-      tl.to('.stat-card', { y: 0, opacity: 1, scale: 1, duration: 0.6, stagger: 0.12, ease: 'back.out(1.2)' }, 0.8);
 
-      // Counting animation
-      document.querySelectorAll('.stat-card .num').forEach(el => {
+      // Stat cards — staggered pop with scale
+      tl.to('.stat-card', { y: 0, opacity: 1, scale: 1, duration: 0.6, stagger: 0.12, ease: 'back.out(1.4)' }, 0.8);
+
+      // Top bar wipe on each card
+      tl.to('.stat-card::before', { scaleX: 1, duration: 0.4, stagger: 0.1, ease: 'power3.inOut' }, 1.2);
+
+      // Counting animation with easing
+      document.querySelectorAll('.stat-card .num').forEach((el, i) => {
         const target = parseInt(el.dataset.count);
         const obj = { val: 0 };
         tl.to(obj, {
           val: target,
-          duration: 1.5,
+          duration: 1.8,
           ease: 'power2.out',
-          onUpdate: () => {
-            el.textContent = Math.floor(obj.val).toLocaleString();
-          }
-        }, 1.0);
+          onUpdate: () => { el.textContent = Math.floor(obj.val).toLocaleString(); }
+        }, 1.0 + i * 0.15);
       });
 
-      tl.to('.bottom-bar .item', { y: 0, opacity: 1, duration: 0.4, stagger: 0.08, ease: 'power2.out' }, 2.8);
+      // Glow pulse on cards
+      tl.to('.stat-card .glow', { opacity: 1, duration: 0.5, stagger: 0.1, ease: 'power2.out' }, 2.0);
+      tl.to('.stat-card .glow', { opacity: 0.5, duration: 1.0, yoyo: true, repeat: 1, ease: 'sine.inOut' }, 2.5);
+
+      // Bottom bar
+      tl.to('.bottom-bar .item', { y: 0, opacity: 1, duration: 0.4, stagger: 0.08, ease: 'power3.out' }, 2.8);
 
       // Exit
-      tl.to('.bottom-bar .item', { y: -10, opacity: 0, duration: 0.3, ease: 'power2.in' }, 4.2);
-      tl.to('.stat-card', { y: -30, opacity: 0, duration: 0.3, stagger: 0.05, ease: 'power2.in' }, 4.3);
-      tl.to('.headline', { y: -20, opacity: 0, duration: 0.3, ease: 'power2.in' }, 4.5);
-      tl.to('.eyebrow', { y: -15, opacity: 0, duration: 0.3, ease: 'power2.in' }, 4.5);
+      tl.to('.bottom-bar .item', { y: -10, opacity: 0, duration: 0.3, ease: 'power3.in' }, 4.2);
+      tl.to('.stat-card', { y: -30, opacity: 0, duration: 0.3, stagger: 0.05, ease: 'power3.in' }, 4.3);
+      tl.to('.headline', { y: -20, opacity: 0, duration: 0.3, ease: 'power3.in' }, 4.5);
+      tl.to('.eyebrow', { y: -15, opacity: 0, duration: 0.3, ease: 'power3.in' }, 4.5);
+      tl.to('.bracket', { scale: 0.5, opacity: 0, duration: 0.3, stagger: 0.03, ease: 'power3.in' }, 4.4);
       tl.to('.red-bar', { scaleX: 0, transformOrigin: 'right center', duration: 0.3 }, 4.5);
 
       window.addEventListener('load', () => tl.play());

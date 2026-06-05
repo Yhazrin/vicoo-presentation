@@ -7,103 +7,61 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Noto+Sans+SC:wght@300;400;500;700;900&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
 <style>
-  @font-face {
-    font-family: 'Smiley Sans';
-    src: url('SmileySans-Oblique.woff2') format('woff2');
-    font-weight: 400; font-style: normal; font-display: block;
-  }
+  @font-face { font-family: 'Smiley Sans'; src: url('SmileySans-Oblique.woff2') format('woff2'); font-weight: 400; font-style: normal; font-display: block; }
   * { margin: 0; padding: 0; box-sizing: border-box; }
-  html, body {
-    width: 2560px; height: 1440px; overflow: hidden;
-    background: #FFFFFF; color: #1A1A16;
-    font-family: 'Inter', -apple-system, sans-serif;
-    -webkit-font-smoothing: antialiased;
-  }
-  .stage { position: absolute; top: 0; left: 0; width: 1920px; height: 1080px;
-    transform: scale(1.3333333); transform-origin: top left; }
-
+  html, body { width: 2560px; height: 1440px; overflow: hidden; background: #FFFFFF; color: #1A1A16; font-family: 'Inter', -apple-system, sans-serif; -webkit-font-smoothing: antialiased; }
+  .stage { position: absolute; top: 0; left: 0; width: 1920px; height: 1080px; transform: scale(1.3333333); transform-origin: top left; }
   .page { position: absolute; inset: 0; }
-  .grid { position: absolute; inset: 0; pointer-events: none; opacity: 0.04;
-    background-image: linear-gradient(to right, #000 1px, transparent 1px);
-    background-size: 80px 80px; }
+  .grid { position: absolute; inset: 0; pointer-events: none; opacity: 0.04; background-image: linear-gradient(to right, #000 1px, transparent 1px); background-size: 80px 80px; }
 
-  /* continuation of red header bar from previous frame */
   .ribbon { position: absolute; top: 0; left: 0; right: 0; height: 8px; background: #E60012; }
-
-  .top-bar { position: absolute; top: 60px; left: 80px; right: 80px;
-    display: flex; align-items: center; gap: 24px; }
-  .top-bar .lbl { font-family: 'JetBrains Mono', monospace; font-size: 13px; font-weight: 500;
-    letter-spacing: 0.2em; text-transform: uppercase; color: #1A1A16; }
+  .top-bar { position: absolute; top: 60px; left: 80px; right: 80px; display: flex; align-items: center; gap: 24px; }
+  .top-bar .lbl { font-family: 'JetBrains Mono', monospace; font-size: 13px; font-weight: 500; letter-spacing: 0.2em; text-transform: uppercase; color: #1A1A16; }
   .top-bar .lbl .red { color: #E60012; }
   .top-bar .rule { flex: 1; height: 1px; background: #1A1A16; }
-  .top-bar .meta { font-family: 'JetBrains Mono', monospace; font-size: 13px; font-weight: 500;
-    letter-spacing: 0.18em; text-transform: uppercase; color: #888; }
+  .top-bar .meta { font-family: 'JetBrains Mono', monospace; font-size: 13px; font-weight: 500; letter-spacing: 0.18em; text-transform: uppercase; color: #888; }
 
-  /* left: product image card with real Unsplash photo */
-  .left { position: absolute; left: 80px; top: 140px; width: 760px; height: 760px;
-    background: #F5F5F5; overflow: hidden; }
-  .left .img { position: absolute; inset: 0; background: #FFFFFF;
-    display: flex; align-items: center; justify-content: center; }
-  .left .img img { width: 88%; height: 88%; object-fit: cover;
-    background: #F0EBE0; }
+  .left { position: absolute; left: 80px; top: 140px; width: 760px; height: 760px; background: #F5F5F5; overflow: hidden; }
+  .left .img { position: absolute; inset: 0; background: #FFFFFF; display: flex; align-items: center; justify-content: center; }
+  .left .img img { width: 88%; height: 88%; object-fit: cover; background: #F0EBE0; }
+  .left .shine { position: absolute; inset: 0; background: linear-gradient(120deg, transparent 30%, rgba(255,255,255,0.4) 50%, transparent 70%); transform: translateX(-100%); pointer-events: none; }
 
-  .donation { position: absolute; top: 32px; right: 32px; background: #E60012; color: #FFFFFF;
-    padding: 12px 18px; font-family: 'Inter', sans-serif; font-weight: 800; font-size: 18px;
-    letter-spacing: 0.02em; z-index: 5; }
-  .donation .small { display: block; font-size: 11px; font-weight: 500;
-    letter-spacing: 0.18em; text-transform: uppercase; opacity: 0.9; margin-bottom: 2px; }
-  .stock-badge { position: absolute; bottom: 32px; left: 32px; background: #1A1A16; color: #FFFFFF;
-    padding: 8px 14px; font-family: 'JetBrains Mono', monospace; font-size: 12px; font-weight: 500;
-    letter-spacing: 0.15em; text-transform: uppercase; z-index: 5; }
+  .donation { position: absolute; top: 32px; right: 32px; background: #E60012; color: #FFFFFF; padding: 12px 18px; font-family: 'Inter', sans-serif; font-weight: 800; font-size: 18px; letter-spacing: 0.02em; z-index: 5; }
+  .donation .small { display: block; font-size: 11px; font-weight: 500; letter-spacing: 0.18em; text-transform: uppercase; opacity: 0.9; margin-bottom: 2px; }
+  .stock-badge { position: absolute; bottom: 32px; left: 32px; background: #1A1A16; color: #FFFFFF; padding: 8px 14px; font-family: 'JetBrains Mono', monospace; font-size: 12px; font-weight: 500; letter-spacing: 0.15em; text-transform: uppercase; z-index: 5; }
 
-  /* right: product info */
   .right { position: absolute; right: 80px; top: 140px; width: 920px; }
-  .right .crumbs { font-family: 'JetBrains Mono', monospace; font-size: 12px; font-weight: 500;
-    letter-spacing: 0.2em; text-transform: uppercase; color: #888; margin-bottom: 24px; }
+  .right .crumbs { font-family: 'JetBrains Mono', monospace; font-size: 12px; font-weight: 500; letter-spacing: 0.2em; text-transform: uppercase; color: #888; margin-bottom: 24px; }
   .right .crumbs .red { color: #E60012; }
-
-  .right h1 { font-family: 'Noto Sans SC', sans-serif; font-weight: 900; font-size: 60px;
-    line-height: 1.05; color: #1A1A16; letter-spacing: -2px; margin-bottom: 16px; }
-
+  .right h1 { font-family: 'Noto Sans SC', sans-serif; font-weight: 900; font-size: 60px; line-height: 1.05; color: #1A1A16; letter-spacing: -2px; margin-bottom: 16px; }
   .right .by { font-family: 'Inter', sans-serif; font-size: 15px; color: #555; margin-bottom: 40px; }
   .right .by strong { color: #1A1A16; font-weight: 700; }
   .right .by .red { color: #E60012; font-weight: 700; }
 
   .price-block { display: flex; align-items: flex-end; gap: 24px; margin-bottom: 12px; }
   .price-block .cur { font-family: 'Inter', sans-serif; font-weight: 600; font-size: 28px; color: #1A1A16; padding-bottom: 12px; }
-  .price-block .val { font-family: 'Inter', sans-serif; font-weight: 900; font-size: 92px;
-    line-height: 1; color: #1A1A16; letter-spacing: -4px; }
-  .price-block .strike { font-family: 'Inter', sans-serif; font-weight: 500; font-size: 24px;
-    color: #999; text-decoration: line-through; padding-bottom: 12px; }
-
-  .price-meta { font-family: 'JetBrains Mono', monospace; font-size: 12px; font-weight: 500;
-    letter-spacing: 0.15em; text-transform: uppercase; color: #888; margin-bottom: 40px; }
+  .price-block .val { font-family: 'Inter', sans-serif; font-weight: 900; font-size: 92px; line-height: 1; color: #1A1A16; letter-spacing: -4px; }
+  .price-block .strike { font-family: 'Inter', sans-serif; font-weight: 500; font-size: 24px; color: #999; text-decoration: line-through; padding-bottom: 12px; }
+  .price-meta { font-family: 'JetBrains Mono', monospace; font-size: 12px; font-weight: 500; letter-spacing: 0.15em; text-transform: uppercase; color: #888; margin-bottom: 40px; }
   .price-meta .red { color: #E60012; font-weight: 700; }
 
   .size { margin-bottom: 40px; }
-  .size .lbl { font-family: 'JetBrains Mono', monospace; font-size: 12px; font-weight: 500;
-    letter-spacing: 0.18em; text-transform: uppercase; color: #888; margin-bottom: 12px; }
+  .size .lbl { font-family: 'JetBrains Mono', monospace; font-size: 12px; font-weight: 500; letter-spacing: 0.18em; text-transform: uppercase; color: #888; margin-bottom: 12px; }
   .size .row { display: flex; gap: 10px; }
-  .size .chip { width: 72px; height: 72px; border: 2px solid #1A1A16; display: flex;
-    align-items: center; justify-content: center; font-family: 'Inter', sans-serif;
-    font-weight: 700; font-size: 18px; color: #1A1A16; background: #FFFFFF; cursor: pointer; }
+  .size .chip { width: 72px; height: 72px; border: 2px solid #1A1A16; display: flex; align-items: center; justify-content: center; font-family: 'Inter', sans-serif; font-weight: 700; font-size: 18px; color: #1A1A16; background: #FFFFFF; cursor: pointer; position: relative; overflow: hidden; }
   .size .chip.selected { background: #1A1A16; color: #FFFFFF; }
   .size .chip.disabled { color: #CCC; border-color: #DDD; text-decoration: line-through; }
+  .size .chip .ripple { position: absolute; inset: 0; background: rgba(230,0,18,0.2); border-radius: 50%; transform: scale(0); }
 
   .cta { display: flex; gap: 16px; margin-bottom: 40px; }
-  .btn-cart { flex: 1; height: 80px; background: #1A1A16; color: #FFFFFF; border: 0;
-    font-family: 'Inter', sans-serif; font-weight: 800; font-size: 18px;
-    letter-spacing: 0.1em; text-transform: uppercase; cursor: pointer; position: relative;
-    overflow: hidden; }
+  .btn-cart { flex: 1; height: 80px; background: #1A1A16; color: #FFFFFF; border: 0; font-family: 'Inter', sans-serif; font-weight: 800; font-size: 18px; letter-spacing: 0.1em; text-transform: uppercase; cursor: pointer; position: relative; overflow: hidden; }
+  .btn-cart .sweep { position: absolute; inset: 0; background: linear-gradient(90deg, transparent, rgba(230,0,18,0.3), transparent); transform: translateX(-100%); }
   .btn-cart::after { content: '↗'; margin-left: 12px; }
-  .btn-donate { width: 80px; height: 80px; background: #E60012; color: #FFFFFF; border: 0;
-    font-size: 28px; font-weight: 700; cursor: pointer; }
+  .btn-donate { width: 80px; height: 80px; background: #E60012; color: #FFFFFF; border: 0; font-size: 28px; font-weight: 700; cursor: pointer; }
 
   .features { display: flex; gap: 32px; border-top: 1px solid #EEE; padding-top: 32px; }
-  .feat { display: flex; align-items: center; gap: 12px; font-family: 'Inter', sans-serif;
-    font-size: 13px; font-weight: 500; color: #555; }
-  .feat .ic { width: 32px; height: 32px; background: #F5F5F5; color: #1A1A16; display: flex;
-    align-items: center; justify-content: center; font-size: 14px; font-weight: 700; }
+  .feat { display: flex; align-items: center; gap: 12px; font-family: 'Inter', sans-serif; font-size: 13px; font-weight: 500; color: #555; }
+  .feat .ic { width: 32px; height: 32px; background: #F5F5F5; color: #1A1A16; display: flex; align-items: center; justify-content: center; font-size: 14px; font-weight: 700; }
   .feat .ic.red { background: #E60012; color: #FFFFFF; }
 </style>
 </head>
@@ -123,6 +81,7 @@
         <div class="img">
           <img src="https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?auto=format&fit=crop&w=1200&q=85" alt="春野 T恤" />
         </div>
+        <div class="shine"></div>
         <div class="donation"><span class="small">DONATION</span>28%</div>
         <div class="stock-badge">STOCK 187 / 200</div>
       </div>
@@ -152,7 +111,7 @@
         </div>
 
         <div class="cta">
-          <button class="btn-cart">ADD TO CART</button>
+          <button class="btn-cart"><div class="sweep"></div>ADD TO CART</button>
           <button class="btn-donate">♥</button>
         </div>
 
@@ -177,24 +136,39 @@
       gsap.set('.top-bar > *', { y: 20, opacity: 0 });
       gsap.set('.left', { clipPath: 'inset(0 100% 0 0)', opacity: 0 });
       gsap.set('.left .img img', { scale: 1.15, opacity: 0 });
+      gsap.set('.left .shine', { x: '-100%' });
       gsap.set('.donation', { scale: 0, rotation: -45, transformOrigin: 'top right' });
       gsap.set('.stock-badge', { x: -20, opacity: 0 });
       gsap.set('.right > *', { y: 30, opacity: 0 });
-      gsap.set('.size .chip', { y: 20, opacity: 0 });
+      gsap.set('.size .chip', { y: 20, opacity: 0, scale: 0.8 });
+      gsap.set('.btn-cart .sweep', { x: '-100%' });
       gsap.set('.price-block .val', { innerText: 0 });
 
-      tl.to('.ribbon', { scaleX: 1, duration: 0.5, ease: 'power3.inOut' }, 0);
-      tl.to('.top-bar > *', { y: 0, opacity: 1, duration: 0.5, stagger: 0.06, ease: 'power2.out' }, 0.1);
-      tl.to('.left', {
-        clipPath: 'inset(0 0% 0 0)', opacity: 1, duration: 1.0, ease: 'power3.inOut'
-      }, 0.3);
-      tl.to('.left .img img', { scale: 1, opacity: 1, duration: 1.2, ease: 'power2.out' }, 0.4);
-      tl.to('.donation', { scale: 1, rotation: 0, duration: 0.7, ease: 'back.out(1.7)' }, 1.2);
-      tl.to('.stock-badge', { x: 0, opacity: 1, duration: 0.5, ease: 'power2.out' }, 1.3);
-      tl.to('.right > *', { y: 0, opacity: 1, duration: 0.6, stagger: 0.1, ease: 'power2.out' }, 1.4);
-      tl.to('.size .chip', { y: 0, opacity: 1, duration: 0.4, stagger: 0.05, ease: 'power2.out' }, 1.9);
+      // Entry — cinematic product reveal
+      tl.to('.ribbon', { scaleX: 1, duration: 0.4, ease: 'power4.inOut' }, 0);
+      tl.to('.top-bar > *', { y: 0, opacity: 1, duration: 0.5, stagger: 0.06, ease: 'power3.out' }, 0.1);
 
-      // odometer price
+      // Image card wipes in with clipPath
+      tl.to('.left', { clipPath: 'inset(0 0% 0 0)', opacity: 1, duration: 1.0, ease: 'power3.inOut' }, 0.3);
+      tl.to('.left .img img', { scale: 1, opacity: 1, duration: 1.2, ease: 'power2.out' }, 0.4);
+
+      // Shine effect sweeps across image
+      tl.to('.left .shine', { x: '100%', duration: 0.8, ease: 'power2.inOut' }, 1.0);
+
+      // Badges pop in with elastic
+      tl.to('.donation', { scale: 1, rotation: 0, duration: 0.7, ease: 'back.out(2)' }, 1.2);
+      tl.to('.stock-badge', { x: 0, opacity: 1, duration: 0.5, ease: 'back.out(1.4)' }, 1.3);
+
+      // Right content reveals with stagger
+      tl.to('.right > *', { y: 0, opacity: 1, duration: 0.6, stagger: 0.08, ease: 'power3.out' }, 1.4);
+
+      // Size chips pop in with stagger and scale
+      tl.to('.size .chip', { y: 0, opacity: 1, scale: 1, duration: 0.4, stagger: 0.06, ease: 'back.out(1.4)' }, 2.0);
+
+      // Selected chip pulse
+      tl.to('.size .chip.selected', { scale: 1.1, duration: 0.2, yoyo: true, repeat: 1, ease: 'power2.inOut' }, 2.5);
+
+      // Odometer price counter
       const priceEl = document.getElementById('price-val');
       const priceObj = { val: 0 };
       priceEl.innerText = '0';
@@ -203,19 +177,22 @@
         onUpdate: () => { priceEl.innerText = Math.floor(priceObj.val).toString(); }
       }, 2.1);
 
+      // CTA button sweep effect
+      tl.to('.btn-cart .sweep', { x: '100%', duration: 0.6, ease: 'power2.inOut' }, 3.2);
+
       // CTA micro-interaction
       tl.to({}, { duration: 0.2, onStart: () => {
         const cartBtn = document.querySelector('.btn-cart');
         const donateBtn = document.querySelector('.btn-donate');
         gsap.fromTo(cartBtn, { x: 0 }, { x: -4, duration: 0.15, yoyo: true, repeat: 1, ease: 'power2.inOut' });
-        gsap.fromTo(donateBtn, { scale: 1 }, { scale: 1.15, duration: 0.3, yoyo: true, repeat: 1, ease: 'power2.inOut' });
+        gsap.fromTo(donateBtn, { scale: 1 }, { scale: 1.15, duration: 0.3, yoyo: true, repeat: 1, ease: 'back.out(2)' });
       }}, 3.5);
 
-      // Exit — image card slides left, content fades (handoff to marquee)
-      tl.to('.left', { x: -100, opacity: 0, duration: 0.5, ease: 'power3.in' }, 4.3);
-      tl.to('.right', { x: 80, opacity: 0, duration: 0.4, ease: 'power2.in' }, 4.3);
-      tl.to('.top-bar', { y: -20, opacity: 0, duration: 0.4, ease: 'power2.in' }, 4.4);
-      tl.to('.ribbon', { scaleX: 0, transformOrigin: 'right center', duration: 0.4, ease: 'power2.in' }, 4.5);
+      // Exit — image card slides left with clipPath
+      tl.to('.left', { clipPath: 'inset(0 0 0 100%)', opacity: 0, duration: 0.5, ease: 'power3.in' }, 5.2);
+      tl.to('.right', { x: 80, opacity: 0, duration: 0.4, ease: 'power3.in' }, 5.3);
+      tl.to('.top-bar', { y: -20, opacity: 0, duration: 0.4, ease: 'power3.in' }, 5.4);
+      tl.to('.ribbon', { scaleX: 0, transformOrigin: 'right center', duration: 0.4, ease: 'power3.in' }, 5.5);
 
       window.addEventListener('load', () => tl.play());
     })();

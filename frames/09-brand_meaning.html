@@ -38,16 +38,24 @@
   .half.left .desc { text-align: left; }
   .half.right .desc { text-align: right; margin-left: auto; }
 
-  /* Circle motif */
+  /* Animated circle motif */
   .motif { position: absolute; right: 200px; top: 540px; width: 160px; height: 160px; border: 2px solid #E60012; border-radius: 50%; opacity: 0; }
   .motif::after { content: ''; position: absolute; inset: 12px; border: 1px solid #E60012; border-radius: 50%; opacity: 0.5; }
   .motif::before { content: ''; position: absolute; left: 50%; top: 50%; width: 12px; height: 12px; background: #E60012; border-radius: 50%; transform: translate(-50%, -50%); }
+  .motif .orbit { position: absolute; inset: -20px; border: 1px dashed rgba(230,0,18,0.3); border-radius: 50%; }
+
+  /* Decorative line accents */
+  .accent-line { position: absolute; height: 1px; background: linear-gradient(90deg, transparent, #E60012, transparent); }
+  .accent-line.l1 { top: 420px; left: 80px; width: 300px; }
+  .accent-line.l2 { top: 420px; right: 80px; width: 300px; }
 </style>
 </head>
 <body>
   <div class="stage">
     <div class="page" data-composition-id="brand_meaning" data-start="0" data-duration="5" data-width="1920" data-height="1080">
       <div class="red-bar"></div>
+      <div class="accent-line l1"></div>
+      <div class="accent-line l2"></div>
       <div class="top">
         <div class="lbl">VICOO · <span class="red">THE NAME</span></div>
         <div class="rule"></div>
@@ -75,7 +83,7 @@
         </div>
       </div>
 
-      <div class="motif"></div>
+      <div class="motif"><div class="orbit"></div></div>
     </div>
   </div>
 
@@ -85,24 +93,52 @@
       const tl = gsap.timeline({ paused: true });
       window.__timelines = window.__timelines || {};
       window.__timelines["brand_meaning"] = tl;
+
       gsap.set('.red-bar', { scaleX: 0, transformOrigin: 'left center' });
       gsap.set('.top > *', { y: -20, opacity: 0 });
       gsap.set('.heading > *', { y: 30, opacity: 0 });
       gsap.set('.split .rule', { scaleY: 0 });
       gsap.set('.half > *', { y: 20, opacity: 0 });
+      gsap.set('.half .letters', { y: 40, opacity: 0, scale: 0.8 });
       gsap.set('.motif', { scale: 0, rotation: -90 });
-      tl.to('.red-bar', { scaleX: 1, duration: 0.5, ease: 'power3.inOut' }, 0);
-      tl.to('.top > *', { y: 0, opacity: 1, duration: 0.5, stagger: 0.06, ease: 'power2.out' }, 0.1);
-      tl.to('.heading > *', { y: 0, opacity: 1, duration: 0.6, stagger: 0.1, ease: 'power2.out' }, 0.4);
-      tl.to('.split .rule', { scaleY: 1, duration: 0.7, ease: 'power3.inOut' }, 1.1);
-      tl.to('.half > *', { y: 0, opacity: 1, duration: 0.5, stagger: 0.06, ease: 'power2.out' }, 1.3);
-      tl.to('.motif', { scale: 1, rotation: 0, duration: 1.0, ease: 'back.out(1.4)' }, 2.4);
+      gsap.set('.motif .orbit', { rotation: 0 });
+      gsap.set('.accent-line', { scaleX: 0, transformOrigin: 'center' });
+
+      // Entry
+      tl.to('.red-bar', { scaleX: 1, duration: 0.4, ease: 'power4.inOut' }, 0);
+      tl.to('.top > *', { y: 0, opacity: 1, duration: 0.5, stagger: 0.06, ease: 'power3.out' }, 0.1);
+
+      // Accent lines wipe in
+      tl.to('.accent-line', { scaleX: 1, duration: 0.6, stagger: 0.1, ease: 'power3.inOut' }, 0.3);
+
+      // Heading reveals
+      tl.to('.heading > *', { y: 0, opacity: 1, duration: 0.6, stagger: 0.1, ease: 'power3.out' }, 0.4);
+
+      // Center rule grows
+      tl.to('.split .rule', { scaleY: 1, duration: 0.7, ease: 'power3.inOut' }, 1.0);
+
+      // Letters — dramatic scale-in with bounce
+      tl.to('.half .letters', { y: 0, opacity: 1, scale: 1, duration: 0.8, stagger: 0.2, ease: 'back.out(1.6)' }, 1.2);
+
+      // Other half content
+      tl.to('.half .lbl', { y: 0, opacity: 1, duration: 0.4, stagger: 0.1, ease: 'power3.out' }, 1.4);
+      tl.to('.half .word', { y: 0, opacity: 1, duration: 0.5, stagger: 0.1, ease: 'power3.out' }, 1.6);
+      tl.to('.half .desc', { y: 0, opacity: 1, duration: 0.5, stagger: 0.1, ease: 'power3.out' }, 1.8);
+
+      // Circle motif — elastic pop with rotation
+      tl.to('.motif', { scale: 1, rotation: 0, duration: 1.0, ease: 'back.out(1.8)' }, 2.4);
+
+      // Orbit rotation
+      tl.to('.motif .orbit', { rotation: 360, duration: 3.0, ease: 'none', repeat: -1 }, 2.5);
+
       // Exit
-      tl.to('.motif', { scale: 0.5, opacity: 0, duration: 0.3, ease: 'power2.in' }, 4.3);
-      tl.to('.half > *', { y: -10, opacity: 0, duration: 0.3, ease: 'power2.in' }, 4.4);
-      tl.to('.heading > *', { y: -20, opacity: 0, duration: 0.3, ease: 'power2.in' }, 4.5);
-      tl.to('.top', { y: -20, opacity: 0, duration: 0.3, ease: 'power2.in' }, 4.5);
+      tl.to('.motif', { scale: 0.5, opacity: 0, duration: 0.3, ease: 'power3.in' }, 4.3);
+      tl.to('.half > *', { y: -10, opacity: 0, duration: 0.3, stagger: 0.03, ease: 'power3.in' }, 4.4);
+      tl.to('.heading > *', { y: -20, opacity: 0, duration: 0.3, ease: 'power3.in' }, 4.5);
+      tl.to('.accent-line', { scaleX: 0, duration: 0.3, ease: 'power3.in' }, 4.4);
+      tl.to('.top', { y: -20, opacity: 0, duration: 0.3, ease: 'power3.in' }, 4.5);
       tl.to('.red-bar', { scaleX: 0, transformOrigin: 'right center', duration: 0.3 }, 4.5);
+
       window.addEventListener('load', () => tl.play());
     })();
   </script>

@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8" />
-<title>VICOO — Traceability Globe</title>
+<title>VICOO — 3D Globe</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Noto+Sans+SC:wght@300;400;500;700;900&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
@@ -12,164 +12,153 @@
   html, body { width: 2560px; height: 1440px; overflow: hidden; background: #0A0A0A; color: #FFFFFF; font-family: 'Inter', -apple-system, sans-serif; -webkit-font-smoothing: antialiased; }
   .stage { position: absolute; top: 0; left: 0; width: 1920px; height: 1080px; transform: scale(1.3333333); transform-origin: top left; }
   .page { position: absolute; inset: 0; }
-  .grid { position: absolute; inset: 0; pointer-events: none; opacity: 0.05; background-image: linear-gradient(to right, #FFF 1px, transparent 1px); background-size: 80px 80px; }
   .red-bar { position: absolute; top: 0; left: 0; right: 0; height: 8px; background: #E60012; }
   .top { position: absolute; top: 60px; left: 80px; right: 80px; display: flex; align-items: center; gap: 24px; }
-  .top .lbl { font-family: 'JetBrains Mono', monospace; font-size: 13px; font-weight: 500; letter-spacing: 0.2em; text-transform: uppercase; }
+  .top .lbl { font-family: 'JetBrains Mono', monospace; font-size: 13px; font-weight: 500; letter-spacing: 0.2em; text-transform: uppercase; color: #FFF; }
   .top .lbl .red { color: #E60012; }
-  .top .rule { flex: 1; height: 1px; background: #333; }
+  .top .rule { flex: 1; height: 1px; background: rgba(255,255,255,0.3); }
   .top .meta { font-family: 'JetBrains Mono', monospace; font-size: 13px; font-weight: 500; letter-spacing: 0.18em; text-transform: uppercase; color: #888; }
 
-  /* The Globe - simulated 3D Earth with continents drawn */
-  .stage-globe { position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); width: 680px; height: 680px; }
-  .globe-wrap { position: relative; width: 100%; height: 100%; }
-  .globe-circle { position: absolute; inset: 0; border-radius: 50%; background: radial-gradient(circle at 30% 30%, #1A3050 0%, #0A1830 50%, #050A1A 100%); border: 2px solid #2A4060; }
-  .globe-circle::before { content: ''; position: absolute; inset: -2px; border-radius: 50%; background: radial-gradient(circle at 30% 30%, transparent 60%, rgba(0,0,0,0.4) 100%); }
-  .globe-arc { position: absolute; left: 50%; top: 50%; width: 50%; height: 1px; background: #E60012; transform-origin: 0 0; opacity: 0.7; }
-  .arc-a1 { transform: rotate(-30deg); }
-  .arc-a2 { transform: rotate(40deg); }
-  .arc-a3 { transform: rotate(110deg); }
-  .arc-a4 { transform: rotate(180deg); }
-  .arc-a5 { transform: rotate(-110deg); }
-  .node { position: absolute; width: 16px; height: 16px; background: #E60012; border-radius: 50%; box-shadow: 0 0 16px #E60012; transform: translate(-50%, -50%); }
-  .node.lg { width: 20px; height: 20px; box-shadow: 0 0 24px #E60012, 0 0 48px rgba(230,0,18,0.4); }
-  .node.white { background: #FFFFFF; box-shadow: 0 0 16px #FFFFFF; }
-  .node-cn { left: 78%; top: 38%; }   /* Shanghai/China */
-  .node-in { left: 70%; top: 50%; }   /* India */
-  .node-tr { left: 56%; top: 38%; }   /* Turkey */
-  .node-fr { left: 48%; top: 30%; }   /* France */
-  .node-us { left: 22%; top: 38%; }   /* US */
-  .node-br { left: 32%; top: 65%; }   /* Brazil */
-  .node.ke { left: 58%; top: 60%; background: #FFFFFF; box-shadow: 0 0 16px #FFFFFF; }  /* Kenya */
+  .content { position: absolute; left: 80px; right: 80px; top: 140px; bottom: 80px; display: grid; grid-template-columns: 1fr 1.2fr; gap: 60px; }
 
-  /* central label */
-  .stage-globe .center { position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); text-align: center; }
-  .stage-globe .center .lbl { font-family: 'JetBrains Mono', monospace; font-size: 11px; font-weight: 500; letter-spacing: 0.2em; text-transform: uppercase; color: #888; }
-  .stage-globe .center .ttl { font-family: 'Smiley Sans', sans-serif; font-weight: 400; font-size: 28px; color: #FFFFFF; margin-top: 4px; }
+  .left { display: flex; flex-direction: column; justify-content: center; }
+  .left .kicker { font-family: 'JetBrains Mono', monospace; font-size: 12px; font-weight: 500; letter-spacing: 0.2em; text-transform: uppercase; color: #E60012; }
+  .left h1 { font-family: 'Smiley Sans', sans-serif; font-weight: 400; font-size: 52px; line-height: 1.0; letter-spacing: -2px; color: #FFFFFF; margin-top: 12px; }
+  .left h1 em { font-style: normal; color: #E60012; }
+  .left .body { font-family: 'Noto Sans SC', sans-serif; font-size: 18px; color: rgba(255,255,255,0.7); margin-top: 24px; line-height: 1.7; max-width: 480px; }
 
-  /* Side panel: stage info */
-  .side { position: absolute; left: 80px; top: 140px; width: 360px; }
-  .side .kicker { font-family: 'JetBrains Mono', monospace; font-size: 12px; font-weight: 500; letter-spacing: 0.2em; text-transform: uppercase; color: #E60012; }
-  .side h1 { font-family: 'Smiley Sans', sans-serif; font-weight: 400; font-size: 56px; line-height: 0.95; letter-spacing: -2px; color: #FFFFFF; margin-top: 12px; }
-  .side h1 em { font-style: normal; color: #E60012; }
-  .side .desc { font-family: 'Noto Sans SC', sans-serif; font-weight: 400; font-size: 14px; line-height: 1.5; color: #AAA; margin-top: 16px; }
+  .stats { display: flex; gap: 24px; margin-top: 32px; }
+  .stat { padding: 16px; background: rgba(255,255,255,0.05); text-align: center; flex: 1; }
+  .stat .val { font-family: 'Inter', sans-serif; font-weight: 800; font-size: 28px; color: #E60012; }
+  .stat .lbl { font-family: 'JetBrains Mono', monospace; font-size: 10px; color: #888; letter-spacing: 0.1em; text-transform: uppercase; margin-top: 4px; }
 
-  /* Right: timeline sidebar */
-  .timeline { position: absolute; right: 80px; top: 140px; width: 320px; }
-  .timeline h3 { font-family: 'Smiley Sans', sans-serif; font-weight: 400; font-size: 18px; color: #E60012; margin-bottom: 12px; }
-  .timeline .row { display: flex; gap: 12px; padding: 10px 0; border-bottom: 1px solid #1A1A1A; }
-  .timeline .row .no { font-family: 'JetBrains Mono', monospace; font-size: 12px; font-weight: 700; color: #E60012; flex-shrink: 0; width: 24px; }
-  .timeline .row .info { flex: 1; }
-  .timeline .row .nm { font-family: 'Inter', sans-serif; font-weight: 700; font-size: 13px; color: #FFFFFF; }
-  .timeline .row .loc { font-family: 'Inter', sans-serif; font-size: 11px; color: #888; margin-top: 2px; }
-  .timeline .row .carbon { font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: 0.1em; color: #00D26A; margin-top: 2px; }
+  .right { position: relative; display: flex; align-items: center; justify-content: center; }
+  .globe-container { position: relative; width: 500px; height: 500px; }
+  .globe { width: 100%; height: 100%; border-radius: 50%; border: 2px solid rgba(255,255,255,0.15); position: relative; background: radial-gradient(circle at 30% 30%, rgba(255,255,255,0.05) 0%, transparent 50%); }
+  .globe::before { content: ''; position: absolute; inset: 40px; border-radius: 50%; border: 1px solid rgba(255,255,255,0.08); }
+  .globe::after { content: ''; position: absolute; inset: 80px; border-radius: 50%; border: 1px solid rgba(255,255,255,0.05); }
 
-  /* Bottom: preconditions notice */
-  .pre { position: absolute; left: 80px; right: 80px; bottom: 60px; padding: 12px 16px; border: 1px solid #E60012; background: rgba(230,0,18,0.08); display: flex; align-items: center; gap: 12px; font-family: 'JetBrains Mono', monospace; font-size: 11px; font-weight: 500; letter-spacing: 0.1em; color: #FFFFFF; }
-  .pre .lbl { color: #E60012; font-weight: 700; }
+  .globe-node { position: absolute; width: 16px; height: 16px; background: #E60012; border-radius: 50%; transform: translate(-50%, -50%); box-shadow: 0 0 12px rgba(230,0,18,0.5); z-index: 2; }
+  .globe-node::before { content: ''; position: absolute; inset: -8px; border-radius: 50%; border: 1px solid rgba(230,0,18,0.3); animation: pulse-ring 2s ease-out infinite; }
+  .globe-node .label { position: absolute; top: -28px; left: 50%; transform: translateX(-50%); font-family: 'JetBrains Mono', monospace; font-size: 10px; color: rgba(255,255,255,0.7); white-space: nowrap; }
+
+  @keyframes pulse-ring { 0% { transform: scale(1); opacity: 1; } 100% { transform: scale(2); opacity: 0; } }
+
+  .globe-arc { position: absolute; border: 1px solid rgba(230,0,18,0.3); border-radius: 50%; }
+
+  .side-timeline { position: absolute; right: -60px; top: 50px; bottom: 50px; width: 2px; background: rgba(255,255,255,0.1); }
+  .side-timeline .dot { position: absolute; left: -4px; width: 10px; height: 10px; background: #E60012; border-radius: 50%; }
+  .side-timeline .dot::after { content: attr(data-label); position: absolute; left: 16px; top: -4px; font-family: 'JetBrains Mono', monospace; font-size: 10px; color: rgba(255,255,255,0.6); white-space: nowrap; }
 </style>
 </head>
 <body>
   <div class="stage">
     <div class="page" data-composition-id="globe_intro" data-start="0" data-duration="6" data-width="1920" data-height="1080">
-      <div class="grid"></div>
       <div class="red-bar"></div>
       <div class="top">
-        <div class="lbl">VICOO · <span class="red">TRACEABILITY GLOBE</span></div>
+        <div class="lbl">VICOO · <span class="red">TRACEABILITY</span></div>
         <div class="rule"></div>
-        <div class="meta">PP. 09 · /impact/shop/:id</div>
+        <div class="meta">PP. 11 · /globe</div>
       </div>
-      <div class="side">
-        <div class="kicker">CHAPTER 04 · 3D TRACE</div>
-        <h1>From <em>field</em> to wardrobe.</h1>
-        <p class="desc">每一件公益商品的供应链都画在地球上。点击节点查看阶段详情，timeline 与地球联动保持一致。</p>
-      </div>
-      <div class="stage-globe">
-        <div class="globe-wrap">
-          <div class="globe-circle"></div>
-          <div class="globe-arc arc-a1"></div>
-          <div class="globe-arc arc-a2"></div>
-          <div class="globe-arc arc-a3"></div>
-          <div class="globe-arc arc-a4"></div>
-          <div class="globe-arc arc-a5"></div>
-          <div class="node lg node-cn"></div>
-          <div class="node node-tr"></div>
-          <div class="node node-in"></div>
-          <div class="node node-fr"></div>
-          <div class="node node-us"></div>
-          <div class="node node-br"></div>
-          <div class="node ke"></div>
-          <div class="center">
-            <div class="lbl">SUPPLY CHAIN</div>
-            <div class="ttl">5 STAGES</div>
+
+      <div class="content">
+        <div class="left">
+          <div class="kicker">TRACEABILITY · 3D GLOBE</div>
+          <h1>See every <em>node</em> in the supply chain.</h1>
+          <div class="body">3D 交互式地球，展示从棉花种植到成衣出厂的每一个节点。7 个国家，5 个阶段，每一步都可验证。</div>
+
+          <div class="stats">
+            <div class="stat"><div class="val">7</div><div class="lbl">Countries</div></div>
+            <div class="stat"><div class="val">5</div><div class="lbl">Stages</div></div>
+            <div class="stat"><div class="val">98.7%</div><div class="lbl">Traceable</div></div>
+          </div>
+        </div>
+
+        <div class="right">
+          <div class="globe-container">
+            <div class="globe">
+              <div class="globe-arc" style="width: 300px; height: 300px; top: 50%; left: 50%; transform: translate(-50%, -50%);"></div>
+              <div class="globe-arc" style="width: 400px; height: 400px; top: 50%; left: 50%; transform: translate(-50%, -50%);"></div>
+
+              <div class="globe-node" style="top: 35%; left: 65%;"><div class="label">CN · Xinjiang</div></div>
+              <div class="globe-node" style="top: 42%; left: 70%;"><div class="label">CN · Shaoxing</div></div>
+              <div class="globe-node" style="top: 38%; left: 75%;"><div class="label">CN · Suzhou</div></div>
+              <div class="globe-node" style="top: 40%; left: 80%;"><div class="label">CN · Shanghai</div></div>
+              <div class="globe-node" style="top: 32%; left: 48%;"><div class="label">TR · Istanbul</div></div>
+              <div class="globe-node" style="top: 50%; left: 60%;"><div class="label">IN · Mumbai</div></div>
+              <div class="globe-node" style="top: 30%; left: 42%;"><div class="label">FR · Paris</div></div>
+            </div>
+
+            <div class="side-timeline">
+              <div class="dot" style="top: 10%;" data-label="COTTON"></div>
+              <div class="dot" style="top: 30%;" data-label="SPINNING"></div>
+              <div class="dot" style="top: 50%;" data-label="DYEING"></div>
+              <div class="dot" style="top: 70%;" data-label="CUTTING"></div>
+              <div class="dot" style="top: 90%;" data-label="ASSEMBLY"></div>
+            </div>
           </div>
         </div>
       </div>
-      <div class="timeline">
-        <h3>Stages</h3>
-        <div class="row">
-          <div class="no">01</div>
-          <div class="info"><div class="nm">MATERIAL</div><div class="loc">Xinjiang · Awati</div><div class="carbon">↓ 0.8 kg CO₂e</div></div>
-        </div>
-        <div class="row">
-          <div class="no">02</div>
-          <div class="info"><div class="nm">MILL</div><div class="loc">Zhejiang · Shaoxing</div><div class="carbon">↓ 1.2 kg CO₂e</div></div>
-        </div>
-        <div class="row">
-          <div class="no">03</div>
-          <div class="info"><div class="nm">CUT &amp; SEW</div><div class="loc">Jiangsu · Suzhou</div><div class="carbon">↓ 1.5 kg CO₂e</div></div>
-        </div>
-        <div class="row">
-          <div class="no">04</div>
-          <div class="info"><div class="nm">PRINT</div><div class="loc">Shanghai · Minhang</div><div class="carbon">↓ 0.4 kg CO₂e</div></div>
-        </div>
-        <div class="row">
-          <div class="no">05</div>
-          <div class="info"><div class="nm">SHIP</div><div class="loc">Shanghai · Pudong</div><div class="carbon">↓ 0.6 kg CO₂e</div></div>
-        </div>
-      </div>
-      <div class="pre">
-        <span class="lbl">PRECONDITIONS:</span>
-        IMPACT PRODUCT · URL = /impact/shop/:id · API RETURNS ≥1 STAGE
-      </div>
     </div>
   </div>
+
   <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
   <script>
     (function () {
       const tl = gsap.timeline({ paused: true });
       window.__timelines = window.__timelines || {};
       window.__timelines["globe_intro"] = tl;
+
       gsap.set('.red-bar', { scaleX: 0, transformOrigin: 'left center' });
       gsap.set('.top > *', { y: -20, opacity: 0 });
-      gsap.set('.side > *, .pre', { x: -20, opacity: 0 });
-      gsap.set('.globe-circle', { scale: 0, opacity: 0 });
-      gsap.set('.globe-arc', { scaleX: 0, transformOrigin: 0 0 });
-      gsap.set('.node', { scale: 0 });
-      gsap.set('.center', { scale: 0 });
-      gsap.set('.timeline', { x: 20, opacity: 0 });
-      gsap.set('.timeline .row', { x: 20, opacity: 0 });
-      tl.to('.red-bar', { scaleX: 1, duration: 0.5, ease: 'power3.inOut' }, 0);
-      tl.to('.top > *', { y: 0, opacity: 1, duration: 0.5, stagger: 0.06, ease: 'power2.out' }, 0.1);
-      tl.to('.side > *', { x: 0, opacity: 1, duration: 0.5, stagger: 0.08, ease: 'power2.out' }, 0.5);
-      tl.to('.globe-circle', { scale: 1, opacity: 1, duration: 0.9, ease: 'expo.out' }, 0.7);
-      tl.to('.globe-arc', { scaleX: 1, duration: 0.6, stagger: 0.1, ease: 'power2.inOut' }, 1.3);
-      tl.to('.node', { scale: 1, duration: 0.5, stagger: 0.08, ease: 'back.out(1.7)' }, 1.6);
-      tl.to('.center', { scale: 1, duration: 0.6, ease: 'back.out(1.5)' }, 1.9);
-      tl.to('.timeline', { x: 0, opacity: 1, duration: 0.5, ease: 'power2.out' }, 2.0);
-      tl.to('.timeline .row', { x: 0, opacity: 1, duration: 0.4, stagger: 0.08, ease: 'power2.out' }, 2.1);
-      tl.to('.pre', { x: 0, opacity: 1, duration: 0.5, ease: 'power2.out' }, 2.6);
-      // subtle pulse on a node
-      tl.to({}, { duration: 0.5, onStart: () => {
-        const node = document.querySelector('.node-cn');
-        gsap.fromTo(node, { scale: 1 }, { scale: 1.5, duration: 0.4, yoyo: true, repeat: 1, ease: 'power2.inOut' });
-      }}, 3.5);
+      gsap.set('.left .kicker', { y: 20, opacity: 0 });
+      gsap.set('.left h1', { y: 30, opacity: 0 });
+      gsap.set('.left .body', { y: 20, opacity: 0 });
+      gsap.set('.stat', { y: 20, opacity: 0, scale: 0.9 });
+      gsap.set('.globe', { scale: 0.5, opacity: 0 });
+      gsap.set('.globe-arc', { scale: 0, opacity: 0 });
+      gsap.set('.globe-node', { scale: 0, opacity: 0 });
+      gsap.set('.side-timeline', { scaleY: 0, transformOrigin: 'top' });
+      gsap.set('.side-timeline .dot', { scale: 0, opacity: 0 });
+
+      // Entry
+      tl.to('.red-bar', { scaleX: 1, duration: 0.4, ease: 'power4.inOut' }, 0);
+      tl.to('.top > *', { y: 0, opacity: 1, duration: 0.5, stagger: 0.06, ease: 'power3.out' }, 0.1);
+
+      // Left content
+      tl.to('.left .kicker', { y: 0, opacity: 1, duration: 0.5, ease: 'power3.out' }, 0.3);
+      tl.to('.left h1', { y: 0, opacity: 1, duration: 0.6, ease: 'expo.out' }, 0.5);
+      tl.to('.left .body', { y: 0, opacity: 1, duration: 0.5, ease: 'power3.out' }, 0.8);
+      tl.to('.stat', { y: 0, opacity: 1, scale: 1, duration: 0.5, stagger: 0.1, ease: 'back.out(1.4)' }, 1.0);
+
+      // Globe — scale in with bounce
+      tl.to('.globe', { scale: 1, opacity: 1, duration: 0.8, ease: 'back.out(1.2)' }, 0.6);
+
+      // Globe arcs
+      tl.to('.globe-arc', { scale: 1, opacity: 1, duration: 0.6, stagger: 0.15, ease: 'power3.out' }, 1.0);
+
+      // Globe nodes — staggered pop
+      tl.to('.globe-node', { scale: 1, opacity: 1, duration: 0.4, stagger: 0.1, ease: 'back.out(2)' }, 1.4);
+
+      // Side timeline
+      tl.to('.side-timeline', { scaleY: 1, duration: 0.6, ease: 'power3.inOut' }, 1.8);
+      tl.to('.side-timeline .dot', { scale: 1, opacity: 1, duration: 0.4, stagger: 0.1, ease: 'back.out(1.4)' }, 2.0);
+
+      // Gentle globe rotation
+      tl.to('.globe', { rotation: 5, duration: 3.0, yoyo: true, repeat: 1, ease: 'sine.inOut' }, 2.5);
+
       // Exit
-      tl.to('.pre, .timeline, .side', { x: 20, opacity: 0, duration: 0.3, ease: 'power2.in' }, 5.2);
-      tl.to('.node', { scale: 0, duration: 0.3, ease: 'back.in(1.5)' }, 5.3);
-      tl.to('.globe-arc', { scaleX: 0, duration: 0.3, ease: 'power2.in' }, 5.3);
-      tl.to('.globe-circle', { scale: 0, duration: 0.5, ease: 'power2.in' }, 5.4);
-      tl.to('.top', { y: -20, opacity: 0, duration: 0.3, ease: 'power2.in' }, 5.5);
+      tl.to('.side-timeline .dot', { scale: 0, opacity: 0, duration: 0.3, stagger: 0.05, ease: 'power3.in' }, 5.2);
+      tl.to('.side-timeline', { scaleY: 0, duration: 0.3, ease: 'power3.in' }, 5.3);
+      tl.to('.globe-node', { scale: 0, opacity: 0, duration: 0.3, stagger: 0.03, ease: 'power3.in' }, 5.2);
+      tl.to('.globe', { scale: 0.5, opacity: 0, duration: 0.4, ease: 'power3.in' }, 5.3);
+      tl.to('.stat', { y: -15, opacity: 0, duration: 0.3, ease: 'power3.in' }, 5.4);
+      tl.to('.left .body', { y: -15, opacity: 0, duration: 0.3, ease: 'power3.in' }, 5.4);
+      tl.to('.left h1', { y: -20, opacity: 0, duration: 0.3, ease: 'power3.in' }, 5.5);
+      tl.to('.left .kicker', { y: -10, opacity: 0, duration: 0.3, ease: 'power3.in' }, 5.5);
+      tl.to('.top', { y: -20, opacity: 0, duration: 0.3, ease: 'power3.in' }, 5.5);
+      tl.to('.red-bar', { scaleX: 0, transformOrigin: 'right center', duration: 0.3 }, 5.5);
+
       window.addEventListener('load', () => tl.play());
     })();
   </script>

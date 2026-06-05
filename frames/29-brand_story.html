@@ -23,7 +23,7 @@
 
   .left { display: flex; flex-direction: column; justify-content: center; }
   .left .kicker { font-family: 'JetBrains Mono', monospace; font-size: 13px; font-weight: 500; letter-spacing: 0.2em; text-transform: uppercase; color: #E60012; }
-  .left h1 { font-family: 'Smiley Sans', sans-serif; font-weight: 400; font-size: 72px; line-height: 1.0; letter-spacing: -2px; color: #1A1A16; margin-top: 16px; }
+  .left h1 { font-family: 'Smiley Sans', sans-serif; font-weight: 400; font-size: 72px; line-height: 1.0; letter-spacing: -3px; color: #1A1A16; margin-top: 16px; }
   .left h1 em { font-style: normal; color: #E60012; }
   .left .body { font-family: 'Noto Sans SC', sans-serif; font-weight: 400; font-size: 20px; line-height: 1.7; color: #555; margin-top: 32px; max-width: 520px; }
   .left .body em { font-style: normal; color: #E60012; font-weight: 700; }
@@ -106,6 +106,7 @@
       gsap.set('.tl-item', { x: 30, opacity: 0 });
       gsap.set('.watermark', { opacity: 0 });
 
+      // Entry
       tl.to('.red-bar', { scaleX: 1, duration: 0.5, ease: 'power3.inOut' }, 0);
       tl.to('.top > *', { y: 0, opacity: 1, duration: 0.5, stagger: 0.06, ease: 'power2.out' }, 0.1);
       tl.to('.left .kicker', { y: 0, opacity: 1, duration: 0.5, ease: 'power2.out' }, 0.4);

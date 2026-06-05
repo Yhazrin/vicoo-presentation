@@ -27,12 +27,13 @@
   .heading h1 em { font-style: normal; color: #E60012; }
 
   .payment-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; max-width: 1200px; }
-  .payment-card { padding: 32px; background: #F5F5F5; text-align: center; border: 2px solid transparent; transition: all 0.3s; }
+  .payment-card { padding: 32px; background: #F5F5F5; text-align: center; border: 2px solid transparent; transition: all 0.3s; position: relative; overflow: hidden; }
   .payment-card.active { border-color: #E60012; background: #FFF; }
   .payment-card .icon { font-size: 48px; margin-bottom: 16px; }
   .payment-card .name { font-family: 'Inter', sans-serif; font-weight: 800; font-size: 18px; }
   .payment-card .desc { font-family: 'Noto Sans SC', sans-serif; font-size: 14px; color: #888; margin-top: 8px; }
   .payment-card .badge { display: inline-block; margin-top: 12px; padding: 4px 12px; background: #E60012; color: #FFFFFF; font-family: 'JetBrains Mono', monospace; font-size: 10px; font-weight: 500; letter-spacing: 0.15em; text-transform: uppercase; }
+  .payment-card .sweep { position: absolute; inset: 0; background: linear-gradient(135deg, rgba(230,0,18,0.1) 0%, transparent 50%); opacity: 0; }
 
   .security { display: flex; align-items: center; gap: 24px; margin-top: 48px; padding: 20px 32px; background: #F5F5F5; }
   .security .icon { font-size: 24px; }
@@ -58,22 +59,26 @@
 
         <div class="payment-grid">
           <div class="payment-card active">
+            <div class="sweep"></div>
             <div class="icon">💚</div>
             <div class="name">WeChat Pay</div>
             <div class="desc">微信支付，扫码即付</div>
             <div class="badge">POPULAR</div>
           </div>
           <div class="payment-card">
+            <div class="sweep"></div>
             <div class="icon">🔵</div>
             <div class="name">Alipay</div>
             <div class="desc">支付宝，快捷安全</div>
           </div>
           <div class="payment-card">
+            <div class="sweep"></div>
             <div class="icon">💳</div>
             <div class="name">Stripe</div>
             <div class="desc">国际信用卡，全球通用</div>
           </div>
           <div class="payment-card">
+            <div class="sweep"></div>
             <div class="icon">🅿️</div>
             <div class="name">PayPal</div>
             <div class="desc">PayPal，海外用户首选</div>
@@ -99,16 +104,23 @@
       gsap.set('.top > *', { y: -20, opacity: 0 });
       gsap.set('.heading > *', { y: 20, opacity: 0 });
       gsap.set('.payment-card', { y: 30, opacity: 0, scale: 0.9 });
+      gsap.set('.payment-card .sweep', { opacity: 0 });
       gsap.set('.security', { y: 20, opacity: 0 });
 
-      tl.to('.red-bar', { scaleX: 1, duration: 0.5, ease: 'power3.inOut' }, 0);
+      // Entry
+      tl.to('.red-bar', { scaleX: 1, duration: 0.4, ease: 'power4.inOut' }, 0);
       tl.to('.top > *', { y: 0, opacity: 1, duration: 0.5, stagger: 0.06, ease: 'power2.out' }, 0.1);
       tl.to('.heading > *', { y: 0, opacity: 1, duration: 0.5, stagger: 0.08, ease: 'power2.out' }, 0.3);
       tl.to('.payment-card', { y: 0, opacity: 1, scale: 1, duration: 0.6, stagger: 0.12, ease: 'back.out(1.2)' }, 0.8);
-      tl.to('.security', { y: 0, opacity: 1, duration: 0.5, ease: 'power2.out' }, 2.0);
+
+      // Sweep effect on active card
+      tl.to('.payment-card.active .sweep', { opacity: 1, duration: 0.5, ease: 'power2.out' }, 1.5);
 
       // Pulse active card
-      tl.to('.payment-card.active', { scale: 1.05, duration: 0.6, yoyo: true, repeat: 1, ease: 'sine.inOut' }, 2.5);
+      tl.to('.payment-card.active', { scale: 1.05, duration: 0.3, yoyo: true, repeat: 1, ease: 'power2.inOut' }, 2.0);
+
+      // Security
+      tl.to('.security', { y: 0, opacity: 1, duration: 0.5, ease: 'power2.out' }, 2.2);
 
       // Exit
       tl.to('.security', { y: -15, opacity: 0, duration: 0.3, ease: 'power2.in' }, 4.2);

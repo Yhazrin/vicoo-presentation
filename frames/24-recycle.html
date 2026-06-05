@@ -9,169 +9,148 @@
 <style>
   @font-face { font-family: 'Smiley Sans'; src: url('SmileySans-Oblique.woff2') format('woff2'); font-weight: 400; font-style: normal; font-display: block; }
   * { margin: 0; padding: 0; box-sizing: border-box; }
-  html, body { width: 2560px; height: 1440px; overflow: hidden; background: #0A0A0A; color: #FFFFFF; font-family: 'Inter', -apple-system, sans-serif; -webkit-font-smoothing: antialiased; }
+  html, body { width: 2560px; height: 1440px; overflow: hidden; background: #FFFFFF; color: #1A1A16; font-family: 'Inter', -apple-system, sans-serif; -webkit-font-smoothing: antialiased; }
   .stage { position: absolute; top: 0; left: 0; width: 1920px; height: 1080px; transform: scale(1.3333333); transform-origin: top left; }
   .page { position: absolute; inset: 0; }
-  .grid { position: absolute; inset: 0; pointer-events: none; opacity: 0.05; background-image: linear-gradient(to right, #FFF 1px, transparent 1px); background-size: 80px 80px; }
   .red-bar { position: absolute; top: 0; left: 0; right: 0; height: 8px; background: #E60012; }
   .top { position: absolute; top: 60px; left: 80px; right: 80px; display: flex; align-items: center; gap: 24px; }
   .top .lbl { font-family: 'JetBrains Mono', monospace; font-size: 13px; font-weight: 500; letter-spacing: 0.2em; text-transform: uppercase; }
   .top .lbl .red { color: #E60012; }
-  .top .rule { flex: 1; height: 1px; background: #333; }
+  .top .rule { flex: 1; height: 1px; background: #1A1A16; }
   .top .meta { font-family: 'JetBrains Mono', monospace; font-size: 13px; font-weight: 500; letter-spacing: 0.18em; text-transform: uppercase; color: #888; }
 
-  .heading { position: absolute; top: 130px; left: 80px; right: 80px; }
-  .heading .kicker { font-family: 'JetBrains Mono', monospace; font-size: 12px; font-weight: 500; letter-spacing: 0.2em; text-transform: uppercase; color: #E60012; }
-  .heading h1 { font-family: 'Smiley Sans', sans-serif; font-weight: 400; font-size: 64px; line-height: 0.95; letter-spacing: -2px; color: #FFFFFF; margin-top: 8px; }
-  .heading h1 em { font-style: normal; color: #E60012; }
-  .heading .sub { font-family: 'Noto Sans SC', sans-serif; font-size: 16px; color: #AAA; margin-top: 12px; max-width: 800px; }
+  .content { position: absolute; left: 80px; right: 80px; top: 140px; bottom: 80px; display: grid; grid-template-columns: 1fr 1fr; gap: 60px; }
 
-  /* Two columns: left form, right illustration */
-  .layout { position: absolute; left: 80px; right: 80px; top: 380px; bottom: 80px; display: grid; grid-template-columns: 1fr 1fr; gap: 40px; }
-  .form { background: #141414; border: 1px solid #2A2A2A; padding: 32px; }
-  .form h2 { font-family: 'Smiley Sans', sans-serif; font-weight: 400; font-size: 28px; color: #FFFFFF; margin-bottom: 24px; }
-  .form .field { margin-bottom: 16px; }
-  .form .lbl { font-family: 'JetBrains Mono', monospace; font-size: 10px; font-weight: 500; letter-spacing: 0.2em; text-transform: uppercase; color: #888; margin-bottom: 6px; }
-  .form .input { width: 100%; height: 52px; background: #1A1A1A; border: 1px solid #333; padding: 0 16px; font-family: 'Inter', sans-serif; font-weight: 600; font-size: 14px; color: #FFFFFF; }
-  .form .input::placeholder { color: #555; }
-  .form .row2 { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
-  .form .types { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
-  .form .type { padding: 12px 8px; border: 1px solid #333; text-align: center; }
-  .form .type .nm { font-family: 'Inter', sans-serif; font-weight: 700; font-size: 13px; color: #FFFFFF; }
-  .form .type .lbl { font-family: 'JetBrains Mono', monospace; font-size: 9px; color: #888; margin-top: 2px; }
-  .form .type.selected { background: #E60012; border-color: #E60012; }
-  .form .type.selected .lbl { color: rgba(255,255,255,0.9); }
-  .form .btn { width: 100%; height: 60px; background: #E60012; color: #FFFFFF; font-family: 'Inter', sans-serif; font-weight: 800; font-size: 15px; letter-spacing: 0.15em; text-transform: uppercase; margin-top: 8px; }
+  .left { display: flex; flex-direction: column; justify-content: center; }
+  .left .kicker { font-family: 'JetBrains Mono', monospace; font-size: 12px; font-weight: 500; letter-spacing: 0.2em; text-transform: uppercase; color: #E60012; }
+  .left h1 { font-family: 'Smiley Sans', sans-serif; font-weight: 400; font-size: 52px; line-height: 1.0; letter-spacing: -2px; color: #1A1A16; margin-top: 12px; }
+  .left h1 em { font-style: normal; color: #E60012; }
+  .left .body { font-family: 'Noto Sans SC', sans-serif; font-size: 18px; color: #555; margin-top: 24px; line-height: 1.7; max-width: 480px; }
 
-  /* Right: circular flow */
-  .flow { display: flex; flex-direction: column; justify-content: center; }
-  .flow .ttl { font-family: 'Smiley Sans', sans-serif; font-weight: 400; font-size: 28px; color: #FFFFFF; text-align: center; margin-bottom: 8px; }
-  .flow .sub { font-family: 'Noto Sans SC', sans-serif; font-size: 14px; color: #888; text-align: center; margin-bottom: 40px; }
-  .flow .circle { position: relative; width: 420px; height: 420px; margin: 0 auto; }
-  .flow .ring { position: absolute; inset: 0; border: 1px solid #E60012; border-radius: 50%; }
-  .flow .ring::before { content: ''; position: absolute; inset: 16px; border: 1px dashed #E60012; border-radius: 50%; opacity: 0.4; }
-  .flow .center { position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); text-align: center; }
-  .flow .center .nm { font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; color: #E60012; font-weight: 700; }
-  .flow .center .v { font-family: 'Smiley Sans', sans-serif; font-weight: 400; font-size: 36px; color: #FFFFFF; margin-top: 4px; }
-  .flow .node { position: absolute; width: 110px; height: 110px; background: #141414; border: 2px solid #E60012; border-radius: 50%; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; }
-  .flow .node .num { font-family: 'JetBrains Mono', monospace; font-size: 10px; font-weight: 700; letter-spacing: 0.15em; color: #E60012; }
-  .flow .node .nm { font-family: 'Inter', sans-serif; font-weight: 700; font-size: 12px; color: #FFFFFF; margin-top: 4px; }
-  .flow .node .lbl { font-family: 'JetBrains Mono', monospace; font-size: 9px; color: #888; margin-top: 2px; }
-  .flow .node.n1 { left: -55px; top: 50%; transform: translateY(-50%); }
-  .flow .node.n2 { left: 50%; top: -55px; transform: translateX(-50%); }
-  .flow .node.n3 { right: -55px; top: 50%; transform: translateY(-50%); }
-  .flow .node.n4 { left: 50%; bottom: -55px; transform: translateX(-50%); }
+  .loop-diagram { display: flex; align-items: center; justify-content: center; gap: 0; margin-top: 32px; }
+  .loop-node { padding: 16px 24px; background: #F5F5F5; text-align: center; position: relative; overflow: hidden; }
+  .loop-node .icon { font-size: 32px; }
+  .loop-node .label { font-family: 'Inter', sans-serif; font-weight: 700; font-size: 14px; margin-top: 8px; }
+  .loop-node .sweep { position: absolute; inset: 0; background: linear-gradient(90deg, transparent, rgba(230,0,18,0.2), transparent); transform: translateX(-100%); }
+  .loop-arrow { font-size: 24px; color: #E60012; padding: 0 8px; }
 
-  .flow .arrow { position: absolute; width: 24px; height: 1px; background: #E60012; }
-  .flow .arrow.a1 { left: 65px; top: 50%; transform: translateY(-50%) rotate(-30deg); transform-origin: left; }
-  .flow .arrow.a2 { top: 65px; right: 50%; transform: translateX(50%) rotate(60deg); transform-origin: right; }
-  .flow .arrow.a3 { right: 65px; top: 50%; transform: translateY(-50%) rotate(-150deg); transform-origin: right; }
-  .flow .arrow.a4 { bottom: 65px; left: 50%; transform: translateX(-50%) rotate(120deg); transform-origin: left; }
+  .right { display: flex; flex-direction: column; gap: 20px; }
+  .impact-card { padding: 24px; background: #F5F5F5; display: flex; gap: 20px; align-items: center; position: relative; overflow: hidden; }
+  .impact-card .icon { font-size: 36px; }
+  .impact-card .info { flex: 1; }
+  .impact-card .info h3 { font-family: 'Inter', sans-serif; font-weight: 800; font-size: 16px; }
+  .impact-card .info p { font-family: 'Noto Sans SC', sans-serif; font-size: 14px; color: #666; margin-top: 4px; }
+  .impact-card .stat { font-family: 'Inter', sans-serif; font-weight: 900; font-size: 32px; color: #E60012; }
+  .impact-card .sweep { position: absolute; inset: 0; background: linear-gradient(90deg, transparent, rgba(230,0,18,0.1), transparent); transform: translateX(-100%); }
 </style>
 </head>
 <body>
   <div class="stage">
     <div class="page" data-composition-id="recycle" data-start="0" data-duration="6" data-width="1920" data-height="1080">
-      <div class="grid"></div>
       <div class="red-bar"></div>
       <div class="top">
-        <div class="lbl">VICOO · <span class="red">CLOTHING RECYCLE</span></div>
+        <div class="lbl">VICOO · <span class="red">RECYCLE</span></div>
         <div class="rule"></div>
-        <div class="meta">PP. 19 · /clothing-recycle</div>
+        <div class="meta">PP. 19 · /recycle</div>
       </div>
-      <div class="heading">
-        <div class="kicker">CHAPTER 07 · THE LOOP</div>
-        <h1>Give clothes a <em>second life</em>.</h1>
-        <p class="sub">预爱的进入二手市场，不可穿的拆解到纤维，收益进入美育基金。每一步都生成证书。</p>
-      </div>
-      <div class="layout">
-        <div class="form">
-          <h2>Schedule a pickup</h2>
-          <div class="field">
-            <div class="lbl">YOUR NAME</div>
-            <input class="input" value="朱莉华" />
+
+      <div class="content">
+        <div class="left">
+          <div class="kicker">CHAPTER 09 · CIRCULAR ECONOMY</div>
+          <h1>From <em>intake</em> to <em>reinvest</em>, nothing is wasted.</h1>
+          <div class="body">每一件回收的衣物，都会经过分拣、清洁、修复，重新进入循环。无法穿着的面料将被分解为再生纤维，用于新品生产。</div>
+
+          <div class="loop-diagram">
+            <div class="loop-node"><div class="sweep"></div><div class="icon">📥</div><div class="label">Intake</div></div>
+            <div class="loop-arrow">→</div>
+            <div class="loop-node"><div class="sweep"></div><div class="icon">🏷️</div><div class="label">Resale</div></div>
+            <div class="loop-arrow">→</div>
+            <div class="loop-node"><div class="sweep"></div><div class="icon">♻️</div><div class="label">Recycle</div></div>
+            <div class="loop-arrow">→</div>
+            <div class="loop-node"><div class="sweep"></div><div class="icon">💰</div><div class="label">Reinvest</div></div>
+            <div class="loop-arrow">↻</div>
           </div>
-          <div class="row2">
-            <div class="field">
-              <div class="lbl">PHONE</div>
-              <input class="input" value="13800138000" />
-            </div>
-            <div class="field">
-              <div class="lbl">CITY</div>
-              <input class="input" value="上海" />
-            </div>
-          </div>
-          <div class="field">
-            <div class="lbl">PICKUP ADDRESS</div>
-            <input class="input" value="上海市黄浦区南京东路 100 号" />
-          </div>
-          <div class="field">
-            <div class="lbl">CLOTHING TYPE</div>
-            <div class="types">
-              <div class="type selected"><div class="nm">TOPS</div><div class="lbl">上衣</div></div>
-              <div class="type"><div class="nm">BOTTOMS</div><div class="lbl">裤装</div></div>
-              <div class="type"><div class="nm">OUTER</div><div class="lbl">外套</div></div>
-              <div class="type"><div class="nm">ACCESS.</div><div class="lbl">配饰</div></div>
-              <div class="type"><div class="nm">FABRIC</div><div class="lbl">纯布料</div></div>
-              <div class="type"><div class="nm">OTHER</div><div class="lbl">其他</div></div>
-            </div>
-          </div>
-          <div class="field">
-            <div class="lbl">ESTIMATED WEIGHT (KG)</div>
-            <input class="input" value="3.5" />
-          </div>
-          <button class="btn">SCHEDULE PICKUP →</button>
         </div>
-        <div class="flow">
-          <div class="ttl">What happens next</div>
-          <div class="sub">物流上门 → 检测分级 → 流向分配</div>
-          <div class="circle">
-            <div class="ring"></div>
-            <div class="arrow a1"></div>
-            <div class="arrow a2"></div>
-            <div class="arrow a3"></div>
-            <div class="arrow a4"></div>
-            <div class="node n1"><div class="num">01</div><div class="nm">INTAKE</div><div class="lbl">3.5 kg</div></div>
-            <div class="node n2"><div class="num">02</div><div class="nm">RESALE</div><div class="lbl">~ 60%</div></div>
-            <div class="node n3"><div class="num">03</div><div class="nm">RECYCLE</div><div class="lbl">~ 30%</div></div>
-            <div class="node n4"><div class="num">04</div><div class="nm">REINVEST</div><div class="lbl">100% back</div></div>
-            <div class="center">
-              <div class="nm">CERTIFICATE NO.</div>
-              <div class="v">VC-2026Q2-128456</div>
-            </div>
+
+        <div class="right">
+          <div class="impact-card">
+            <div class="sweep"></div>
+            <div class="icon">👕</div>
+            <div class="info"><h3>Clothing Intake</h3><p>旧衣回收，每件 ¥5-20 回收补贴</p></div>
+            <div class="stat">2,847</div>
+          </div>
+          <div class="impact-card">
+            <div class="sweep"></div>
+            <div class="icon">🔄</div>
+            <div class="info"><h3>Resale Rate</h3><p>可穿着衣物二手转售率</p></div>
+            <div class="stat">68%</div>
+          </div>
+          <div class="impact-card">
+            <div class="sweep"></div>
+            <div class="icon">🧵</div>
+            <div class="info"><h3>Fiber Recovery</h3><p>不可穿着面料再生纤维回收率</p></div>
+            <div class="stat">92%</div>
+          </div>
+          <div class="impact-card">
+            <div class="sweep"></div>
+            <div class="icon">💚</div>
+            <div class="info"><h3>Reinvested</h3><p>回收收益重新投入美育基金</p></div>
+            <div class="stat">¥42K</div>
           </div>
         </div>
       </div>
     </div>
   </div>
+
   <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
   <script>
     (function () {
       const tl = gsap.timeline({ paused: true });
       window.__timelines = window.__timelines || {};
       window.__timelines["recycle"] = tl;
+
       gsap.set('.red-bar', { scaleX: 0, transformOrigin: 'left center' });
       gsap.set('.top > *', { y: -20, opacity: 0 });
-      gsap.set('.heading > *', { y: 20, opacity: 0 });
-      gsap.set('.form > *', { y: 20, opacity: 0 });
-      gsap.set('.flow .ring', { scale: 0, opacity: 0 });
-      gsap.set('.flow .node', { scale: 0 });
-      gsap.set('.flow .center', { scale: 0 });
-      gsap.set('.flow .arrow', { scaleX: 0, transformOrigin: 'left' });
-      tl.to('.red-bar', { scaleX: 1, duration: 0.5, ease: 'power3.inOut' }, 0);
-      tl.to('.top > *', { y: 0, opacity: 1, duration: 0.5, stagger: 0.06, ease: 'power2.out' }, 0.1);
-      tl.to('.heading > *', { y: 0, opacity: 1, duration: 0.5, stagger: 0.08, ease: 'power2.out' }, 0.4);
-      tl.to('.form > *', { y: 0, opacity: 1, duration: 0.4, stagger: 0.08, ease: 'power2.out' }, 0.7);
-      tl.to('.flow .ring', { scale: 1, opacity: 1, duration: 0.8, ease: 'expo.out' }, 1.0);
-      tl.to('.flow .node', { scale: 1, duration: 0.5, stagger: 0.1, ease: 'back.out(1.7)' }, 1.4);
-      tl.to('.flow .center', { scale: 1, duration: 0.5, ease: 'back.out(1.5)' }, 1.6);
-      tl.to('.flow .arrow', { scaleX: 1, duration: 0.4, stagger: 0.08, ease: 'power2.out' }, 1.8);
+      gsap.set('.left .kicker', { y: 20, opacity: 0 });
+      gsap.set('.left h1', { y: 30, opacity: 0 });
+      gsap.set('.left .body', { y: 20, opacity: 0 });
+      gsap.set('.loop-node', { scale: 0, opacity: 0 });
+      gsap.set('.loop-node .sweep', { x: '-100%' });
+      gsap.set('.loop-arrow', { opacity: 0 });
+      gsap.set('.impact-card', { x: 30, opacity: 0 });
+      gsap.set('.impact-card .sweep', { x: '-100%' });
+
+      // Entry
+      tl.to('.red-bar', { scaleX: 1, duration: 0.4, ease: 'power4.inOut' }, 0);
+      tl.to('.top > *', { y: 0, opacity: 1, duration: 0.5, stagger: 0.06, ease: 'power3.out' }, 0.1);
+
+      // Left content
+      tl.to('.left .kicker', { y: 0, opacity: 1, duration: 0.5, ease: 'power3.out' }, 0.3);
+      tl.to('.left h1', { y: 0, opacity: 1, duration: 0.6, ease: 'expo.out' }, 0.5);
+      tl.to('.left .body', { y: 0, opacity: 1, duration: 0.5, ease: 'power3.out' }, 0.8);
+
+      // Loop diagram — staggered pop
+      tl.to('.loop-node', { scale: 1, opacity: 1, duration: 0.5, stagger: 0.1, ease: 'back.out(1.4)' }, 1.0);
+      tl.to('.loop-arrow', { opacity: 1, duration: 0.3, stagger: 0.08 }, 1.3);
+
+      // Loop node sweeps
+      tl.to('.loop-node .sweep', { x: '100%', duration: 0.6, stagger: 0.1, ease: 'power2.inOut' }, 1.8);
+
+      // Impact cards — staggered slide
+      tl.to('.impact-card', { x: 0, opacity: 1, duration: 0.5, stagger: 0.12, ease: 'power3.out' }, 1.5);
+
+      // Impact card sweeps
+      tl.to('.impact-card .sweep', { x: '100%', duration: 0.6, stagger: 0.1, ease: 'power2.inOut' }, 2.0);
+
       // Exit
-      tl.to('.flow .arrow, .flow .center, .flow .node', { scale: 0, opacity: 0, duration: 0.3, ease: 'back.in(1.5)' }, 5.2);
-      tl.to('.flow .ring', { scale: 0, opacity: 0, duration: 0.3, ease: 'power2.in' }, 5.3);
-      tl.to('.form > *', { y: 20, opacity: 0, duration: 0.3, ease: 'power2.in' }, 5.4);
-      tl.to('.heading > *', { y: -20, opacity: 0, duration: 0.3, ease: 'power2.in' }, 5.4);
-      tl.to('.top', { y: -20, opacity: 0, duration: 0.3, ease: 'power2.in' }, 5.5);
+      tl.to('.impact-card', { x: 20, opacity: 0, duration: 0.3, stagger: 0.05, ease: 'power3.in' }, 5.2);
+      tl.to('.loop-node, .loop-arrow', { opacity: 0, duration: 0.3, ease: 'power3.in' }, 5.3);
+      tl.to('.left .body', { y: -15, opacity: 0, duration: 0.3, ease: 'power3.in' }, 5.4);
+      tl.to('.left h1', { y: -20, opacity: 0, duration: 0.3, ease: 'power3.in' }, 5.5);
+      tl.to('.left .kicker', { y: -10, opacity: 0, duration: 0.3, ease: 'power3.in' }, 5.5);
+      tl.to('.top', { y: -20, opacity: 0, duration: 0.3, ease: 'power3.in' }, 5.5);
+      tl.to('.red-bar', { scaleX: 0, transformOrigin: 'right center', duration: 0.3 }, 5.5);
+
       window.addEventListener('load', () => tl.play());
     })();
   </script>

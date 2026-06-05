@@ -19,54 +19,46 @@
   .top .rule { flex: 1; height: 1px; background: #1A1A16; }
   .top .meta { font-family: 'JetBrains Mono', monospace; font-size: 13px; font-weight: 500; letter-spacing: 0.18em; text-transform: uppercase; color: #888; }
 
-  .layout { position: absolute; left: 80px; right: 80px; top: 130px; bottom: 60px; display: grid; grid-template-columns: 1fr 380px; gap: 24px; }
+  .content { position: absolute; left: 80px; right: 80px; top: 140px; bottom: 80px; display: grid; grid-template-columns: 1.2fr 1fr; gap: 60px; }
 
-  /* Main: order details */
-  .main { background: #FFFFFF; border: 1px solid #DDD; padding: 32px; }
-  .main .head { display: flex; align-items: start; gap: 16px; padding-bottom: 24px; border-bottom: 1px solid #EEE; }
-  .main .head .left h1 { font-family: 'Smiley Sans', sans-serif; font-weight: 400; font-size: 36px; color: #1A1A16; }
-  .main .head .left .no { font-family: 'JetBrains Mono', monospace; font-size: 12px; letter-spacing: 0.15em; color: #888; margin-top: 4px; }
-  .main .head .right { margin-left: auto; text-align: right; }
-  .main .head .right .status { display: inline-flex; align-items: center; gap: 8px; padding: 8px 16px; background: #00D26A; color: #1A1A16; font-family: 'Inter', sans-serif; font-weight: 800; font-size: 13px; letter-spacing: 0.15em; text-transform: uppercase; }
-  .main .head .right .status .d { width: 8px; height: 8px; background: #1A1A16; border-radius: 50%; }
-  .main .head .right .est { font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: 0.15em; text-transform: uppercase; color: #888; margin-top: 8px; }
+  .left { display: flex; flex-direction: column; }
+  .left .kicker { font-family: 'JetBrains Mono', monospace; font-size: 12px; font-weight: 500; letter-spacing: 0.2em; text-transform: uppercase; color: #E60012; }
+  .left h1 { font-family: 'Smiley Sans', sans-serif; font-weight: 400; font-size: 48px; line-height: 1.0; letter-spacing: -2px; color: #1A1A16; margin-top: 12px; }
+  .left h1 em { font-style: normal; color: #E60012; }
 
-  /* Status timeline */
-  .status-tl { margin-top: 24px; padding: 20px 0; }
-  .status-tl .head { font-family: 'JetBrains Mono', monospace; font-size: 12px; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: #888; padding-bottom: 8px; }
-  .status-tl .steps { display: grid; grid-template-columns: repeat(5, 1fr); gap: 0; position: relative; }
-  .status-tl .steps::before { content: ''; position: absolute; top: 14px; left: 0; right: 0; height: 1px; background: #DDD; }
-  .status-tl .step { position: relative; text-align: center; }
-  .status-tl .step .dot { width: 28px; height: 28px; border-radius: 50%; background: #DDD; color: #FFFFFF; display: flex; align-items: center; justify-content: center; margin: 0 auto 8px; font-family: 'Inter', sans-serif; font-weight: 800; font-size: 12px; }
-  .status-tl .step.done .dot { background: #1A1A16; }
-  .status-tl .step.current .dot { background: #E60012; box-shadow: 0 0 0 6px rgba(230,0,18,0.2); }
-  .status-tl .step .nm { font-family: 'Inter', sans-serif; font-weight: 700; font-size: 12px; color: #1A1A16; }
-  .status-tl .step .date { font-family: 'JetBrains Mono', monospace; font-size: 10px; color: #888; margin-top: 2px; }
+  .order-info { margin-top: 24px; padding: 20px; background: #F5F5F5; }
+  .order-info .row { display: flex; justify-content: space-between; margin-bottom: 12px; }
+  .order-info .row:last-child { margin-bottom: 0; }
+  .order-info .row .label { font-family: 'JetBrains Mono', monospace; font-size: 11px; font-weight: 500; letter-spacing: 0.15em; text-transform: uppercase; color: #888; }
+  .order-info .row .value { font-family: 'Inter', sans-serif; font-weight: 700; font-size: 14px; }
+  .order-info .row .value.red { color: #E60012; }
 
-  /* Items */
-  .main .items { margin-top: 24px; }
-  .main .items .head { font-family: 'JetBrains Mono', monospace; font-size: 12px; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: #888; padding: 8px 0; }
-  .main .item { display: grid; grid-template-columns: 80px 1fr 100px 120px 80px; gap: 16px; align-items: center; padding: 16px 0; border-top: 1px solid #EEE; }
-  .main .item .img { width: 80px; height: 100px; background: #F5F5F5; overflow: hidden; }
-  .main .item .img img { width: 100%; height: 100%; object-fit: cover; }
-  .main .item .name { font-family: 'Noto Sans SC', sans-serif; font-weight: 700; font-size: 14px; }
-  .main .item .meta { font-family: 'JetBrains Mono', monospace; font-size: 11px; color: #888; margin-top: 4px; }
-  .main .item .badge { display: inline-block; margin-top: 4px; padding: 2px 6px; background: #E60012; color: #FFFFFF; font-family: 'JetBrains Mono', monospace; font-size: 9px; font-weight: 700; letter-spacing: 0.1em; }
-  .main .item .qty { font-family: 'Inter', sans-serif; font-weight: 700; font-size: 13px; }
-  .main .item .qty .lbl { font-family: 'JetBrains Mono', monospace; font-size: 10px; color: #888; margin-bottom: 4px; letter-spacing: 0.15em; text-transform: uppercase; }
-  .main .item .price { text-align: right; font-family: 'Smiley Sans', sans-serif; font-size: 22px; }
-  .main .item .price .lbl { font-family: 'JetBrains Mono', monospace; font-size: 10px; color: #888; margin-bottom: 4px; letter-spacing: 0.15em; text-transform: uppercase; }
+  .tracking { margin-top: 24px; }
+  .tracking h3 { font-family: 'Inter', sans-serif; font-weight: 800; font-size: 16px; margin-bottom: 16px; }
+  .tracking-steps { display: flex; flex-direction: column; gap: 0; }
+  .tracking-step { display: flex; gap: 16px; padding: 16px 0; position: relative; }
+  .tracking-step::before { content: ''; position: absolute; left: 16px; top: 40px; bottom: 0; width: 2px; background: #E0E0E0; }
+  .tracking-step:last-child::before { display: none; }
+  .tracking-step .dot { width: 34px; height: 34px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 16px; flex-shrink: 0; }
+  .tracking-step.done .dot { background: #E60012; color: #FFFFFF; }
+  .tracking-step.active .dot { background: #FFFFFF; border: 3px solid #E60012; color: #E60012; box-shadow: 0 0 0 6px rgba(230,0,18,0.1); }
+  .tracking-step .info .title { font-family: 'Inter', sans-serif; font-weight: 700; font-size: 14px; }
+  .tracking-step .info .time { font-family: 'JetBrains Mono', monospace; font-size: 11px; color: #888; margin-top: 4px; }
 
-  /* Side: address + summary */
-  .side { display: flex; flex-direction: column; gap: 16px; }
-  .side .card { background: #FFFFFF; border: 1px solid #DDD; padding: 24px; }
-  .side .card .lbl { font-family: 'JetBrains Mono', monospace; font-size: 11px; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: #888; margin-bottom: 12px; }
-  .side .card .val { font-family: 'Inter', sans-serif; font-weight: 600; font-size: 13px; line-height: 1.6; color: #1A1A16; }
-  .side .card .row { display: flex; justify-content: space-between; padding: 4px 0; font-family: 'Inter', sans-serif; font-size: 13px; }
-  .side .card .row strong { font-weight: 700; }
-  .side .card .row .red { color: #E60012; font-weight: 700; }
-  .side .card .total { font-family: 'Smiley Sans', sans-serif; font-size: 28px; padding: 12px 0; border-top: 1px solid #1A1A16; margin-top: 8px; }
-  .side .card .total .lbl { font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: 0.15em; text-transform: uppercase; color: #888; }
+  .right { display: flex; flex-direction: column; }
+  .right h3 { font-family: 'Inter', sans-serif; font-weight: 800; font-size: 16px; margin-bottom: 16px; }
+
+  .items { display: flex; flex-direction: column; gap: 16px; }
+  .item { display: flex; gap: 16px; padding: 16px; background: #F5F5F5; }
+  .item .img { width: 80px; height: 80px; background: #E0E0E0; }
+  .item .info { flex: 1; }
+  .item .info .name { font-family: 'Noto Sans SC', sans-serif; font-weight: 700; font-size: 14px; }
+  .item .info .price { font-family: 'Inter', sans-serif; font-weight: 800; font-size: 16px; margin-top: 4px; }
+  .item .info .qty { font-family: 'JetBrains Mono', monospace; font-size: 11px; color: #888; margin-top: 4px; }
+
+  .total { margin-top: 20px; padding: 16px; background: #1A1A16; color: #FFFFFF; display: flex; justify-content: space-between; align-items: center; }
+  .total .label { font-family: 'Inter', sans-serif; font-weight: 600; font-size: 14px; }
+  .total .value { font-family: 'Inter', sans-serif; font-weight: 900; font-size: 24px; color: #E60012; }
 </style>
 </head>
 <body>
@@ -76,101 +68,94 @@
       <div class="top">
         <div class="lbl">VICOO · <span class="red">ORDER</span></div>
         <div class="rule"></div>
-        <div class="meta">PP. 17 · /orders/:id</div>
+        <div class="meta">PP. 18 · /orders/VC-2026</div>
       </div>
-      <div class="layout">
-        <div class="main">
-          <div class="head">
-            <div class="left">
-              <h1>Order #VC-2026-0428-0192</h1>
-              <div class="no">PLACED 2026-04-28 14:32 · 3 ITEMS · ¥605.00</div>
-            </div>
-            <div class="right">
-              <div class="status"><span class="d"></span>SHIPPED</div>
-              <div class="est">EST. DELIVERY · 2026-05-01</div>
-            </div>
+
+      <div class="content">
+        <div class="left">
+          <div class="kicker">ORDER · VC-2026Q2-128456</div>
+          <h1>Order <em>confirmed</em>.</h1>
+
+          <div class="order-info">
+            <div class="row"><div class="label">ORDER ID</div><div class="value">VC-2026Q2-128456</div></div>
+            <div class="row"><div class="label">DATE</div><div class="value">2026-04-20</div></div>
+            <div class="row"><div class="label">STATUS</div><div class="value red">SHIPPED</div></div>
+            <div class="row"><div class="label">EST. DELIVERY</div><div class="value">2026-04-26</div></div>
           </div>
-          <div class="status-tl">
-            <div class="head">SHIPMENT STATUS</div>
-            <div class="steps">
-              <div class="step done"><div class="dot">✓</div><div class="nm">Placed</div><div class="date">04-28</div></div>
-              <div class="step done"><div class="dot">✓</div><div class="nm">Paid</div><div class="date">04-28</div></div>
-              <div class="step done"><div class="dot">✓</div><div class="nm">Packed</div><div class="date">04-29</div></div>
-              <div class="step current"><div class="dot">4</div><div class="nm">Shipped</div><div class="date">04-30</div></div>
-              <div class="step"><div class="dot">5</div><div class="nm">Delivered</div><div class="date">--</div></div>
-            </div>
-          </div>
-          <div class="items">
-            <div class="head">3 ITEMS</div>
-            <div class="item">
-              <div class="img"><img src="https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?auto=format&fit=crop&w=200&q=80"/></div>
-              <div class="name">春野·儿童画联名有机棉T恤<div class="meta">SIZE 110 · WHITE · 28% DONATE</div></div>
-              <div class="qty"><div class="lbl">QTY</div>1</div>
-              <div class="price"><div class="lbl">PRICE</div>¥178</div>
-              <div class="price"><div class="lbl">TOTAL</div>¥178</div>
-            </div>
-            <div class="item">
-              <div class="img"><img src="https://images.unsplash.com/photo-1597484662317-9bd7bdda2907?auto=format&fit=crop&w=200&q=80"/></div>
-              <div class="name">云岭·公益插画帆布托特<div class="meta">ONE SIZE · NATURAL · 25% DONATE</div></div>
-              <div class="qty"><div class="lbl">QTY</div>1</div>
-              <div class="price"><div class="lbl">PRICE</div>¥98</div>
-              <div class="price"><div class="lbl">TOTAL</div>¥98</div>
-            </div>
-            <div class="item">
-              <div class="img"><img src="https://images.unsplash.com/photo-1434389677669-e08b4cac3105?auto=format&fit=crop&w=200&q=80"/></div>
-              <div class="name">再生羊毛混纺V领针织衫<div class="meta">SIZE M · TAUPE</div></div>
-              <div class="qty"><div class="lbl">QTY</div>1</div>
-              <div class="price"><div class="lbl">PRICE</div>¥329</div>
-              <div class="price"><div class="lbl">TOTAL</div>¥329</div>
+
+          <div class="tracking">
+            <h3>Shipment Tracking</h3>
+            <div class="tracking-steps">
+              <div class="tracking-step done"><div class="dot">✓</div><div class="info"><div class="title">Order Confirmed</div><div class="time">2026-04-20 14:32</div></div></div>
+              <div class="tracking-step done"><div class="dot">✓</div><div class="info"><div class="title">Production Complete</div><div class="time">2026-04-23 09:15</div></div></div>
+              <div class="tracking-step done"><div class="dot">✓</div><div class="info"><div class="title">Shipped</div><div class="time">2026-04-24 16:48</div></div></div>
+              <div class="tracking-step active"><div class="dot">📦</div><div class="info"><div class="title">In Transit</div><div class="time">2026-04-25 08:20</div></div></div>
+              <div class="tracking-step"><div class="dot">🏠</div><div class="info"><div class="title">Delivered</div><div class="time">Est. 2026-04-26</div></div></div>
             </div>
           </div>
         </div>
-        <div class="side">
-          <div class="card">
-            <div class="lbl">SHIP TO</div>
-            <div class="val">朱莉华 · 13800138000<br>上海市黄浦区南京东路 100 号<br>200002 · 中国</div>
+
+        <div class="right">
+          <h3>Order Items</h3>
+          <div class="items">
+            <div class="item"><div class="img"></div><div class="info"><div class="name">春野·儿童画联名T恤</div><div class="price">¥178</div><div class="qty">Qty: 1</div></div></div>
+            <div class="item"><div class="img"></div><div class="info"><div class="name">再生羊毛V领针织衫</div><div class="price">¥329</div><div class="qty">Qty: 1</div></div></div>
+            <div class="item"><div class="img"></div><div class="info"><div class="name">轻量保暖外套</div><div class="price">¥499</div><div class="qty">Qty: 1</div></div></div>
           </div>
-          <div class="card">
-            <div class="lbl">TRACKING</div>
-            <div class="val">顺丰速运<br>SF-20260428-1942-CN<br><span style="color:#E60012">● IN TRANSIT · 浦东分拣中心</span></div>
-          </div>
-          <div class="card">
-            <div class="lbl">SUMMARY</div>
-            <div class="row"><span>Subtotal</span><span>¥605</span></div>
-            <div class="row"><span>Shipping</span><span>FREE</span></div>
-            <div class="row"><span>To fund</span><span class="red">+¥77</span></div>
-            <div class="total"><div class="lbl">TOTAL</div>¥605</div>
-          </div>
+          <div class="total"><div class="label">TOTAL</div><div class="value">¥1,006</div></div>
         </div>
       </div>
     </div>
   </div>
+
   <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
   <script>
     (function () {
       const tl = gsap.timeline({ paused: true });
       window.__timelines = window.__timelines || {};
       window.__timelines["order"] = tl;
+
       gsap.set('.red-bar', { scaleX: 0, transformOrigin: 'left center' });
       gsap.set('.top > *', { y: -20, opacity: 0 });
-      gsap.set('.main .head > *', { y: 20, opacity: 0 });
-      gsap.set('.main .head .right .status', { scale: 0 });
-      gsap.set('.status-tl .step .dot', { scale: 0 });
-      gsap.set('.main .item', { x: -20, opacity: 0 });
-      gsap.set('.side .card', { x: 20, opacity: 0 });
-      tl.to('.red-bar', { scaleX: 1, duration: 0.5, ease: 'power3.inOut' }, 0);
-      tl.to('.top > *', { y: 0, opacity: 1, duration: 0.5, stagger: 0.06, ease: 'power2.out' }, 0.1);
-      tl.to('.main .head > *', { y: 0, opacity: 1, duration: 0.5, stagger: 0.08, ease: 'power2.out' }, 0.4);
-      tl.to('.main .head .right .status', { scale: 1, duration: 0.5, ease: 'back.out(1.7)' }, 0.8);
-      tl.to('.status-tl .step .dot', { scale: 1, duration: 0.4, stagger: 0.1, ease: 'back.out(1.5)' }, 1.0);
-      tl.to('.main .item', { x: 0, opacity: 1, duration: 0.4, stagger: 0.1, ease: 'power2.out' }, 1.4);
-      tl.to('.side .card', { x: 0, opacity: 1, duration: 0.5, stagger: 0.1, ease: 'power2.out' }, 1.7);
+      gsap.set('.left .kicker', { y: 20, opacity: 0 });
+      gsap.set('.left h1', { y: 30, opacity: 0 });
+      gsap.set('.order-info', { y: 20, opacity: 0 });
+      gsap.set('.tracking h3', { y: 15, opacity: 0 });
+      gsap.set('.tracking-step', { x: -20, opacity: 0 });
+      gsap.set('.right h3', { y: 15, opacity: 0 });
+      gsap.set('.item', { x: 20, opacity: 0 });
+      gsap.set('.total', { y: 20, opacity: 0 });
+
+      // Entry
+      tl.to('.red-bar', { scaleX: 1, duration: 0.4, ease: 'power4.inOut' }, 0);
+      tl.to('.top > *', { y: 0, opacity: 1, duration: 0.5, stagger: 0.06, ease: 'power3.out' }, 0.1);
+
+      // Left content
+      tl.to('.left .kicker', { y: 0, opacity: 1, duration: 0.5, ease: 'power3.out' }, 0.3);
+      tl.to('.left h1', { y: 0, opacity: 1, duration: 0.6, ease: 'expo.out' }, 0.5);
+      tl.to('.order-info', { y: 0, opacity: 1, duration: 0.5, ease: 'power3.out' }, 0.8);
+
+      // Tracking
+      tl.to('.tracking h3', { y: 0, opacity: 1, duration: 0.4, ease: 'power3.out' }, 1.0);
+      tl.to('.tracking-step', { x: 0, opacity: 1, duration: 0.5, stagger: 0.12, ease: 'power3.out' }, 1.2);
+
+      // Right content
+      tl.to('.right h3', { y: 0, opacity: 1, duration: 0.4, ease: 'power3.out' }, 1.5);
+      tl.to('.item', { x: 0, opacity: 1, duration: 0.4, stagger: 0.1, ease: 'power3.out' }, 1.7);
+      tl.to('.total', { y: 0, opacity: 1, duration: 0.4, ease: 'power3.out' }, 2.2);
+
       // Exit
-      tl.to('.side .card', { x: 20, opacity: 0, duration: 0.3, ease: 'power2.in' }, 5.2);
-      tl.to('.main .item', { x: -20, opacity: 0, duration: 0.3, ease: 'power2.in' }, 5.3);
-      tl.to('.status-tl .step .dot', { scale: 0, duration: 0.3, ease: 'back.in(1.5)' }, 5.4);
-      tl.to('.main .head > *', { y: 20, opacity: 0, duration: 0.3, ease: 'power2.in' }, 5.4);
-      tl.to('.top', { y: -20, opacity: 0, duration: 0.3, ease: 'power2.in' }, 5.5);
+      tl.to('.total', { y: -15, opacity: 0, duration: 0.3, ease: 'power3.in' }, 5.2);
+      tl.to('.item', { x: 15, opacity: 0, duration: 0.3, stagger: 0.05, ease: 'power3.in' }, 5.3);
+      tl.to('.right h3', { y: -10, opacity: 0, duration: 0.3, ease: 'power3.in' }, 5.4);
+      tl.to('.tracking-step', { x: -15, opacity: 0, duration: 0.3, stagger: 0.05, ease: 'power3.in' }, 5.3);
+      tl.to('.tracking h3', { y: -10, opacity: 0, duration: 0.3, ease: 'power3.in' }, 5.4);
+      tl.to('.order-info', { y: -15, opacity: 0, duration: 0.3, ease: 'power3.in' }, 5.4);
+      tl.to('.left h1', { y: -20, opacity: 0, duration: 0.3, ease: 'power3.in' }, 5.5);
+      tl.to('.left .kicker', { y: -10, opacity: 0, duration: 0.3, ease: 'power3.in' }, 5.5);
+      tl.to('.top', { y: -20, opacity: 0, duration: 0.3, ease: 'power3.in' }, 5.5);
+      tl.to('.red-bar', { scaleX: 0, transformOrigin: 'right center', duration: 0.3 }, 5.5);
+
       window.addEventListener('load', () => tl.play());
     })();
   </script>

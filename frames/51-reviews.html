@@ -1,0 +1,141 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<title>VICOO — Reviews</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Noto+Sans+SC:wght@300;400;500;700;900&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  @font-face { font-family: 'Smiley Sans'; src: url('SmileySans-Oblique.woff2') format('woff2'); font-weight: 400; font-style: normal; font-display: block; }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html, body { width: 2560px; height: 1440px; overflow: hidden; background: #FFFFFF; color: #1A1A16; font-family: 'Inter', -apple-system, sans-serif; -webkit-font-smoothing: antialiased; }
+  .stage { position: absolute; top: 0; left: 0; width: 1920px; height: 1080px; transform: scale(1.3333333); transform-origin: top left; }
+  .page { position: absolute; inset: 0; }
+  .red-bar { position: absolute; top: 0; left: 0; right: 0; height: 8px; background: #E60012; }
+  .top { position: absolute; top: 60px; left: 80px; right: 80px; display: flex; align-items: center; gap: 24px; }
+  .top .lbl { font-family: 'JetBrains Mono', monospace; font-size: 13px; font-weight: 500; letter-spacing: 0.2em; text-transform: uppercase; }
+  .top .lbl .red { color: #E60012; }
+  .top .rule { flex: 1; height: 1px; background: #1A1A16; }
+  .top .meta { font-family: 'JetBrains Mono', monospace; font-size: 13px; font-weight: 500; letter-spacing: 0.18em; text-transform: uppercase; color: #888; }
+
+  .content { position: absolute; left: 80px; right: 80px; top: 140px; bottom: 80px; display: grid; grid-template-columns: 1.2fr 1fr; gap: 60px; }
+
+  .left { display: flex; flex-direction: column; }
+  .left .kicker { font-family: 'JetBrains Mono', monospace; font-size: 12px; font-weight: 500; letter-spacing: 0.2em; text-transform: uppercase; color: #E60012; }
+  .left h1 { font-family: 'Smiley Sans', sans-serif; font-weight: 400; font-size: 52px; line-height: 1.0; letter-spacing: -2px; color: #1A1A16; margin-top: 12px; }
+  .left h1 em { font-style: normal; color: #E60012; }
+
+  .rating-summary { margin-top: 32px; padding: 24px; background: #F5F5F5; display: flex; align-items: center; gap: 32px; }
+  .rating-summary .score { font-family: 'Inter', sans-serif; font-weight: 900; font-size: 64px; color: #1A1A16; }
+  .rating-summary .stars { font-size: 24px; color: #FFD700; }
+  .rating-summary .count { font-family: 'JetBrains Mono', monospace; font-size: 14px; color: #888; margin-top: 8px; }
+
+  .reviews { display: flex; flex-direction: column; gap: 16px; margin-top: 24px; }
+  .review { padding: 20px; background: #F5F5F5; }
+  .review .header { display: flex; align-items: center; gap: 12px; margin-bottom: 8px; }
+  .review .header .avatar { width: 36px; height: 36px; background: #E60012; color: #FFFFFF; display: flex; align-items: center; justify-content: center; font-family: 'Smiley Sans', sans-serif; font-size: 16px; }
+  .review .header .info .name { font-family: 'Inter', sans-serif; font-weight: 700; font-size: 14px; }
+  .review .header .info .date { font-family: 'JetBrains Mono', monospace; font-size: 11px; color: #888; }
+  .review .header .stars { margin-left: auto; color: #FFD700; font-size: 14px; }
+  .review .text { font-family: 'Noto Sans SC', sans-serif; font-size: 15px; line-height: 1.6; color: #555; }
+
+  .right { display: flex; flex-direction: column; gap: 16px; }
+  .rating-bar { display: flex; align-items: center; gap: 12px; }
+  .rating-bar .label { font-family: 'JetBrains Mono', monospace; font-size: 12px; color: #888; min-width: 40px; }
+  .rating-bar .bar { flex: 1; height: 8px; background: #F0F0F0; }
+  .rating-bar .fill { height: 100%; background: #FFD700; }
+  .rating-bar .count { font-family: 'JetBrains Mono', monospace; font-size: 12px; color: #888; min-width: 40px; text-align: right; }
+</style>
+</head>
+<body>
+  <div class="stage">
+    <div class="page" data-composition-id="reviews" data-start="0" data-duration="5" data-width="1920" data-height="1080">
+      <div class="red-bar"></div>
+      <div class="top">
+        <div class="lbl">VICOO · <span class="red">REVIEWS</span></div>
+        <div class="rule"></div>
+        <div class="meta">PP. 13 · /reviews</div>
+      </div>
+
+      <div class="content">
+        <div class="left">
+          <div class="kicker">CHAPTER 07 · REVIEWS</div>
+          <h1>Real <em>reviews</em> from real buyers.</h1>
+
+          <div class="rating-summary">
+            <div class="score">4.8</div>
+            <div>
+              <div class="stars">★★★★★</div>
+              <div class="count">Based on 1,284 reviews</div>
+            </div>
+          </div>
+
+          <div class="reviews">
+            <div class="review">
+              <div class="header">
+                <div class="avatar">莉</div>
+                <div class="info"><div class="name">朱莉华</div><div class="date">2026-04-15</div></div>
+                <div class="stars">★★★★★</div>
+              </div>
+              <div class="text">面料非常柔软，能通过溯源看到每一步生产过程，给孩子买很放心。最重要的是知道 28% 直接捐给了乡村学校。</div>
+            </div>
+            <div class="review">
+              <div class="header">
+                <div class="avatar">王</div>
+                <div class="info"><div class="name">王建国</div><div class="date">2026-04-10</div></div>
+                <div class="stars">★★★★★</div>
+              </div>
+              <div class="text">给女儿买的联名款，她看到衣服上的画是同龄小朋友画的，特别开心。质量也很好，洗了几次都没变形。</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="right">
+          <div class="rating-bar"><div class="label">5 ★</div><div class="bar"><div class="fill" style="width: 78%;"></div></div><div class="count">986</div></div>
+          <div class="rating-bar"><div class="label">4 ★</div><div class="bar"><div class="fill" style="width: 15%;"></div></div><div class="count">192</div></div>
+          <div class="rating-bar"><div class="label">3 ★</div><div class="bar"><div class="fill" style="width: 5%;"></div></div><div class="count">64</div></div>
+          <div class="rating-bar"><div class="label">2 ★</div><div class="bar"><div class="fill" style="width: 1%;"></div></div><div class="count">12</div></div>
+          <div class="rating-bar"><div class="label">1 ★</div><div class="bar"><div class="fill" style="width: 1%;"></div></div><div class="count">8</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
+  <script>
+    (function () {
+      const tl = gsap.timeline({ paused: true });
+      window.__timelines = window.__timelines || {};
+      window.__timelines["reviews"] = tl;
+
+      gsap.set('.red-bar', { scaleX: 0, transformOrigin: 'left center' });
+      gsap.set('.top > *', { y: -20, opacity: 0 });
+      gsap.set('.left .kicker', { y: 20, opacity: 0 });
+      gsap.set('.left h1', { y: 30, opacity: 0 });
+      gsap.set('.rating-summary', { y: 20, opacity: 0 });
+      gsap.set('.review', { x: -20, opacity: 0 });
+      gsap.set('.rating-bar', { x: 20, opacity: 0 });
+
+      tl.to('.red-bar', { scaleX: 1, duration: 0.5, ease: 'power3.inOut' }, 0);
+      tl.to('.top > *', { y: 0, opacity: 1, duration: 0.5, stagger: 0.06, ease: 'power2.out' }, 0.1);
+      tl.to('.left .kicker', { y: 0, opacity: 1, duration: 0.5, ease: 'power2.out' }, 0.3);
+      tl.to('.left h1', { y: 0, opacity: 1, duration: 0.6, ease: 'expo.out' }, 0.5);
+      tl.to('.rating-summary', { y: 0, opacity: 1, duration: 0.5, ease: 'power2.out' }, 0.8);
+      tl.to('.review', { x: 0, opacity: 1, duration: 0.5, stagger: 0.15, ease: 'power2.out' }, 1.0);
+      tl.to('.rating-bar', { x: 0, opacity: 1, duration: 0.4, stagger: 0.08, ease: 'power2.out' }, 1.5);
+
+      // Exit
+      tl.to('.rating-bar', { x: 15, opacity: 0, duration: 0.3, stagger: 0.03, ease: 'power2.in' }, 4.2);
+      tl.to('.review', { x: -15, opacity: 0, duration: 0.3, stagger: 0.05, ease: 'power2.in' }, 4.3);
+      tl.to('.rating-summary', { y: -15, opacity: 0, duration: 0.3, ease: 'power2.in' }, 4.4);
+      tl.to('.left h1', { y: -20, opacity: 0, duration: 0.3, ease: 'power2.in' }, 4.5);
+      tl.to('.left .kicker', { y: -10, opacity: 0, duration: 0.3, ease: 'power2.in' }, 4.5);
+      tl.to('.top', { y: -20, opacity: 0, duration: 0.3, ease: 'power2.in' }, 4.5);
+      tl.to('.red-bar', { scaleX: 0, transformOrigin: 'right center', duration: 0.3 }, 4.5);
+
+      window.addEventListener('load', () => tl.play());
+    })();
+  </script>
+</body>
+</html>

@@ -1,0 +1,150 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<title>VICOO — Web Platform</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Noto+Sans+SC:wght@300;400;500;700;900&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  @font-face { font-family: 'Smiley Sans'; src: url('SmileySans-Oblique.woff2') format('woff2'); font-weight: 400; font-style: normal; font-display: block; }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html, body { width: 2560px; height: 1440px; overflow: hidden; background: #FFFFFF; color: #1A1A16; font-family: 'Inter', -apple-system, sans-serif; -webkit-font-smoothing: antialiased; }
+  .stage { position: absolute; top: 0; left: 0; width: 1920px; height: 1080px; transform: scale(1.3333333); transform-origin: top left; }
+  .page { position: absolute; inset: 0; }
+  .red-bar { position: absolute; top: 0; left: 0; right: 0; height: 8px; background: #E60012; }
+  .top { position: absolute; top: 60px; left: 80px; right: 80px; display: flex; align-items: center; gap: 24px; }
+  .top .lbl { font-family: 'JetBrains Mono', monospace; font-size: 13px; font-weight: 500; letter-spacing: 0.2em; text-transform: uppercase; }
+  .top .lbl .red { color: #E60012; }
+  .top .rule { flex: 1; height: 1px; background: #1A1A16; }
+  .top .meta { font-family: 'JetBrains Mono', monospace; font-size: 13px; font-weight: 500; letter-spacing: 0.18em; text-transform: uppercase; color: #888; }
+
+  .content { position: absolute; left: 80px; right: 80px; top: 140px; bottom: 80px; display: grid; grid-template-columns: 1fr 1.2fr; gap: 60px; }
+
+  .left { display: flex; flex-direction: column; justify-content: center; }
+  .left .kicker { font-family: 'JetBrains Mono', monospace; font-size: 12px; font-weight: 500; letter-spacing: 0.2em; text-transform: uppercase; color: #E60012; }
+  .left h1 { font-family: 'Smiley Sans', sans-serif; font-weight: 400; font-size: 52px; line-height: 1.0; letter-spacing: -2px; color: #1A1A16; margin-top: 12px; }
+  .left h1 em { font-style: normal; color: #E60012; }
+  .left .body { font-family: 'Noto Sans SC', sans-serif; font-size: 18px; color: #555; margin-top: 24px; line-height: 1.7; max-width: 480px; }
+
+  .features { display: flex; flex-direction: column; gap: 16px; margin-top: 32px; }
+  .feature { display: flex; gap: 16px; padding: 16px; background: #F5F5F5; }
+  .feature .icon { font-size: 28px; }
+  .feature .info h3 { font-family: 'Inter', sans-serif; font-weight: 700; font-size: 15px; }
+  .feature .info p { font-family: 'Noto Sans SC', sans-serif; font-size: 13px; color: #888; margin-top: 4px; }
+
+  .right { display: flex; align-items: center; justify-content: center; }
+  .browser { width: 100%; background: #F5F5F5; border-radius: 12px; overflow: hidden; box-shadow: 0 20px 60px rgba(0,0,0,0.1); }
+  .browser .toolbar { height: 40px; background: #E0E0E0; display: flex; align-items: center; padding: 0 16px; gap: 8px; }
+  .browser .toolbar .dot { width: 12px; height: 12px; border-radius: 50%; }
+  .browser .toolbar .dot.r { background: #FF5F57; }
+  .browser .toolbar .dot.y { background: #FFBD2E; }
+  .browser .toolbar .dot.g { background: #28CA42; }
+  .browser .toolbar .url { flex: 1; margin-left: 16px; padding: 6px 12px; background: #FFFFFF; border-radius: 6px; font-family: 'JetBrains Mono', monospace; font-size: 11px; color: #888; }
+  .browser .screen { height: 400px; background: #FFFFFF; padding: 20px; display: flex; flex-direction: column; gap: 16px; }
+  .browser .screen .header { height: 48px; background: #1A1A16; display: flex; align-items: center; padding: 0 20px; }
+  .browser .screen .header .logo { font-family: 'Smiley Sans', sans-serif; font-size: 20px; color: #FFFFFF; }
+  .browser .screen .header .nav { display: flex; gap: 24px; margin-left: 40px; }
+  .browser .screen .header .nav a { font-family: 'Inter', sans-serif; font-size: 13px; color: rgba(255,255,255,0.7); text-decoration: none; }
+  .browser .screen .hero { height: 120px; background: #F5F0E8; display: flex; align-items: center; justify-content: center; }
+  .browser .screen .hero h2 { font-family: 'Smiley Sans', sans-serif; font-size: 28px; color: #1A1A16; }
+  .browser .screen .grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; flex: 1; }
+  .browser .screen .grid .card { background: #F5F5F5; padding: 12px; }
+  .browser .screen .grid .card .img { height: 60px; background: #E0E0E0; margin-bottom: 8px; }
+  .browser .screen .grid .card .name { font-family: 'Noto Sans SC', sans-serif; font-size: 12px; font-weight: 700; }
+  .browser .screen .grid .card .price { font-family: 'Inter', sans-serif; font-weight: 800; font-size: 14px; color: #E60012; margin-top: 4px; }
+</style>
+</head>
+<body>
+  <div class="stage">
+    <div class="page" data-composition-id="web_platform" data-start="0" data-duration="5" data-width="1920" data-height="1080">
+      <div class="red-bar"></div>
+      <div class="top">
+        <div class="lbl">VICOO · <span class="red">WEB</span></div>
+        <div class="rule"></div>
+        <div class="meta">PP. 07 · PLATFORM</div>
+      </div>
+
+      <div class="content">
+        <div class="left">
+          <div class="kicker">PLATFORM · WEB</div>
+          <h1>A magazine-quality <em>shopping</em> experience.</h1>
+          <div class="body">React 18 + TypeScript + Tailwind CSS，1990s 编辑杂志美学。响应式设计，从桌面到移动端完美适配。</div>
+
+          <div class="features">
+            <div class="feature"><div class="icon">📰</div><div class="info"><h3>Editorial Design</h3><p>1990s 杂志美学，沉浸式浏览体验</p></div></div>
+            <div class="feature"><div class="icon">🌍</div><div class="info"><h3>3D Globe</h3><p>Three.js 供应链溯源地球，交互式探索</p></div></div>
+            <div class="feature"><div class="icon">🤖</div><div class="info"><h3>AI Assistant</h3><p>智能问答，实时查询商品与活动数据</p></div></div>
+          </div>
+        </div>
+
+        <div class="right">
+          <div class="browser">
+            <div class="toolbar">
+              <div class="dot r"></div>
+              <div class="dot y"></div>
+              <div class="dot g"></div>
+              <div class="url">vicoo.org/shop</div>
+            </div>
+            <div class="screen">
+              <div class="header">
+                <div class="logo">VICOO</div>
+                <div class="nav">
+                  <a>Home</a>
+                  <a>Shop</a>
+                  <a>Impact</a>
+                  <a>Campaigns</a>
+                  <a>AI</a>
+                </div>
+              </div>
+              <div class="hero"><h2>Sustainable Fashion for Children's Art</h2></div>
+              <div class="grid">
+                <div class="card"><div class="img"></div><div class="name">有机棉T恤</div><div class="price">¥159</div></div>
+                <div class="card"><div class="img"></div><div class="name">针织衫</div><div class="price">¥329</div></div>
+                <div class="card"><div class="img"></div><div class="name">外套</div><div class="price">¥499</div></div>
+                <div class="card"><div class="img"></div><div class="name">慢跑裤</div><div class="price">¥199</div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
+  <script>
+    (function () {
+      const tl = gsap.timeline({ paused: true });
+      window.__timelines = window.__timelines || {};
+      window.__timelines["web_platform"] = tl;
+
+      gsap.set('.red-bar', { scaleX: 0, transformOrigin: 'left center' });
+      gsap.set('.top > *', { y: -20, opacity: 0 });
+      gsap.set('.left .kicker', { y: 20, opacity: 0 });
+      gsap.set('.left h1', { y: 30, opacity: 0 });
+      gsap.set('.left .body', { y: 20, opacity: 0 });
+      gsap.set('.feature', { x: -20, opacity: 0 });
+      gsap.set('.browser', { y: 40, opacity: 0, scale: 0.95 });
+
+      tl.to('.red-bar', { scaleX: 1, duration: 0.5, ease: 'power3.inOut' }, 0);
+      tl.to('.top > *', { y: 0, opacity: 1, duration: 0.5, stagger: 0.06, ease: 'power2.out' }, 0.1);
+      tl.to('.left .kicker', { y: 0, opacity: 1, duration: 0.5, ease: 'power2.out' }, 0.3);
+      tl.to('.left h1', { y: 0, opacity: 1, duration: 0.6, ease: 'expo.out' }, 0.5);
+      tl.to('.left .body', { y: 0, opacity: 1, duration: 0.5, ease: 'power2.out' }, 0.8);
+      tl.to('.feature', { x: 0, opacity: 1, duration: 0.4, stagger: 0.1, ease: 'power2.out' }, 1.0);
+      tl.to('.browser', { y: 0, opacity: 1, scale: 1, duration: 0.8, ease: 'power3.out' }, 0.6);
+
+      // Exit
+      tl.to('.browser', { y: -30, opacity: 0, duration: 0.4, ease: 'power2.in' }, 4.2);
+      tl.to('.feature', { x: -15, opacity: 0, duration: 0.3, stagger: 0.05, ease: 'power2.in' }, 4.3);
+      tl.to('.left .body', { y: -15, opacity: 0, duration: 0.3, ease: 'power2.in' }, 4.4);
+      tl.to('.left h1', { y: -20, opacity: 0, duration: 0.3, ease: 'power2.in' }, 4.5);
+      tl.to('.left .kicker', { y: -10, opacity: 0, duration: 0.3, ease: 'power2.in' }, 4.5);
+      tl.to('.top', { y: -20, opacity: 0, duration: 0.3, ease: 'power2.in' }, 4.5);
+      tl.to('.red-bar', { scaleX: 0, transformOrigin: 'right center', duration: 0.3 }, 4.5);
+
+      window.addEventListener('load', () => tl.play());
+    })();
+  </script>
+</body>
+</html>

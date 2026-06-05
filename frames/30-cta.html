@@ -29,14 +29,21 @@
   .headline .small { font-size: 72px; letter-spacing: -2px; }
 
   .actions { display: flex; gap: 24px; margin-top: 48px; }
-  .action { display: flex; flex-direction: column; align-items: center; gap: 16px; padding: 32px 48px; border: 2px solid rgba(255,255,255,0.2); background: rgba(255,255,255,0.03); }
+  .action { display: flex; flex-direction: column; align-items: center; gap: 16px; padding: 32px 48px; border: 2px solid rgba(255,255,255,0.2); background: rgba(255,255,255,0.03); position: relative; overflow: hidden; cursor: pointer; }
+  .action::before { content: ''; position: absolute; inset: 0; background: linear-gradient(135deg, rgba(230,0,18,0.1) 0%, transparent 50%); opacity: 0; }
   .action .icon { font-size: 48px; }
   .action .title { font-family: 'Inter', sans-serif; font-weight: 800; font-size: 18px; letter-spacing: 0.1em; text-transform: uppercase; }
   .action .desc { font-family: 'Noto Sans SC', sans-serif; font-size: 14px; color: rgba(255,255,255,0.6); text-align: center; max-width: 200px; }
   .action.primary { border-color: #E60012; background: rgba(230, 0, 18, 0.1); }
+  .action .sweep { position: absolute; inset: 0; background: linear-gradient(90deg, transparent, rgba(230,0,18,0.2), transparent); transform: translateX(-100%); }
 
   .url { position: absolute; bottom: 60px; left: 0; right: 0; text-align: center; font-family: 'JetBrains Mono', monospace; font-size: 16px; font-weight: 500; letter-spacing: 0.25em; text-transform: uppercase; color: rgba(255,255,255,0.5); }
   .url .red { color: #E60012; font-weight: 700; }
+
+  /* Decorative circles */
+  .deco-circle { position: absolute; border-radius: 50%; border: 1px solid rgba(230,0,18,0.2); }
+  .deco-circle.c1 { width: 300px; height: 300px; top: -100px; left: -100px; }
+  .deco-circle.c2 { width: 200px; height: 200px; bottom: -50px; right: -50px; }
 </style>
 </head>
 <body>
@@ -44,6 +51,9 @@
     <div class="page" data-composition-id="cta" data-start="0" data-duration="6" data-width="1920" data-height="1080">
       <div class="red-bar"></div>
       <div class="grid"></div>
+
+      <div class="deco-circle c1"></div>
+      <div class="deco-circle c2"></div>
 
       <div class="corner tl">VICOO · JOIN US</div>
       <div class="corner tr">SS26</div>
@@ -60,21 +70,25 @@
 
         <div class="actions">
           <div class="action primary">
+            <div class="sweep"></div>
             <div class="icon">🛍️</div>
             <div class="title">Shop</div>
             <div class="desc">浏览公益联名款，28% 直接捐赠</div>
           </div>
           <div class="action">
+            <div class="sweep"></div>
             <div class="icon">🎨</div>
             <div class="title">Submit</div>
             <div class="desc">投稿孩子的画作，参与下一期活动</div>
           </div>
           <div class="action">
+            <div class="sweep"></div>
             <div class="icon">💝</div>
             <div class="title">Donate</div>
             <div class="desc">直接捐赠，支持乡村美育基金</div>
           </div>
           <div class="action">
+            <div class="sweep"></div>
             <div class="icon">♻️</div>
             <div class="title">Recycle</div>
             <div class="desc">旧衣回收，让衣物循环再生</div>
@@ -98,14 +112,35 @@
       gsap.set('.eyebrow', { y: -20, opacity: 0 });
       gsap.set('.headline', { y: 50, opacity: 0, scale: 0.95 });
       gsap.set('.action', { y: 40, opacity: 0, scale: 0.9 });
+      gsap.set('.action .sweep', { x: '-100%' });
+      gsap.set('.action::before', { opacity: 0 });
       gsap.set('.url', { y: 20, opacity: 0 });
+      gsap.set('.deco-circle', { scale: 0, opacity: 0 });
 
-      tl.to('.red-bar', { scaleX: 1, duration: 0.5, ease: 'power3.inOut' }, 0);
-      tl.to('.corner', { y: 0, opacity: 1, duration: 0.5, stagger: 0.06, ease: 'power2.out' }, 0.1);
-      tl.to('.eyebrow', { y: 0, opacity: 1, duration: 0.5, ease: 'power2.out' }, 0.3);
+      // Entry
+      tl.to('.red-bar', { scaleX: 1, duration: 0.4, ease: 'power4.inOut' }, 0);
+
+      // Decorative circles
+      tl.to('.deco-circle', { scale: 1, opacity: 1, duration: 1.0, stagger: 0.15, ease: 'back.out(1.2)' }, 0.1);
+
+      // Corner text
+      tl.to('.corner', { y: 0, opacity: 1, duration: 0.5, stagger: 0.06, ease: 'power3.out' }, 0.2);
+
+      // Text reveals
+      tl.to('.eyebrow', { y: 0, opacity: 1, duration: 0.5, ease: 'power3.out' }, 0.3);
       tl.to('.headline', { y: 0, opacity: 1, scale: 1, duration: 0.8, ease: 'expo.out' }, 0.5);
+
+      // Action cards — staggered pop with scale
       tl.to('.action', { y: 0, opacity: 1, scale: 1, duration: 0.6, stagger: 0.12, ease: 'back.out(1.4)' }, 1.2);
-      tl.to('.url', { y: 0, opacity: 1, duration: 0.5, ease: 'power2.out' }, 2.5);
+
+      // Sweep effect on each action
+      tl.to('.action .sweep', { x: '100%', duration: 0.6, stagger: 0.1, ease: 'power2.inOut' }, 1.8);
+
+      // Hover glow on primary action
+      tl.to('.action.primary::before', { opacity: 1, duration: 0.5, ease: 'power2.out' }, 2.2);
+
+      // URL
+      tl.to('.url', { y: 0, opacity: 1, duration: 0.5, ease: 'power3.out' }, 2.5);
 
       // Magnetic hover on primary action
       tl.to({}, { duration: 0.3, onStart: () => {
@@ -113,12 +148,16 @@
         gsap.fromTo(btn, { x: 0, y: 0 }, { x: -3, y: -2, duration: 0.15, yoyo: true, repeat: 1, ease: 'power2.inOut' });
       }}, 3.0);
 
+      // Gentle circle rotation
+      tl.to('.deco-circle', { rotation: 30, duration: 4.0, ease: 'sine.inOut' }, 2.0);
+
       // Exit
-      tl.to('.url', { y: -15, opacity: 0, duration: 0.3, ease: 'power2.in' }, 5.2);
-      tl.to('.action', { y: -30, opacity: 0, duration: 0.3, stagger: 0.05, ease: 'power2.in' }, 5.3);
-      tl.to('.headline', { y: -40, opacity: 0, duration: 0.3, ease: 'power2.in' }, 5.4);
-      tl.to('.eyebrow', { y: -20, opacity: 0, duration: 0.3, ease: 'power2.in' }, 5.5);
-      tl.to('.corner', { y: -15, opacity: 0, duration: 0.3, ease: 'power2.in' }, 5.5);
+      tl.to('.url', { y: -15, opacity: 0, duration: 0.3, ease: 'power3.in' }, 5.2);
+      tl.to('.action', { y: -30, opacity: 0, duration: 0.3, stagger: 0.05, ease: 'power3.in' }, 5.3);
+      tl.to('.headline', { y: -40, opacity: 0, duration: 0.3, ease: 'power3.in' }, 5.4);
+      tl.to('.eyebrow', { y: -20, opacity: 0, duration: 0.3, ease: 'power3.in' }, 5.5);
+      tl.to('.corner', { y: -15, opacity: 0, duration: 0.3, ease: 'power3.in' }, 5.5);
+      tl.to('.deco-circle', { scale: 0.5, opacity: 0, duration: 0.4, ease: 'power3.in' }, 5.4);
       tl.to('.red-bar', { scaleX: 0, transformOrigin: 'right center', duration: 0.3 }, 5.5);
 
       window.addEventListener('load', () => tl.play());

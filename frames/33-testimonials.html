@@ -20,7 +20,8 @@
   .headline { font-family: 'Smiley Sans', sans-serif; font-weight: 400; font-size: 56px; line-height: 1.0; letter-spacing: -2px; color: #FFFFFF; text-align: center; margin-bottom: 48px; }
 
   .quotes { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 32px; max-width: 1500px; }
-  .quote-card { padding: 32px; background: rgba(255,255,255,0.05); border-left: 3px solid #E60012; }
+  .quote-card { padding: 32px; background: rgba(255,255,255,0.05); border-left: 3px solid #E60012; position: relative; overflow: hidden; }
+  .quote-card::before { content: '"'; position: absolute; top: 10px; right: 20px; font-family: 'Smiley Sans', sans-serif; font-size: 120px; color: rgba(230,0,18,0.1); line-height: 1; }
   .quote-card .icon { font-size: 32px; margin-bottom: 12px; }
   .quote-card .text { font-family: 'Noto Sans SC', sans-serif; font-size: 17px; line-height: 1.6; color: rgba(255,255,255,0.85); margin-bottom: 16px; }
   .quote-card .text em { font-style: normal; color: #E60012; font-weight: 700; }
@@ -28,12 +29,16 @@
   .quote-card .author .avatar { width: 36px; height: 36px; background: #E60012; color: #FFFFFF; display: flex; align-items: center; justify-content: center; font-family: 'Smiley Sans', sans-serif; font-size: 16px; }
   .quote-card .author .info .name { font-family: 'Inter', sans-serif; font-weight: 700; font-size: 14px; }
   .quote-card .author .info .role { font-family: 'JetBrains Mono', monospace; font-size: 11px; color: #888; letter-spacing: 0.1em; text-transform: uppercase; }
+
+  /* Decorative horizontal line */
+  .h-line { position: absolute; left: 10%; right: 10%; bottom: 120px; height: 1px; background: linear-gradient(90deg, transparent, rgba(230,0,18,0.3), transparent); }
 </style>
 </head>
 <body>
   <div class="stage">
     <div class="page" data-composition-id="testimonials" data-start="0" data-duration="6" data-width="1920" data-height="1080">
       <div class="red-bar"></div>
+      <div class="h-line"></div>
 
       <div class="content">
         <div class="eyebrow">VOICES FROM THE COMMUNITY</div>
@@ -89,19 +94,33 @@
       gsap.set('.eyebrow', { y: -20, opacity: 0 });
       gsap.set('.headline', { y: 30, opacity: 0 });
       gsap.set('.quote-card', { y: 40, opacity: 0, scale: 0.95 });
+      gsap.set('.quote-card::before', { opacity: 0, scale: 0.5 });
+      gsap.set('.h-line', { scaleX: 0, transformOrigin: 'center' });
 
-      tl.to('.red-bar', { scaleX: 1, duration: 0.5, ease: 'power3.inOut' }, 0);
-      tl.to('.eyebrow', { y: 0, opacity: 1, duration: 0.5, ease: 'power2.out' }, 0.2);
-      tl.to('.headline', { y: 0, opacity: 1, duration: 0.7, ease: 'expo.out' }, 0.4);
-      tl.to('.quote-card', { y: 0, opacity: 1, scale: 1, duration: 0.6, stagger: 0.2, ease: 'back.out(1.2)' }, 1.0);
+      // Entry
+      tl.to('.red-bar', { scaleX: 1, duration: 0.4, ease: 'power4.inOut' }, 0);
 
-      // Gentle hover effect
-      tl.to('.quote-card:nth-child(2)', { y: -5, duration: 0.8, yoyo: true, repeat: 1, ease: 'sine.inOut' }, 2.5);
+      // Horizontal line wipes in
+      tl.to('.h-line', { scaleX: 1, duration: 0.8, ease: 'power3.inOut' }, 0.2);
+
+      // Text reveals
+      tl.to('.eyebrow', { y: 0, opacity: 1, duration: 0.5, ease: 'power3.out' }, 0.3);
+      tl.to('.headline', { y: 0, opacity: 1, duration: 0.7, ease: 'expo.out' }, 0.5);
+
+      // Quote cards — staggered pop with scale
+      tl.to('.quote-card', { y: 0, opacity: 1, scale: 1, duration: 0.6, stagger: 0.2, ease: 'back.out(1.4)' }, 1.0);
+
+      // Quote marks fade in
+      tl.to('.quote-card::before', { opacity: 1, scale: 1, duration: 0.5, stagger: 0.15, ease: 'power2.out' }, 1.5);
+
+      // Gentle hover on middle card
+      tl.to('.quote-card:nth-child(2)', { y: -8, duration: 0.8, yoyo: true, repeat: 1, ease: 'sine.inOut' }, 2.5);
 
       // Exit
-      tl.to('.quote-card', { y: -30, opacity: 0, duration: 0.3, stagger: 0.08, ease: 'power2.in' }, 5.0);
-      tl.to('.headline', { y: -20, opacity: 0, duration: 0.3, ease: 'power2.in' }, 5.3);
-      tl.to('.eyebrow', { y: -15, opacity: 0, duration: 0.3, ease: 'power2.in' }, 5.4);
+      tl.to('.quote-card', { y: -30, opacity: 0, duration: 0.3, stagger: 0.08, ease: 'power3.in' }, 5.0);
+      tl.to('.headline', { y: -20, opacity: 0, duration: 0.3, ease: 'power3.in' }, 5.3);
+      tl.to('.eyebrow', { y: -15, opacity: 0, duration: 0.3, ease: 'power3.in' }, 5.4);
+      tl.to('.h-line', { scaleX: 0, duration: 0.3, ease: 'power3.in' }, 5.3);
       tl.to('.red-bar', { scaleX: 0, transformOrigin: 'right center', duration: 0.3 }, 5.4);
 
       window.addEventListener('load', () => tl.play());

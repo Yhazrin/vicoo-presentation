@@ -1,0 +1,292 @@
+1
+00:00:00,000 --> 00:00:04,000
+VICOO
+Made to Circulate
+
+2
+00:00:04,000 --> 00:00:09,000
+Every child has a story to tell —
+we just need to listen.
+
+3
+00:00:09,000 --> 00:00:13,000
+Children's art, worn by everyone.
+
+4
+00:00:13,000 --> 00:00:18,000
+Spring Collection — UNIQLO × VICOO
+Organic cotton, 28% donated
+
+5
+00:00:18,000 --> 00:00:23,000
+Lin Yiyi, age 8 — "Colors of Spring"
+Her artwork becomes a real T-shirt
+
+6
+00:00:23,000 --> 00:00:28,000
+UNIQLO × VICOO
+Full supply chain traceability
+
+7
+00:00:28,000 --> 00:00:33,000
+1,284 products in the collection
+
+8
+00:00:33,000 --> 00:00:38,000
+¥178 → 28% donated
+= 1 student, 1 semester of art supplies
+
+9
+00:00:38,000 --> 00:00:42,000
+¥1,284,560 donated
+12,431 artworks submitted
+
+10
+00:00:42,000 --> 00:00:47,000
+Choose your amount
+Every donation has real impact
+
+11
+00:00:47,000 --> 00:00:51,000
+Web · WeChat Mini Program · Android
+Three platforms, one mission
+
+12
+00:00:51,000 --> 00:00:56,000
+Made to Circulate
+For the next child, keep painting.
+
+13
+00:00:56,000 --> 00:01:01,000
+VI — Visual
+Every child's drawing is a visual expression
+
+14
+00:01:01,000 --> 00:01:07,000
+From a child's sketchbook
+to a global movement
+
+15
+00:01:07,000 --> 00:01:12,000
+COO — Circle
+The loop of giving and receiving
+
+16
+00:01:12,000 --> 00:01:18,000
+Creative · Traceable · Circular · Charitable
+Four pillars of VICOO
+
+17
+00:01:18,000 --> 00:01:24,000
+Modern technology stack
+React · FastAPI · WeChat · Android
+
+18
+00:01:24,000 --> 00:01:30,000
+Welcome to VICOO
+Children's art, sustainable fashion
+
+19
+00:01:30,000 --> 00:01:35,000
+Search and discover
+1,284 products
+
+20
+00:01:35,000 --> 00:01:41,000
+The complete collection
+Every purchase supports children's art
+
+21
+00:01:41,000 --> 00:01:46,000
+Save what you love
+Share what matters
+
+22
+00:01:46,000 --> 00:01:52,000
+Organic cotton T-shirt
+¥159 · GOTS certified
+
+23
+00:01:52,000 --> 00:01:58,000
+Impact product
+28% donated to art education
+
+24
+00:01:58,000 --> 00:02:03,000
+Real reviews from real buyers
+4.8/5.0 average rating
+
+25
+00:02:03,000 --> 00:02:09,000
+3D Traceability Globe
+See every node in the supply chain
+
+26
+00:02:09,000 --> 00:02:14,000
+Shaoxing Dyeing Workshop
+95% water saved with CO₂ dyeing
+
+27
+00:02:14,000 --> 00:02:19,000
+5-stage supply chain timeline
+From cotton farm to your door
+
+28
+00:02:19,000 --> 00:02:24,000
+Material records
+GOTS · BLUESIGN · OEKO-TEX certified
+
+29
+00:02:24,000 --> 00:02:30,000
+Full supply chain map
+Xinjiang → Shaoxing → Suzhou → Shanghai
+
+30
+00:02:30,000 --> 00:02:35,000
+Carbon footprint
+4.5kg CO₂e per item (industry avg: 8.2kg)
+
+31
+00:02:35,000 --> 00:02:40,000
+Sign in to your account
+Track orders, donations, and more
+
+32
+00:02:40,000 --> 00:02:45,000
+Create your VICOO account
+Join the circle
+
+33
+00:02:45,000 --> 00:02:50,000
+Your profile
+Orders, donations, and impact
+
+34
+00:02:50,000 --> 00:02:55,000
+Shopping cart
+This order donates ¥77 (12.7%)
+
+35
+00:02:55,000 --> 00:03:00,000
+WeChat Pay · Alipay · Stripe · PayPal
+Choose how to give
+
+36
+00:03:00,000 --> 00:03:05,000
+Checkout
+Secure payment, real impact
+
+37
+00:03:05,000 --> 00:03:10,000
+Order tracking
+Real-time delivery updates
+
+38
+00:03:10,000 --> 00:03:15,000
+Order detail
+Shipped · Est. delivery tomorrow
+
+39
+00:03:15,000 --> 00:03:20,000
+Donation certificate
+VC-2026Q2-128456-SH
+
+40
+00:03:20,000 --> 00:03:25,000
+Certificate detail
+Verified donation to art education fund
+
+41
+00:03:25,000 --> 00:03:30,000
+Donation breakdown
+¥1,284,560 total donated
+
+42
+00:03:30,000 --> 00:03:35,000
+Clothing recycle
+Intake → Resale → Recycle → Reinvest
+
+43
+00:03:35,000 --> 00:03:40,000
+Environmental impact
+98.7% supply chain traceable
+
+44
+00:03:40,000 --> 00:03:45,000
+Campaigns
+"Colors of Spring" — 200/500 items
+
+45
+00:03:45,000 --> 00:03:50,000
+Campaign detail
+87% on track, est. July 2026
+
+46
+00:03:50,000 --> 00:03:55,000
+Submit artwork
+Every child can participate
+
+47
+00:03:55,000 --> 00:04:00,000
+Artwork gallery
+12,431 children's creations
+
+48
+00:04:00,000 --> 00:04:05,000
+Community vote
+3,419 votes · 3 days left
+
+49
+00:04:05,000 --> 00:04:10,000
+AI Assistant
+Ask about any product, campaign, or artwork
+
+50
+00:04:10,000 --> 00:04:15,000
+"Seeing their art on clothes,
+the children's eyes light up."
+
+51
+00:04:15,000 --> 00:04:20,000
+Every number tells a child's story
+¥1.28M · 12,431 artworks · 4,872 children
+
+52
+00:04:20,000 --> 00:04:25,000
+A world where every child's imagination
+becomes a force for change
+
+53
+00:04:25,000 --> 00:04:30,000
+The next child's masterpiece
+starts with you
+
+54
+00:04:30,000 --> 00:04:35,000
+VICOO — Made to Circulate
+Children's Art → Sustainable Fashion → Circular Future
+
+55
+00:04:35,000 --> 00:04:40,000
+Shop · Donate · Submit · Recycle
+vicoo.org
+
+56
+00:04:40,000 --> 00:04:45,000
+VICOO × UNIQLO
+© 2026 VICOO
+
+57
+00:04:45,000 --> 00:04:50,000
+Made to Circulate
+For the next child, keep painting.
+
+58
+00:04:50,000 --> 00:04:55,000
+VICOO
+Visual · Circle
+
+59
+00:04:55,000 --> 00:05:00,000
+© 2026 VICOO
+Children's Art → Sustainable Fashion → Circular Future

@@ -29,6 +29,10 @@
       linear-gradient(to bottom, #FFF 1px, transparent 1px);
     background-size: 80px 80px; }
 
+  /* Animated background lines */
+  .bg-lines { position: absolute; inset: 0; pointer-events: none; overflow: hidden; }
+  .bg-line { position: absolute; height: 1px; background: linear-gradient(90deg, transparent, rgba(230,0,18,0.3), transparent); width: 200%; left: -50%; }
+
   .red-bar { position: absolute; top: 0; left: 0; right: 0; height: 8px; background: #E60012; }
 
   .corner { position: absolute; font-family: 'JetBrains Mono', monospace; font-size: 14px;
@@ -42,7 +46,8 @@
     text-align: center; }
   .vicoo .word { font-family: 'Smiley Sans', 'Inter', sans-serif;
     font-size: 460px; line-height: 0.85; letter-spacing: -22px; color: #FFFFFF;
-    font-weight: 400; }
+    font-weight: 400; position: relative; }
+  .vicoo .word .glow { position: absolute; inset: -40px; background: radial-gradient(ellipse at center, rgba(230,0,18,0.15) 0%, transparent 70%); pointer-events: none; filter: blur(30px); }
 
   .tagline { position: absolute; left: 0; right: 0; bottom: 130px; text-align: center;
     font-family: 'JetBrains Mono', monospace; font-size: 22px; font-weight: 500;
@@ -51,20 +56,37 @@
   .sweep { position: absolute; left: 0; right: 0; top: 50%; transform: translateY(40px);
     height: 8px; background: #E60012; }
 
-  /* small floating product preview that hints at the next frame */
   .hint { position: absolute; right: 80px; bottom: 130px; opacity: 0;
     display: flex; align-items: center; gap: 12px;
     font-family: 'JetBrains Mono', monospace; font-size: 14px; font-weight: 500;
     letter-spacing: 0.18em; text-transform: uppercase; color: #FFF; }
   .hint .line { width: 60px; height: 1px; background: #E60012; }
   .hint .red { color: #E60012; }
+
+  /* Decorative corner brackets */
+  .bracket { position: absolute; width: 40px; height: 40px; border-color: rgba(230,0,18,0.4); border-style: solid; }
+  .bracket.tl { top: 100px; left: 100px; border-width: 2px 0 0 2px; }
+  .bracket.tr { top: 100px; right: 100px; border-width: 2px 2px 0 0; }
+  .bracket.bl { bottom: 100px; left: 100px; border-width: 0 0 2px 2px; }
+  .bracket.br { bottom: 100px; right: 100px; border-width: 0 2px 2px 0; }
 </style>
 </head>
 <body>
   <div class="stage">
     <div class="page" data-composition-id="cover_blackred" data-start="0" data-duration="5" data-width="1920" data-height="1080">
       <div class="grid"></div>
+      <div class="bg-lines">
+        <div class="bg-line" style="top: 20%;"></div>
+        <div class="bg-line" style="top: 40%;"></div>
+        <div class="bg-line" style="top: 60%;"></div>
+        <div class="bg-line" style="top: 80%;"></div>
+      </div>
       <div class="red-bar"></div>
+
+      <div class="bracket tl"></div>
+      <div class="bracket tr"></div>
+      <div class="bracket bl"></div>
+      <div class="bracket br"></div>
 
       <div class="corner tl">VICOO · SS26</div>
       <div class="corner tr">CAMPAIGN FILM</div>
@@ -72,7 +94,7 @@
       <div class="corner br">2026</div>
 
       <div class="vicoo">
-        <div class="word">VICOO</div>
+        <div class="word"><div class="glow"></div>VICOO</div>
       </div>
 
       <div class="sweep"></div>
@@ -94,31 +116,60 @@
       window.__timelines["cover_blackred"] = tl;
 
       gsap.set('.vicoo .word', { y: 80, opacity: 0, skewY: 4, transformOrigin: 'center bottom' });
+      gsap.set('.vicoo .word .glow', { opacity: 0, scale: 0.5 });
       gsap.set('.sweep', { scaleX: 0, transformOrigin: 'left center' });
       gsap.set('.tagline', { y: 20, opacity: 0, letterSpacing: '0.8em' });
       gsap.set('.corner', { y: 10, opacity: 0 });
       gsap.set('.red-bar', { scaleX: 0, transformOrigin: 'left center' });
       gsap.set('.hint', { x: 30, opacity: 0 });
+      gsap.set('.bracket', { scale: 0, opacity: 0 });
+      gsap.set('.bg-line', { x: '-100%', opacity: 0 });
 
-      // Entry
-      tl.to('.red-bar', { scaleX: 1, duration: 0.5, ease: 'power3.inOut' }, 0);
-      tl.to('.corner', { y: 0, opacity: 1, duration: 0.6, stagger: 0.08, ease: 'power2.out' }, 0.2);
+      // Entry — cinematic sequence
+      tl.to('.red-bar', { scaleX: 1, duration: 0.4, ease: 'power4.inOut' }, 0);
+
+      // Background lines sweep in
+      tl.to('.bg-line', { x: '0%', opacity: 1, duration: 1.2, stagger: 0.1, ease: 'power2.out' }, 0.1);
+
+      // Corner brackets pop in with elastic
+      tl.to('.bracket', { scale: 1, opacity: 1, duration: 0.6, stagger: 0.08, ease: 'back.out(2)' }, 0.3);
+
+      // Corner text fades in
+      tl.to('.corner', { y: 0, opacity: 1, duration: 0.5, stagger: 0.06, ease: 'power3.out' }, 0.4);
+
+      // Main wordmark — dramatic entrance with skew correction
       tl.to('.vicoo .word', {
-        y: 0, opacity: 1, skewY: 0, duration: 1.0, ease: 'expo.out'
-      }, 0.5);
-      tl.to('.sweep', { scaleX: 1, duration: 0.7, ease: 'power4.inOut' }, 1.4);
+        y: 0, opacity: 1, skewY: 0, duration: 1.2, ease: 'expo.out'
+      }, 0.6);
+
+      // Glow pulse on wordmark
+      tl.to('.vicoo .word .glow', { opacity: 1, scale: 1, duration: 0.8, ease: 'power2.out' }, 1.0);
+      tl.to('.vicoo .word .glow', { opacity: 0.6, scale: 1.1, duration: 1.5, yoyo: true, repeat: 1, ease: 'sine.inOut' }, 1.8);
+
+      // Red sweep with overshoot
+      tl.to('.sweep', { scaleX: 1.05, duration: 0.6, ease: 'power4.inOut' }, 1.6);
+      tl.to('.sweep', { scaleX: 1, duration: 0.2, ease: 'power2.out' }, 2.2);
+
+      // Tagline reveals with letter-spacing animation
       tl.to('.tagline', {
         y: 0, opacity: 1, letterSpacing: '0.4em', duration: 0.8, ease: 'power3.out'
-      }, 1.9);
-      tl.to('.hint', { x: 0, opacity: 1, duration: 0.6, ease: 'power2.out' }, 2.7);
+      }, 2.0);
 
-      // Exit — wordmark morphs up-left, the rest fades (set up xfade into header)
+      // Hint slides in with magnetic feel
+      tl.to('.hint', { x: 0, opacity: 1, duration: 0.5, ease: 'back.out(1.4)' }, 2.8);
+      // Magnetic micro-interaction on hint
+      tl.to('.hint', { x: -3, duration: 0.15, yoyo: true, repeat: 1, ease: 'power2.inOut' }, 3.3);
+
+      // Exit — cinematic dissolve
+      tl.to('.vicoo .word .glow', { opacity: 0, scale: 0.8, duration: 0.4, ease: 'power2.in' }, 4.0);
       tl.to('.vicoo .word', {
         y: -260, x: -640, scale: 0.16, duration: 0.6, ease: 'power3.inOut'
-      }, 4.2);
-      tl.to('.sweep', { scaleX: 0, transformOrigin: 'right center', duration: 0.4, ease: 'power2.in' }, 4.4);
-      tl.to('.tagline', { y: 20, opacity: 0, duration: 0.4, ease: 'power2.in' }, 4.4);
-      tl.to('.corner', { y: -10, opacity: 0, duration: 0.4, stagger: 0.04, ease: 'power2.in' }, 4.4);
+      }, 4.1);
+      tl.to('.sweep', { scaleX: 0, transformOrigin: 'right center', duration: 0.4, ease: 'power2.in' }, 4.3);
+      tl.to('.tagline', { y: 20, opacity: 0, duration: 0.4, ease: 'power2.in' }, 4.3);
+      tl.to('.corner', { y: -10, opacity: 0, duration: 0.4, stagger: 0.03, ease: 'power2.in' }, 4.3);
+      tl.to('.bracket', { scale: 0.5, opacity: 0, duration: 0.3, stagger: 0.03, ease: 'power2.in' }, 4.3);
+      tl.to('.bg-line', { x: '100%', opacity: 0, duration: 0.5, stagger: 0.05, ease: 'power2.in' }, 4.2);
       tl.to('.hint', { x: 30, opacity: 0, duration: 0.3, ease: 'power2.in' }, 4.4);
 
       window.addEventListener('load', () => tl.play());

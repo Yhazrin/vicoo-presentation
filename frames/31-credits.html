@@ -18,16 +18,18 @@
 
   .vicoo { font-family: 'Smiley Sans', 'Inter', sans-serif; font-weight: 400; font-size: 180px; line-height: 0.9; letter-spacing: -8px; color: #1A1A16; }
   .vicoo .red { color: #E60012; }
+  .vicoo .glow { position: absolute; inset: -40px; background: radial-gradient(ellipse at center, rgba(230,0,18,0.1) 0%, transparent 70%); pointer-events: none; filter: blur(30px); opacity: 0; }
 
   .tagline { font-family: 'JetBrains Mono', monospace; font-size: 18px; font-weight: 500; letter-spacing: 0.4em; text-transform: uppercase; color: #888; margin-top: 16px; }
 
   .divider { width: 80px; height: 3px; background: #E60012; margin: 40px 0; }
 
   .credits-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 40px 80px; max-width: 1200px; }
-  .credit { text-align: center; }
+  .credit { text-align: center; position: relative; }
   .credit .role { font-family: 'JetBrains Mono', monospace; font-size: 11px; font-weight: 500; letter-spacing: 0.2em; text-transform: uppercase; color: #E60012; }
   .credit .name { font-family: 'Inter', sans-serif; font-weight: 700; font-size: 18px; color: #1A1A16; margin-top: 8px; }
   .credit .detail { font-family: 'Noto Sans SC', sans-serif; font-size: 14px; color: #888; margin-top: 4px; }
+  .credit::after { content: ''; position: absolute; bottom: -20px; left: 50%; width: 30px; height: 1px; background: rgba(230,0,18,0.3); transform: translateX(-50%); }
 
   .logos { display: flex; align-items: center; gap: 32px; margin-top: 48px; }
   .logo { display: flex; align-items: center; gap: 10px; }
@@ -38,10 +40,16 @@
 
   .footer { position: absolute; bottom: 40px; left: 0; right: 0; text-align: center; font-family: 'JetBrains Mono', monospace; font-size: 12px; font-weight: 500; letter-spacing: 0.2em; text-transform: uppercase; color: #BBB; }
 
-  /* Corner marks */
   .corner { position: absolute; font-family: 'JetBrains Mono', monospace; font-size: 12px; font-weight: 500; letter-spacing: 0.15em; text-transform: uppercase; color: #CCC; }
   .corner.tl { top: 36px; left: 64px; }
   .corner.tr { top: 36px; right: 64px; }
+
+  /* Decorative corner brackets */
+  .bracket { position: absolute; width: 30px; height: 30px; border-color: rgba(230,0,18,0.3); border-style: solid; }
+  .bracket.tl { top: 80px; left: 80px; border-width: 2px 0 0 2px; }
+  .bracket.tr { top: 80px; right: 80px; border-width: 2px 2px 0 0; }
+  .bracket.bl { bottom: 80px; left: 80px; border-width: 0 0 2px 2px; }
+  .bracket.br { bottom: 80px; right: 80px; border-width: 0 2px 2px 0; }
 </style>
 </head>
 <body>
@@ -51,8 +59,16 @@
       <div class="corner tl">VICOO · CREDITS</div>
       <div class="corner tr">SS26 CAMPAIGN FILM</div>
 
+      <div class="bracket tl"></div>
+      <div class="bracket tr"></div>
+      <div class="bracket bl"></div>
+      <div class="bracket br"></div>
+
       <div class="content">
-        <div class="vicoo">VI<span class="red">COO</span></div>
+        <div style="position: relative; display: inline-block;">
+          <div class="vicoo">VI<span class="red">COO</span></div>
+          <div class="glow"></div>
+        </div>
         <div class="tagline">MADE TO CIRCULATE</div>
         <div class="divider"></div>
 
@@ -115,34 +131,63 @@
 
       gsap.set('.red-bar', { scaleX: 0, transformOrigin: 'left center' });
       gsap.set('.corner', { y: 15, opacity: 0 });
+      gsap.set('.bracket', { scale: 0, opacity: 0 });
       gsap.set('.vicoo', { y: 60, opacity: 0, scale: 0.9 });
+      gsap.set('.vicoo .glow', { opacity: 0, scale: 0.5 });
       gsap.set('.tagline', { y: 15, opacity: 0 });
       gsap.set('.divider', { scaleX: 0 });
       gsap.set('.credit', { y: 30, opacity: 0 });
+      gsap.set('.credit::after', { scaleX: 0 });
       gsap.set('.logos .logo, .logos .sep', { y: 20, opacity: 0 });
       gsap.set('.footer', { y: 15, opacity: 0 });
 
-      tl.to('.red-bar', { scaleX: 1, duration: 0.5, ease: 'power3.inOut' }, 0);
-      tl.to('.corner', { y: 0, opacity: 1, duration: 0.4, stagger: 0.06, ease: 'power2.out' }, 0.1);
-      tl.to('.vicoo', { y: 0, opacity: 1, scale: 1, duration: 0.9, ease: 'expo.out' }, 0.3);
-      tl.to('.tagline', { y: 0, opacity: 1, duration: 0.5, ease: 'power2.out' }, 0.8);
-      tl.to('.divider', { scaleX: 1, duration: 0.5, ease: 'power3.inOut' }, 1.0);
-      tl.to('.credit', { y: 0, opacity: 1, duration: 0.5, stagger: 0.08, ease: 'power2.out' }, 1.2);
-      tl.to('.logos .logo, .logos .sep', { y: 0, opacity: 1, duration: 0.4, stagger: 0.08, ease: 'power2.out' }, 2.2);
-      tl.to('.footer', { y: 0, opacity: 1, duration: 0.4, ease: 'power2.out' }, 2.6);
+      // Entry
+      tl.to('.red-bar', { scaleX: 1, duration: 0.4, ease: 'power4.inOut' }, 0);
 
-      // Gentle breathing on the wordmark
-      tl.to('.vicoo', { scale: 1.02, duration: 1.5, yoyo: true, repeat: 1, ease: 'sine.inOut' }, 2.8);
+      // Corner text
+      tl.to('.corner', { y: 0, opacity: 1, duration: 0.4, stagger: 0.06, ease: 'power3.out' }, 0.1);
+
+      // Brackets pop in
+      tl.to('.bracket', { scale: 1, opacity: 1, duration: 0.5, stagger: 0.08, ease: 'back.out(2)' }, 0.2);
+
+      // Wordmark — dramatic entrance
+      tl.to('.vicoo', { y: 0, opacity: 1, scale: 1, duration: 0.9, ease: 'expo.out' }, 0.3);
+
+      // Glow pulse on wordmark
+      tl.to('.vicoo .glow', { opacity: 1, scale: 1, duration: 0.6, ease: 'power2.out' }, 0.8);
+      tl.to('.vicoo .glow', { opacity: 0.5, scale: 1.1, duration: 1.5, yoyo: true, repeat: 1, ease: 'sine.inOut' }, 1.4);
+
+      // Tagline
+      tl.to('.tagline', { y: 0, opacity: 1, duration: 0.5, ease: 'power3.out' }, 0.8);
+
+      // Divider wipes in
+      tl.to('.divider', { scaleX: 1, duration: 0.5, ease: 'power3.inOut' }, 1.0);
+
+      // Credits — staggered reveal
+      tl.to('.credit', { y: 0, opacity: 1, duration: 0.5, stagger: 0.08, ease: 'power3.out' }, 1.2);
+
+      // Underline wipes
+      tl.to('.credit::after', { scaleX: 1, duration: 0.3, stagger: 0.06, ease: 'power3.inOut' }, 1.5);
+
+      // Logos
+      tl.to('.logos .logo, .logos .sep', { y: 0, opacity: 1, duration: 0.4, stagger: 0.08, ease: 'back.out(1.4)' }, 2.2);
+
+      // Footer
+      tl.to('.footer', { y: 0, opacity: 1, duration: 0.4, ease: 'power3.out' }, 2.6);
+
+      // Gentle breathing on wordmark
+      tl.to('.vicoo', { scale: 1.02, duration: 1.5, yoyo: true, repeat: 1, ease: 'sine.inOut' }, 3.0);
 
       // Exit — fade to white
-      tl.to('.footer', { opacity: 0, duration: 0.3, ease: 'power2.in' }, 4.2);
-      tl.to('.credit', { opacity: 0, duration: 0.3, ease: 'power2.in' }, 4.3);
-      tl.to('.logos .logo, .logos .sep', { opacity: 0, duration: 0.3, ease: 'power2.in' }, 4.3);
-      tl.to('.divider', { scaleX: 0, duration: 0.2 }, 4.4);
-      tl.to('.tagline', { opacity: 0, duration: 0.3, ease: 'power2.in' }, 4.4);
-      tl.to('.vicoo', { y: -30, opacity: 0, duration: 0.4, ease: 'power2.in' }, 4.5);
-      tl.to('.corner', { opacity: 0, duration: 0.2 }, 4.6);
-      tl.to('.red-bar', { scaleX: 0, transformOrigin: 'right center', duration: 0.3 }, 4.6);
+      tl.to('.footer', { opacity: 0, duration: 0.3, ease: 'power3.in' }, 5.2);
+      tl.to('.credit', { opacity: 0, duration: 0.3, ease: 'power3.in' }, 5.3);
+      tl.to('.logos .logo, .logos .sep', { opacity: 0, duration: 0.3, ease: 'power3.in' }, 5.3);
+      tl.to('.divider', { scaleX: 0, duration: 0.2 }, 5.4);
+      tl.to('.tagline', { opacity: 0, duration: 0.3, ease: 'power3.in' }, 5.4);
+      tl.to('.vicoo', { y: -30, opacity: 0, duration: 0.4, ease: 'power3.in' }, 5.5);
+      tl.to('.bracket', { scale: 0.5, opacity: 0, duration: 0.3, stagger: 0.03, ease: 'power3.in' }, 5.4);
+      tl.to('.corner', { opacity: 0, duration: 0.2 }, 5.5);
+      tl.to('.red-bar', { scaleX: 0, transformOrigin: 'right center', duration: 0.3 }, 5.5);
 
       window.addEventListener('load', () => tl.play());
     })();

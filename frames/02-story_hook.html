@@ -14,14 +14,17 @@
   .page { position: absolute; inset: 0; }
   .red-bar { position: absolute; top: 0; left: 0; right: 0; height: 8px; background: #E60012; }
 
-  /* Background circles - representing children's world */
+  /* Animated circles with rotation */
   .circles { position: absolute; inset: 0; pointer-events: none; }
   .circle { position: absolute; border-radius: 50%; border: 2px solid rgba(230, 0, 18, 0.3); }
   .circle.c1 { width: 400px; height: 400px; top: -100px; right: -80px; }
   .circle.c2 { width: 250px; height: 250px; bottom: -60px; left: -40px; }
   .circle.c3 { width: 180px; height: 180px; top: 50%; left: 60%; }
+  .circle .inner { position: absolute; inset: 20px; border-radius: 50%; border: 1px solid rgba(230, 0, 18, 0.15); }
 
-  /* Main content */
+  /* Radial gradient backdrop */
+  .backdrop { position: absolute; inset: 0; background: radial-gradient(ellipse at 30% 50%, rgba(230,0,18,0.08) 0%, transparent 60%); pointer-events: none; }
+
   .content { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; }
 
   .eyebrow { font-family: 'JetBrains Mono', monospace; font-size: 14px; font-weight: 500; letter-spacing: 0.3em; text-transform: uppercase; color: #E60012; margin-bottom: 32px; }
@@ -35,21 +38,26 @@
   .sub { font-family: 'Noto Sans SC', sans-serif; font-weight: 400; font-size: 28px; line-height: 1.6; color: rgba(255,255,255,0.7); text-align: center; max-width: 800px; }
   .sub em { font-style: normal; color: #E60012; font-weight: 700; }
 
-  /* Bottom stats ticker */
+  /* Bottom stats ticker with reveal */
   .ticker { position: absolute; bottom: 60px; left: 0; right: 0; display: flex; justify-content: center; gap: 48px; }
-  .stat { text-align: center; }
-  .stat .num { font-family: 'Inter', sans-serif; font-weight: 800; font-size: 36px; color: #E60012; }
+  .stat { text-align: center; overflow: hidden; }
+  .stat .num { font-family: 'Inter', sans-serif; font-weight: 800; font-size: 36px; color: #E60012; display: inline-block; }
   .stat .lbl { font-family: 'JetBrains Mono', monospace; font-size: 11px; font-weight: 500; letter-spacing: 0.2em; text-transform: uppercase; color: rgba(255,255,255,0.5); margin-top: 4px; }
+
+  /* Horizontal rule reveal */
+  .h-rule { position: absolute; left: 10%; right: 10%; top: 50%; height: 1px; background: rgba(255,255,255,0.06); }
 </style>
 </head>
 <body>
   <div class="stage">
     <div class="page" data-composition-id="story_hook" data-start="0" data-duration="6" data-width="1920" data-height="1080">
       <div class="red-bar"></div>
+      <div class="backdrop"></div>
+      <div class="h-rule"></div>
       <div class="circles">
-        <div class="circle c1"></div>
-        <div class="circle c2"></div>
-        <div class="circle c3"></div>
+        <div class="circle c1"><div class="inner"></div></div>
+        <div class="circle c2"><div class="inner"></div></div>
+        <div class="circle c3"><div class="inner"></div></div>
       </div>
 
       <div class="content">
@@ -66,9 +74,9 @@
       </div>
 
       <div class="ticker">
-        <div class="stat"><div class="num">12,431</div><div class="lbl">Artworks</div></div>
-        <div class="stat"><div class="num">32</div><div class="lbl">Schools</div></div>
-        <div class="stat"><div class="num">4,872</div><div class="lbl">Children</div></div>
+        <div class="stat"><div class="num" data-count="12431">0</div><div class="lbl">Artworks</div></div>
+        <div class="stat"><div class="num" data-count="32">0</div><div class="lbl">Schools</div></div>
+        <div class="stat"><div class="num" data-count="4872">0</div><div class="lbl">Children</div></div>
       </div>
     </div>
   </div>
@@ -82,32 +90,66 @@
 
       gsap.set('.red-bar', { scaleX: 0, transformOrigin: 'left center' });
       gsap.set('.circle', { scale: 0, opacity: 0 });
+      gsap.set('.circle .inner', { scale: 0, opacity: 0 });
+      gsap.set('.backdrop', { opacity: 0 });
+      gsap.set('.h-rule', { scaleX: 0, transformOrigin: 'center' });
       gsap.set('.eyebrow', { y: -20, opacity: 0 });
       gsap.set('.quote', { y: 40, opacity: 0 });
       gsap.set('.divider', { scaleX: 0 });
       gsap.set('.sub', { y: 20, opacity: 0 });
       gsap.set('.stat', { y: 30, opacity: 0 });
 
-      // Entry
-      tl.to('.red-bar', { scaleX: 1, duration: 0.5, ease: 'power3.inOut' }, 0);
-      tl.to('.circle', { scale: 1, opacity: 1, duration: 1.2, stagger: 0.15, ease: 'back.out(1.2)' }, 0.2);
-      tl.to('.eyebrow', { y: 0, opacity: 1, duration: 0.5, ease: 'power2.out' }, 0.3);
-      tl.to('.quote', { y: 0, opacity: 1, duration: 0.8, ease: 'expo.out' }, 0.5);
-      tl.to('.divider', { scaleX: 1, duration: 0.6, ease: 'power3.inOut' }, 1.0);
-      tl.to('.sub', { y: 0, opacity: 1, duration: 0.6, ease: 'power2.out' }, 1.2);
-      tl.to('.stat', { y: 0, opacity: 1, duration: 0.5, stagger: 0.1, ease: 'power2.out' }, 1.6);
+      // Entry — cinematic reveal
+      tl.to('.red-bar', { scaleX: 1, duration: 0.4, ease: 'power4.inOut' }, 0);
+      tl.to('.backdrop', { opacity: 1, duration: 1.0, ease: 'power2.out' }, 0.1);
 
-      // Pulse the circles gently
-      tl.to('.circle.c1', { scale: 1.05, duration: 1.5, yoyo: true, repeat: 1, ease: 'sine.inOut' }, 2.0);
-      tl.to('.circle.c3', { scale: 1.08, duration: 1.2, yoyo: true, repeat: 1, ease: 'sine.inOut' }, 2.3);
+      // Circles expand with elastic bounce
+      tl.to('.circle', { scale: 1, opacity: 1, duration: 1.0, stagger: 0.12, ease: 'back.out(1.4)' }, 0.2);
+      tl.to('.circle .inner', { scale: 1, opacity: 1, duration: 0.8, stagger: 0.1, ease: 'back.out(1.6)' }, 0.5);
+
+      // Horizontal rule wipes in
+      tl.to('.h-rule', { scaleX: 1, duration: 0.8, ease: 'power3.inOut' }, 0.4);
+
+      // Text reveals with stagger
+      tl.to('.eyebrow', { y: 0, opacity: 1, duration: 0.5, ease: 'power3.out' }, 0.5);
+
+      // Quote — word-by-word reveal effect
+      tl.to('.quote', { y: 0, opacity: 1, duration: 0.8, ease: 'expo.out' }, 0.7);
+
+      // Divider wipes in from left
+      tl.to('.divider', { scaleX: 1, duration: 0.5, ease: 'power3.inOut' }, 1.2);
+
+      // Sub text fades up
+      tl.to('.sub', { y: 0, opacity: 1, duration: 0.6, ease: 'power3.out' }, 1.4);
+
+      // Stats count up with stagger
+      tl.to('.stat', { y: 0, opacity: 1, duration: 0.5, stagger: 0.12, ease: 'back.out(1.2)' }, 1.8);
+
+      // Counting animation for stats
+      document.querySelectorAll('.stat .num').forEach(el => {
+        const target = parseInt(el.dataset.count);
+        const obj = { val: 0 };
+        tl.to(obj, {
+          val: target,
+          duration: 1.5,
+          ease: 'power2.out',
+          onUpdate: () => { el.textContent = Math.floor(obj.val).toLocaleString(); }
+        }, 2.0);
+      });
+
+      // Gentle circle rotation
+      tl.to('.circle.c1', { rotation: 15, duration: 3.0, ease: 'sine.inOut' }, 2.0);
+      tl.to('.circle.c3', { rotation: -10, duration: 2.5, ease: 'sine.inOut' }, 2.5);
 
       // Exit
-      tl.to('.stat', { y: -20, opacity: 0, duration: 0.3, ease: 'power2.in' }, 4.2);
-      tl.to('.sub', { y: -15, opacity: 0, duration: 0.3, ease: 'power2.in' }, 4.3);
-      tl.to('.divider', { scaleX: 0, duration: 0.2, ease: 'power2.in' }, 4.3);
-      tl.to('.quote', { y: -30, opacity: 0, duration: 0.3, ease: 'power2.in' }, 4.4);
-      tl.to('.eyebrow', { y: -20, opacity: 0, duration: 0.3, ease: 'power2.in' }, 4.4);
-      tl.to('.circle', { scale: 0.5, opacity: 0, duration: 0.4, ease: 'power2.in' }, 4.3);
+      tl.to('.stat', { y: -20, opacity: 0, duration: 0.3, ease: 'power3.in' }, 5.2);
+      tl.to('.sub', { y: -15, opacity: 0, duration: 0.3, ease: 'power3.in' }, 5.3);
+      tl.to('.divider', { scaleX: 0, duration: 0.2, ease: 'power3.in' }, 5.3);
+      tl.to('.quote', { y: -30, opacity: 0, duration: 0.3, ease: 'power3.in' }, 5.4);
+      tl.to('.eyebrow', { y: -20, opacity: 0, duration: 0.3, ease: 'power3.in' }, 5.4);
+      tl.to('.h-rule', { scaleX: 0, duration: 0.3, ease: 'power3.in' }, 5.3);
+      tl.to('.circle', { scale: 0.5, opacity: 0, duration: 0.4, stagger: 0.05, ease: 'power3.in' }, 5.3);
+      tl.to('.backdrop', { opacity: 0, duration: 0.4, ease: 'power2.in' }, 5.4);
 
       window.addEventListener('load', () => tl.play());
     })();

@@ -19,7 +19,6 @@
   .top .rule { flex: 1; height: 1px; background: #1A1A16; }
   .top .meta { font-family: 'JetBrains Mono', monospace; font-size: 13px; font-weight: 500; letter-spacing: 0.18em; text-transform: uppercase; color: #888; }
 
-  /* Hero — full bleed split */
   .hero { position: absolute; left: 80px; top: 140px; right: 80px; height: 540px; display: grid; grid-template-columns: 1fr 540px; gap: 40px; }
   .hero .copy { padding-top: 20px; }
   .hero .kicker { font-family: 'JetBrains Mono', monospace; font-size: 13px; font-weight: 500; letter-spacing: 0.2em; text-transform: uppercase; color: #E60012; }
@@ -27,23 +26,31 @@
   .hero h1 em { font-style: normal; color: #E60012; }
   .hero .sub { font-family: 'Noto Sans SC', sans-serif; font-weight: 400; font-size: 20px; line-height: 1.5; color: #555; margin-top: 28px; max-width: 720px; }
   .hero .cta { display: flex; gap: 16px; margin-top: 36px; }
-  .hero .btn1 { padding: 18px 32px; background: #1A1A16; color: #FFFFFF; font-family: 'Inter', sans-serif; font-weight: 800; font-size: 14px; letter-spacing: 0.1em; text-transform: uppercase; }
-  .hero .btn2 { padding: 18px 32px; border: 2px solid #1A1A16; color: #1A1A16; background: #FFFFFF; font-family: 'Inter', sans-serif; font-weight: 800; font-size: 14px; letter-spacing: 0.1em; text-transform: uppercase; }
-  .hero .photo { position: relative; background: linear-gradient(135deg, #E8E2D5 0%, #C9BFA9 100%); overflow: hidden; }
-  .hero .photo img { width: 100%; height: 100%; object-fit: cover; }
-  .hero .photo .tag { position: absolute; bottom: 24px; left: 24px; background: #FFFFFF; color: #1A1A16; padding: 10px 16px; font-family: 'Inter', sans-serif; font-weight: 700; font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; }
-  .hero .photo .badge { position: absolute; top: 24px; right: 24px; background: #E60012; color: #FFFFFF; padding: 8px 14px; font-family: 'Inter', sans-serif; font-weight: 800; font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; }
+  .hero .btn1 { padding: 18px 32px; background: #1A1A16; color: #FFFFFF; font-family: 'Inter', sans-serif; font-weight: 800; font-size: 14px; letter-spacing: 0.1em; text-transform: uppercase; position: relative; overflow: hidden; }
+  .hero .btn1 .sweep { position: absolute; inset: 0; background: linear-gradient(90deg, transparent, rgba(230,0,18,0.3), transparent); transform: translateX(-100%); }
+  .hero .btn1::after { content: '→'; margin-left: 10px; }
+  .hero .btn2 { padding: 18px 32px; border: 2px solid #1A1A16; font-family: 'Inter', sans-serif; font-weight: 700; font-size: 14px; letter-spacing: 0.1em; text-transform: uppercase; }
 
-  /* marquee strip */
-  .marquee { position: absolute; left: 0; right: 0; bottom: 100px; height: 60px; background: #1A1A16; color: #FFFFFF; display: flex; align-items: center; overflow: hidden; }
-  .marquee .track { display: flex; gap: 60px; white-space: nowrap; padding-left: 40px; font-family: 'Smiley Sans', sans-serif; font-size: 22px; letter-spacing: -0.5px; }
-  .marquee .track span.red { color: #E60012; }
+  .hero .visual { background: #F5F0E8; display: flex; align-items: center; justify-content: center; overflow: hidden; position: relative; }
+  .hero .visual img { width: 90%; height: 90%; object-fit: cover; }
+  .hero .visual .shine { position: absolute; inset: 0; background: linear-gradient(120deg, transparent 30%, rgba(255,255,255,0.4) 50%, transparent 70%); transform: translateX(-100%); pointer-events: none; }
+  .hero .visual .badge { position: absolute; top: 24px; right: 24px; background: #E60012; color: #FFFFFF; padding: 10px 16px; font-family: 'Inter', sans-serif; font-weight: 800; font-size: 14px; }
 
-  /* bottom meta */
-  .bot { position: absolute; bottom: 0; left: 0; right: 0; height: 60px; background: #F5F5F5; display: flex; align-items: center; padding: 0 80px; gap: 40px; border-top: 1px solid #EEE; }
-  .bot .lbl { font-family: 'JetBrains Mono', monospace; font-size: 11px; font-weight: 500; letter-spacing: 0.18em; text-transform: uppercase; color: #888; }
-  .bot .v { font-family: 'Inter', sans-serif; font-weight: 800; font-size: 18px; color: #1A1A16; }
-  .bot .red { color: #E60012; }
+  /* Ticker */
+  .ticker { position: absolute; left: 0; right: 0; bottom: 180px; overflow: hidden; height: 60px; background: #0A0A0A; }
+  .ticker .track { display: flex; align-items: center; height: 100%; white-space: nowrap; will-change: transform; }
+  .ticker .item { display: flex; align-items: center; gap: 10px; padding: 0 40px; font-family: 'JetBrains Mono', monospace; font-size: 14px; font-weight: 500; letter-spacing: 0.15em; text-transform: uppercase; color: #FFFFFF; }
+  .ticker .item .dot { width: 6px; height: 6px; background: #E60012; border-radius: 50%; }
+
+  /* Bottom section */
+  .bottom { position: absolute; left: 80px; right: 80px; bottom: 40px; display: flex; justify-content: space-between; align-items: flex-end; }
+  .bottom .stat-group { display: flex; gap: 48px; }
+  .bottom .stat .num { font-family: 'Inter', sans-serif; font-weight: 800; font-size: 32px; color: #1A1A16; }
+  .bottom .stat .lbl { font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: 0.15em; text-transform: uppercase; color: #888; margin-top: 4px; }
+  .bottom .scroll-hint { font-family: 'JetBrains Mono', monospace; font-size: 12px; color: #888; letter-spacing: 0.15em; text-transform: uppercase; display: flex; align-items: center; gap: 8px; }
+  .bottom .scroll-hint .arrow { color: #E60012; animation: bounce-down 1.5s ease-in-out infinite; }
+
+  @keyframes bounce-down { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(5px); } }
 </style>
 </head>
 <body>
@@ -51,79 +58,113 @@
     <div class="page" data-composition-id="home" data-start="0" data-duration="6" data-width="1920" data-height="1080">
       <div class="red-bar"></div>
       <div class="top">
-        <div class="lbl">VICOO · <span class="red">CONSUMER HOME</span></div>
+        <div class="lbl">VICOO · <span class="red">HOME</span></div>
         <div class="rule"></div>
-        <div class="meta">PP. 05 · /</div>
+        <div class="meta">PP. 09 · /</div>
       </div>
+
       <div class="hero">
         <div class="copy">
-          <div class="kicker">SS26 · WELFARE × ART</div>
-          <h1>Children's art,<br/>worn by <em>everyone</em>.</h1>
-          <p class="sub">把孩子的画变成可穿的、可持续的、每一件都能被验证的衣服。VICOO 联合 UNIQLO「美育公益」项目，让创意进入衣橱，让公益有可追溯的回执。</p>
+          <div class="kicker">SPRING · SS26</div>
+          <h1>Children's <em>art</em>,<br>worn by <em>everyone</em>.</h1>
+          <p class="sub">从乡村孩子的画笔到你的衣橱——每一件 VICOO 联名款，都是一个孩子被世界看见的机会。</p>
           <div class="cta">
-            <div class="btn1">SHOP THE COLLECTION →</div>
+            <div class="btn1"><div class="sweep"></div>SHOP THE COLLECTION</div>
             <div class="btn2">DONATE NOW ♥</div>
           </div>
         </div>
-        <div class="photo">
-          <img src="https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?auto=format&fit=crop&w=1200&q=85" alt="hero"/>
+        <div class="visual">
+          <img src="https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?auto=format&fit=crop&w=800&q=85" alt="" />
+          <div class="shine"></div>
           <div class="badge">28% DONATE</div>
-          <div class="tag">SS26 · WELFARE × ART</div>
         </div>
       </div>
-      <div class="marquee">
-        <div class="track" id="mt">
-          <span>MADE TO CIRCULATE</span><span class="red">·</span>
-          <span>32 SCHOOLS</span><span class="red">·</span>
-          <span>1,284 PRODUCTS</span><span class="red">·</span>
-          <span>12,431 ARTWORKS</span><span class="red">·</span>
-          <span>¥1.2M DONATED</span><span class="red">·</span>
-          <span>98.7% TRACEABLE</span><span class="red">·</span>
+
+      <div class="ticker">
+        <div class="track">
+          <div class="item"><div class="dot"></div>32 SCHOOLS</div>
+          <div class="item"><div class="dot"></div>1,284 PRODUCTS</div>
+          <div class="item"><div class="dot"></div>12,431 ARTWORKS</div>
+          <div class="item"><div class="dot"></div>¥1.2M DONATED</div>
+          <div class="item"><div class="dot"></div>98.7% TRACEABLE</div>
+          <div class="item"><div class="dot"></div>32 SCHOOLS</div>
+          <div class="item"><div class="dot"></div>1,284 PRODUCTS</div>
+          <div class="item"><div class="dot"></div>12,431 ARTWORKS</div>
+          <div class="item"><div class="dot"></div>¥1.2M DONATED</div>
+          <div class="item"><div class="dot"></div>98.7% TRACEABLE</div>
         </div>
       </div>
-      <div class="bot">
-        <div class="lbl">● LIVE · SS26</div>
-        <div class="v">1,284 <span class="red">PRODUCTS</span></div>
-        <div class="v">¥1.2M <span class="red">DONATED</span></div>
-        <div class="v">32 <span class="red">SCHOOLS</span></div>
-        <div class="v">12,431 <span class="red">ARTWORKS</span></div>
-        <div class="v">98.7% <span class="red">TRACEABLE</span></div>
+
+      <div class="bottom">
+        <div class="stat-group">
+          <div class="stat"><div class="num">12,431</div><div class="lbl">Artworks</div></div>
+          <div class="stat"><div class="num">4,872</div><div class="lbl">Children</div></div>
+          <div class="stat"><div class="num">¥1.28M</div><div class="lbl">Donated</div></div>
+        </div>
+        <div class="scroll-hint">SCROLL TO EXPLORE <span class="arrow">↓</span></div>
       </div>
     </div>
   </div>
+
   <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
   <script>
     (function () {
       const tl = gsap.timeline({ paused: true });
       window.__timelines = window.__timelines || {};
       window.__timelines["home"] = tl;
+
       gsap.set('.red-bar', { scaleX: 0, transformOrigin: 'left center' });
       gsap.set('.top > *', { y: -20, opacity: 0 });
-      gsap.set('.hero .copy > *', { y: 40, opacity: 0 });
-      gsap.set('.hero .photo', { clipPath: 'inset(0 100% 0 0)' });
-      gsap.set('.hero .photo .badge', { scale: 0, transformOrigin: 'top right' });
-      gsap.set('.hero .photo .tag', { x: -20, opacity: 0 });
-      gsap.set('.marquee', { y: 60, opacity: 0 });
-      gsap.set('.bot > *', { y: 20, opacity: 0 });
-      tl.to('.red-bar', { scaleX: 1, duration: 0.5, ease: 'power3.inOut' }, 0);
-      tl.to('.top > *', { y: 0, opacity: 1, duration: 0.5, stagger: 0.06, ease: 'power2.out' }, 0.1);
-      tl.to('.hero .copy > *', { y: 0, opacity: 1, duration: 0.7, stagger: 0.1, ease: 'expo.out' }, 0.4);
-      tl.to('.hero .photo', { clipPath: 'inset(0 0% 0 0)', duration: 1.2, ease: 'power3.inOut' }, 0.7);
-      tl.to('.hero .photo .badge', { scale: 1, duration: 0.5, ease: 'back.out(1.6)' }, 1.7);
-      tl.to('.hero .photo .tag', { x: 0, opacity: 1, duration: 0.5, ease: 'power2.out' }, 1.8);
-      tl.to('.marquee', { y: 0, opacity: 1, duration: 0.6, ease: 'power3.out' }, 1.6);
-      // continuous marquee
-      const mt = document.getElementById('mt');
-      const mtLoop = gsap.to(mt, { x: '-50%', duration: 12, ease: 'none', repeat: -1 });
-      mtLoop.pause();
-      tl.call(() => mtLoop.play(), [], 2.2);
-      tl.to('.bot > *', { y: 0, opacity: 1, duration: 0.4, stagger: 0.05, ease: 'power2.out' }, 1.9);
+      gsap.set('.hero .kicker', { y: 20, opacity: 0 });
+      gsap.set('.hero h1', { y: 40, opacity: 0 });
+      gsap.set('.hero .sub', { y: 20, opacity: 0 });
+      gsap.set('.hero .cta > *', { y: 20, opacity: 0 });
+      gsap.set('.hero .btn1 .sweep', { x: '-100%' });
+      gsap.set('.hero .visual', { clipPath: 'inset(0 100% 0 0)', opacity: 0 });
+      gsap.set('.hero .visual img', { scale: 1.15, opacity: 0 });
+      gsap.set('.hero .visual .shine', { x: '-100%' });
+      gsap.set('.hero .visual .badge', { scale: 0, rotation: -45 });
+      gsap.set('.ticker .track', { x: 0 });
+      gsap.set('.bottom .stat', { y: 20, opacity: 0 });
+      gsap.set('.bottom .scroll-hint', { opacity: 0 });
+
+      // Entry
+      tl.to('.red-bar', { scaleX: 1, duration: 0.4, ease: 'power4.inOut' }, 0);
+      tl.to('.top > *', { y: 0, opacity: 1, duration: 0.5, stagger: 0.06, ease: 'power3.out' }, 0.1);
+
+      // Hero copy
+      tl.to('.hero .kicker', { y: 0, opacity: 1, duration: 0.5, ease: 'power3.out' }, 0.3);
+      tl.to('.hero h1', { y: 0, opacity: 1, duration: 0.8, ease: 'expo.out' }, 0.5);
+      tl.to('.hero .sub', { y: 0, opacity: 1, duration: 0.5, ease: 'power3.out' }, 0.8);
+      tl.to('.hero .cta > *', { y: 0, opacity: 1, duration: 0.4, stagger: 0.1, ease: 'back.out(1.4)' }, 1.0);
+
+      // Button sweep
+      tl.to('.hero .btn1 .sweep', { x: '100%', duration: 0.6, ease: 'power2.inOut' }, 1.5);
+
+      // Hero visual — clipPath wipe
+      tl.to('.hero .visual', { clipPath: 'inset(0 0% 0 0)', opacity: 1, duration: 1.0, ease: 'power3.inOut' }, 0.6);
+      tl.to('.hero .visual img', { scale: 1, opacity: 1, duration: 1.2, ease: 'power2.out' }, 0.7);
+
+      // Shine effect
+      tl.to('.hero .visual .shine', { x: '100%', duration: 0.8, ease: 'power2.inOut' }, 1.5);
+
+      // Badge pop
+      tl.to('.hero .visual .badge', { scale: 1, rotation: 0, duration: 0.6, ease: 'back.out(2)' }, 1.8);
+
+      // Ticker animation
+      tl.to('.ticker .track', { x: '-50%', duration: 8.0, ease: 'none', repeat: -1 }, 2.0);
+
+      // Bottom stats
+      tl.to('.bottom .stat', { y: 0, opacity: 1, duration: 0.5, stagger: 0.1, ease: 'power3.out' }, 2.2);
+      tl.to('.bottom .scroll-hint', { opacity: 1, duration: 0.5, ease: 'power2.out' }, 2.5);
+
       // Exit
-      tl.to('.hero .photo', { x: 100, opacity: 0, duration: 0.4, ease: 'power2.in' }, 5.2);
-      tl.to('.hero .copy > *', { y: -20, opacity: 0, duration: 0.3, ease: 'power2.in' }, 5.3);
-      tl.to('.marquee', { y: 60, duration: 0.3, ease: 'power2.in' }, 5.4);
-      tl.to('.bot', { y: 60, duration: 0.3, ease: 'power2.in' }, 5.4);
-      tl.to('.top', { y: -20, opacity: 0, duration: 0.3, ease: 'power2.in' }, 5.5);
+      tl.to('.bottom .stat, .bottom .scroll-hint', { y: -15, opacity: 0, duration: 0.3, ease: 'power3.in' }, 5.2);
+      tl.to('.hero .visual', { clipPath: 'inset(0 0 0 100%)', opacity: 0, duration: 0.5, ease: 'power3.in' }, 5.3);
+      tl.to('.hero .copy > *', { y: -20, opacity: 0, duration: 0.3, stagger: 0.05, ease: 'power3.in' }, 5.3);
+      tl.to('.top', { y: -20, opacity: 0, duration: 0.3, ease: 'power3.in' }, 5.5);
+      tl.to('.red-bar', { scaleX: 0, transformOrigin: 'right center', duration: 0.3 }, 5.5);
+
       window.addEventListener('load', () => tl.play());
     })();
   </script>

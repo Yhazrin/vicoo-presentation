@@ -11,44 +11,52 @@
   * { margin: 0; padding: 0; box-sizing: border-box; }
   html, body { width: 2560px; height: 1440px; overflow: hidden; background: #FFFFFF; color: #1A1A16; font-family: 'Inter', -apple-system, sans-serif; -webkit-font-smoothing: antialiased; }
   .stage { position: absolute; top: 0; left: 0; width: 1920px; height: 1080px; transform: scale(1.3333333); transform-origin: top left; }
-  .page { position: absolute; inset: 0; }
+  .page { position: absolute; inset: 0; display: flex; }
 
-  /* Split: left dark, right white */
-  .left { position: absolute; left: 0; top: 0; width: 700px; height: 1080px; background: #0A0A0A; color: #FFFFFF; padding: 80px 64px; display: flex; flex-direction: column; justify-content: space-between; }
+  .left { width: 700px; background: #0A0A0A; color: #FFFFFF; padding: 80px 64px; display: flex; flex-direction: column; justify-content: space-between; position: relative; overflow: hidden; }
   .left .top-bar { display: flex; align-items: center; gap: 12px; }
   .left .top-bar .mark { width: 40px; height: 40px; background: #E60012; color: #FFFFFF; display: flex; align-items: center; justify-content: center; font-family: 'Smiley Sans', sans-serif; font-size: 22px; }
   .left .top-bar .name { font-family: 'Smiley Sans', sans-serif; font-size: 22px; }
-  .left .quote { }
-  .left .quote .mark { font-family: 'Smiley Sans', sans-serif; font-size: 80px; line-height: 0.6; color: #E60012; }
-  .left .quote .text { font-family: 'Noto Sans SC', sans-serif; font-weight: 400; font-size: 24px; line-height: 1.4; color: #DDD; margin-top: 16px; max-width: 520px; }
-  .left .quote .by { font-family: 'JetBrains Mono', monospace; font-size: 12px; letter-spacing: 0.18em; text-transform: uppercase; color: #888; margin-top: 20px; }
-  .left .bottom { display: flex; flex-direction: column; gap: 8px; }
-  .left .bottom .lbl { font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; color: #888; }
-  .left .bottom .v { font-family: 'Smiley Sans', sans-serif; font-size: 18px; color: #FFFFFF; }
 
-  /* Right: form */
-  .right { position: absolute; left: 700px; top: 0; right: 0; height: 1080px; background: #FFFFFF; padding: 80px 80px; }
-  .right .crumb { font-family: 'JetBrains Mono', monospace; font-size: 12px; font-weight: 500; letter-spacing: 0.2em; text-transform: uppercase; color: #888; }
-  .right .crumb .red { color: #E60012; }
-  .right .crumb .sep { color: #CCC; margin: 0 8px; }
+  .left .hero { margin-top: 80px; }
+  .left .hero h1 { font-family: 'Smiley Sans', sans-serif; font-weight: 400; font-size: 72px; line-height: 0.95; letter-spacing: -3px; }
+  .left .hero h1 em { font-style: normal; color: #E60012; }
+  .left .hero .sub { font-family: 'Noto Sans SC', sans-serif; font-size: 18px; color: rgba(255,255,255,0.6); margin-top: 24px; line-height: 1.6; }
 
-  .right h1 { font-family: 'Smiley Sans', sans-serif; font-weight: 400; font-size: 64px; line-height: 0.95; letter-spacing: -2px; color: #1A1A16; margin-top: 24px; }
-  .right .sub { font-family: 'Noto Sans SC', sans-serif; font-weight: 400; font-size: 16px; color: #666; margin-top: 12px; }
+  .left .stats { display: flex; gap: 32px; margin-bottom: 40px; }
+  .left .stats .stat { text-align: center; }
+  .left .stats .stat .num { font-family: 'Inter', sans-serif; font-weight: 800; font-size: 28px; color: #E60012; }
+  .left .stats .stat .lbl { font-family: 'JetBrains Mono', monospace; font-size: 10px; color: rgba(255,255,255,0.5); letter-spacing: 0.1em; text-transform: uppercase; margin-top: 4px; }
 
-  .form { margin-top: 48px; max-width: 520px; }
-  .form .field { margin-bottom: 20px; }
-  .form .label { font-family: 'JetBrains Mono', monospace; font-size: 11px; font-weight: 500; letter-spacing: 0.2em; text-transform: uppercase; color: #888; margin-bottom: 8px; }
-  .form .input { width: 100%; height: 60px; border: 2px solid #1A1A16; padding: 0 20px; font-family: 'Inter', sans-serif; font-weight: 600; font-size: 16px; color: #1A1A16; }
-  .form .input::placeholder { color: #BBB; }
-  .form .row { display: flex; justify-content: space-between; align-items: center; }
-  .form .forgot { font-family: 'Inter', sans-serif; font-weight: 600; font-size: 13px; color: #1A1A16; text-decoration: underline; }
-  .form .btn { width: 100%; height: 64px; background: #1A1A16; color: #FFFFFF; font-family: 'Inter', sans-serif; font-weight: 800; font-size: 16px; letter-spacing: 0.15em; text-transform: uppercase; }
-  .form .divider { display: flex; align-items: center; gap: 16px; margin: 28px 0; font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; color: #888; }
-  .form .divider::before, .form .divider::after { content: ''; flex: 1; height: 1px; background: #DDD; }
-  .form .social { display: flex; gap: 12px; }
-  .form .social .s { flex: 1; height: 56px; border: 2px solid #1A1A16; display: flex; align-items: center; justify-content: center; gap: 8px; font-family: 'Inter', sans-serif; font-weight: 700; font-size: 13px; }
-  .form .signup { text-align: center; font-family: 'Inter', sans-serif; font-size: 14px; color: #666; margin-top: 24px; }
-  .form .signup strong { color: #1A1A16; font-weight: 700; text-decoration: underline; }
+  .left .deco { position: absolute; bottom: 0; right: 0; width: 200px; height: 200px; border-radius: 50%; border: 2px solid rgba(230,0,18,0.3); transform: translate(30%, 30%); }
+
+  .right { flex: 1; display: flex; align-items: center; justify-content: center; padding: 80px; }
+  .right .form { width: 100%; max-width: 440px; }
+  .right .form .kicker { font-family: 'JetBrains Mono', monospace; font-size: 12px; font-weight: 500; letter-spacing: 0.2em; text-transform: uppercase; color: #E60012; }
+  .right .form h2 { font-family: 'Inter', sans-serif; font-weight: 800; font-size: 32px; margin-top: 12px; }
+  .right .form .desc { font-family: 'Noto Sans SC', sans-serif; font-size: 15px; color: #888; margin-top: 8px; }
+
+  .right .form .field { margin-top: 24px; }
+  .right .form .field label { font-family: 'JetBrains Mono', monospace; font-size: 11px; font-weight: 500; letter-spacing: 0.15em; text-transform: uppercase; color: #888; display: block; margin-bottom: 8px; }
+  .right .form .field input { width: 100%; padding: 16px 20px; border: 2px solid #E0E0E0; font-family: 'Inter', sans-serif; font-size: 15px; transition: border-color 0.3s ease; }
+  .right .form .field input:focus { border-color: #E60012; outline: none; }
+  .right .form .field input::placeholder { color: #CCC; }
+
+  .right .form .forgot { text-align: right; margin-top: 8px; }
+  .right .form .forgot a { font-family: 'Inter', sans-serif; font-size: 13px; color: #E60012; text-decoration: none; }
+
+  .right .form .btn { width: 100%; padding: 18px; background: #E60012; color: #FFFFFF; border: 0; font-family: 'Inter', sans-serif; font-weight: 800; font-size: 16px; letter-spacing: 0.1em; text-transform: uppercase; cursor: pointer; margin-top: 24px; position: relative; overflow: hidden; }
+  .right .form .btn .sweep { position: absolute; inset: 0; background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent); transform: translateX(-100%); }
+
+  .right .form .divider { display: flex; align-items: center; gap: 16px; margin-top: 24px; }
+  .right .form .divider .line { flex: 1; height: 1px; background: #E0E0E0; }
+  .right .form .divider .text { font-family: 'JetBrains Mono', monospace; font-size: 11px; color: #888; letter-spacing: 0.1em; text-transform: uppercase; }
+
+  .right .form .social { display: flex; gap: 12px; margin-top: 16px; }
+  .right .form .social .btn-social { flex: 1; padding: 14px; border: 2px solid #E0E0E0; background: #FFFFFF; font-family: 'Inter', sans-serif; font-weight: 600; font-size: 13px; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 8px; }
+
+  .right .form .signup { text-align: center; margin-top: 24px; font-family: 'Inter', sans-serif; font-size: 14px; color: #888; }
+  .right .form .signup a { color: #E60012; text-decoration: none; font-weight: 700; }
 </style>
 </head>
 <body>
@@ -59,71 +67,93 @@
           <div class="mark">V</div>
           <div class="name">VICOO</div>
         </div>
-        <div class="quote">
-          <div class="mark">"</div>
-          <p class="text">「我画的那朵花，现在穿在别人身上。我妈妈说，这样会有更多小朋友能上学画画。」</p>
-          <div class="by">— 林一一, 8 岁 · 「春的色彩」美育项目</div>
+        <div class="hero">
+          <h1>Hello,<br><em>again.</em></h1>
+          <p class="sub">登录您的 VICOO 账户，追踪订单、管理捐赠、参与投票——一切从这里开始。</p>
         </div>
-        <div class="bottom">
-          <div class="lbl">● WELFARE × ART</div>
-          <div class="v">Welcome back.</div>
+        <div class="stats">
+          <div class="stat"><div class="num">12,431</div><div class="lbl">Artworks</div></div>
+          <div class="stat"><div class="num">4,872</div><div class="lbl">Children</div></div>
+          <div class="stat"><div class="num">¥1.28M</div><div class="lbl">Donated</div></div>
         </div>
+        <div class="deco"></div>
       </div>
+
       <div class="right">
-        <div class="crumb">ACCOUNT <span class="sep">/</span> <span class="red">SIGN IN</span></div>
-        <h1>Hello, again.</h1>
-        <p class="sub">登录后可以查看订单、提交评价、追踪捐赠证书。</p>
         <div class="form">
+          <div class="kicker">WELCOME BACK</div>
+          <h2>Sign in to your account</h2>
+          <p class="desc">输入您的邮箱和密码继续</p>
+
           <div class="field">
-            <div class="label">EMAIL OR PHONE</div>
-            <input class="input" placeholder="lihua@example.com" value="lihua@example.com" />
+            <label>Email</label>
+            <input type="email" placeholder="lihua@example.com" disabled>
           </div>
           <div class="field">
-            <div class="row">
-              <div class="label">PASSWORD</div>
-              <a class="forgot" href="#">Forgot?</a>
-            </div>
-            <input class="input" type="password" placeholder="••••••••" value="••••••••" />
+            <label>Password</label>
+            <input type="password" placeholder="••••••••" disabled>
           </div>
-          <button class="btn">SIGN IN →</button>
-          <div class="divider">OR CONTINUE WITH</div>
+          <div class="forgot"><a href="#">Forgot password?</a></div>
+
+          <button class="btn" disabled><div class="sweep"></div>SIGN IN →</button>
+
+          <div class="divider">
+            <div class="line"></div>
+            <div class="text">OR</div>
+            <div class="line"></div>
+          </div>
+
           <div class="social">
-            <div class="s">微信</div>
-            <div class="s">支付宝</div>
-            <div class="s">Google</div>
+            <button class="btn-social" disabled>💬 WeChat</button>
+            <button class="btn-social" disabled>🔵 Alipay</button>
           </div>
-          <p class="signup">还没有账号？<strong>立即注册</strong></p>
+
+          <div class="signup">Don't have an account? <a href="#">Sign up</a></div>
         </div>
       </div>
     </div>
   </div>
+
   <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
   <script>
     (function () {
       const tl = gsap.timeline({ paused: true });
       window.__timelines = window.__timelines || {};
       window.__timelines["login"] = tl;
-      gsap.set('.left', { x: -100, opacity: 0 });
-      gsap.set('.right', { x: 100, opacity: 0 });
-      gsap.set('.left .quote .mark, .left .quote .text, .left .quote .by, .left .bottom > *', { y: 20, opacity: 0 });
-      gsap.set('.right .crumb, .right h1, .right .sub', { y: 20, opacity: 0 });
-      gsap.set('.form > *', { y: 20, opacity: 0 });
-      tl.to('.left', { x: 0, opacity: 1, duration: 0.7, ease: 'power3.out' }, 0);
-      tl.to('.right', { x: 0, opacity: 1, duration: 0.7, ease: 'power3.out' }, 0.1);
-      tl.to('.left .top-bar', { y: 0, opacity: 1, duration: 0.4 }, 0.4);
-      tl.to('.left .quote > *', { y: 0, opacity: 1, duration: 0.6, stagger: 0.1, ease: 'power2.out' }, 0.5);
-      tl.to('.left .bottom > *', { y: 0, opacity: 1, duration: 0.4, stagger: 0.08, ease: 'power2.out' }, 0.7);
-      tl.to('.right .crumb, .right h1, .right .sub', { y: 0, opacity: 1, duration: 0.5, stagger: 0.1, ease: 'power2.out' }, 0.7);
-      tl.to('.form > *', { y: 0, opacity: 1, duration: 0.4, stagger: 0.06, ease: 'power2.out' }, 1.0);
-      // typing-like effect on email
-      tl.to({}, { duration: 0.3, onStart: () => {
-        const input = document.querySelector('.form .input');
-        gsap.fromTo(input, { borderColor: '#E60012' }, { borderColor: '#1A1A16', duration: 0.3 });
-      }}, 2.5);
+
+      gsap.set('.left', { x: -700, opacity: 0 });
+      gsap.set('.left .top-bar', { y: -20, opacity: 0 });
+      gsap.set('.left .hero h1', { y: 40, opacity: 0 });
+      gsap.set('.left .hero .sub', { y: 20, opacity: 0 });
+      gsap.set('.left .stats .stat', { y: 20, opacity: 0 });
+      gsap.set('.left .deco', { scale: 0, opacity: 0 });
+      gsap.set('.right .form > *', { y: 20, opacity: 0 });
+      gsap.set('.right .form .btn .sweep', { x: '-100%' });
+      gsap.set('.right .form .field input', { borderColor: '#E0E0E0' });
+
+      // Entry — left panel slides in
+      tl.to('.left', { x: 0, opacity: 1, duration: 0.8, ease: 'power3.out' }, 0);
+
+      // Left content
+      tl.to('.left .top-bar', { y: 0, opacity: 1, duration: 0.5, ease: 'power3.out' }, 0.3);
+      tl.to('.left .hero h1', { y: 0, opacity: 1, duration: 0.7, ease: 'expo.out' }, 0.5);
+      tl.to('.left .hero .sub', { y: 0, opacity: 1, duration: 0.5, ease: 'power3.out' }, 0.8);
+      tl.to('.left .stats .stat', { y: 0, opacity: 1, duration: 0.4, stagger: 0.1, ease: 'back.out(1.4)' }, 1.0);
+      tl.to('.left .deco', { scale: 1, opacity: 1, duration: 0.8, ease: 'back.out(1.2)' }, 1.2);
+
+      // Right form
+      tl.to('.right .form > *', { y: 0, opacity: 1, duration: 0.5, stagger: 0.08, ease: 'power3.out' }, 0.5);
+
+      // Input focus animation
+      tl.to('.right .form .field input', { borderColor: '#E60012', duration: 0.3, stagger: 0.1, ease: 'power2.out' }, 1.5);
+
+      // Button sweep
+      tl.to('.right .form .btn .sweep', { x: '100%', duration: 0.6, ease: 'power2.inOut' }, 2.0);
+
       // Exit
-      tl.to('.form > *, .right .crumb, .right h1, .right .sub', { y: 20, opacity: 0, duration: 0.3, ease: 'power2.in' }, 4.2);
-      tl.to('.left', { x: -100, opacity: 0, duration: 0.4, ease: 'power2.in' }, 4.3);
-      tl.to('.right', { x: 100, opacity: 0, duration: 0.4, ease: 'power2.in' }, 4.3);
+      tl.to('.right .form > *', { y: -15, opacity: 0, duration: 0.3, stagger: 0.04, ease: 'power3.in' }, 4.2);
+      tl.to('.left', { x: -700, opacity: 0, duration: 0.5, ease: 'power3.in' }, 4.3);
+
       window.addEventListener('load', () => tl.play());
     })();
   </script>

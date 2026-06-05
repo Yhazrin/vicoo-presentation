@@ -120,7 +120,8 @@
       gsap.set('.campaign-stat', { y: 20, opacity: 0 });
       gsap.set('.artwork-card', { x: 30, opacity: 0 });
 
-      tl.to('.red-bar', { scaleX: 1, duration: 0.5, ease: 'power3.inOut' }, 0);
+      // Entry
+      tl.to('.red-bar', { scaleX: 1, duration: 0.4, ease: 'power4.inOut' }, 0);
       tl.to('.top > *', { y: 0, opacity: 1, duration: 0.5, stagger: 0.06, ease: 'power2.out' }, 0.1);
       tl.to('.left .kicker', { y: 0, opacity: 1, duration: 0.5, ease: 'power2.out' }, 0.3);
       tl.to('.left h1', { y: 0, opacity: 1, duration: 0.6, ease: 'expo.out' }, 0.5);

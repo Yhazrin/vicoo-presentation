@@ -1,0 +1,148 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<title>VICOO — Campaign Detail</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Noto+Sans+SC:wght@300;400;500;700;900&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  @font-face { font-family: 'Smiley Sans'; src: url('SmileySans-Oblique.woff2') format('woff2'); font-weight: 400; font-style: normal; font-display: block; }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html, body { width: 2560px; height: 1440px; overflow: hidden; background: #FFFFFF; color: #1A1A16; font-family: 'Inter', -apple-system, sans-serif; -webkit-font-smoothing: antialiased; }
+  .stage { position: absolute; top: 0; left: 0; width: 1920px; height: 1080px; transform: scale(1.3333333); transform-origin: top left; }
+  .page { position: absolute; inset: 0; }
+  .red-bar { position: absolute; top: 0; left: 0; right: 0; height: 8px; background: #E60012; }
+  .top { position: absolute; top: 60px; left: 80px; right: 80px; display: flex; align-items: center; gap: 24px; }
+  .top .lbl { font-family: 'JetBrains Mono', monospace; font-size: 13px; font-weight: 500; letter-spacing: 0.2em; text-transform: uppercase; }
+  .top .lbl .red { color: #E60012; }
+  .top .rule { flex: 1; height: 1px; background: #1A1A16; }
+  .top .meta { font-family: 'JetBrains Mono', monospace; font-size: 13px; font-weight: 500; letter-spacing: 0.18em; text-transform: uppercase; color: #888; }
+
+  .content { position: absolute; left: 80px; right: 80px; top: 140px; bottom: 80px; display: grid; grid-template-columns: 1.2fr 1fr; gap: 60px; }
+
+  .left { display: flex; flex-direction: column; }
+  .left .kicker { font-family: 'JetBrains Mono', monospace; font-size: 12px; font-weight: 500; letter-spacing: 0.2em; text-transform: uppercase; color: #E60012; }
+  .left h1 { font-family: 'Smiley Sans', sans-serif; font-weight: 400; font-size: 52px; line-height: 1.0; letter-spacing: -2px; color: #1A1A16; margin-top: 12px; }
+  .left h1 em { font-style: normal; color: #E60012; }
+
+  .progress-section { margin-top: 32px; }
+  .progress-header { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 12px; }
+  .progress-header .current { font-family: 'Inter', sans-serif; font-weight: 900; font-size: 48px; color: #E60012; }
+  .progress-header .target { font-family: 'JetBrains Mono', monospace; font-size: 14px; color: #888; }
+  .progress-bar { height: 12px; background: #F0F0F0; position: relative; overflow: hidden; }
+  .progress-fill { height: 100%; background: #E60012; width: 0; }
+  .progress-labels { display: flex; justify-content: space-between; margin-top: 8px; }
+  .progress-labels span { font-family: 'JetBrains Mono', monospace; font-size: 11px; color: #888; }
+
+  .campaign-stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-top: 24px; }
+  .campaign-stat { padding: 16px; background: #F5F5F5; text-align: center; }
+  .campaign-stat .val { font-family: 'Inter', sans-serif; font-weight: 800; font-size: 24px; color: #1A1A16; }
+  .campaign-stat .lbl { font-family: 'JetBrains Mono', monospace; font-size: 10px; color: #888; letter-spacing: 0.1em; text-transform: uppercase; margin-top: 4px; }
+
+  .right { display: flex; flex-direction: column; gap: 16px; }
+  .artwork-card { padding: 20px; background: #F5F5F5; display: flex; gap: 16px; align-items: center; }
+  .artwork-card .rank { font-family: 'Smiley Sans', sans-serif; font-size: 36px; color: #E60012; min-width: 50px; text-align: center; }
+  .artwork-card .info .name { font-family: 'Noto Sans SC', sans-serif; font-weight: 700; font-size: 16px; }
+  .artwork-card .info .artist { font-family: 'Inter', sans-serif; font-size: 13px; color: #888; margin-top: 4px; }
+  .artwork-card .info .votes { font-family: 'JetBrains Mono', monospace; font-size: 12px; color: #E60012; margin-top: 4px; }
+</style>
+</head>
+<body>
+  <div class="stage">
+    <div class="page" data-composition-id="campaign_detail" data-start="0" data-duration="5" data-width="1920" data-height="1080">
+      <div class="red-bar"></div>
+      <div class="top">
+        <div class="lbl">VICOO · <span class="red">CAMPAIGN</span></div>
+        <div class="rule"></div>
+        <div class="meta">PP. 22 · /campaigns/春的色彩</div>
+      </div>
+
+      <div class="content">
+        <div class="left">
+          <div class="kicker">CAMPAIGN · 2026 SPRING</div>
+          <h1>「<em>春的色彩</em>」</h1>
+
+          <div class="progress-section">
+            <div class="progress-header">
+              <div class="current">200</div>
+              <div class="target">/ 500 件目标</div>
+            </div>
+            <div class="progress-bar"><div class="progress-fill" style="width: 0%;"></div></div>
+            <div class="progress-labels">
+              <span>STARTED 2026-03-01</span>
+              <span>40% · 87% ON TRACK</span>
+              <span>EST. 2026-07-15</span>
+            </div>
+          </div>
+
+          <div class="campaign-stats">
+            <div class="campaign-stat"><div class="val">¥17,800</div><div class="lbl">Donated</div></div>
+            <div class="campaign-stat"><div class="val">12</div><div class="lbl">Artworks</div></div>
+            <div class="campaign-stat"><div class="val">3,419</div><div class="lbl">Votes</div></div>
+          </div>
+        </div>
+
+        <div class="right">
+          <div class="artwork-card">
+            <div class="rank">#1</div>
+            <div class="info"><div class="name">春的色彩 · 林一一</div><div class="artist">Age 8 · 云南</div><div class="votes">1,247 votes</div></div>
+          </div>
+          <div class="artwork-card">
+            <div class="rank">#2</div>
+            <div class="info"><div class="name">我的家 · 王小明</div><div class="artist">Age 10 · 贵州</div><div class="votes">986 votes</div></div>
+          </div>
+          <div class="artwork-card">
+            <div class="rank">#3</div>
+            <div class="info"><div class="name">太阳花 · 陈思雨</div><div class="artist">Age 7 · 四川</div><div class="votes">756 votes</div></div>
+          </div>
+          <div class="artwork-card">
+            <div class="rank">#4</div>
+            <div class="info"><div class="name">彩虹桥 · 李梦琪</div><div class="artist">Age 9 · 广西</div><div class="votes">430 votes</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
+  <script>
+    (function () {
+      const tl = gsap.timeline({ paused: true });
+      window.__timelines = window.__timelines || {};
+      window.__timelines["campaign_detail"] = tl;
+
+      gsap.set('.red-bar', { scaleX: 0, transformOrigin: 'left center' });
+      gsap.set('.top > *', { y: -20, opacity: 0 });
+      gsap.set('.left .kicker', { y: 20, opacity: 0 });
+      gsap.set('.left h1', { y: 30, opacity: 0 });
+      gsap.set('.progress-section', { y: 20, opacity: 0 });
+      gsap.set('.campaign-stat', { y: 20, opacity: 0 });
+      gsap.set('.artwork-card', { x: 30, opacity: 0 });
+
+      tl.to('.red-bar', { scaleX: 1, duration: 0.5, ease: 'power3.inOut' }, 0);
+      tl.to('.top > *', { y: 0, opacity: 1, duration: 0.5, stagger: 0.06, ease: 'power2.out' }, 0.1);
+      tl.to('.left .kicker', { y: 0, opacity: 1, duration: 0.5, ease: 'power2.out' }, 0.3);
+      tl.to('.left h1', { y: 0, opacity: 1, duration: 0.6, ease: 'expo.out' }, 0.5);
+      tl.to('.progress-section', { y: 0, opacity: 1, duration: 0.5, ease: 'power2.out' }, 0.8);
+
+      // Animate progress bar
+      tl.to('.progress-fill', { width: '40%', duration: 1.2, ease: 'power2.inOut' }, 1.2);
+
+      tl.to('.campaign-stat', { y: 0, opacity: 1, duration: 0.4, stagger: 0.08, ease: 'power2.out' }, 1.5);
+      tl.to('.artwork-card', { x: 0, opacity: 1, duration: 0.5, stagger: 0.12, ease: 'power2.out' }, 1.8);
+
+      // Exit
+      tl.to('.artwork-card', { x: 20, opacity: 0, duration: 0.3, stagger: 0.05, ease: 'power2.in' }, 4.2);
+      tl.to('.campaign-stat', { y: -15, opacity: 0, duration: 0.3, ease: 'power2.in' }, 4.3);
+      tl.to('.progress-section', { y: -15, opacity: 0, duration: 0.3, ease: 'power2.in' }, 4.4);
+      tl.to('.left h1', { y: -20, opacity: 0, duration: 0.3, ease: 'power2.in' }, 4.5);
+      tl.to('.left .kicker', { y: -10, opacity: 0, duration: 0.3, ease: 'power2.in' }, 4.5);
+      tl.to('.top', { y: -20, opacity: 0, duration: 0.3, ease: 'power2.in' }, 4.5);
+      tl.to('.red-bar', { scaleX: 0, transformOrigin: 'right center', duration: 0.3 }, 4.5);
+
+      window.addEventListener('load', () => tl.play());
+    })();
+  </script>
+</body>
+</html>

@@ -1,0 +1,137 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<title>VICOO — Environmental Impact</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Noto+Sans+SC:wght@300;400;500;700;900&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  @font-face { font-family: 'Smiley Sans'; src: url('SmileySans-Oblique.woff2') format('woff2'); font-weight: 400; font-style: normal; font-display: block; }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html, body { width: 2560px; height: 1440px; overflow: hidden; background: #FFFFFF; color: #1A1A16; font-family: 'Inter', -apple-system, sans-serif; -webkit-font-smoothing: antialiased; }
+  .stage { position: absolute; top: 0; left: 0; width: 1920px; height: 1080px; transform: scale(1.3333333); transform-origin: top left; }
+  .page { position: absolute; inset: 0; }
+  .red-bar { position: absolute; top: 0; left: 0; right: 0; height: 8px; background: #E60012; }
+  .top { position: absolute; top: 60px; left: 80px; right: 80px; display: flex; align-items: center; gap: 24px; }
+  .top .lbl { font-family: 'JetBrains Mono', monospace; font-size: 13px; font-weight: 500; letter-spacing: 0.2em; text-transform: uppercase; }
+  .top .lbl .red { color: #E60012; }
+  .top .rule { flex: 1; height: 1px; background: #1A1A16; }
+  .top .meta { font-family: 'JetBrains Mono', monospace; font-size: 13px; font-weight: 500; letter-spacing: 0.18em; text-transform: uppercase; color: #888; }
+
+  .content { position: absolute; left: 80px; right: 80px; top: 140px; bottom: 80px; display: grid; grid-template-columns: 1fr 1fr; gap: 60px; }
+
+  .left { display: flex; flex-direction: column; justify-content: center; }
+  .left .kicker { font-family: 'JetBrains Mono', monospace; font-size: 12px; font-weight: 500; letter-spacing: 0.2em; text-transform: uppercase; color: #E60012; }
+  .left h1 { font-family: 'Smiley Sans', sans-serif; font-weight: 400; font-size: 52px; line-height: 1.0; letter-spacing: -2px; color: #1A1A16; margin-top: 12px; }
+  .left h1 em { font-style: normal; color: #E60012; }
+  .left .body { font-family: 'Noto Sans SC', sans-serif; font-size: 18px; color: #555; margin-top: 24px; line-height: 1.7; max-width: 480px; }
+
+  .loop-diagram { display: flex; align-items: center; justify-content: center; gap: 0; margin-top: 32px; }
+  .loop-node { padding: 16px 24px; background: #F5F5F5; text-align: center; }
+  .loop-node .icon { font-size: 32px; }
+  .loop-node .label { font-family: 'Inter', sans-serif; font-weight: 700; font-size: 14px; margin-top: 8px; }
+  .loop-arrow { font-size: 24px; color: #E60012; padding: 0 8px; }
+
+  .right { display: flex; flex-direction: column; gap: 20px; }
+  .impact-card { padding: 24px; background: #F5F5F5; display: flex; gap: 20px; align-items: center; }
+  .impact-card .icon { font-size: 36px; }
+  .impact-card .info { flex: 1; }
+  .impact-card .info h3 { font-family: 'Inter', sans-serif; font-weight: 800; font-size: 16px; }
+  .impact-card .info p { font-family: 'Noto Sans SC', sans-serif; font-size: 14px; color: #666; margin-top: 4px; }
+  .impact-card .stat { font-family: 'Inter', sans-serif; font-weight: 900; font-size: 32px; color: #E60012; }
+</style>
+</head>
+<body>
+  <div class="stage">
+    <div class="page" data-composition-id="environmental_impact" data-start="0" data-duration="5" data-width="1920" data-height="1080">
+      <div class="red-bar"></div>
+      <div class="top">
+        <div class="lbl">VICOO · <span class="red">CIRCULAR</span></div>
+        <div class="rule"></div>
+        <div class="meta">PP. 21 · /recycle</div>
+      </div>
+
+      <div class="content">
+        <div class="left">
+          <div class="kicker">CHAPTER 09 · CIRCULAR ECONOMY</div>
+          <h1>From <em>intake</em> to <em>reinvest</em>, nothing is wasted.</h1>
+          <div class="body">每一件回收的衣物，都会经过分拣、清洁、修复，重新进入循环。无法穿着的面料将被分解为再生纤维，用于新品生产。</div>
+
+          <div class="loop-diagram">
+            <div class="loop-node"><div class="icon">📥</div><div class="label">Intake</div></div>
+            <div class="loop-arrow">→</div>
+            <div class="loop-node"><div class="icon">🏷️</div><div class="label">Resale</div></div>
+            <div class="loop-arrow">→</div>
+            <div class="loop-node"><div class="icon">♻️</div><div class="label">Recycle</div></div>
+            <div class="loop-arrow">→</div>
+            <div class="loop-node"><div class="icon">💰</div><div class="label">Reinvest</div></div>
+            <div class="loop-arrow">↻</div>
+          </div>
+        </div>
+
+        <div class="right">
+          <div class="impact-card">
+            <div class="icon">👕</div>
+            <div class="info"><h3>Clothing Intake</h3><p>旧衣回收，每件 ¥5-20 回收补贴</p></div>
+            <div class="stat">2,847</div>
+          </div>
+          <div class="impact-card">
+            <div class="icon">🔄</div>
+            <div class="info"><h3>Resale Rate</h3><p>可穿着衣物二手转售率</p></div>
+            <div class="stat">68%</div>
+          </div>
+          <div class="impact-card">
+            <div class="icon">🧵</div>
+            <div class="info"><h3>Fiber Recovery</h3><p>不可穿着面料再生纤维回收率</p></div>
+            <div class="stat">92%</div>
+          </div>
+          <div class="impact-card">
+            <div class="icon">💚</div>
+            <div class="info"><h3>Reinvested</h3><p>回收收益重新投入美育基金</p></div>
+            <div class="stat">¥42K</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
+  <script>
+    (function () {
+      const tl = gsap.timeline({ paused: true });
+      window.__timelines = window.__timelines || {};
+      window.__timelines["environmental_impact"] = tl;
+
+      gsap.set('.red-bar', { scaleX: 0, transformOrigin: 'left center' });
+      gsap.set('.top > *', { y: -20, opacity: 0 });
+      gsap.set('.left .kicker', { y: 20, opacity: 0 });
+      gsap.set('.left h1', { y: 30, opacity: 0 });
+      gsap.set('.left .body', { y: 20, opacity: 0 });
+      gsap.set('.loop-node', { scale: 0, opacity: 0 });
+      gsap.set('.loop-arrow', { opacity: 0 });
+      gsap.set('.impact-card', { x: 40, opacity: 0 });
+
+      tl.to('.red-bar', { scaleX: 1, duration: 0.5, ease: 'power3.inOut' }, 0);
+      tl.to('.top > *', { y: 0, opacity: 1, duration: 0.5, stagger: 0.06, ease: 'power2.out' }, 0.1);
+      tl.to('.left .kicker', { y: 0, opacity: 1, duration: 0.5, ease: 'power2.out' }, 0.3);
+      tl.to('.left h1', { y: 0, opacity: 1, duration: 0.6, ease: 'expo.out' }, 0.5);
+      tl.to('.left .body', { y: 0, opacity: 1, duration: 0.5, ease: 'power2.out' }, 0.8);
+      tl.to('.loop-node', { scale: 1, opacity: 1, duration: 0.5, stagger: 0.1, ease: 'back.out(1.4)' }, 1.0);
+      tl.to('.loop-arrow', { opacity: 1, duration: 0.3, stagger: 0.08 }, 1.3);
+      tl.to('.impact-card', { x: 0, opacity: 1, duration: 0.5, stagger: 0.1, ease: 'power2.out' }, 1.5);
+
+      // Exit
+      tl.to('.impact-card', { x: 30, opacity: 0, duration: 0.3, stagger: 0.05, ease: 'power2.in' }, 4.2);
+      tl.to('.loop-node, .loop-arrow', { opacity: 0, duration: 0.3, ease: 'power2.in' }, 4.3);
+      tl.to('.left .body', { y: -15, opacity: 0, duration: 0.3, ease: 'power2.in' }, 4.4);
+      tl.to('.left h1', { y: -20, opacity: 0, duration: 0.3, ease: 'power2.in' }, 4.5);
+      tl.to('.left .kicker', { y: -10, opacity: 0, duration: 0.3, ease: 'power2.in' }, 4.5);
+      tl.to('.top', { y: -20, opacity: 0, duration: 0.3, ease: 'power2.in' }, 4.5);
+      tl.to('.red-bar', { scaleX: 0, transformOrigin: 'right center', duration: 0.3 }, 4.5);
+
+      window.addEventListener('load', () => tl.play());
+    })();
+  </script>
+</body>
+</html>

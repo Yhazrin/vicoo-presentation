@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<title>VICOO — Register</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Noto+Sans+SC:wght@300;400;500;700;900&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  @font-face { font-family: 'Smiley Sans'; src: url('SmileySans-Oblique.woff2') format('woff2'); font-weight: 400; font-style: normal; font-display: block; }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html, body { width: 2560px; height: 1440px; overflow: hidden; background: #FFFFFF; color: #1A1A16; font-family: 'Inter', -apple-system, sans-serif; -webkit-font-smoothing: antialiased; }
+  .stage { position: absolute; top: 0; left: 0; width: 1920px; height: 1080px; transform: scale(1.3333333); transform-origin: top left; }
+  .page { position: absolute; inset: 0; display: grid; grid-template-columns: 1fr 1fr; }
+  .red-bar { position: absolute; top: 0; left: 0; right: 0; height: 8px; background: #E60012; z-index: 10; }
+
+  .left { background: #0A0A0A; display: flex; flex-direction: column; justify-content: center; padding: 80px; }
+  .left .kicker { font-family: 'JetBrains Mono', monospace; font-size: 12px; font-weight: 500; letter-spacing: 0.2em; text-transform: uppercase; color: #E60012; }
+  .left h1 { font-family: 'Smiley Sans', sans-serif; font-weight: 400; font-size: 72px; line-height: 0.95; letter-spacing: -3px; color: #FFFFFF; margin-top: 16px; }
+  .left h1 em { font-style: normal; color: #E60012; }
+  .left .body { font-family: 'Noto Sans SC', sans-serif; font-size: 18px; color: rgba(255,255,255,0.6); margin-top: 24px; line-height: 1.6; max-width: 440px; }
+
+  .right { display: flex; flex-direction: column; justify-content: center; padding: 80px; }
+  .right .form-title { font-family: 'Inter', sans-serif; font-weight: 800; font-size: 24px; margin-bottom: 32px; }
+
+  .form-group { margin-bottom: 20px; }
+  .form-group label { font-family: 'JetBrains Mono', monospace; font-size: 11px; font-weight: 500; letter-spacing: 0.15em; text-transform: uppercase; color: #888; display: block; margin-bottom: 8px; }
+  .form-group input, .form-group select { width: 100%; padding: 14px 16px; border: 2px solid #1A1A16; font-family: 'Inter', sans-serif; font-size: 15px; background: #FFFFFF; }
+  .form-group input::placeholder { color: #CCC; }
+
+  .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+
+  .submit { width: 100%; padding: 18px; background: #E60012; color: #FFFFFF; border: 0; font-family: 'Inter', sans-serif; font-weight: 800; font-size: 16px; letter-spacing: 0.1em; text-transform: uppercase; cursor: pointer; margin-top: 16px; }
+
+  .terms { font-family: 'Inter', sans-serif; font-size: 12px; color: #888; margin-top: 16px; text-align: center; }
+  .terms a { color: #E60012; text-decoration: none; }
+</style>
+</head>
+<body>
+  <div class="stage">
+    <div class="page" data-composition-id="register" data-start="0" data-duration="5" data-width="1920" data-height="1080">
+      <div class="red-bar"></div>
+      <div class="left">
+        <div class="kicker">JOIN THE CIRCLE</div>
+        <h1>Create your <em>VICOO</em> account.</h1>
+        <div class="body">加入 VICOO，参与公益联名、投稿儿童画作、追踪供应链、捐赠与回收——一切从一个账户开始。</div>
+      </div>
+      <div class="right">
+        <div class="form-title">Sign Up</div>
+        <div class="form-row">
+          <div class="form-group"><label>First Name</label><input type="text" placeholder="莉华" disabled></div>
+          <div class="form-group"><label>Last Name</label><input type="text" placeholder="朱" disabled></div>
+        </div>
+        <div class="form-group"><label>Email</label><input type="email" placeholder="lihua@example.com" disabled></div>
+        <div class="form-group"><label>Password</label><input type="password" placeholder="••••••••" disabled></div>
+        <div class="form-group"><label>Role</label><select disabled><option>Parent / Guardian</option></select></div>
+        <button class="submit" disabled>CREATE ACCOUNT →</button>
+        <div class="terms">By signing up, you agree to our <a href="#">Terms</a> and <a href="#">Privacy Policy</a>.</div>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
+  <script>
+    (function () {
+      const tl = gsap.timeline({ paused: true });
+      window.__timelines = window.__timelines || {};
+      window.__timelines["register"] = tl;
+
+      gsap.set('.red-bar', { scaleX: 0, transformOrigin: 'left center' });
+      gsap.set('.left .kicker', { y: 20, opacity: 0 });
+      gsap.set('.left h1', { y: 30, opacity: 0 });
+      gsap.set('.left .body', { y: 20, opacity: 0 });
+      gsap.set('.right .form-title', { y: 20, opacity: 0 });
+      gsap.set('.form-group', { x: 30, opacity: 0 });
+      gsap.set('.submit', { y: 20, opacity: 0 });
+      gsap.set('.terms', { opacity: 0 });
+
+      tl.to('.red-bar', { scaleX: 1, duration: 0.5, ease: 'power3.inOut' }, 0);
+      tl.to('.left .kicker', { y: 0, opacity: 1, duration: 0.5, ease: 'power2.out' }, 0.2);
+      tl.to('.left h1', { y: 0, opacity: 1, duration: 0.7, ease: 'expo.out' }, 0.4);
+      tl.to('.left .body', { y: 0, opacity: 1, duration: 0.5, ease: 'power2.out' }, 0.8);
+      tl.to('.right .form-title', { y: 0, opacity: 1, duration: 0.5, ease: 'power2.out' }, 0.6);
+      tl.to('.form-group', { x: 0, opacity: 1, duration: 0.4, stagger: 0.08, ease: 'power2.out' }, 0.9);
+      tl.to('.submit', { y: 0, opacity: 1, duration: 0.5, ease: 'power2.out' }, 1.8);
+      tl.to('.terms', { opacity: 1, duration: 0.4, ease: 'power2.out' }, 2.0);
+
+      // Exit
+      tl.to('.terms', { opacity: 0, duration: 0.2 }, 4.2);
+      tl.to('.submit', { y: -10, opacity: 0, duration: 0.3, ease: 'power2.in' }, 4.2);
+      tl.to('.form-group', { x: 20, opacity: 0, duration: 0.3, stagger: 0.03, ease: 'power2.in' }, 4.3);
+      tl.to('.right .form-title', { y: -15, opacity: 0, duration: 0.3, ease: 'power2.in' }, 4.4);
+      tl.to('.left .body', { y: -15, opacity: 0, duration: 0.3, ease: 'power2.in' }, 4.4);
+      tl.to('.left h1', { y: -20, opacity: 0, duration: 0.3, ease: 'power2.in' }, 4.5);
+      tl.to('.left .kicker', { y: -10, opacity: 0, duration: 0.3, ease: 'power2.in' }, 4.5);
+      tl.to('.red-bar', { scaleX: 0, transformOrigin: 'right center', duration: 0.3 }, 4.5);
+
+      window.addEventListener('load', () => tl.play());
+    })();
+  </script>
+</body>
+</html>

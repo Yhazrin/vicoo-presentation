@@ -1,0 +1,129 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<title>VICOO — Brand Story</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Noto+Sans+SC:wght@300;400;500;700;900&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  @font-face { font-family: 'Smiley Sans'; src: url('SmileySans-Oblique.woff2') format('woff2'); font-weight: 400; font-style: normal; font-display: block; }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html, body { width: 2560px; height: 1440px; overflow: hidden; background: #FFFFFF; color: #1A1A16; font-family: 'Inter', -apple-system, sans-serif; -webkit-font-smoothing: antialiased; }
+  .stage { position: absolute; top: 0; left: 0; width: 1920px; height: 1080px; transform: scale(1.3333333); transform-origin: top left; }
+  .page { position: absolute; inset: 0; }
+  .red-bar { position: absolute; top: 0; left: 0; right: 0; height: 8px; background: #E60012; }
+  .top { position: absolute; top: 60px; left: 80px; right: 80px; display: flex; align-items: center; gap: 24px; }
+  .top .lbl { font-family: 'JetBrains Mono', monospace; font-size: 13px; font-weight: 500; letter-spacing: 0.2em; text-transform: uppercase; }
+  .top .lbl .red { color: #E60012; }
+  .top .rule { flex: 1; height: 1px; background: #1A1A16; }
+  .top .meta { font-family: 'JetBrains Mono', monospace; font-size: 13px; font-weight: 500; letter-spacing: 0.18em; text-transform: uppercase; color: #888; }
+
+  .content { position: absolute; left: 80px; right: 80px; top: 140px; bottom: 80px; display: grid; grid-template-columns: 1fr 1fr; gap: 80px; }
+
+  .left { display: flex; flex-direction: column; justify-content: center; }
+  .left .kicker { font-family: 'JetBrains Mono', monospace; font-size: 13px; font-weight: 500; letter-spacing: 0.2em; text-transform: uppercase; color: #E60012; }
+  .left h1 { font-family: 'Smiley Sans', sans-serif; font-weight: 400; font-size: 72px; line-height: 1.0; letter-spacing: -2px; color: #1A1A16; margin-top: 16px; }
+  .left h1 em { font-style: normal; color: #E60012; }
+  .left .body { font-family: 'Noto Sans SC', sans-serif; font-weight: 400; font-size: 20px; line-height: 1.7; color: #555; margin-top: 32px; max-width: 520px; }
+  .left .body em { font-style: normal; color: #E60012; font-weight: 700; }
+
+  /* Timeline on the right */
+  .timeline { display: flex; flex-direction: column; gap: 0; position: relative; padding-left: 40px; }
+  .timeline::before { content: ''; position: absolute; left: 12px; top: 0; bottom: 0; width: 2px; background: #E0E0E0; }
+  .tl-item { position: relative; padding: 20px 0 20px 32px; }
+  .tl-item::before { content: ''; position: absolute; left: -32px; top: 28px; width: 12px; height: 12px; background: #E60012; border-radius: 50%; border: 3px solid #FFFFFF; box-shadow: 0 0 0 2px #E60012; }
+  .tl-item .year { font-family: 'JetBrains Mono', monospace; font-size: 14px; font-weight: 700; letter-spacing: 0.15em; color: #E60012; }
+  .tl-item .event { font-family: 'Noto Sans SC', sans-serif; font-size: 17px; font-weight: 500; color: #1A1A16; margin-top: 6px; }
+  .tl-item .detail { font-family: 'Inter', sans-serif; font-size: 14px; color: #888; margin-top: 4px; line-height: 1.5; }
+
+  /* Big year watermark */
+  .watermark { position: absolute; right: -40px; bottom: 40px; font-family: 'Smiley Sans', sans-serif; font-size: 200px; font-weight: 400; color: rgba(230, 0, 18, 0.06); line-height: 1; pointer-events: none; }
+</style>
+</head>
+<body>
+  <div class="stage">
+    <div class="page" data-composition-id="brand_story" data-start="0" data-duration="6" data-width="1920" data-height="1080">
+      <div class="red-bar"></div>
+      <div class="top">
+        <div class="lbl">VICOO · <span class="red">ORIGIN</span></div>
+        <div class="rule"></div>
+        <div class="meta">PP. 04 · THE STORY</div>
+      </div>
+
+      <div class="content">
+        <div class="left">
+          <div class="kicker">CHAPTER 03 · ORIGIN STORY</div>
+          <h1>From a child's <em>sketchbook</em> to a global <em>movement</em>.</h1>
+          <div class="body">
+            2024 年冬天，一位乡村教师把学生的画作印在了旧 T 恤上。<br><br>
+            那件衣服在校园义卖中被<em>抢购一空</em>。<br><br>
+            我们意识到：每个孩子的画，都是一件<em>未被发现的时装</em>。VICOO 就此诞生——
+            让创意<em>循环</em>，让善意<em>永续</em>。
+          </div>
+        </div>
+
+        <div class="timeline">
+          <div class="tl-item">
+            <div class="year">2024 · WINTER</div>
+            <div class="event">第一件画作 T 恤诞生</div>
+            <div class="detail">乡村教师 × 学生画作 × 旧衣改造</div>
+          </div>
+          <div class="tl-item">
+            <div class="year">2025 · SPRING</div>
+            <div class="event">VICOO 平台原型上线</div>
+            <div class="detail">Web + 微信小程序，首批 3 所学校试点</div>
+          </div>
+          <div class="tl-item">
+            <div class="year">2025 · AUTUMN</div>
+            <div class="event">UNIQLO 公益联名启动</div>
+            <div class="detail">供应链溯源 × 28% 捐赠比例 × 3D 地球</div>
+          </div>
+          <div class="tl-item">
+            <div class="year">2026 · NOW</div>
+            <div class="event">32 所学校 · 12,431 件画作</div>
+            <div class="detail">Web + 小程序 + Android 三端，¥1.28M 已捐赠</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="watermark">2024</div>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
+  <script>
+    (function () {
+      const tl = gsap.timeline({ paused: true });
+      window.__timelines = window.__timelines || {};
+      window.__timelines["brand_story"] = tl;
+
+      gsap.set('.red-bar', { scaleX: 0, transformOrigin: 'left center' });
+      gsap.set('.top > *', { y: -20, opacity: 0 });
+      gsap.set('.left .kicker', { y: 20, opacity: 0 });
+      gsap.set('.left h1', { y: 30, opacity: 0 });
+      gsap.set('.left .body', { y: 20, opacity: 0 });
+      gsap.set('.tl-item', { x: 30, opacity: 0 });
+      gsap.set('.watermark', { opacity: 0 });
+
+      tl.to('.red-bar', { scaleX: 1, duration: 0.5, ease: 'power3.inOut' }, 0);
+      tl.to('.top > *', { y: 0, opacity: 1, duration: 0.5, stagger: 0.06, ease: 'power2.out' }, 0.1);
+      tl.to('.left .kicker', { y: 0, opacity: 1, duration: 0.5, ease: 'power2.out' }, 0.4);
+      tl.to('.left h1', { y: 0, opacity: 1, duration: 0.7, ease: 'expo.out' }, 0.6);
+      tl.to('.left .body', { y: 0, opacity: 1, duration: 0.6, ease: 'power2.out' }, 1.0);
+      tl.to('.tl-item', { x: 0, opacity: 1, duration: 0.5, stagger: 0.2, ease: 'power2.out' }, 1.2);
+      tl.to('.watermark', { opacity: 1, duration: 1.0, ease: 'power1.in' }, 2.0);
+
+      // Exit
+      tl.to('.tl-item', { x: -20, opacity: 0, duration: 0.3, stagger: 0.05, ease: 'power2.in' }, 5.0);
+      tl.to('.left .body', { y: -15, opacity: 0, duration: 0.3, ease: 'power2.in' }, 5.2);
+      tl.to('.left h1', { y: -20, opacity: 0, duration: 0.3, ease: 'power2.in' }, 5.3);
+      tl.to('.left .kicker', { y: -10, opacity: 0, duration: 0.3, ease: 'power2.in' }, 5.3);
+      tl.to('.top', { y: -20, opacity: 0, duration: 0.3, ease: 'power2.in' }, 5.4);
+      tl.to('.red-bar', { scaleX: 0, transformOrigin: 'right center', duration: 0.3 }, 5.4);
+
+      window.addEventListener('load', () => tl.play());
+    })();
+  </script>
+</body>
+</html>

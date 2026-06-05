@@ -1,0 +1,125 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<title>VICOO — Carbon Footprint</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Noto+Sans+SC:wght@300;400;500;700;900&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  @font-face { font-family: 'Smiley Sans'; src: url('SmileySans-Oblique.woff2') format('woff2'); font-weight: 400; font-style: normal; font-display: block; }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html, body { width: 2560px; height: 1440px; overflow: hidden; background: #0A0A0A; color: #FFFFFF; font-family: 'Inter', -apple-system, sans-serif; -webkit-font-smoothing: antialiased; }
+  .stage { position: absolute; top: 0; left: 0; width: 1920px; height: 1080px; transform: scale(1.3333333); transform-origin: top left; }
+  .page { position: absolute; inset: 0; }
+  .red-bar { position: absolute; top: 0; left: 0; right: 0; height: 8px; background: #E60012; }
+
+  .content { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 80px; }
+
+  .eyebrow { font-family: 'JetBrains Mono', monospace; font-size: 14px; font-weight: 500; letter-spacing: 0.3em; text-transform: uppercase; color: #E60012; margin-bottom: 12px; }
+  .headline { font-family: 'Smiley Sans', sans-serif; font-weight: 400; font-size: 64px; line-height: 1.0; letter-spacing: -2px; color: #FFFFFF; text-align: center; margin-bottom: 48px; }
+  .headline .red { color: #E60012; }
+
+  .carbon-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 32px; max-width: 1200px; }
+  .carbon-card { padding: 32px; background: rgba(255,255,255,0.05); border-top: 4px solid #E60012; text-align: center; }
+  .carbon-card .icon { font-size: 48px; margin-bottom: 16px; }
+  .carbon-card .value { font-family: 'Inter', sans-serif; font-weight: 900; font-size: 56px; color: #E60012; line-height: 1; }
+  .carbon-card .unit { font-family: 'JetBrains Mono', monospace; font-size: 14px; font-weight: 500; letter-spacing: 0.15em; text-transform: uppercase; color: #888; margin-top: 8px; }
+  .carbon-card .label { font-family: 'Noto Sans SC', sans-serif; font-size: 16px; color: rgba(255,255,255,0.7); margin-top: 12px; }
+
+  .bar-chart { display: flex; align-items: flex-end; gap: 16px; margin-top: 48px; height: 120px; }
+  .bar-item { display: flex; flex-direction: column; align-items: center; gap: 8px; }
+  .bar { width: 48px; background: #E60012; border-radius: 2px 2px 0 0; }
+  .bar-label { font-family: 'JetBrains Mono', monospace; font-size: 10px; color: #888; letter-spacing: 0.1em; text-transform: uppercase; }
+</style>
+</head>
+<body>
+  <div class="stage">
+    <div class="page" data-composition-id="carbon_footprint" data-start="0" data-duration="5" data-width="1920" data-height="1080">
+      <div class="red-bar"></div>
+
+      <div class="content">
+        <div class="eyebrow">ENVIRONMENTAL IMPACT</div>
+        <div class="headline">Every item tells a <span class="red">carbon story</span>.</div>
+
+        <div class="carbon-grid">
+          <div class="carbon-card">
+            <div class="icon">💧</div>
+            <div class="value" data-count="2400">0</div>
+            <div class="unit">LITERS</div>
+            <div class="label">每件衣服节水（vs 传统工艺）</div>
+          </div>
+          <div class="carbon-card">
+            <div class="icon">🌿</div>
+            <div class="value" data-count="4.5">0</div>
+            <div class="unit">KG CO₂E</div>
+            <div class="label">平均碳足迹（行业均值 8.2kg）</div>
+          </div>
+          <div class="carbon-card">
+            <div class="icon">♻️</div>
+            <div class="value" data-count="98.7">0</div>
+            <div class="unit">PERCENT</div>
+            <div class="label">供应链可溯源率</div>
+          </div>
+        </div>
+
+        <div class="bar-chart">
+          <div class="bar-item"><div class="bar" style="height: 30px;"></div><div class="bar-label">Cotton</div></div>
+          <div class="bar-item"><div class="bar" style="height: 50px;"></div><div class="bar-label">Dye</div></div>
+          <div class="bar-item"><div class="bar" style="height: 80px;"></div><div class="bar-label">Cut</div></div>
+          <div class="bar-item"><div class="bar" style="height: 40px;"></div><div class="bar-label">Sew</div></div>
+          <div class="bar-item"><div class="bar" style="height: 60px;"></div><div class="bar-label">Ship</div></div>
+          <div class="bar-item"><div class="bar" style="height: 20px;"></div><div class="bar-label">Pack</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
+  <script>
+    (function () {
+      const tl = gsap.timeline({ paused: true });
+      window.__timelines = window.__timelines || {};
+      window.__timelines["carbon_footprint"] = tl;
+
+      gsap.set('.red-bar', { scaleX: 0, transformOrigin: 'left center' });
+      gsap.set('.eyebrow', { y: -20, opacity: 0 });
+      gsap.set('.headline', { y: 30, opacity: 0 });
+      gsap.set('.carbon-card', { y: 40, opacity: 0, scale: 0.9 });
+      gsap.set('.bar-item .bar', { scaleY: 0, transformOrigin: 'bottom' });
+      gsap.set('.bar-item .bar-label', { opacity: 0 });
+
+      tl.to('.red-bar', { scaleX: 1, duration: 0.5, ease: 'power3.inOut' }, 0);
+      tl.to('.eyebrow', { y: 0, opacity: 1, duration: 0.5, ease: 'power2.out' }, 0.2);
+      tl.to('.headline', { y: 0, opacity: 1, duration: 0.7, ease: 'expo.out' }, 0.4);
+      tl.to('.carbon-card', { y: 0, opacity: 1, scale: 1, duration: 0.6, stagger: 0.15, ease: 'back.out(1.2)' }, 0.8);
+
+      // Counting animation
+      document.querySelectorAll('.carbon-card .value').forEach(el => {
+        const target = parseFloat(el.dataset.count);
+        const obj = { val: 0 };
+        tl.to(obj, {
+          val: target,
+          duration: 1.2,
+          ease: 'power2.out',
+          onUpdate: () => {
+            el.textContent = target % 1 !== 0 ? obj.val.toFixed(1) : Math.floor(obj.val).toLocaleString();
+          }
+        }, 1.0);
+      });
+
+      tl.to('.bar-item .bar', { scaleY: 1, duration: 0.6, stagger: 0.08, ease: 'power3.out' }, 2.0);
+      tl.to('.bar-item .bar-label', { opacity: 1, duration: 0.3, stagger: 0.05 }, 2.5);
+
+      // Exit
+      tl.to('.bar-item', { opacity: 0, duration: 0.3, ease: 'power2.in' }, 4.2);
+      tl.to('.carbon-card', { y: -30, opacity: 0, duration: 0.3, stagger: 0.05, ease: 'power2.in' }, 4.3);
+      tl.to('.headline', { y: -20, opacity: 0, duration: 0.3, ease: 'power2.in' }, 4.5);
+      tl.to('.eyebrow', { y: -15, opacity: 0, duration: 0.3, ease: 'power2.in' }, 4.5);
+      tl.to('.red-bar', { scaleX: 0, transformOrigin: 'right center', duration: 0.3 }, 4.5);
+
+      window.addEventListener('load', () => tl.play());
+    })();
+  </script>
+</body>
+</html>

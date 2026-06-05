@@ -1,0 +1,151 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<title>VICOO — Credits</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Noto+Sans+SC:wght@300;400;500;700;900&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  @font-face { font-family: 'Smiley Sans'; src: url('SmileySans-Oblique.woff2') format('woff2'); font-weight: 400; font-style: normal; font-display: block; }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html, body { width: 2560px; height: 1440px; overflow: hidden; background: #FFFFFF; color: #1A1A16; font-family: 'Inter', -apple-system, sans-serif; -webkit-font-smoothing: antialiased; }
+  .stage { position: absolute; top: 0; left: 0; width: 1920px; height: 1080px; transform: scale(1.3333333); transform-origin: top left; }
+  .page { position: absolute; inset: 0; }
+  .red-bar { position: absolute; top: 0; left: 0; right: 0; height: 8px; background: #E60012; }
+
+  .content { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 80px; }
+
+  .vicoo { font-family: 'Smiley Sans', 'Inter', sans-serif; font-weight: 400; font-size: 180px; line-height: 0.9; letter-spacing: -8px; color: #1A1A16; }
+  .vicoo .red { color: #E60012; }
+
+  .tagline { font-family: 'JetBrains Mono', monospace; font-size: 18px; font-weight: 500; letter-spacing: 0.4em; text-transform: uppercase; color: #888; margin-top: 16px; }
+
+  .divider { width: 80px; height: 3px; background: #E60012; margin: 40px 0; }
+
+  .credits-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 40px 80px; max-width: 1200px; }
+  .credit { text-align: center; }
+  .credit .role { font-family: 'JetBrains Mono', monospace; font-size: 11px; font-weight: 500; letter-spacing: 0.2em; text-transform: uppercase; color: #E60012; }
+  .credit .name { font-family: 'Inter', sans-serif; font-weight: 700; font-size: 18px; color: #1A1A16; margin-top: 8px; }
+  .credit .detail { font-family: 'Noto Sans SC', sans-serif; font-size: 14px; color: #888; margin-top: 4px; }
+
+  .logos { display: flex; align-items: center; gap: 32px; margin-top: 48px; }
+  .logo { display: flex; align-items: center; gap: 10px; }
+  .logo .mark { width: 40px; height: 40px; background: #1A1A16; color: #FFFFFF; display: flex; align-items: center; justify-content: center; font-family: 'Smiley Sans', sans-serif; font-size: 24px; }
+  .logo.welfare .mark { background: #E60012; }
+  .logo .name { font-family: 'Smiley Sans', sans-serif; font-size: 20px; color: #1A1A16; }
+  .logos .sep { width: 1px; height: 24px; background: #DDD; }
+
+  .footer { position: absolute; bottom: 40px; left: 0; right: 0; text-align: center; font-family: 'JetBrains Mono', monospace; font-size: 12px; font-weight: 500; letter-spacing: 0.2em; text-transform: uppercase; color: #BBB; }
+
+  /* Corner marks */
+  .corner { position: absolute; font-family: 'JetBrains Mono', monospace; font-size: 12px; font-weight: 500; letter-spacing: 0.15em; text-transform: uppercase; color: #CCC; }
+  .corner.tl { top: 36px; left: 64px; }
+  .corner.tr { top: 36px; right: 64px; }
+</style>
+</head>
+<body>
+  <div class="stage">
+    <div class="page" data-composition-id="credits" data-start="0" data-duration="5" data-width="1920" data-height="1080">
+      <div class="red-bar"></div>
+      <div class="corner tl">VICOO · CREDITS</div>
+      <div class="corner tr">SS26 CAMPAIGN FILM</div>
+
+      <div class="content">
+        <div class="vicoo">VI<span class="red">COO</span></div>
+        <div class="tagline">MADE TO CIRCULATE</div>
+        <div class="divider"></div>
+
+        <div class="credits-grid">
+          <div class="credit">
+            <div class="role">PLATFORM</div>
+            <div class="name">VICOO-ESP</div>
+            <div class="detail">Cross-platform e-commerce ecosystem</div>
+          </div>
+          <div class="credit">
+            <div class="role">PARTNER</div>
+            <div class="name">UNIQLO</div>
+            <div class="detail">Welfare × Fashion collaboration</div>
+          </div>
+          <div class="credit">
+            <div class="role">TECHNOLOGY</div>
+            <div class="name">HTML-Video Pipeline</div>
+            <div class="detail">GSAP + Chromium + ffmpeg</div>
+          </div>
+          <div class="credit">
+            <div class="role">DESIGN</div>
+            <div class="name">Smiley Sans 得意黑</div>
+            <div class="detail">Brand typeface by Atelier Anchor</div>
+          </div>
+          <div class="credit">
+            <div class="role">IMAGERY</div>
+            <div class="name">Unsplash</div>
+            <div class="detail">Product photography</div>
+          </div>
+          <div class="credit">
+            <div class="role">SCHOOL</div>
+            <div class="name">32 Schools</div>
+            <div class="detail">12,431 children's artworks</div>
+          </div>
+        </div>
+
+        <div class="logos">
+          <div class="logo">
+            <div class="mark">U</div>
+            <div class="name">UNIQLO</div>
+          </div>
+          <div class="sep"></div>
+          <div class="logo welfare">
+            <div class="mark">V</div>
+            <div class="name">VICOO</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="footer">© 2026 VICOO · CHILDREN'S ART → SUSTAINABLE FASHION → CIRCULAR FUTURE</div>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
+  <script>
+    (function () {
+      const tl = gsap.timeline({ paused: true });
+      window.__timelines = window.__timelines || {};
+      window.__timelines["credits"] = tl;
+
+      gsap.set('.red-bar', { scaleX: 0, transformOrigin: 'left center' });
+      gsap.set('.corner', { y: 15, opacity: 0 });
+      gsap.set('.vicoo', { y: 60, opacity: 0, scale: 0.9 });
+      gsap.set('.tagline', { y: 15, opacity: 0 });
+      gsap.set('.divider', { scaleX: 0 });
+      gsap.set('.credit', { y: 30, opacity: 0 });
+      gsap.set('.logos .logo, .logos .sep', { y: 20, opacity: 0 });
+      gsap.set('.footer', { y: 15, opacity: 0 });
+
+      tl.to('.red-bar', { scaleX: 1, duration: 0.5, ease: 'power3.inOut' }, 0);
+      tl.to('.corner', { y: 0, opacity: 1, duration: 0.4, stagger: 0.06, ease: 'power2.out' }, 0.1);
+      tl.to('.vicoo', { y: 0, opacity: 1, scale: 1, duration: 0.9, ease: 'expo.out' }, 0.3);
+      tl.to('.tagline', { y: 0, opacity: 1, duration: 0.5, ease: 'power2.out' }, 0.8);
+      tl.to('.divider', { scaleX: 1, duration: 0.5, ease: 'power3.inOut' }, 1.0);
+      tl.to('.credit', { y: 0, opacity: 1, duration: 0.5, stagger: 0.08, ease: 'power2.out' }, 1.2);
+      tl.to('.logos .logo, .logos .sep', { y: 0, opacity: 1, duration: 0.4, stagger: 0.08, ease: 'power2.out' }, 2.2);
+      tl.to('.footer', { y: 0, opacity: 1, duration: 0.4, ease: 'power2.out' }, 2.6);
+
+      // Gentle breathing on the wordmark
+      tl.to('.vicoo', { scale: 1.02, duration: 1.5, yoyo: true, repeat: 1, ease: 'sine.inOut' }, 2.8);
+
+      // Exit — fade to white
+      tl.to('.footer', { opacity: 0, duration: 0.3, ease: 'power2.in' }, 4.2);
+      tl.to('.credit', { opacity: 0, duration: 0.3, ease: 'power2.in' }, 4.3);
+      tl.to('.logos .logo, .logos .sep', { opacity: 0, duration: 0.3, ease: 'power2.in' }, 4.3);
+      tl.to('.divider', { scaleX: 0, duration: 0.2 }, 4.4);
+      tl.to('.tagline', { opacity: 0, duration: 0.3, ease: 'power2.in' }, 4.4);
+      tl.to('.vicoo', { y: -30, opacity: 0, duration: 0.4, ease: 'power2.in' }, 4.5);
+      tl.to('.corner', { opacity: 0, duration: 0.2 }, 4.6);
+      tl.to('.red-bar', { scaleX: 0, transformOrigin: 'right center', duration: 0.3 }, 4.6);
+
+      window.addEventListener('load', () => tl.play());
+    })();
+  </script>
+</body>
+</html>

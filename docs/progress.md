@@ -97,3 +97,55 @@ User said: *"I don't want this in VICOO-esp. Make it a standalone repo. Move eve
   - `docs/` — methodology + progress + final-deliverable
   - `README.md` + `LICENSE` + `.gitignore`
 - Ready to commit and push.
+
+## Session 6 — 2026-06-06: Expansion to 48 frames (~4:05)
+
+**Goal**: Expand from 28 frames (2:23) to ~5 minutes by adding new content frames.
+
+### What was done
+- **20 new frames created** (frames 02, 29-48)
+- **content-graph.json updated** — 48 nodes + 47 sequence edges
+- **project.json updated** — 48 frame entries in correct playback order
+
+### New frames added
+
+| Frame | ID | Section | Duration | Description |
+|-------|------|---------|----------|-------------|
+| 02 | story_hook | OPENING | 5s | Emotional opener: "Every child has a story" |
+| 29 | brand_story | BRAND | 6s | Origin timeline: 2024 winter → 2026 now |
+| 30 | cta | CLOSING | 6s | Call to action: Shop/Submit/Donate/Recycle |
+| 31 | credits | CLOSING | 5s | Credits: VICOO, UNIQLO, tech stack |
+| 32 | uniqlo_partnership | OPENING | 5s | UNIQLO × VICOO collaboration details |
+| 33 | testimonials | CLOSING | 6s | 3 user quotes (teacher, parent, child) |
+| 34 | stats_summary | CLOSING | 5s | Impact numbers with counting animation |
+| 35 | vision | CLOSING | 6s | Future vision: 4 pillars |
+| 36 | search_filter | STOREFRONT | 5s | Search bar + filter chips + results grid |
+| 37 | globe_deep_dive | TRACEABILITY | 5s | Single node detail (Shaoxing dyeing) |
+| 38 | carbon_footprint | TRACEABILITY | 5s | Environmental data: water/CO₂/traceability |
+| 39 | register | AUTH | 5s | Registration form (split layout) |
+| 40 | payment_methods | COMMERCE | 5s | 4 payment options: WeChat/Alipay/Stripe/PayPal |
+| 41 | order_tracking | COMMERCE | 5s | 5-step tracking with map visualization |
+| 42 | environmental_impact | CIRCULAR | 5s | Circular economy diagram + stats |
+| 43 | campaign_detail | COMMUNITY | 5s | Campaign progress bar + top artworks |
+| 44 | artwork_gallery | COMMUNITY | 5s | 8-card artwork grid gallery |
+| 45 | values_visual | BRAND | 5s | Circular diagram: Create→Make→Sell→Donate→Recycle→Fund |
+| 46 | artist_portrait | OPENING | 5s | Lin Yiyi story: child artist + artwork |
+| 47 | impact_preview | OPENING | 5s | Where donations go: ¥178 → 1 student |
+| 48 | wishlist_save | STOREFRONT | 5s | Wishlist with save/share functionality |
+
+### Current state
+- **48 frames** total
+- **~245 seconds** (4:05) estimated duration
+- **Target**: 300 seconds (5:00)
+- **Gap**: ~55 seconds (~10-11 more frames)
+
+### Next iteration goals (Session 7)
+1. **Add remaining frames** to reach 5:00:
+   - More detailed product pages
+   - Android/Mini Program showcase
+   - Review system detail
+   - Donation certificate detail
+   - Supply chain map visualization
+2. **Extend existing frame durations** where content is rich
+3. **Update docs/final-deliverable.md** with new frame list
+4. **Test render** on Mac with html-video pipeline

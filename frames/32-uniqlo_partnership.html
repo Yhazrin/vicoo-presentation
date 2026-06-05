@@ -1,0 +1,143 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<title>VICOO — UNIQLO Partnership</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Noto+Sans+SC:wght@300;400;500;700;900&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  @font-face { font-family: 'Smiley Sans'; src: url('SmileySans-Oblique.woff2') format('woff2'); font-weight: 400; font-style: normal; font-display: block; }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html, body { width: 2560px; height: 1440px; overflow: hidden; background: #FFFFFF; color: #1A1A16; font-family: 'Inter', -apple-system, sans-serif; -webkit-font-smoothing: antialiased; }
+  .stage { position: absolute; top: 0; left: 0; width: 1920px; height: 1080px; transform: scale(1.3333333); transform-origin: top left; }
+  .page { position: absolute; inset: 0; }
+  .red-bar { position: absolute; top: 0; left: 0; right: 0; height: 8px; background: #E60012; }
+  .top { position: absolute; top: 60px; left: 80px; right: 80px; display: flex; align-items: center; gap: 24px; }
+  .top .lbl { font-family: 'JetBrains Mono', monospace; font-size: 13px; font-weight: 500; letter-spacing: 0.2em; text-transform: uppercase; }
+  .top .lbl .red { color: #E60012; }
+  .top .rule { flex: 1; height: 1px; background: #1A1A16; }
+  .top .meta { font-family: 'JetBrains Mono', monospace; font-size: 13px; font-weight: 500; letter-spacing: 0.18em; text-transform: uppercase; color: #888; }
+
+  .content { position: absolute; left: 80px; right: 80px; top: 140px; bottom: 80px; display: grid; grid-template-columns: 1.2fr 1fr; gap: 60px; }
+
+  .left { display: flex; flex-direction: column; }
+  .left .kicker { font-family: 'JetBrains Mono', monospace; font-size: 13px; font-weight: 500; letter-spacing: 0.2em; text-transform: uppercase; color: #E60012; }
+  .left h1 { font-family: 'Smiley Sans', sans-serif; font-weight: 400; font-size: 64px; line-height: 1.0; letter-spacing: -2px; color: #1A1A16; margin-top: 16px; }
+  .left h1 em { font-style: normal; color: #E60012; }
+  .left .body { font-family: 'Noto Sans SC', sans-serif; font-weight: 400; font-size: 19px; line-height: 1.7; color: #555; margin-top: 24px; max-width: 560px; }
+  .left .body em { font-style: normal; color: #E60012; font-weight: 700; }
+
+  .partnership-badge { display: inline-flex; align-items: center; gap: 16px; padding: 20px 32px; background: #F5F5F5; margin-top: 32px; }
+  .partnership-badge .mark { width: 48px; height: 48px; background: #1A1A16; color: #FFFFFF; display: flex; align-items: center; justify-content: center; font-family: 'Smiley Sans', sans-serif; font-size: 28px; }
+  .partnership-badge .mark.red { background: #E60012; }
+  .partnership-badge .info .title { font-family: 'Inter', sans-serif; font-weight: 800; font-size: 16px; }
+  .partnership-badge .info .sub { font-family: 'JetBrains Mono', monospace; font-size: 11px; color: #888; letter-spacing: 0.15em; text-transform: uppercase; }
+
+  /* Right: 3 feature cards */
+  .features { display: flex; flex-direction: column; gap: 20px; }
+  .feature { display: flex; gap: 20px; padding: 24px; background: #F5F5F5; }
+  .feature .num { font-family: 'Smiley Sans', sans-serif; font-weight: 400; font-size: 48px; color: #E60012; line-height: 1; min-width: 60px; }
+  .feature .info { flex: 1; }
+  .feature .info h3 { font-family: 'Inter', sans-serif; font-weight: 800; font-size: 18px; color: #1A1A16; }
+  .feature .info p { font-family: 'Noto Sans SC', sans-serif; font-size: 15px; color: #666; margin-top: 6px; line-height: 1.5; }
+
+  .supply-chain { display: flex; align-items: center; gap: 8px; margin-top: 24px; }
+  .supply-chain .node { padding: 8px 14px; background: #1A1A16; color: #FFFFFF; font-family: 'JetBrains Mono', monospace; font-size: 11px; font-weight: 500; letter-spacing: 0.1em; }
+  .supply-chain .arrow { color: #E60012; font-size: 16px; }
+</style>
+</head>
+<body>
+  <div class="stage">
+    <div class="page" data-composition-id="uniqlo_partnership" data-start="0" data-duration="5" data-width="1920" data-height="1080">
+      <div class="red-bar"></div>
+      <div class="top">
+        <div class="lbl">VICOO × <span class="red">UNIQLO</span></div>
+        <div class="rule"></div>
+        <div class="meta">PP. 05 · PARTNERSHIP</div>
+      </div>
+
+      <div class="content">
+        <div class="left">
+          <div class="kicker">COLLABORATION · 2026</div>
+          <h1>Where <em>children's art</em> meets <em>global fashion</em>.</h1>
+          <div class="body">
+            VICOO 与 UNIQLO 的公益联名，不是简单的品牌叠加——<br><br>
+            每一件联名款都经过<em>完整供应链溯源</em>，从棉花种植到成衣出厂，每一步都可验证。<br><br>
+            <em>28%</em> 的销售额直接进入乡村儿童美育基金。
+          </div>
+          <div class="partnership-badge">
+            <div class="mark">U</div>
+            <span style="font-size: 24px; color: #E60012;">×</span>
+            <div class="mark red">V</div>
+            <div class="info">
+              <div class="title">UNIQLO × VICOO</div>
+              <div class="sub">WELFARE COLLECTION · SS26</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="features">
+          <div class="feature">
+            <div class="num">01</div>
+            <div class="info">
+              <h3>Full Traceability</h3>
+              <p>从新疆棉田到上海门店，5 站供应链全程可追溯。每件衣服都有独立的碳足迹档案。</p>
+            </div>
+          </div>
+          <div class="feature">
+            <div class="num">02</div>
+            <div class="info">
+              <h3>28% Direct Donation</h3>
+              <p>每售出一件联名款，28% 的销售额直接捐赠给乡村儿童画材与驻校美育基金。</p>
+            </div>
+          </div>
+          <div class="feature">
+            <div class="num">03</div>
+            <div class="info">
+              <h3>Children as Designers</h3>
+              <p>联名款的图案全部来自 VICOO 平台上的儿童画作投稿，经专业设计师二创后量产。</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
+  <script>
+    (function () {
+      const tl = gsap.timeline({ paused: true });
+      window.__timelines = window.__timelines || {};
+      window.__timelines["uniqlo_partnership"] = tl;
+
+      gsap.set('.red-bar', { scaleX: 0, transformOrigin: 'left center' });
+      gsap.set('.top > *', { y: -20, opacity: 0 });
+      gsap.set('.left .kicker', { y: 20, opacity: 0 });
+      gsap.set('.left h1', { y: 30, opacity: 0 });
+      gsap.set('.left .body', { y: 20, opacity: 0 });
+      gsap.set('.partnership-badge', { y: 20, opacity: 0, scale: 0.9 });
+      gsap.set('.feature', { x: 40, opacity: 0 });
+
+      tl.to('.red-bar', { scaleX: 1, duration: 0.5, ease: 'power3.inOut' }, 0);
+      tl.to('.top > *', { y: 0, opacity: 1, duration: 0.5, stagger: 0.06, ease: 'power2.out' }, 0.1);
+      tl.to('.left .kicker', { y: 0, opacity: 1, duration: 0.5, ease: 'power2.out' }, 0.4);
+      tl.to('.left h1', { y: 0, opacity: 1, duration: 0.7, ease: 'expo.out' }, 0.6);
+      tl.to('.left .body', { y: 0, opacity: 1, duration: 0.6, ease: 'power2.out' }, 1.0);
+      tl.to('.partnership-badge', { y: 0, opacity: 1, scale: 1, duration: 0.6, ease: 'back.out(1.4)' }, 1.4);
+      tl.to('.feature', { x: 0, opacity: 1, duration: 0.5, stagger: 0.15, ease: 'power2.out' }, 1.6);
+
+      // Exit
+      tl.to('.feature', { x: 30, opacity: 0, duration: 0.3, stagger: 0.05, ease: 'power2.in' }, 4.2);
+      tl.to('.partnership-badge', { scale: 0.9, opacity: 0, duration: 0.3, ease: 'power2.in' }, 4.3);
+      tl.to('.left .body', { y: -15, opacity: 0, duration: 0.3, ease: 'power2.in' }, 4.4);
+      tl.to('.left h1', { y: -20, opacity: 0, duration: 0.3, ease: 'power2.in' }, 4.5);
+      tl.to('.left .kicker', { y: -10, opacity: 0, duration: 0.3, ease: 'power2.in' }, 4.5);
+      tl.to('.top', { y: -20, opacity: 0, duration: 0.3, ease: 'power2.in' }, 4.6);
+      tl.to('.red-bar', { scaleX: 0, transformOrigin: 'right center', duration: 0.3 }, 4.6);
+
+      window.addEventListener('load', () => tl.play());
+    })();
+  </script>
+</body>
+</html>

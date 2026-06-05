@@ -1,0 +1,111 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<title>VICOO — Testimonials</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Noto+Sans+SC:wght@300;400;500;700;900&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  @font-face { font-family: 'Smiley Sans'; src: url('SmileySans-Oblique.woff2') format('woff2'); font-weight: 400; font-style: normal; font-display: block; }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html, body { width: 2560px; height: 1440px; overflow: hidden; background: #0A0A0A; color: #FFFFFF; font-family: 'Inter', -apple-system, sans-serif; -webkit-font-smoothing: antialiased; }
+  .stage { position: absolute; top: 0; left: 0; width: 1920px; height: 1080px; transform: scale(1.3333333); transform-origin: top left; }
+  .page { position: absolute; inset: 0; }
+  .red-bar { position: absolute; top: 0; left: 0; right: 0; height: 8px; background: #E60012; }
+
+  .content { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 80px; }
+
+  .eyebrow { font-family: 'JetBrains Mono', monospace; font-size: 14px; font-weight: 500; letter-spacing: 0.3em; text-transform: uppercase; color: #E60012; margin-bottom: 16px; }
+  .headline { font-family: 'Smiley Sans', sans-serif; font-weight: 400; font-size: 56px; line-height: 1.0; letter-spacing: -2px; color: #FFFFFF; text-align: center; margin-bottom: 48px; }
+
+  .quotes { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 32px; max-width: 1500px; }
+  .quote-card { padding: 32px; background: rgba(255,255,255,0.05); border-left: 3px solid #E60012; }
+  .quote-card .icon { font-size: 32px; margin-bottom: 12px; }
+  .quote-card .text { font-family: 'Noto Sans SC', sans-serif; font-size: 17px; line-height: 1.6; color: rgba(255,255,255,0.85); margin-bottom: 16px; }
+  .quote-card .text em { font-style: normal; color: #E60012; font-weight: 700; }
+  .quote-card .author { display: flex; align-items: center; gap: 12px; }
+  .quote-card .author .avatar { width: 36px; height: 36px; background: #E60012; color: #FFFFFF; display: flex; align-items: center; justify-content: center; font-family: 'Smiley Sans', sans-serif; font-size: 16px; }
+  .quote-card .author .info .name { font-family: 'Inter', sans-serif; font-weight: 700; font-size: 14px; }
+  .quote-card .author .info .role { font-family: 'JetBrains Mono', monospace; font-size: 11px; color: #888; letter-spacing: 0.1em; text-transform: uppercase; }
+</style>
+</head>
+<body>
+  <div class="stage">
+    <div class="page" data-composition-id="testimonials" data-start="0" data-duration="6" data-width="1920" data-height="1080">
+      <div class="red-bar"></div>
+
+      <div class="content">
+        <div class="eyebrow">VOICES FROM THE COMMUNITY</div>
+        <div class="headline">他们说，VICOO 改变了一些事。</div>
+
+        <div class="quotes">
+          <div class="quote-card">
+            <div class="icon">👩‍🏫</div>
+            <div class="text">「看到自己的画被印在衣服上，孩子们的眼睛都在<em>发光</em>。这不只是美术课，这是一次被世界<em>看见</em>的机会。」</div>
+            <div class="author">
+              <div class="avatar">张</div>
+              <div class="info">
+                <div class="name">张老师</div>
+                <div class="role">贵州 · 乡村美术教师</div>
+              </div>
+            </div>
+          </div>
+          <div class="quote-card">
+            <div class="icon">👩</div>
+            <div class="text">「我买的不只是衣服，是一个孩子的<em>梦想</em>。能通过溯源看到这件衣服从哪里来，<em>每一分钱</em>去了哪里，这让我很安心。」</div>
+            <div class="author">
+              <div class="avatar">莉</div>
+              <div class="info">
+                <div class="name">朱莉华</div>
+                <div class="role">上海 · VICOO 用户</div>
+              </div>
+            </div>
+          </div>
+          <div class="quote-card">
+            <div class="icon">👦</div>
+            <div class="text">「我画的<em>春天</em>变成了真的衣服！我妈妈说要<em>骄傲</em>地穿出去。」</div>
+            <div class="author">
+              <div class="avatar">林</div>
+              <div class="info">
+                <div class="name">林一一 · 8 岁</div>
+                <div class="role">云南 · 小画家</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
+  <script>
+    (function () {
+      const tl = gsap.timeline({ paused: true });
+      window.__timelines = window.__timelines || {};
+      window.__timelines["testimonials"] = tl;
+
+      gsap.set('.red-bar', { scaleX: 0, transformOrigin: 'left center' });
+      gsap.set('.eyebrow', { y: -20, opacity: 0 });
+      gsap.set('.headline', { y: 30, opacity: 0 });
+      gsap.set('.quote-card', { y: 40, opacity: 0, scale: 0.95 });
+
+      tl.to('.red-bar', { scaleX: 1, duration: 0.5, ease: 'power3.inOut' }, 0);
+      tl.to('.eyebrow', { y: 0, opacity: 1, duration: 0.5, ease: 'power2.out' }, 0.2);
+      tl.to('.headline', { y: 0, opacity: 1, duration: 0.7, ease: 'expo.out' }, 0.4);
+      tl.to('.quote-card', { y: 0, opacity: 1, scale: 1, duration: 0.6, stagger: 0.2, ease: 'back.out(1.2)' }, 1.0);
+
+      // Gentle hover effect
+      tl.to('.quote-card:nth-child(2)', { y: -5, duration: 0.8, yoyo: true, repeat: 1, ease: 'sine.inOut' }, 2.5);
+
+      // Exit
+      tl.to('.quote-card', { y: -30, opacity: 0, duration: 0.3, stagger: 0.08, ease: 'power2.in' }, 5.0);
+      tl.to('.headline', { y: -20, opacity: 0, duration: 0.3, ease: 'power2.in' }, 5.3);
+      tl.to('.eyebrow', { y: -15, opacity: 0, duration: 0.3, ease: 'power2.in' }, 5.4);
+      tl.to('.red-bar', { scaleX: 0, transformOrigin: 'right center', duration: 0.3 }, 5.4);
+
+      window.addEventListener('load', () => tl.play());
+    })();
+  </script>
+</body>
+</html>

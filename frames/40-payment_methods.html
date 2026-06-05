@@ -1,0 +1,124 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<title>VICOO — Payment Methods</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Noto+Sans+SC:wght@300;400;500;700;900&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  @font-face { font-family: 'Smiley Sans'; src: url('SmileySans-Oblique.woff2') format('woff2'); font-weight: 400; font-style: normal; font-display: block; }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html, body { width: 2560px; height: 1440px; overflow: hidden; background: #FFFFFF; color: #1A1A16; font-family: 'Inter', -apple-system, sans-serif; -webkit-font-smoothing: antialiased; }
+  .stage { position: absolute; top: 0; left: 0; width: 1920px; height: 1080px; transform: scale(1.3333333); transform-origin: top left; }
+  .page { position: absolute; inset: 0; }
+  .red-bar { position: absolute; top: 0; left: 0; right: 0; height: 8px; background: #E60012; }
+  .top { position: absolute; top: 60px; left: 80px; right: 80px; display: flex; align-items: center; gap: 24px; }
+  .top .lbl { font-family: 'JetBrains Mono', monospace; font-size: 13px; font-weight: 500; letter-spacing: 0.2em; text-transform: uppercase; }
+  .top .lbl .red { color: #E60012; }
+  .top .rule { flex: 1; height: 1px; background: #1A1A16; }
+  .top .meta { font-family: 'JetBrains Mono', monospace; font-size: 13px; font-weight: 500; letter-spacing: 0.18em; text-transform: uppercase; color: #888; }
+
+  .content { position: absolute; left: 80px; right: 80px; top: 140px; bottom: 80px; display: flex; flex-direction: column; align-items: center; justify-content: center; }
+
+  .heading { text-align: center; margin-bottom: 48px; }
+  .heading .kicker { font-family: 'JetBrains Mono', monospace; font-size: 12px; font-weight: 500; letter-spacing: 0.2em; text-transform: uppercase; color: #E60012; }
+  .heading h1 { font-family: 'Smiley Sans', sans-serif; font-weight: 400; font-size: 56px; line-height: 0.95; letter-spacing: -2px; color: #1A1A16; margin-top: 8px; }
+  .heading h1 em { font-style: normal; color: #E60012; }
+
+  .payment-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; max-width: 1200px; }
+  .payment-card { padding: 32px; background: #F5F5F5; text-align: center; border: 2px solid transparent; transition: all 0.3s; }
+  .payment-card.active { border-color: #E60012; background: #FFF; }
+  .payment-card .icon { font-size: 48px; margin-bottom: 16px; }
+  .payment-card .name { font-family: 'Inter', sans-serif; font-weight: 800; font-size: 18px; }
+  .payment-card .desc { font-family: 'Noto Sans SC', sans-serif; font-size: 14px; color: #888; margin-top: 8px; }
+  .payment-card .badge { display: inline-block; margin-top: 12px; padding: 4px 12px; background: #E60012; color: #FFFFFF; font-family: 'JetBrains Mono', monospace; font-size: 10px; font-weight: 500; letter-spacing: 0.15em; text-transform: uppercase; }
+
+  .security { display: flex; align-items: center; gap: 24px; margin-top: 48px; padding: 20px 32px; background: #F5F5F5; }
+  .security .icon { font-size: 24px; }
+  .security .text { font-family: 'Inter', sans-serif; font-size: 14px; color: #666; }
+  .security .text strong { color: #1A1A16; }
+</style>
+</head>
+<body>
+  <div class="stage">
+    <div class="page" data-composition-id="payment_methods" data-start="0" data-duration="5" data-width="1920" data-height="1080">
+      <div class="red-bar"></div>
+      <div class="top">
+        <div class="lbl">VICOO · <span class="red">PAYMENT</span></div>
+        <div class="rule"></div>
+        <div class="meta">PP. 18 · /checkout</div>
+      </div>
+
+      <div class="content">
+        <div class="heading">
+          <div class="kicker">CHAPTER 08 · PAYMENT</div>
+          <h1>Choose how to <em>give</em>.</h1>
+        </div>
+
+        <div class="payment-grid">
+          <div class="payment-card active">
+            <div class="icon">💚</div>
+            <div class="name">WeChat Pay</div>
+            <div class="desc">微信支付，扫码即付</div>
+            <div class="badge">POPULAR</div>
+          </div>
+          <div class="payment-card">
+            <div class="icon">🔵</div>
+            <div class="name">Alipay</div>
+            <div class="desc">支付宝，快捷安全</div>
+          </div>
+          <div class="payment-card">
+            <div class="icon">💳</div>
+            <div class="name">Stripe</div>
+            <div class="desc">国际信用卡，全球通用</div>
+          </div>
+          <div class="payment-card">
+            <div class="icon">🅿️</div>
+            <div class="name">PayPal</div>
+            <div class="desc">PayPal，海外用户首选</div>
+          </div>
+        </div>
+
+        <div class="security">
+          <div class="icon">🔒</div>
+          <div class="text"><strong>256-bit SSL</strong> 加密 · 所有支付信息经 PCI DSS 认证 · 捐赠金额 <strong>100%</strong> 进入公益基金</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
+  <script>
+    (function () {
+      const tl = gsap.timeline({ paused: true });
+      window.__timelines = window.__timelines || {};
+      window.__timelines["payment_methods"] = tl;
+
+      gsap.set('.red-bar', { scaleX: 0, transformOrigin: 'left center' });
+      gsap.set('.top > *', { y: -20, opacity: 0 });
+      gsap.set('.heading > *', { y: 20, opacity: 0 });
+      gsap.set('.payment-card', { y: 30, opacity: 0, scale: 0.9 });
+      gsap.set('.security', { y: 20, opacity: 0 });
+
+      tl.to('.red-bar', { scaleX: 1, duration: 0.5, ease: 'power3.inOut' }, 0);
+      tl.to('.top > *', { y: 0, opacity: 1, duration: 0.5, stagger: 0.06, ease: 'power2.out' }, 0.1);
+      tl.to('.heading > *', { y: 0, opacity: 1, duration: 0.5, stagger: 0.08, ease: 'power2.out' }, 0.3);
+      tl.to('.payment-card', { y: 0, opacity: 1, scale: 1, duration: 0.6, stagger: 0.12, ease: 'back.out(1.2)' }, 0.8);
+      tl.to('.security', { y: 0, opacity: 1, duration: 0.5, ease: 'power2.out' }, 2.0);
+
+      // Pulse active card
+      tl.to('.payment-card.active', { scale: 1.05, duration: 0.6, yoyo: true, repeat: 1, ease: 'sine.inOut' }, 2.5);
+
+      // Exit
+      tl.to('.security', { y: -15, opacity: 0, duration: 0.3, ease: 'power2.in' }, 4.2);
+      tl.to('.payment-card', { y: -25, opacity: 0, duration: 0.3, stagger: 0.05, ease: 'power2.in' }, 4.3);
+      tl.to('.heading > *', { y: -15, opacity: 0, duration: 0.3, ease: 'power2.in' }, 4.5);
+      tl.to('.top', { y: -20, opacity: 0, duration: 0.3, ease: 'power2.in' }, 4.5);
+      tl.to('.red-bar', { scaleX: 0, transformOrigin: 'right center', duration: 0.3 }, 4.5);
+
+      window.addEventListener('load', () => tl.play());
+    })();
+  </script>
+</body>
+</html>

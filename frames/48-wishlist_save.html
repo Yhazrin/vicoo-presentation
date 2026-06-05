@@ -1,0 +1,131 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<title>VICOO — Wishlist</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Noto+Sans+SC:wght@300;400;500;700;900&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  @font-face { font-family: 'Smiley Sans'; src: url('SmileySans-Oblique.woff2') format('woff2'); font-weight: 400; font-style: normal; font-display: block; }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html, body { width: 2560px; height: 1440px; overflow: hidden; background: #FFFFFF; color: #1A1A16; font-family: 'Inter', -apple-system, sans-serif; -webkit-font-smoothing: antialiased; }
+  .stage { position: absolute; top: 0; left: 0; width: 1920px; height: 1080px; transform: scale(1.3333333); transform-origin: top left; }
+  .page { position: absolute; inset: 0; }
+  .red-bar { position: absolute; top: 0; left: 0; right: 0; height: 8px; background: #E60012; }
+  .top { position: absolute; top: 60px; left: 80px; right: 80px; display: flex; align-items: center; gap: 24px; }
+  .top .lbl { font-family: 'JetBrains Mono', monospace; font-size: 13px; font-weight: 500; letter-spacing: 0.2em; text-transform: uppercase; }
+  .top .lbl .red { color: #E60012; }
+  .top .rule { flex: 1; height: 1px; background: #1A1A16; }
+  .top .meta { font-family: 'JetBrains Mono', monospace; font-size: 13px; font-weight: 500; letter-spacing: 0.18em; text-transform: uppercase; color: #888; }
+
+  .content { position: absolute; left: 80px; right: 80px; top: 140px; bottom: 80px; display: grid; grid-template-columns: 1fr 1fr; gap: 60px; }
+
+  .left { display: flex; flex-direction: column; }
+  .left .kicker { font-family: 'JetBrains Mono', monospace; font-size: 12px; font-weight: 500; letter-spacing: 0.2em; text-transform: uppercase; color: #E60012; }
+  .left h1 { font-family: 'Smiley Sans', sans-serif; font-weight: 400; font-size: 52px; line-height: 1.0; letter-spacing: -2px; color: #1A1A16; margin-top: 12px; }
+  .left h1 em { font-style: normal; color: #E60012; }
+  .left .body { font-family: 'Noto Sans SC', sans-serif; font-size: 18px; color: #555; margin-top: 24px; line-height: 1.7; max-width: 480px; }
+
+  .actions { display: flex; gap: 16px; margin-top: 32px; }
+  .action-btn { display: flex; align-items: center; gap: 10px; padding: 14px 24px; font-family: 'Inter', sans-serif; font-weight: 700; font-size: 14px; }
+  .action-btn.primary { background: #E60012; color: #FFFFFF; }
+  .action-btn.ghost { border: 2px solid #1A1A16; color: #1A1A16; }
+
+  .right { display: flex; flex-direction: column; gap: 16px; }
+  .wishlist-item { display: flex; gap: 16px; padding: 20px; background: #F5F5F5; align-items: center; }
+  .wishlist-item .img { width: 80px; height: 80px; background: #E0E0E0; overflow: hidden; flex-shrink: 0; }
+  .wishlist-item .img img { width: 100%; height: 100%; object-fit: cover; }
+  .wishlist-item .info { flex: 1; }
+  .wishlist-item .info .name { font-family: 'Noto Sans SC', sans-serif; font-weight: 700; font-size: 16px; }
+  .wishlist-item .info .price { font-family: 'Inter', sans-serif; font-weight: 800; font-size: 20px; color: #1A1A16; margin-top: 4px; }
+  .wishlist-item .info .tag { font-family: 'JetBrains Mono', monospace; font-size: 10px; color: #E60012; letter-spacing: 0.1em; text-transform: uppercase; margin-top: 4px; }
+  .wishlist-item .heart { font-size: 24px; color: #E60012; }
+  .wishlist-item .share { font-size: 20px; color: #888; margin-left: 8px; }
+</style>
+</head>
+<body>
+  <div class="stage">
+    <div class="page" data-composition-id="wishlist_save" data-start="0" data-duration="5" data-width="1920" data-height="1080">
+      <div class="red-bar"></div>
+      <div class="top">
+        <div class="lbl">VICOO · <span class="red">WISHLIST</span></div>
+        <div class="rule"></div>
+        <div class="meta">PP. 12 · /wishlist</div>
+      </div>
+
+      <div class="content">
+        <div class="left">
+          <div class="kicker">CHAPTER 06 · SAVE & SHARE</div>
+          <h1>Save what you <em>love</em>, share what <em>matters</em>.</h1>
+          <div class="body">收藏你喜欢的公益商品，分享给朋友——每多一个人看见，就多一份改变的可能。</div>
+          <div class="actions">
+            <div class="action-btn primary">♡ MY WISHLIST</div>
+            <div class="action-btn ghost">↗ SHARE ALL</div>
+          </div>
+        </div>
+
+        <div class="right">
+          <div class="wishlist-item">
+            <div class="img"><img src="https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?auto=format&fit=crop&w=200&q=80" alt=""></div>
+            <div class="info"><div class="name">春的色彩联名T恤</div><div class="price">¥178</div><div class="tag">IMPACT · 28% DONATE</div></div>
+            <div class="heart">♥</div>
+            <div class="share">↗</div>
+          </div>
+          <div class="wishlist-item">
+            <div class="img"><img src="https://images.unsplash.com/photo-1434389677669-e08b4cac3105?auto=format&fit=crop&w=200&q=80" alt=""></div>
+            <div class="info"><div class="name">再生羊毛V领针织衫</div><div class="price">¥329</div><div class="tag">RECYCLED WOOL</div></div>
+            <div class="heart">♥</div>
+            <div class="share">↗</div>
+          </div>
+          <div class="wishlist-item">
+            <div class="img"><img src="https://images.unsplash.com/photo-1551028719-00167b16eac5?auto=format&fit=crop&w=200&q=80" alt=""></div>
+            <div class="info"><div class="name">轻量保暖外套</div><div class="price">¥499</div><div class="tag">WATER RESISTANT</div></div>
+            <div class="heart">♥</div>
+            <div class="share">↗</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
+  <script>
+    (function () {
+      const tl = gsap.timeline({ paused: true });
+      window.__timelines = window.__timelines || {};
+      window.__timelines["wishlist_save"] = tl;
+
+      gsap.set('.red-bar', { scaleX: 0, transformOrigin: 'left center' });
+      gsap.set('.top > *', { y: -20, opacity: 0 });
+      gsap.set('.left .kicker', { y: 20, opacity: 0 });
+      gsap.set('.left h1', { y: 30, opacity: 0 });
+      gsap.set('.left .body', { y: 20, opacity: 0 });
+      gsap.set('.actions .action-btn', { y: 20, opacity: 0 });
+      gsap.set('.wishlist-item', { x: 30, opacity: 0 });
+
+      tl.to('.red-bar', { scaleX: 1, duration: 0.5, ease: 'power3.inOut' }, 0);
+      tl.to('.top > *', { y: 0, opacity: 1, duration: 0.5, stagger: 0.06, ease: 'power2.out' }, 0.1);
+      tl.to('.left .kicker', { y: 0, opacity: 1, duration: 0.5, ease: 'power2.out' }, 0.3);
+      tl.to('.left h1', { y: 0, opacity: 1, duration: 0.6, ease: 'expo.out' }, 0.5);
+      tl.to('.left .body', { y: 0, opacity: 1, duration: 0.5, ease: 'power2.out' }, 0.8);
+      tl.to('.actions .action-btn', { y: 0, opacity: 1, duration: 0.4, stagger: 0.1, ease: 'power2.out' }, 1.0);
+      tl.to('.wishlist-item', { x: 0, opacity: 1, duration: 0.5, stagger: 0.15, ease: 'power2.out' }, 1.2);
+
+      // Heart pulse
+      tl.to('.heart', { scale: 1.3, duration: 0.3, yoyo: true, repeat: 1, stagger: 0.1, ease: 'back.out(2)' }, 2.5);
+
+      // Exit
+      tl.to('.wishlist-item', { x: 20, opacity: 0, duration: 0.3, stagger: 0.05, ease: 'power2.in' }, 4.2);
+      tl.to('.actions .action-btn', { y: -15, opacity: 0, duration: 0.3, ease: 'power2.in' }, 4.3);
+      tl.to('.left .body', { y: -15, opacity: 0, duration: 0.3, ease: 'power2.in' }, 4.4);
+      tl.to('.left h1', { y: -20, opacity: 0, duration: 0.3, ease: 'power2.in' }, 4.5);
+      tl.to('.left .kicker', { y: -10, opacity: 0, duration: 0.3, ease: 'power2.in' }, 4.5);
+      tl.to('.top', { y: -20, opacity: 0, duration: 0.3, ease: 'power2.in' }, 4.5);
+      tl.to('.red-bar', { scaleX: 0, transformOrigin: 'right center', duration: 0.3 }, 4.5);
+
+      window.addEventListener('load', () => tl.play());
+    })();
+  </script>
+</body>
+</html>

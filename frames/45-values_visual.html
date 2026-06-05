@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<title>VICOO — Values Visual</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Noto+Sans+SC:wght@300;400;500;700;900&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  @font-face { font-family: 'Smiley Sans'; src: url('SmileySans-Oblique.woff2') format('woff2'); font-weight: 400; font-style: normal; font-display: block; }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html, body { width: 2560px; height: 1440px; overflow: hidden; background: #0A0A0A; color: #FFFFFF; font-family: 'Inter', -apple-system, sans-serif; -webkit-font-smoothing: antialiased; }
+  .stage { position: absolute; top: 0; left: 0; width: 1920px; height: 1080px; transform: scale(1.3333333); transform-origin: top left; }
+  .page { position: absolute; inset: 0; }
+  .red-bar { position: absolute; top: 0; left: 0; right: 0; height: 8px; background: #E60012; }
+
+  .content { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 80px; }
+
+  .eyebrow { font-family: 'JetBrains Mono', monospace; font-size: 14px; font-weight: 500; letter-spacing: 0.3em; text-transform: uppercase; color: #E60012; margin-bottom: 16px; }
+  .headline { font-family: 'Smiley Sans', sans-serif; font-weight: 400; font-size: 64px; line-height: 1.0; letter-spacing: -2px; color: #FFFFFF; text-align: center; margin-bottom: 48px; }
+
+  .cycle { position: relative; width: 500px; height: 500px; }
+  .cycle-center { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 120px; height: 120px; background: #E60012; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-family: 'Smiley Sans', sans-serif; font-size: 36px; }
+  .cycle-node { position: absolute; width: 100px; height: 100px; background: rgba(255,255,255,0.1); border-radius: 50%; display: flex; flex-direction: column; align-items: center; justify-content: center; border: 2px solid rgba(255,255,255,0.2); }
+  .cycle-node .icon { font-size: 28px; }
+  .cycle-node .label { font-family: 'JetBrains Mono', monospace; font-size: 10px; color: rgba(255,255,255,0.7); margin-top: 4px; letter-spacing: 0.1em; text-transform: uppercase; }
+  .cycle-node.n1 { top: 0; left: 50%; transform: translateX(-50%); }
+  .cycle-node.n2 { top: 20%; right: 0; }
+  .cycle-node.n3 { bottom: 20%; right: 0; }
+  .cycle-node.n4 { bottom: 0; left: 50%; transform: translateX(-50%); }
+  .cycle-node.n5 { bottom: 20%; left: 0; }
+  .cycle-node.n6 { top: 20%; left: 0; }
+
+  .cycle-arc { position: absolute; border: 1px dashed rgba(230,0,18,0.4); border-radius: 50%; top: 50%; left: 50%; transform: translate(-50%, -50%); }
+
+  .sub { font-family: 'Noto Sans SC', sans-serif; font-size: 18px; color: rgba(255,255,255,0.5); margin-top: 32px; text-align: center; }
+  .sub em { font-style: normal; color: #E60012; font-weight: 700; }
+</style>
+</head>
+<body>
+  <div class="stage">
+    <div class="page" data-composition-id="values_visual" data-start="0" data-duration="5" data-width="1920" data-height="1080">
+      <div class="red-bar"></div>
+
+      <div class="content">
+        <div class="eyebrow">THE VICOO CIRCLE</div>
+        <div class="headline">Every O is a loop that never ends.</div>
+
+        <div class="cycle">
+          <div class="cycle-arc" style="width: 360px; height: 360px;"></div>
+          <div class="cycle-arc" style="width: 460px; height: 460px;"></div>
+          <div class="cycle-center">VICOO</div>
+          <div class="cycle-node n1"><div class="icon">🎨</div><div class="label">Create</div></div>
+          <div class="cycle-node n2"><div class="icon">👕</div><div class="label">Make</div></div>
+          <div class="cycle-node n3"><div class="icon">🛍️</div><div class="label">Sell</div></div>
+          <div class="cycle-node n4"><div class="icon">💝</div><div class="label">Donate</div></div>
+          <div class="cycle-node n5"><div class="icon">♻️</div><div class="label">Recycle</div></div>
+          <div class="cycle-node n6"><div class="icon">🏫</div><div class="label">Fund</div></div>
+        </div>
+
+        <div class="sub">从<em>创作</em>到<em>生产</em>，从<em>销售</em>到<em>捐赠</em>，从<em>回收</em>到<em>再投资</em>——每一个 O 都是一个完整的循环。</div>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
+  <script>
+    (function () {
+      const tl = gsap.timeline({ paused: true });
+      window.__timelines = window.__timelines || {};
+      window.__timelines["values_visual"] = tl;
+
+      gsap.set('.red-bar', { scaleX: 0, transformOrigin: 'left center' });
+      gsap.set('.eyebrow', { y: -20, opacity: 0 });
+      gsap.set('.headline', { y: 30, opacity: 0 });
+      gsap.set('.cycle-center', { scale: 0, opacity: 0 });
+      gsap.set('.cycle-arc', { scale: 0, opacity: 0 });
+      gsap.set('.cycle-node', { scale: 0, opacity: 0 });
+      gsap.set('.sub', { y: 20, opacity: 0 });
+
+      tl.to('.red-bar', { scaleX: 1, duration: 0.5, ease: 'power3.inOut' }, 0);
+      tl.to('.eyebrow', { y: 0, opacity: 1, duration: 0.5, ease: 'power2.out' }, 0.2);
+      tl.to('.headline', { y: 0, opacity: 1, duration: 0.7, ease: 'expo.out' }, 0.4);
+      tl.to('.cycle-center', { scale: 1, opacity: 1, duration: 0.6, ease: 'back.out(1.4)' }, 0.8);
+      tl.to('.cycle-arc', { scale: 1, opacity: 1, duration: 0.8, stagger: 0.15, ease: 'power3.out' }, 1.0);
+      tl.to('.cycle-node', { scale: 1, opacity: 1, duration: 0.5, stagger: 0.1, ease: 'back.out(1.4)' }, 1.4);
+      tl.to('.sub', { y: 0, opacity: 1, duration: 0.5, ease: 'power2.out' }, 2.5);
+
+      // Gentle rotation of the cycle
+      tl.to('.cycle', { rotation: 30, duration: 2.0, ease: 'sine.inOut' }, 2.5);
+
+      // Exit
+      tl.to('.sub', { y: -15, opacity: 0, duration: 0.3, ease: 'power2.in' }, 4.2);
+      tl.to('.cycle-node', { scale: 0.5, opacity: 0, duration: 0.3, stagger: 0.03, ease: 'power2.in' }, 4.3);
+      tl.to('.cycle-center', { scale: 0, opacity: 0, duration: 0.3, ease: 'power2.in' }, 4.4);
+      tl.to('.cycle-arc', { scale: 0.5, opacity: 0, duration: 0.3, ease: 'power2.in' }, 4.4);
+      tl.to('.headline', { y: -20, opacity: 0, duration: 0.3, ease: 'power2.in' }, 4.5);
+      tl.to('.eyebrow', { y: -15, opacity: 0, duration: 0.3, ease: 'power2.in' }, 4.5);
+      tl.to('.red-bar', { scaleX: 0, transformOrigin: 'right center', duration: 0.3 }, 4.5);
+
+      window.addEventListener('load', () => tl.play());
+    })();
+  </script>
+</body>
+</html>

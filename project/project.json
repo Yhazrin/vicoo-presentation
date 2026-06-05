@@ -16,177 +16,58 @@
   },
   "status": "rendered",
   "createdAt": "2026-06-05T19:40:02.800Z",
-  "updatedAt": "2026-06-05T21:05:09.692Z",
+  "updatedAt": "2026-06-06T12:00:00.000Z",
   "contentGraphPath": ".html-video/projects/proj_6ee4e1be-bbf/content-graph.json",
   "frames": [
-    {
-      "graphNodeId": "cover_blackred",
-      "htmlPath": ".html-video/projects/proj_6ee4e1be-bbf/frames/01-cover_blackred.html",
-      "durationSec": 4,
-      "order": 0
-    },
-    {
-      "graphNodeId": "header_unfold",
-      "htmlPath": ".html-video/projects/proj_6ee4e1be-bbf/frames/02-header_unfold.html",
-      "durationSec": 4,
-      "order": 1
-    },
-    {
-      "graphNodeId": "hero_product",
-      "htmlPath": ".html-video/projects/proj_6ee4e1be-bbf/frames/03-hero_product.html",
-      "durationSec": 5,
-      "order": 2
-    },
-    {
-      "graphNodeId": "marquee_strip",
-      "htmlPath": ".html-video/projects/proj_6ee4e1be-bbf/frames/04-marquee_strip.html",
-      "durationSec": 5,
-      "order": 3
-    },
-    {
-      "graphNodeId": "counters_burst",
-      "htmlPath": ".html-video/projects/proj_6ee4e1be-bbf/frames/05-counters_burst.html",
-      "durationSec": 4,
-      "order": 4
-    },
-    {
-      "graphNodeId": "donation_panel",
-      "htmlPath": ".html-video/projects/proj_6ee4e1be-bbf/frames/06-donation_panel.html",
-      "durationSec": 5,
-      "order": 5
-    },
-    {
-      "graphNodeId": "platforms_chip",
-      "htmlPath": ".html-video/projects/proj_6ee4e1be-bbf/frames/07-platforms_chip.html",
-      "durationSec": 4,
-      "order": 6
-    },
-    {
-      "graphNodeId": "closing_redbar",
-      "htmlPath": ".html-video/projects/proj_6ee4e1be-bbf/frames/08-closing_redbar.html",
-      "durationSec": 4,
-      "order": 7
-    },
-    {
-      "graphNodeId": "brand_meaning",
-      "htmlPath": ".html-video/projects/proj_6ee4e1be-bbf/frames/09-brand_meaning.html",
-      "durationSec": 5,
-      "order": 8
-    },
-    {
-      "graphNodeId": "missions",
-      "htmlPath": ".html-video/projects/proj_6ee4e1be-bbf/frames/10-missions.html",
-      "durationSec": 6,
-      "order": 9
-    },
-    {
-      "graphNodeId": "home",
-      "htmlPath": ".html-video/projects/proj_6ee4e1be-bbf/frames/11-home.html",
-      "durationSec": 6,
-      "order": 10
-    },
-    {
-      "graphNodeId": "shop_browse",
-      "htmlPath": ".html-video/projects/proj_6ee4e1be-bbf/frames/12-shop_browse.html",
-      "durationSec": 6,
-      "order": 11
-    },
-    {
-      "graphNodeId": "normal_detail",
-      "htmlPath": ".html-video/projects/proj_6ee4e1be-bbf/frames/13-normal_detail.html",
-      "durationSec": 6,
-      "order": 12
-    },
-    {
-      "graphNodeId": "impact_detail",
-      "htmlPath": ".html-video/projects/proj_6ee4e1be-bbf/frames/14-impact_detail.html",
-      "durationSec": 6,
-      "order": 13
-    },
-    {
-      "graphNodeId": "globe_intro",
-      "htmlPath": ".html-video/projects/proj_6ee4e1be-bbf/frames/15-globe_intro.html",
-      "durationSec": 6,
-      "order": 14
-    },
-    {
-      "graphNodeId": "timeline",
-      "htmlPath": ".html-video/projects/proj_6ee4e1be-bbf/frames/16-timeline.html",
-      "durationSec": 5,
-      "order": 15
-    },
-    {
-      "graphNodeId": "material_trace",
-      "htmlPath": ".html-video/projects/proj_6ee4e1be-bbf/frames/17-material_trace.html",
-      "durationSec": 5,
-      "order": 16
-    },
-    {
-      "graphNodeId": "login",
-      "htmlPath": ".html-video/projects/proj_6ee4e1be-bbf/frames/18-login.html",
-      "durationSec": 5,
-      "order": 17
-    },
-    {
-      "graphNodeId": "profile",
-      "htmlPath": ".html-video/projects/proj_6ee4e1be-bbf/frames/19-profile.html",
-      "durationSec": 6,
-      "order": 18
-    },
-    {
-      "graphNodeId": "cart",
-      "htmlPath": ".html-video/projects/proj_6ee4e1be-bbf/frames/20-cart.html",
-      "durationSec": 6,
-      "order": 19
-    },
-    {
-      "graphNodeId": "checkout",
-      "htmlPath": ".html-video/projects/proj_6ee4e1be-bbf/frames/21-checkout.html",
-      "durationSec": 6,
-      "order": 20
-    },
-    {
-      "graphNodeId": "order",
-      "htmlPath": ".html-video/projects/proj_6ee4e1be-bbf/frames/22-order.html",
-      "durationSec": 6,
-      "order": 21
-    },
-    {
-      "graphNodeId": "certificate",
-      "htmlPath": ".html-video/projects/proj_6ee4e1be-bbf/frames/23-certificate.html",
-      "durationSec": 5,
-      "order": 22
-    },
-    {
-      "graphNodeId": "recycle",
-      "htmlPath": ".html-video/projects/proj_6ee4e1be-bbf/frames/24-recycle.html",
-      "durationSec": 6,
-      "order": 23
-    },
-    {
-      "graphNodeId": "campaigns",
-      "htmlPath": ".html-video/projects/proj_6ee4e1be-bbf/frames/25-campaigns.html",
-      "durationSec": 6,
-      "order": 24
-    },
-    {
-      "graphNodeId": "artwork",
-      "htmlPath": ".html-video/projects/proj_6ee4e1be-bbf/frames/26-artwork.html",
-      "durationSec": 6,
-      "order": 25
-    },
-    {
-      "graphNodeId": "vote",
-      "htmlPath": ".html-video/projects/proj_6ee4e1be-bbf/frames/27-vote.html",
-      "durationSec": 6,
-      "order": 26
-    },
-    {
-      "graphNodeId": "ai",
-      "htmlPath": ".html-video/projects/proj_6ee4e1be-bbf/frames/28-ai.html",
-      "durationSec": 6,
-      "order": 27
-    }
+    { "graphNodeId": "cover_blackred", "htmlPath": ".html-video/projects/proj_6ee4e1be-bbf/frames/01-cover_blackred.html", "durationSec": 4, "order": 0 },
+    { "graphNodeId": "story_hook", "htmlPath": ".html-video/projects/proj_6ee4e1be-bbf/frames/02-story_hook.html", "durationSec": 5, "order": 1 },
+    { "graphNodeId": "header_unfold", "htmlPath": ".html-video/projects/proj_6ee4e1be-bbf/frames/02-header_unfold.html", "durationSec": 4, "order": 2 },
+    { "graphNodeId": "hero_product", "htmlPath": ".html-video/projects/proj_6ee4e1be-bbf/frames/03-hero_product.html", "durationSec": 5, "order": 3 },
+    { "graphNodeId": "artist_portrait", "htmlPath": ".html-video/projects/proj_6ee4e1be-bbf/frames/46-artist_portrait.html", "durationSec": 5, "order": 4 },
+    { "graphNodeId": "uniqlo_partnership", "htmlPath": ".html-video/projects/proj_6ee4e1be-bbf/frames/32-uniqlo_partnership.html", "durationSec": 5, "order": 5 },
+    { "graphNodeId": "marquee_strip", "htmlPath": ".html-video/projects/proj_6ee4e1be-bbf/frames/04-marquee_strip.html", "durationSec": 5, "order": 6 },
+    { "graphNodeId": "impact_preview", "htmlPath": ".html-video/projects/proj_6ee4e1be-bbf/frames/47-impact_preview.html", "durationSec": 5, "order": 7 },
+    { "graphNodeId": "counters_burst", "htmlPath": ".html-video/projects/proj_6ee4e1be-bbf/frames/05-counters_burst.html", "durationSec": 4, "order": 8 },
+    { "graphNodeId": "donation_panel", "htmlPath": ".html-video/projects/proj_6ee4e1be-bbf/frames/06-donation_panel.html", "durationSec": 5, "order": 9 },
+    { "graphNodeId": "platforms_chip", "htmlPath": ".html-video/projects/proj_6ee4e1be-bbf/frames/07-platforms_chip.html", "durationSec": 4, "order": 10 },
+    { "graphNodeId": "closing_redbar", "htmlPath": ".html-video/projects/proj_6ee4e1be-bbf/frames/08-closing_redbar.html", "durationSec": 4, "order": 11 },
+    { "graphNodeId": "brand_meaning", "htmlPath": ".html-video/projects/proj_6ee4e1be-bbf/frames/09-brand_meaning.html", "durationSec": 5, "order": 12 },
+    { "graphNodeId": "brand_story", "htmlPath": ".html-video/projects/proj_6ee4e1be-bbf/frames/29-brand_story.html", "durationSec": 6, "order": 13 },
+    { "graphNodeId": "values_visual", "htmlPath": ".html-video/projects/proj_6ee4e1be-bbf/frames/45-values_visual.html", "durationSec": 5, "order": 14 },
+    { "graphNodeId": "missions", "htmlPath": ".html-video/projects/proj_6ee4e1be-bbf/frames/10-missions.html", "durationSec": 6, "order": 15 },
+    { "graphNodeId": "home", "htmlPath": ".html-video/projects/proj_6ee4e1be-bbf/frames/11-home.html", "durationSec": 6, "order": 16 },
+    { "graphNodeId": "search_filter", "htmlPath": ".html-video/projects/proj_6ee4e1be-bbf/frames/36-search_filter.html", "durationSec": 5, "order": 17 },
+    { "graphNodeId": "shop_browse", "htmlPath": ".html-video/projects/proj_6ee4e1be-bbf/frames/12-shop_browse.html", "durationSec": 6, "order": 18 },
+    { "graphNodeId": "wishlist_save", "htmlPath": ".html-video/projects/proj_6ee4e1be-bbf/frames/48-wishlist_save.html", "durationSec": 5, "order": 19 },
+    { "graphNodeId": "normal_detail", "htmlPath": ".html-video/projects/proj_6ee4e1be-bbf/frames/13-normal_detail.html", "durationSec": 6, "order": 20 },
+    { "graphNodeId": "impact_detail", "htmlPath": ".html-video/projects/proj_6ee4e1be-bbf/frames/14-impact_detail.html", "durationSec": 6, "order": 21 },
+    { "graphNodeId": "globe_intro", "htmlPath": ".html-video/projects/proj_6ee4e1be-bbf/frames/15-globe_intro.html", "durationSec": 6, "order": 22 },
+    { "graphNodeId": "globe_deep_dive", "htmlPath": ".html-video/projects/proj_6ee4e1be-bbf/frames/37-globe_deep_dive.html", "durationSec": 5, "order": 23 },
+    { "graphNodeId": "timeline", "htmlPath": ".html-video/projects/proj_6ee4e1be-bbf/frames/16-timeline.html", "durationSec": 5, "order": 24 },
+    { "graphNodeId": "material_trace", "htmlPath": ".html-video/projects/proj_6ee4e1be-bbf/frames/17-material_trace.html", "durationSec": 5, "order": 25 },
+    { "graphNodeId": "carbon_footprint", "htmlPath": ".html-video/projects/proj_6ee4e1be-bbf/frames/38-carbon_footprint.html", "durationSec": 5, "order": 26 },
+    { "graphNodeId": "login", "htmlPath": ".html-video/projects/proj_6ee4e1be-bbf/frames/18-login.html", "durationSec": 5, "order": 27 },
+    { "graphNodeId": "register", "htmlPath": ".html-video/projects/proj_6ee4e1be-bbf/frames/39-register.html", "durationSec": 5, "order": 28 },
+    { "graphNodeId": "profile", "htmlPath": ".html-video/projects/proj_6ee4e1be-bbf/frames/19-profile.html", "durationSec": 6, "order": 29 },
+    { "graphNodeId": "cart", "htmlPath": ".html-video/projects/proj_6ee4e1be-bbf/frames/20-cart.html", "durationSec": 6, "order": 30 },
+    { "graphNodeId": "payment_methods", "htmlPath": ".html-video/projects/proj_6ee4e1be-bbf/frames/40-payment_methods.html", "durationSec": 5, "order": 31 },
+    { "graphNodeId": "checkout", "htmlPath": ".html-video/projects/proj_6ee4e1be-bbf/frames/21-checkout.html", "durationSec": 6, "order": 32 },
+    { "graphNodeId": "order_tracking", "htmlPath": ".html-video/projects/proj_6ee4e1be-bbf/frames/41-order_tracking.html", "durationSec": 5, "order": 33 },
+    { "graphNodeId": "order", "htmlPath": ".html-video/projects/proj_6ee4e1be-bbf/frames/22-order.html", "durationSec": 6, "order": 34 },
+    { "graphNodeId": "certificate", "htmlPath": ".html-video/projects/proj_6ee4e1be-bbf/frames/23-certificate.html", "durationSec": 5, "order": 35 },
+    { "graphNodeId": "recycle", "htmlPath": ".html-video/projects/proj_6ee4e1be-bbf/frames/24-recycle.html", "durationSec": 6, "order": 36 },
+    { "graphNodeId": "environmental_impact", "htmlPath": ".html-video/projects/proj_6ee4e1be-bbf/frames/42-environmental_impact.html", "durationSec": 5, "order": 37 },
+    { "graphNodeId": "campaigns", "htmlPath": ".html-video/projects/proj_6ee4e1be-bbf/frames/25-campaigns.html", "durationSec": 6, "order": 38 },
+    { "graphNodeId": "campaign_detail", "htmlPath": ".html-video/projects/proj_6ee4e1be-bbf/frames/43-campaign_detail.html", "durationSec": 5, "order": 39 },
+    { "graphNodeId": "artwork", "htmlPath": ".html-video/projects/proj_6ee4e1be-bbf/frames/26-artwork.html", "durationSec": 6, "order": 40 },
+    { "graphNodeId": "artwork_gallery", "htmlPath": ".html-video/projects/proj_6ee4e1be-bbf/frames/44-artwork_gallery.html", "durationSec": 5, "order": 41 },
+    { "graphNodeId": "vote", "htmlPath": ".html-video/projects/proj_6ee4e1be-bbf/frames/27-vote.html", "durationSec": 6, "order": 42 },
+    { "graphNodeId": "ai", "htmlPath": ".html-video/projects/proj_6ee4e1be-bbf/frames/28-ai.html", "durationSec": 6, "order": 43 },
+    { "graphNodeId": "testimonials", "htmlPath": ".html-video/projects/proj_6ee4e1be-bbf/frames/33-testimonials.html", "durationSec": 6, "order": 44 },
+    { "graphNodeId": "stats_summary", "htmlPath": ".html-video/projects/proj_6ee4e1be-bbf/frames/34-stats_summary.html", "durationSec": 5, "order": 45 },
+    { "graphNodeId": "vision", "htmlPath": ".html-video/projects/proj_6ee4e1be-bbf/frames/35-vision.html", "durationSec": 6, "order": 46 },
+    { "graphNodeId": "cta", "htmlPath": ".html-video/projects/proj_6ee4e1be-bbf/frames/30-cta.html", "durationSec": 6, "order": 47 },
+    { "graphNodeId": "credits", "htmlPath": ".html-video/projects/proj_6ee4e1be-bbf/frames/31-credits.html", "durationSec": 5, "order": 48 }
   ],
   "lastPreviewHtmlPath": ".html-video/projects/proj_6ee4e1be-bbf/frames/01-cover_blackred.html",
   "lastOutputMp4Path": "/Users/yanghaoze/Desktop/PROJECT/VICOO-esp/videos/vicoo-promo-tmp.mp4",

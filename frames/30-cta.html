@@ -1,0 +1,128 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<title>VICOO — Call to Action</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Noto+Sans+SC:wght@300;400;500;700;900&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  @font-face { font-family: 'Smiley Sans'; src: url('SmileySans-Oblique.woff2') format('woff2'); font-weight: 400; font-style: normal; font-display: block; }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html, body { width: 2560px; height: 1440px; overflow: hidden; background: #0A0A0A; color: #FFFFFF; font-family: 'Inter', -apple-system, sans-serif; -webkit-font-smoothing: antialiased; }
+  .stage { position: absolute; top: 0; left: 0; width: 1920px; height: 1080px; transform: scale(1.3333333); transform-origin: top left; }
+  .page { position: absolute; inset: 0; }
+  .red-bar { position: absolute; top: 0; left: 0; right: 0; height: 8px; background: #E60012; }
+  .grid { position: absolute; inset: 0; pointer-events: none; opacity: 0.04; background-image: linear-gradient(to right, #FFF 1px, transparent 1px); background-size: 80px 80px; }
+
+  .corner { position: absolute; font-family: 'JetBrains Mono', monospace; font-size: 13px; font-weight: 500; letter-spacing: 0.2em; text-transform: uppercase; color: #888; }
+  .corner.tl { top: 40px; left: 80px; }
+  .corner.tr { top: 40px; right: 80px; }
+  .corner.bl { bottom: 40px; left: 80px; }
+  .corner.br { bottom: 40px; right: 80px; color: #E60012; }
+
+  .content { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; }
+
+  .eyebrow { font-family: 'JetBrains Mono', monospace; font-size: 14px; font-weight: 500; letter-spacing: 0.3em; text-transform: uppercase; color: #E60012; margin-bottom: 24px; }
+  .headline { font-family: 'Smiley Sans', 'Inter', sans-serif; font-weight: 400; font-size: 120px; line-height: 0.95; letter-spacing: -4px; color: #FFFFFF; text-align: center; }
+  .headline .red { color: #E60012; }
+  .headline .small { font-size: 72px; letter-spacing: -2px; }
+
+  .actions { display: flex; gap: 24px; margin-top: 48px; }
+  .action { display: flex; flex-direction: column; align-items: center; gap: 16px; padding: 32px 48px; border: 2px solid rgba(255,255,255,0.2); background: rgba(255,255,255,0.03); }
+  .action .icon { font-size: 48px; }
+  .action .title { font-family: 'Inter', sans-serif; font-weight: 800; font-size: 18px; letter-spacing: 0.1em; text-transform: uppercase; }
+  .action .desc { font-family: 'Noto Sans SC', sans-serif; font-size: 14px; color: rgba(255,255,255,0.6); text-align: center; max-width: 200px; }
+  .action.primary { border-color: #E60012; background: rgba(230, 0, 18, 0.1); }
+
+  .url { position: absolute; bottom: 60px; left: 0; right: 0; text-align: center; font-family: 'JetBrains Mono', monospace; font-size: 16px; font-weight: 500; letter-spacing: 0.25em; text-transform: uppercase; color: rgba(255,255,255,0.5); }
+  .url .red { color: #E60012; font-weight: 700; }
+</style>
+</head>
+<body>
+  <div class="stage">
+    <div class="page" data-composition-id="cta" data-start="0" data-duration="6" data-width="1920" data-height="1080">
+      <div class="red-bar"></div>
+      <div class="grid"></div>
+
+      <div class="corner tl">VICOO · JOIN US</div>
+      <div class="corner tr">SS26</div>
+      <div class="corner bl">EVERY PURCHASE = DONATION</div>
+      <div class="corner br">→ ACT NOW</div>
+
+      <div class="content">
+        <div class="eyebrow">BE PART OF THE CIRCLE</div>
+        <div class="headline">
+          <span class="small">The next child's</span><br>
+          <span class="red">masterpiece</span><br>
+          <span class="small">starts with you.</span>
+        </div>
+
+        <div class="actions">
+          <div class="action primary">
+            <div class="icon">🛍️</div>
+            <div class="title">Shop</div>
+            <div class="desc">浏览公益联名款，28% 直接捐赠</div>
+          </div>
+          <div class="action">
+            <div class="icon">🎨</div>
+            <div class="title">Submit</div>
+            <div class="desc">投稿孩子的画作，参与下一期活动</div>
+          </div>
+          <div class="action">
+            <div class="icon">💝</div>
+            <div class="title">Donate</div>
+            <div class="desc">直接捐赠，支持乡村美育基金</div>
+          </div>
+          <div class="action">
+            <div class="icon">♻️</div>
+            <div class="title">Recycle</div>
+            <div class="desc">旧衣回收，让衣物循环再生</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="url">VICOO.ORG · <span class="red">SHOP</span> · DONATE · SUBMIT · RECYCLE</div>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
+  <script>
+    (function () {
+      const tl = gsap.timeline({ paused: true });
+      window.__timelines = window.__timelines || {};
+      window.__timelines["cta"] = tl;
+
+      gsap.set('.red-bar', { scaleX: 0, transformOrigin: 'left center' });
+      gsap.set('.corner', { y: 20, opacity: 0 });
+      gsap.set('.eyebrow', { y: -20, opacity: 0 });
+      gsap.set('.headline', { y: 50, opacity: 0, scale: 0.95 });
+      gsap.set('.action', { y: 40, opacity: 0, scale: 0.9 });
+      gsap.set('.url', { y: 20, opacity: 0 });
+
+      tl.to('.red-bar', { scaleX: 1, duration: 0.5, ease: 'power3.inOut' }, 0);
+      tl.to('.corner', { y: 0, opacity: 1, duration: 0.5, stagger: 0.06, ease: 'power2.out' }, 0.1);
+      tl.to('.eyebrow', { y: 0, opacity: 1, duration: 0.5, ease: 'power2.out' }, 0.3);
+      tl.to('.headline', { y: 0, opacity: 1, scale: 1, duration: 0.8, ease: 'expo.out' }, 0.5);
+      tl.to('.action', { y: 0, opacity: 1, scale: 1, duration: 0.6, stagger: 0.12, ease: 'back.out(1.4)' }, 1.2);
+      tl.to('.url', { y: 0, opacity: 1, duration: 0.5, ease: 'power2.out' }, 2.5);
+
+      // Magnetic hover on primary action
+      tl.to({}, { duration: 0.3, onStart: () => {
+        const btn = document.querySelector('.action.primary');
+        gsap.fromTo(btn, { x: 0, y: 0 }, { x: -3, y: -2, duration: 0.15, yoyo: true, repeat: 1, ease: 'power2.inOut' });
+      }}, 3.0);
+
+      // Exit
+      tl.to('.url', { y: -15, opacity: 0, duration: 0.3, ease: 'power2.in' }, 5.2);
+      tl.to('.action', { y: -30, opacity: 0, duration: 0.3, stagger: 0.05, ease: 'power2.in' }, 5.3);
+      tl.to('.headline', { y: -40, opacity: 0, duration: 0.3, ease: 'power2.in' }, 5.4);
+      tl.to('.eyebrow', { y: -20, opacity: 0, duration: 0.3, ease: 'power2.in' }, 5.5);
+      tl.to('.corner', { y: -15, opacity: 0, duration: 0.3, ease: 'power2.in' }, 5.5);
+      tl.to('.red-bar', { scaleX: 0, transformOrigin: 'right center', duration: 0.3 }, 5.5);
+
+      window.addEventListener('load', () => tl.play());
+    })();
+  </script>
+</body>
+</html>

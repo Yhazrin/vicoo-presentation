@@ -1,0 +1,116 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<title>VICOO — Story Hook</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Noto+Sans+SC:wght@300;400;500;700;900&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  @font-face { font-family: 'Smiley Sans'; src: url('SmileySans-Oblique.woff2') format('woff2'); font-weight: 400; font-style: normal; font-display: block; }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html, body { width: 2560px; height: 1440px; overflow: hidden; background: #0A0A0A; color: #FFFFFF; font-family: 'Inter', -apple-system, sans-serif; -webkit-font-smoothing: antialiased; }
+  .stage { position: absolute; top: 0; left: 0; width: 1920px; height: 1080px; transform: scale(1.3333333); transform-origin: top left; }
+  .page { position: absolute; inset: 0; }
+  .red-bar { position: absolute; top: 0; left: 0; right: 0; height: 8px; background: #E60012; }
+
+  /* Background circles - representing children's world */
+  .circles { position: absolute; inset: 0; pointer-events: none; }
+  .circle { position: absolute; border-radius: 50%; border: 2px solid rgba(230, 0, 18, 0.3); }
+  .circle.c1 { width: 400px; height: 400px; top: -100px; right: -80px; }
+  .circle.c2 { width: 250px; height: 250px; bottom: -60px; left: -40px; }
+  .circle.c3 { width: 180px; height: 180px; top: 50%; left: 60%; }
+
+  /* Main content */
+  .content { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; }
+
+  .eyebrow { font-family: 'JetBrains Mono', monospace; font-size: 14px; font-weight: 500; letter-spacing: 0.3em; text-transform: uppercase; color: #E60012; margin-bottom: 32px; }
+
+  .quote { font-family: 'Smiley Sans', 'Inter', sans-serif; font-weight: 400; font-size: 88px; line-height: 1.1; letter-spacing: -3px; color: #FFFFFF; text-align: center; max-width: 1200px; }
+  .quote .red { color: #E60012; }
+  .quote .dim { opacity: 0.5; }
+
+  .divider { width: 120px; height: 3px; background: #E60012; margin: 40px 0; }
+
+  .sub { font-family: 'Noto Sans SC', sans-serif; font-weight: 400; font-size: 28px; line-height: 1.6; color: rgba(255,255,255,0.7); text-align: center; max-width: 800px; }
+  .sub em { font-style: normal; color: #E60012; font-weight: 700; }
+
+  /* Bottom stats ticker */
+  .ticker { position: absolute; bottom: 60px; left: 0; right: 0; display: flex; justify-content: center; gap: 48px; }
+  .stat { text-align: center; }
+  .stat .num { font-family: 'Inter', sans-serif; font-weight: 800; font-size: 36px; color: #E60012; }
+  .stat .lbl { font-family: 'JetBrains Mono', monospace; font-size: 11px; font-weight: 500; letter-spacing: 0.2em; text-transform: uppercase; color: rgba(255,255,255,0.5); margin-top: 4px; }
+</style>
+</head>
+<body>
+  <div class="stage">
+    <div class="page" data-composition-id="story_hook" data-start="0" data-duration="5" data-width="1920" data-height="1080">
+      <div class="red-bar"></div>
+      <div class="circles">
+        <div class="circle c1"></div>
+        <div class="circle c2"></div>
+        <div class="circle c3"></div>
+      </div>
+
+      <div class="content">
+        <div class="eyebrow">A CHILD'S DRAWING</div>
+        <div class="quote">
+          Every child has a <span class="red">story</span> to tell —<br>
+          <span class="dim">we just need to</span> <span class="red">listen</span>.
+        </div>
+        <div class="divider"></div>
+        <div class="sub">
+          从<em>一支画笔</em>到<em>一件衣裳</em>，<br>
+          每个孩子的想象，都值得被世界看见。
+        </div>
+      </div>
+
+      <div class="ticker">
+        <div class="stat"><div class="num">12,431</div><div class="lbl">Artworks</div></div>
+        <div class="stat"><div class="num">32</div><div class="lbl">Schools</div></div>
+        <div class="stat"><div class="num">4,872</div><div class="lbl">Children</div></div>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
+  <script>
+    (function () {
+      const tl = gsap.timeline({ paused: true });
+      window.__timelines = window.__timelines || {};
+      window.__timelines["story_hook"] = tl;
+
+      gsap.set('.red-bar', { scaleX: 0, transformOrigin: 'left center' });
+      gsap.set('.circle', { scale: 0, opacity: 0 });
+      gsap.set('.eyebrow', { y: -20, opacity: 0 });
+      gsap.set('.quote', { y: 40, opacity: 0 });
+      gsap.set('.divider', { scaleX: 0 });
+      gsap.set('.sub', { y: 20, opacity: 0 });
+      gsap.set('.stat', { y: 30, opacity: 0 });
+
+      // Entry
+      tl.to('.red-bar', { scaleX: 1, duration: 0.5, ease: 'power3.inOut' }, 0);
+      tl.to('.circle', { scale: 1, opacity: 1, duration: 1.2, stagger: 0.15, ease: 'back.out(1.2)' }, 0.2);
+      tl.to('.eyebrow', { y: 0, opacity: 1, duration: 0.5, ease: 'power2.out' }, 0.3);
+      tl.to('.quote', { y: 0, opacity: 1, duration: 0.8, ease: 'expo.out' }, 0.5);
+      tl.to('.divider', { scaleX: 1, duration: 0.6, ease: 'power3.inOut' }, 1.0);
+      tl.to('.sub', { y: 0, opacity: 1, duration: 0.6, ease: 'power2.out' }, 1.2);
+      tl.to('.stat', { y: 0, opacity: 1, duration: 0.5, stagger: 0.1, ease: 'power2.out' }, 1.6);
+
+      // Pulse the circles gently
+      tl.to('.circle.c1', { scale: 1.05, duration: 1.5, yoyo: true, repeat: 1, ease: 'sine.inOut' }, 2.0);
+      tl.to('.circle.c3', { scale: 1.08, duration: 1.2, yoyo: true, repeat: 1, ease: 'sine.inOut' }, 2.3);
+
+      // Exit
+      tl.to('.stat', { y: -20, opacity: 0, duration: 0.3, ease: 'power2.in' }, 4.2);
+      tl.to('.sub', { y: -15, opacity: 0, duration: 0.3, ease: 'power2.in' }, 4.3);
+      tl.to('.divider', { scaleX: 0, duration: 0.2, ease: 'power2.in' }, 4.3);
+      tl.to('.quote', { y: -30, opacity: 0, duration: 0.3, ease: 'power2.in' }, 4.4);
+      tl.to('.eyebrow', { y: -20, opacity: 0, duration: 0.3, ease: 'power2.in' }, 4.4);
+      tl.to('.circle', { scale: 0.5, opacity: 0, duration: 0.4, ease: 'power2.in' }, 4.3);
+
+      window.addEventListener('load', () => tl.play());
+    })();
+  </script>
+</body>
+</html>

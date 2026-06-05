@@ -19,48 +19,37 @@
   .top .rule { flex: 1; height: 1px; background: #1A1A16; }
   .top .meta { font-family: 'JetBrains Mono', monospace; font-size: 13px; font-weight: 500; letter-spacing: 0.18em; text-transform: uppercase; color: #888; }
 
-  .heading { position: absolute; top: 130px; left: 80px; right: 80px; }
-  .heading .kicker { font-family: 'JetBrains Mono', monospace; font-size: 12px; font-weight: 500; letter-spacing: 0.2em; text-transform: uppercase; color: #E60012; }
-  .heading h1 { font-family: 'Smiley Sans', sans-serif; font-weight: 400; font-size: 64px; line-height: 0.95; letter-spacing: -2px; color: #1A1A16; margin-top: 8px; }
-  .heading h1 em { font-style: normal; color: #E60012; }
-  .heading .sub { font-family: 'Noto Sans SC', sans-serif; font-size: 16px; color: #666; margin-top: 8px; }
+  .content { position: absolute; left: 80px; right: 80px; top: 140px; bottom: 80px; display: grid; grid-template-columns: 1fr 1fr; gap: 60px; }
 
-  /* Two columns */
-  .layout { position: absolute; left: 80px; right: 80px; top: 320px; bottom: 60px; display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+  .left { display: flex; flex-direction: column; }
+  .left .kicker { font-family: 'JetBrains Mono', monospace; font-size: 12px; font-weight: 500; letter-spacing: 0.2em; text-transform: uppercase; color: #E60012; }
+  .left h1 { font-family: 'Smiley Sans', sans-serif; font-weight: 400; font-size: 52px; line-height: 1.0; letter-spacing: -2px; color: #1A1A16; margin-top: 12px; }
+  .left h1 em { font-style: normal; color: #E60012; }
+  .left .body { font-family: 'Noto Sans SC', sans-serif; font-size: 18px; color: #555; margin-top: 24px; line-height: 1.7; max-width: 480px; }
 
-  /* Left: upload area */
-  .upload { background: #F5F5F5; border: 2px dashed #1A1A16; padding: 32px; display: flex; flex-direction: column; }
-  .upload .head { font-family: 'Smiley Sans', sans-serif; font-weight: 400; font-size: 28px; color: #1A1A16; margin-bottom: 20px; }
-  .upload .drop { flex: 1; min-height: 200px; background: #FFFFFF; border: 2px dashed #BBB; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; }
-  .upload .drop .ic { font-size: 48px; margin-bottom: 12px; }
-  .upload .drop .text { font-family: 'Inter', sans-serif; font-weight: 600; font-size: 16px; color: #1A1A16; }
-  .upload .drop .sub { font-family: 'JetBrains Mono', monospace; font-size: 11px; color: #888; margin-top: 4px; letter-spacing: 0.1em; }
-  .upload .preview { margin-top: 16px; }
-  .upload .preview .ttl { font-family: 'JetBrains Mono', monospace; font-size: 11px; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: #888; margin-bottom: 8px; }
-  .upload .preview .img { width: 100%; height: 160px; background: linear-gradient(135deg, #FFD93D 0%, #E60012 50%, #4D96FF 100%); position: relative; }
-  .upload .preview .img::after { content: '✓ READY · 2.3 MB · 1920×1080'; position: absolute; bottom: 12px; left: 12px; background: rgba(0,0,0,0.7); color: #FFFFFF; padding: 6px 12px; font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: 0.1em; }
-  .upload .actions { display: flex; gap: 8px; margin-top: 16px; }
-  .upload .actions .btn { flex: 1; height: 52px; background: #1A1A16; color: #FFFFFF; font-family: 'Inter', sans-serif; font-weight: 800; font-size: 13px; letter-spacing: 0.15em; text-transform: uppercase; }
-  .upload .actions .btn.ghost { background: #FFFFFF; color: #1A1A16; border: 2px solid #1A1A16; }
+  .form { margin-top: 32px; }
+  .form .field { margin-bottom: 20px; }
+  .form .field label { font-family: 'JetBrains Mono', monospace; font-size: 11px; font-weight: 500; letter-spacing: 0.15em; text-transform: uppercase; color: #888; display: block; margin-bottom: 8px; }
+  .form .field input, .form .field textarea { width: 100%; padding: 14px 16px; border: 2px solid #E0E0E0; font-family: 'Inter', sans-serif; font-size: 14px; transition: border-color 0.3s ease; }
+  .form .field input:focus, .form .field textarea:focus { border-color: #E60012; outline: none; }
+  .form .field textarea { height: 100px; resize: none; }
 
-  /* Right: form */
-  .form { background: #FFFFFF; border: 1px solid #DDD; padding: 32px; }
-  .form h2 { font-family: 'Smiley Sans', sans-serif; font-weight: 400; font-size: 28px; color: #1A1A16; margin-bottom: 20px; }
-  .form .field { margin-bottom: 16px; }
-  .form .lbl { font-family: 'JetBrains Mono', monospace; font-size: 10px; font-weight: 500; letter-spacing: 0.2em; text-transform: uppercase; color: #888; margin-bottom: 6px; }
-  .form .input, .form .textarea, .form .select { width: 100%; border: 1px solid #1A1A16; padding: 12px 16px; font-family: 'Inter', sans-serif; font-weight: 600; font-size: 14px; color: #1A1A16; background: #FFFFFF; }
-  .form .input { height: 52px; }
-  .form .textarea { height: 100px; font-family: 'Noto Sans SC', sans-serif; resize: none; }
-  .form .select { height: 52px; }
-  .form .row2 { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
-  .form .age { display: flex; gap: 8px; }
-  .form .age .chip { padding: 8px 14px; border: 1px solid #1A1A16; font-family: 'Inter', sans-serif; font-weight: 700; font-size: 13px; }
-  .form .age .chip.selected { background: #1A1A16; color: #FFFFFF; }
-  .form .consent { display: flex; align-items: start; gap: 12px; padding: 12px; background: #FFF8E7; border: 1px solid #E60012; margin-top: 12px; }
-  .form .consent .box { width: 20px; height: 20px; border: 2px solid #E60012; background: #E60012; display: flex; align-items: center; justify-content: center; color: #FFFFFF; font-size: 12px; }
-  .form .consent .text { font-family: 'Noto Sans SC', sans-serif; font-size: 12px; color: #1A1A16; line-height: 1.4; }
-  .form .consent .text strong { font-weight: 700; }
-  .form .submit { width: 100%; height: 60px; background: #E60012; color: #FFFFFF; font-family: 'Inter', sans-serif; font-weight: 800; font-size: 15px; letter-spacing: 0.15em; text-transform: uppercase; margin-top: 16px; }
+  .consent { display: flex; gap: 12px; margin-top: 20px; padding: 16px; background: #F5F5F5; }
+  .consent .icon { font-size: 24px; }
+  .consent .text { font-family: 'Noto Sans SC', sans-serif; font-size: 13px; color: #666; line-height: 1.5; }
+  .consent .text strong { color: #1A1A16; }
+
+  .right { display: flex; flex-direction: column; }
+  .right h3 { font-family: 'Inter', sans-serif; font-weight: 800; font-size: 18px; margin-bottom: 20px; }
+
+  .dropzone { flex: 1; border: 3px dashed #E0E0E0; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 16px; transition: all 0.3s ease; position: relative; overflow: hidden; }
+  .dropzone .icon { font-size: 64px; }
+  .dropzone .text { font-family: 'Inter', sans-serif; font-weight: 700; font-size: 16px; color: #888; }
+  .dropzone .sub { font-family: 'Noto Sans SC', sans-serif; font-size: 14px; color: #AAA; }
+  .dropzone .sweep { position: absolute; inset: 0; background: linear-gradient(90deg, transparent, rgba(230,0,18,0.1), transparent); transform: translateX(-100%); }
+
+  .btn { padding: 18px 32px; background: #E60012; color: #FFFFFF; border: 0; font-family: 'Inter', sans-serif; font-weight: 800; font-size: 16px; letter-spacing: 0.1em; text-transform: uppercase; cursor: pointer; margin-top: 20px; position: relative; overflow: hidden; }
+  .btn .sweep { position: absolute; inset: 0; background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent); transform: translateX(-100%); }
 </style>
 </head>
 <body>
@@ -68,111 +57,102 @@
     <div class="page" data-composition-id="artwork" data-start="0" data-duration="6" data-width="1920" data-height="1080">
       <div class="red-bar"></div>
       <div class="top">
-        <div class="lbl">VICOO · <span class="red">SUBMIT ART</span></div>
+        <div class="lbl">VICOO · <span class="red">SUBMIT</span></div>
         <div class="rule"></div>
-        <div class="meta">PP. 21 · /artwork-submit</div>
+        <div class="meta">PP. 21 · /submit</div>
       </div>
-      <div class="heading">
-        <div class="kicker">CHAPTER 08 · YOUR ART, ON A GARMENT</div>
-        <h1>Submit <em>your art</em> for the next collection.</h1>
-        <p class="sub">儿童画作经监护人同意后上传。编辑精选 + 社区投票后，可能联同 UNIQLO 印制成可穿的公益品。</p>
-      </div>
-      <div class="layout">
-        <div class="upload">
-          <div class="head">Upload artwork</div>
-          <div class="drop">
-            <div class="ic">↑</div>
-            <div class="text">拖拽到此处，或点击选择</div>
-            <div class="sub">JPG / PNG / 高分辨率扫描 · 最大 20 MB</div>
+
+      <div class="content">
+        <div class="left">
+          <div class="kicker">CHAPTER 10 · SUBMIT ARTWORK</div>
+          <h1>Every child can be a <em>designer</em>.</h1>
+          <div class="body">上传孩子的画作，参与主题活动。优秀作品将被印在 VICOO 联名款上，让全世界看见。</div>
+
+          <div class="form">
+            <div class="field"><label>Artwork Title</label><input type="text" placeholder="我家的春天" disabled></div>
+            <div class="field"><label>Child's Name</label><input type="text" placeholder="林一一" disabled></div>
+            <div class="field"><label>Age</label><input type="text" placeholder="8" disabled></div>
+            <div class="field"><label>Description</label><textarea placeholder="春天是彩色的，因为花开了，蝴蝶也来了。" disabled></textarea></div>
           </div>
-          <div class="preview">
-            <div class="ttl">PREVIEW</div>
-            <div class="img"></div>
-          </div>
-          <div class="actions">
-            <button class="btn ghost">REPLACE</button>
-            <button class="btn">RETAKE</button>
+
+          <div class="consent">
+            <div class="icon">👨‍👩‍👧</div>
+            <div class="text"><strong>Guardian Consent</strong>：家长同意将画作用于 VICOO 公益联名款设计，并确认画作为原创作品。</div>
           </div>
         </div>
-        <div class="form">
-          <h2>Artwork details</h2>
-          <div class="field">
-            <div class="lbl">TITLE</div>
-            <input class="input" value="我家的春天" />
+
+        <div class="right">
+          <h3>Upload Artwork</h3>
+          <div class="dropzone">
+            <div class="sweep"></div>
+            <div class="icon">🎨</div>
+            <div class="text">Drag & drop artwork here</div>
+            <div class="sub">支持 JPG, PNG, PDF · 最大 10MB</div>
           </div>
-          <div class="field">
-            <div class="lbl">DESCRIPTION (OPTIONAL)</div>
-            <textarea>我家门口的樱花开了，风吹过来的时候，蝴蝶在花上飞。</textarea>
-          </div>
-          <div class="row2">
-            <div class="field">
-              <div class="lbl">CHILD'S NAME</div>
-              <input class="input" value="林一一" />
-            </div>
-            <div class="field">
-              <div class="lbl">AGE</div>
-              <input class="input" value="8" />
-            </div>
-          </div>
-          <div class="field">
-            <div class="lbl">CAMPAIGN</div>
-            <select class="select">
-              <option>「春的色彩」美育项目 · 200/500</option>
-            </select>
-          </div>
-          <div class="field">
-            <div class="lbl">TAGS</div>
-            <div class="age">
-              <div class="chip selected">春天</div>
-              <div class="chip">花朵</div>
-              <div class="chip">蝴蝶</div>
-              <div class="chip">家人</div>
-              <div class="chip">水彩</div>
-            </div>
-          </div>
-          <div class="consent">
-            <div class="box">✓</div>
-            <div class="text">我作为 <strong>监护人</strong>，同意将本作品授权给 VICOO-ESP 用于公益宣传与商品生产，并允许公开显示儿童笔名（不显示真实姓名）。</div>
-          </div>
-          <button class="submit">SUBMIT FOR REVIEW →</button>
+          <button class="btn" disabled><div class="sweep"></div>SUBMIT ARTWORK →</button>
         </div>
       </div>
     </div>
   </div>
+
   <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
   <script>
     (function () {
       const tl = gsap.timeline({ paused: true });
       window.__timelines = window.__timelines || {};
       window.__timelines["artwork"] = tl;
+
       gsap.set('.red-bar', { scaleX: 0, transformOrigin: 'left center' });
       gsap.set('.top > *', { y: -20, opacity: 0 });
-      gsap.set('.heading > *', { y: 20, opacity: 0 });
-      gsap.set('.upload .head', { x: -20, opacity: 0 });
-      gsap.set('.upload .drop', { scale: 0.9, opacity: 0 });
-      gsap.set('.upload .preview .img', { scale: 0, opacity: 0 });
-      gsap.set('.upload .actions .btn', { y: 20, opacity: 0 });
-      gsap.set('.form > *', { x: 20, opacity: 0 });
-      gsap.set('.form .consent .box', { scale: 0 });
-      tl.to('.red-bar', { scaleX: 1, duration: 0.5, ease: 'power3.inOut' }, 0);
-      tl.to('.top > *', { y: 0, opacity: 1, duration: 0.5, stagger: 0.06, ease: 'power2.out' }, 0.1);
-      tl.to('.heading > *', { y: 0, opacity: 1, duration: 0.5, stagger: 0.08, ease: 'power2.out' }, 0.4);
-      tl.to('.upload .head', { x: 0, opacity: 1, duration: 0.5, ease: 'power2.out' }, 0.7);
-      // simulated drop animation
-      tl.to('.upload .drop', { scale: 1, opacity: 1, duration: 0.5, ease: 'power2.out' }, 0.9);
-      tl.to('.upload .preview .img', { scale: 1, opacity: 1, duration: 0.5, ease: 'back.out(1.4)' }, 1.2);
-      tl.to('.upload .actions .btn', { y: 0, opacity: 1, duration: 0.4, stagger: 0.1, ease: 'power2.out' }, 1.4);
-      tl.to('.form > *', { x: 0, opacity: 1, duration: 0.4, stagger: 0.06, ease: 'power2.out' }, 0.9);
-      tl.to('.form .consent .box', { scale: 1, duration: 0.4, ease: 'back.out(1.5)' }, 1.8);
-      // pulse submit
-      tl.to({}, { duration: 0.4, onStart: () => {
-        gsap.fromTo('.form .submit', { scale: 1 }, { scale: 1.04, duration: 0.2, yoyo: true, repeat: 1, ease: 'power2.inOut' });
-      }}, 3.5);
+      gsap.set('.left .kicker', { y: 20, opacity: 0 });
+      gsap.set('.left h1', { y: 30, opacity: 0 });
+      gsap.set('.left .body', { y: 20, opacity: 0 });
+      gsap.set('.form .field', { x: -20, opacity: 0 });
+      gsap.set('.consent', { y: 20, opacity: 0 });
+      gsap.set('.right h3', { y: 15, opacity: 0 });
+      gsap.set('.dropzone', { y: 30, opacity: 0, scale: 0.95 });
+      gsap.set('.dropzone .sweep', { x: '-100%' });
+      gsap.set('.btn', { y: 20, opacity: 0 });
+      gsap.set('.btn .sweep', { x: '-100%' });
+
+      // Entry
+      tl.to('.red-bar', { scaleX: 1, duration: 0.4, ease: 'power4.inOut' }, 0);
+      tl.to('.top > *', { y: 0, opacity: 1, duration: 0.5, stagger: 0.06, ease: 'power3.out' }, 0.1);
+
+      // Left content
+      tl.to('.left .kicker', { y: 0, opacity: 1, duration: 0.5, ease: 'power3.out' }, 0.3);
+      tl.to('.left h1', { y: 0, opacity: 1, duration: 0.6, ease: 'expo.out' }, 0.5);
+      tl.to('.left .body', { y: 0, opacity: 1, duration: 0.5, ease: 'power3.out' }, 0.8);
+
+      // Form fields — staggered slide
+      tl.to('.form .field', { x: 0, opacity: 1, duration: 0.4, stagger: 0.1, ease: 'power3.out' }, 1.0);
+
+      // Consent
+      tl.to('.consent', { y: 0, opacity: 1, duration: 0.4, ease: 'power3.out' }, 1.5);
+
+      // Right content
+      tl.to('.right h3', { y: 0, opacity: 1, duration: 0.4, ease: 'power3.out' }, 1.2);
+      tl.to('.dropzone', { y: 0, opacity: 1, scale: 1, duration: 0.6, ease: 'back.out(1.2)' }, 1.4);
+
+      // Dropzone sweep
+      tl.to('.dropzone .sweep', { x: '100%', duration: 0.8, ease: 'power2.inOut' }, 2.0);
+
+      // Button
+      tl.to('.btn', { y: 0, opacity: 1, duration: 0.4, ease: 'power3.out' }, 2.2);
+      tl.to('.btn .sweep', { x: '100%', duration: 0.6, ease: 'power2.inOut' }, 2.5);
+
       // Exit
-      tl.to('.form > *', { x: 20, opacity: 0, duration: 0.3, ease: 'power2.in' }, 5.2);
-      tl.to('.upload > *', { x: -20, opacity: 0, duration: 0.3, ease: 'power2.in' }, 5.3);
-      tl.to('.heading > *', { y: -20, opacity: 0, duration: 0.3, ease: 'power2.in' }, 5.4);
-      tl.to('.top', { y: -20, opacity: 0, duration: 0.3, ease: 'power2.in' }, 5.4);
+      tl.to('.btn', { y: -15, opacity: 0, duration: 0.3, ease: 'power3.in' }, 5.2);
+      tl.to('.dropzone', { y: -20, opacity: 0, duration: 0.3, ease: 'power3.in' }, 5.3);
+      tl.to('.right h3', { y: -10, opacity: 0, duration: 0.3, ease: 'power3.in' }, 5.4);
+      tl.to('.consent', { y: -15, opacity: 0, duration: 0.3, ease: 'power3.in' }, 5.3);
+      tl.to('.form .field', { x: -15, opacity: 0, duration: 0.3, stagger: 0.05, ease: 'power3.in' }, 5.4);
+      tl.to('.left .body', { y: -15, opacity: 0, duration: 0.3, ease: 'power3.in' }, 5.5);
+      tl.to('.left h1', { y: -20, opacity: 0, duration: 0.3, ease: 'power3.in' }, 5.5);
+      tl.to('.left .kicker', { y: -10, opacity: 0, duration: 0.3, ease: 'power3.in' }, 5.5);
+      tl.to('.top', { y: -20, opacity: 0, duration: 0.3, ease: 'power3.in' }, 5.5);
+      tl.to('.red-bar', { scaleX: 0, transformOrigin: 'right center', duration: 0.3 }, 5.5);
+
       window.addEventListener('load', () => tl.play());
     })();
   </script>

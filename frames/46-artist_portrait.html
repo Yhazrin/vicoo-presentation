@@ -28,8 +28,9 @@
   .right .story em { font-style: normal; color: #E60012; font-weight: 700; }
   .right .quote { margin-top: 32px; padding: 20px 24px; background: #F5F5F5; border-left: 3px solid #E60012; font-family: 'Noto Sans SC', sans-serif; font-size: 18px; line-height: 1.6; color: #1A1A16; font-style: italic; max-width: 480px; }
 
-  .product-link { display: inline-flex; align-items: center; gap: 12px; margin-top: 24px; padding: 14px 24px; background: #1A1A16; color: #FFFFFF; font-family: 'Inter', sans-serif; font-weight: 700; font-size: 14px; letter-spacing: 0.05em; }
+  .product-link { display: inline-flex; align-items: center; gap: 12px; margin-top: 24px; padding: 14px 24px; background: #1A1A16; color: #FFFFFF; font-family: 'Inter', sans-serif; font-weight: 700; font-size: 14px; letter-spacing: 0.05em; position: relative; overflow: hidden; }
   .product-link .arrow { color: #E60012; }
+  .product-link .sweep { position: absolute; inset: 0; background: linear-gradient(90deg, transparent, rgba(230,0,18,0.3), transparent); transform: translateX(-100%); }
 </style>
 </head>
 <body>
@@ -51,7 +52,7 @@
           这幅画现在印在了 VICOO × UNIQLO 联名 T 恤上，每售出一件，<em>28%</em> 直接捐赠给乡村美育基金。
         </div>
         <div class="quote">「我画的春天变成了真的衣服！我妈妈说要骄傲地穿出去。」</div>
-        <div class="product-link">VIEW THE PRODUCT <span class="arrow">→</span></div>
+        <div class="product-link"><div class="sweep"></div>VIEW THE PRODUCT <span class="arrow">→</span></div>
       </div>
     </div>
   </div>
@@ -73,7 +74,9 @@
       gsap.set('.right .story', { y: 20, opacity: 0 });
       gsap.set('.right .quote', { x: -20, opacity: 0 });
       gsap.set('.product-link', { y: 20, opacity: 0 });
+      gsap.set('.product-link .sweep', { x: '-100%' });
 
+      // Entry
       tl.to('.red-bar', { scaleX: 1, duration: 0.5, ease: 'power3.inOut' }, 0);
       tl.to('.artwork', { scale: 1, opacity: 1, rotation: 0, duration: 0.8, ease: 'back.out(1.4)' }, 0.3);
       tl.to('.frame', { scale: 1, opacity: 1, duration: 0.6, ease: 'power2.out' }, 0.5);
@@ -84,6 +87,7 @@
       tl.to('.right .story', { y: 0, opacity: 1, duration: 0.6, ease: 'power2.out' }, 1.2);
       tl.to('.right .quote', { x: 0, opacity: 1, duration: 0.5, ease: 'power2.out' }, 1.8);
       tl.to('.product-link', { y: 0, opacity: 1, duration: 0.4, ease: 'power2.out' }, 2.2);
+      tl.to('.product-link .sweep', { x: '100%', duration: 0.6, ease: 'power2.inOut' }, 2.5);
 
       // Exit
       tl.to('.product-link', { y: -10, opacity: 0, duration: 0.3, ease: 'power2.in' }, 4.2);

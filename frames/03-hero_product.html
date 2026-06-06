@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8" />
-<title>VICOO — Hero Product (2K · Real Image)</title>
+<title>VICOO — Hero Product</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Noto+Sans+SC:wght@300;400;500;700;900&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
@@ -11,115 +11,149 @@
   * { margin: 0; padding: 0; box-sizing: border-box; }
   html, body { width: 2560px; height: 1440px; overflow: hidden; background: #FFFFFF; color: #1A1A16; font-family: 'Inter', -apple-system, sans-serif; -webkit-font-smoothing: antialiased; }
   .stage { position: absolute; top: 0; left: 0; width: 1920px; height: 1080px; transform: scale(1.3333333); transform-origin: top left; }
-  .page { position: absolute; inset: 0; }
-  .grid { position: absolute; inset: 0; pointer-events: none; opacity: 0.04; background-image: linear-gradient(to right, #000 1px, transparent 1px); background-size: 80px 80px; }
+  .page { position: absolute; inset: 0; overflow: hidden; }
 
-  .ribbon { position: absolute; top: 0; left: 0; right: 0; height: 8px; background: #E60012; }
-  .top-bar { position: absolute; top: 60px; left: 80px; right: 80px; display: flex; align-items: center; gap: 24px; }
-  .top-bar .lbl { font-family: 'JetBrains Mono', monospace; font-size: 13px; font-weight: 500; letter-spacing: 0.2em; text-transform: uppercase; color: #1A1A16; }
-  .top-bar .lbl .red { color: #E60012; }
-  .top-bar .rule { flex: 1; height: 1px; background: #1A1A16; }
-  .top-bar .meta { font-family: 'JetBrains Mono', monospace; font-size: 13px; font-weight: 500; letter-spacing: 0.18em; text-transform: uppercase; color: #888; }
+  /* Top red accent */
+  .ribbon { position: absolute; top: 0; left: 0; right: 0; height: 6px; background: #E60012; transform: scaleX(0); transform-origin: left; }
 
-  .left { position: absolute; left: 80px; top: 140px; width: 760px; height: 760px; background: #F5F5F5; overflow: hidden; }
-  .left .img { position: absolute; inset: 0; background: #FFFFFF; display: flex; align-items: center; justify-content: center; }
-  .left .img img { width: 88%; height: 88%; object-fit: cover; background: #F0EBE0; }
-  .left .shine { position: absolute; inset: 0; background: linear-gradient(120deg, transparent 30%, rgba(255,255,255,0.4) 50%, transparent 70%); transform: translateX(-100%); pointer-events: none; }
+  /* === LEFT: Product image with parallax mask === */
+  .left { position: absolute; left: 0; top: 0; width: 50%; height: 100%; overflow: hidden; }
+  .left .bg { position: absolute; inset: 0; background: #F5F0E8; transform: scaleX(0); transform-origin: left; }
+  .left .img-wrap { position: absolute; inset: 60px; overflow: hidden; }
+  .left .img-wrap img {
+    width: 100%; height: 100%; object-fit: cover;
+    transform: scale(1.3); /* parallax start */
+  }
+  .left .img-mask { position: absolute; inset: 60px; background: #F5F0E8; transform-origin: right; }
 
-  .donation { position: absolute; top: 32px; right: 32px; background: #E60012; color: #FFFFFF; padding: 12px 18px; font-family: 'Inter', sans-serif; font-weight: 800; font-size: 18px; letter-spacing: 0.02em; z-index: 5; }
-  .donation .small { display: block; font-size: 11px; font-weight: 500; letter-spacing: 0.18em; text-transform: uppercase; opacity: 0.9; margin-bottom: 2px; }
-  .stock-badge { position: absolute; bottom: 32px; left: 32px; background: #1A1A16; color: #FFFFFF; padding: 8px 14px; font-family: 'JetBrains Mono', monospace; font-size: 12px; font-weight: 500; letter-spacing: 0.15em; text-transform: uppercase; z-index: 5; }
+  /* Donation badge — stamps in from top-right */
+  .badge-donate {
+    position: absolute; top: 80px; right: 80px; z-index: 5;
+    background: #E60012; color: #FFFFFF; padding: 14px 20px;
+    font-family: 'Inter', sans-serif; font-weight: 800; font-size: 20px;
+    transform: rotate(-8deg) scale(0);
+  }
+  .badge-donate .small {
+    display: block; font-size: 10px; font-weight: 600;
+    letter-spacing: 0.2em; text-transform: uppercase; opacity: 0.85;
+  }
 
-  .right { position: absolute; right: 80px; top: 140px; width: 920px; }
-  .right .crumbs { font-family: 'JetBrains Mono', monospace; font-size: 12px; font-weight: 500; letter-spacing: 0.2em; text-transform: uppercase; color: #888; margin-bottom: 24px; }
-  .right .crumbs .red { color: #E60012; }
-  .right h1 { font-family: 'Noto Sans SC', sans-serif; font-weight: 900; font-size: 60px; line-height: 1.05; color: #1A1A16; letter-spacing: -2px; margin-bottom: 16px; }
-  .right .by { font-family: 'Inter', sans-serif; font-size: 15px; color: #555; margin-bottom: 40px; }
-  .right .by strong { color: #1A1A16; font-weight: 700; }
-  .right .by .red { color: #E60012; font-weight: 700; }
+  /* Stock counter — types in */
+  .stock {
+    position: absolute; bottom: 80px; left: 80px; z-index: 5;
+    font-family: 'JetBrains Mono', monospace; font-size: 12px;
+    font-weight: 500; letter-spacing: 0.15em; text-transform: uppercase;
+    color: #FFFFFF; background: #1A1A16; padding: 10px 16px;
+    clip-path: inset(0 100% 0 0);
+  }
 
-  .price-block { display: flex; align-items: flex-end; gap: 24px; margin-bottom: 12px; }
-  .price-block .cur { font-family: 'Inter', sans-serif; font-weight: 600; font-size: 28px; color: #1A1A16; padding-bottom: 12px; }
-  .price-block .val { font-family: 'Inter', sans-serif; font-weight: 900; font-size: 92px; line-height: 1; color: #1A1A16; letter-spacing: -4px; }
-  .price-block .strike { font-family: 'Inter', sans-serif; font-weight: 500; font-size: 24px; color: #999; text-decoration: line-through; padding-bottom: 12px; }
-  .price-meta { font-family: 'JetBrains Mono', monospace; font-size: 12px; font-weight: 500; letter-spacing: 0.15em; text-transform: uppercase; color: #888; margin-bottom: 40px; }
-  .price-meta .red { color: #E60012; font-weight: 700; }
+  /* === RIGHT: Product info === */
+  .right { position: absolute; right: 0; top: 0; width: 50%; height: 100%; padding: 80px; display: flex; flex-direction: column; justify-content: center; }
 
-  .size { margin-bottom: 40px; }
-  .size .lbl { font-family: 'JetBrains Mono', monospace; font-size: 12px; font-weight: 500; letter-spacing: 0.18em; text-transform: uppercase; color: #888; margin-bottom: 12px; }
-  .size .row { display: flex; gap: 10px; }
-  .size .chip { width: 72px; height: 72px; border: 2px solid #1A1A16; display: flex; align-items: center; justify-content: center; font-family: 'Inter', sans-serif; font-weight: 700; font-size: 18px; color: #1A1A16; background: #FFFFFF; cursor: pointer; position: relative; overflow: hidden; }
-  .size .chip.selected { background: #1A1A16; color: #FFFFFF; }
-  .size .chip.disabled { color: #CCC; border-color: #DDD; text-decoration: line-through; }
-  .size .chip .ripple { position: absolute; inset: 0; background: rgba(230,0,18,0.2); border-radius: 50%; transform: scale(0); }
+  /* Breadcrumb — clipPath from left */
+  .crumbs {
+    font-family: 'JetBrains Mono', monospace; font-size: 11px; font-weight: 500;
+    letter-spacing: 0.2em; text-transform: uppercase; color: #999;
+    clip-path: inset(0 100% 0 0);
+  }
+  .crumbs .red { color: #E60012; }
 
-  .cta { display: flex; gap: 16px; margin-bottom: 40px; }
-  .btn-cart { flex: 1; height: 80px; background: #1A1A16; color: #FFFFFF; border: 0; font-family: 'Inter', sans-serif; font-weight: 800; font-size: 18px; letter-spacing: 0.1em; text-transform: uppercase; cursor: pointer; position: relative; overflow: hidden; }
-  .btn-cart .sweep { position: absolute; inset: 0; background: linear-gradient(90deg, transparent, rgba(230,0,18,0.3), transparent); transform: translateX(-100%); }
-  .btn-cart::after { content: '↗'; margin-left: 12px; }
-  .btn-donate { width: 80px; height: 80px; background: #E60012; color: #FFFFFF; border: 0; font-size: 28px; font-weight: 700; cursor: pointer; }
+  /* Title — each line is a separate clipPath reveal */
+  .title { margin-top: 24px; }
+  .title .line {
+    font-family: 'Noto Sans SC', sans-serif; font-weight: 900; font-size: 56px;
+    line-height: 1.1; letter-spacing: -2px; color: #1A1A16;
+    clip-path: inset(0 100% 0 0);
+  }
 
-  .features { display: flex; gap: 32px; border-top: 1px solid #EEE; padding-top: 32px; }
-  .feat { display: flex; align-items: center; gap: 12px; font-family: 'Inter', sans-serif; font-size: 13px; font-weight: 500; color: #555; }
-  .feat .ic { width: 32px; height: 32px; background: #F5F5F5; color: #1A1A16; display: flex; align-items: center; justify-content: center; font-size: 14px; font-weight: 700; }
-  .feat .ic.red { background: #E60012; color: #FFFFFF; }
+  /* Price — odometer counter */
+  .price-row { display: flex; align-items: baseline; gap: 16px; margin-top: 32px; }
+  .price-row .sym { font-family: 'Inter', sans-serif; font-weight: 600; font-size: 24px; opacity: 0; }
+  .price-row .val { font-family: 'Inter', sans-serif; font-weight: 900; font-size: 80px; line-height: 1; letter-spacing: -3px; }
+  .price-row .strike { font-family: 'Inter', sans-serif; font-weight: 500; font-size: 20px; color: #BBB; text-decoration: line-through; opacity: 0; }
+
+  /* Size chips — stagger from left */
+  .sizes { display: flex; gap: 10px; margin-top: 28px; }
+  .sizes .chip {
+    width: 64px; height: 64px; border: 2px solid #DDD;
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Inter', sans-serif; font-weight: 700; font-size: 16px;
+    transform: translateX(-20px); opacity: 0;
+  }
+  .sizes .chip.sel { background: #1A1A16; color: #FFFFFF; border-color: #1A1A16; }
+
+  /* CTA button — grows from center */
+  .cta { margin-top: 32px; display: flex; gap: 12px; }
+  .cta .btn {
+    height: 64px; padding: 0 32px; background: #1A1A16; color: #FFFFFF; border: 0;
+    font-family: 'Inter', sans-serif; font-weight: 800; font-size: 15px;
+    letter-spacing: 0.08em; text-transform: uppercase;
+    display: flex; align-items: center; gap: 10px;
+    transform: scaleX(0); transform-origin: left;
+  }
+  .cta .btn-heart {
+    width: 64px; height: 64px; border: 2px solid #E0E0E0;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 22px; transform: scale(0);
+  }
+
+  /* Features row — slides up from below */
+  .features { display: flex; gap: 24px; margin-top: 28px; padding-top: 20px; border-top: 1px solid #EEE; }
+  .features .feat {
+    display: flex; align-items: center; gap: 8px;
+    font-family: 'Inter', sans-serif; font-size: 12px; font-weight: 500; color: #888;
+    transform: translateY(20px); opacity: 0;
+  }
+  .features .feat .dot { width: 6px; height: 6px; background: #E60012; border-radius: 50%; }
+
+  /* Vertical divider line between left/right */
+  .v-line {
+    position: absolute; left: 50%; top: 0; bottom: 0; width: 1px;
+    background: #E0E0E0; transform: scaleY(0); transform-origin: top;
+  }
 </style>
 </head>
 <body>
   <div class="stage">
     <div class="page" data-composition-id="hero_product" data-start="0" data-duration="6" data-width="1920" data-height="1080">
-      <div class="grid"></div>
       <div class="ribbon"></div>
-
-      <div class="top-bar">
-        <div class="lbl"><span class="red">●</span> FEATURED · 01 OF 12</div>
-        <div class="rule"></div>
-        <div class="meta">SS26 · CAMPAIGN 春野</div>
-      </div>
+      <div class="v-line"></div>
 
       <div class="left">
-        <div class="img">
-          <img src="https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?auto=format&fit=crop&w=1200&q=85" alt="春野 T恤" />
+        <div class="bg"></div>
+        <div class="img-wrap">
+          <img src="https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?auto=format&fit=crop&w=1200&q=85" alt="" />
         </div>
-        <div class="shine"></div>
-        <div class="donation"><span class="small">DONATION</span>28%</div>
-        <div class="stock-badge">STOCK 187 / 200</div>
+        <div class="img-mask"></div>
+        <div class="badge-donate"><span class="small">DONATION</span>28%</div>
+        <div class="stock">STOCK 187 / 200</div>
       </div>
 
       <div class="right">
         <div class="crumbs">SHOP / WELFARE × ART / <span class="red">CHILDREN'S TEE</span></div>
-        <h1>春野·儿童画联名<br/>有机棉T恤</h1>
-        <p class="by">Original by <strong>林一一</strong>, age 8 · <span class="red">「春的色彩」美育项目</span></p>
-
-        <div class="price-block">
-          <span class="cur">¥</span>
-          <span class="val" id="price-val">0</span>
+        <div class="title">
+          <div class="line">春野·儿童画联名</div>
+          <div class="line">有机棉T恤</div>
+        </div>
+        <div class="price-row">
+          <span class="sym">¥</span>
+          <span class="val" id="priceVal">0</span>
           <span class="strike">¥239</span>
         </div>
-        <div class="price-meta">SALE · <span class="red">SAVE ¥61 (25% OFF)</span> · ENDS IN 2D 14H</div>
-
-        <div class="size">
-          <div class="lbl">SELECT SIZE (儿童款)</div>
-          <div class="row">
-            <div class="chip disabled">90</div>
-            <div class="chip">100</div>
-            <div class="chip selected">110</div>
-            <div class="chip">120</div>
-            <div class="chip">130</div>
-            <div class="chip">140</div>
-          </div>
+        <div class="sizes">
+          <div class="chip">S</div>
+          <div class="chip sel">M</div>
+          <div class="chip">L</div>
+          <div class="chip">XL</div>
         </div>
-
         <div class="cta">
-          <button class="btn-cart"><div class="sweep"></div>ADD TO CART</button>
-          <button class="btn-donate">♥</button>
+          <button class="btn">ADD TO CART →</button>
+          <button class="btn-heart">♡</button>
         </div>
-
         <div class="features">
-          <div class="feat"><div class="ic red">✓</div>FREE SHIPPING ¥99+</div>
-          <div class="feat"><div class="ic">↻</div>30-DAY RETURN</div>
-          <div class="feat"><div class="ic">◉</div>TRACEABLE CHAIN</div>
-          <div class="feat"><div class="ic">★</div>4.9 / 5.0</div>
+          <div class="feat"><div class="dot"></div>Free Shipping</div>
+          <div class="feat"><div class="dot"></div>30-Day Return</div>
+          <div class="feat"><div class="dot"></div>Traceable</div>
         </div>
       </div>
     </div>
@@ -132,67 +166,64 @@
       window.__timelines = window.__timelines || {};
       window.__timelines["hero_product"] = tl;
 
-      gsap.set('.ribbon', { scaleX: 0, transformOrigin: 'left center' });
-      gsap.set('.top-bar > *', { y: 20, opacity: 0 });
-      gsap.set('.left', { clipPath: 'inset(0 100% 0 0)', opacity: 0 });
-      gsap.set('.left .img img', { scale: 1.15, opacity: 0 });
-      gsap.set('.left .shine', { x: '-100%' });
-      gsap.set('.donation', { scale: 0, rotation: -45, transformOrigin: 'top right' });
-      gsap.set('.stock-badge', { x: -20, opacity: 0 });
-      gsap.set('.right > *', { y: 30, opacity: 0 });
-      gsap.set('.size .chip', { y: 20, opacity: 0, scale: 0.8 });
-      gsap.set('.btn-cart .sweep', { x: '-100%' });
-      gsap.set('.price-block .val', { innerText: 0 });
+      // === ACT 1: Ribbon wipes across (0-0.3s) ===
+      tl.to('.ribbon', { scaleX: 1, duration: 0.25, ease: 'power4.in' }, 0);
 
-      // Entry — cinematic product reveal
-      tl.to('.ribbon', { scaleX: 1, duration: 0.4, ease: 'power4.inOut' }, 0);
-      tl.to('.top-bar > *', { y: 0, opacity: 1, duration: 0.5, stagger: 0.06, ease: 'power3.out' }, 0.1);
+      // === ACT 2: Left panel — background slides in, then image parallax (0.2-1.0s) ===
+      tl.to('.left .bg', { scaleX: 1, duration: 0.5, ease: 'power3.inOut' }, 0.2);
+      // Image mask wipes away revealing the photo
+      tl.to('.left .img-mask', { scaleX: 0, duration: 0.6, ease: 'power3.inOut' }, 0.5);
+      // Image parallax: starts zoomed, slowly settles
+      tl.to('.left .img-wrap img', { scale: 1, duration: 1.5, ease: 'power1.out' }, 0.5);
 
-      // Image card wipes in with clipPath
-      tl.to('.left', { clipPath: 'inset(0 0% 0 0)', opacity: 1, duration: 1.0, ease: 'power3.inOut' }, 0.3);
-      tl.to('.left .img img', { scale: 1, opacity: 1, duration: 1.2, ease: 'power2.out' }, 0.4);
+      // === ACT 3: Vertical divider grows (0.6-1.0s) ===
+      tl.to('.v-line', { scaleY: 1, duration: 0.5, ease: 'power2.inOut' }, 0.6);
 
-      // Shine effect sweeps across image
-      tl.to('.left .shine', { x: '100%', duration: 0.8, ease: 'power2.inOut' }, 1.0);
+      // === ACT 4: Right side — content reveals (0.8-2.5s) ===
+      // Breadcrumb clips in from left
+      tl.to('.crumbs', { clipPath: 'inset(0 0% 0 0)', duration: 0.4, ease: 'power2.out' }, 0.8);
 
-      // Badges pop in with elastic
-      tl.to('.donation', { scale: 1, rotation: 0, duration: 0.7, ease: 'back.out(2)' }, 1.2);
-      tl.to('.stock-badge', { x: 0, opacity: 1, duration: 0.5, ease: 'back.out(1.4)' }, 1.3);
+      // Title lines clip in sequentially
+      tl.to('.title .line', { clipPath: 'inset(0 0% 0 0)', duration: 0.5, stagger: 0.15, ease: 'power3.inOut' }, 1.0);
 
-      // Right content reveals with stagger
-      tl.to('.right > *', { y: 0, opacity: 1, duration: 0.6, stagger: 0.08, ease: 'power3.out' }, 1.4);
-
-      // Size chips pop in with stagger and scale
-      tl.to('.size .chip', { y: 0, opacity: 1, scale: 1, duration: 0.4, stagger: 0.06, ease: 'back.out(1.4)' }, 2.0);
-
-      // Selected chip pulse
-      tl.to('.size .chip.selected', { scale: 1.1, duration: 0.2, yoyo: true, repeat: 1, ease: 'power2.inOut' }, 2.5);
-
-      // Odometer price counter
-      const priceEl = document.getElementById('price-val');
+      // Price odometer
+      tl.to('.price-row .sym', { opacity: 1, duration: 0.3 }, 1.4);
+      const priceEl = document.getElementById('priceVal');
       const priceObj = { val: 0 };
-      priceEl.innerText = '0';
       tl.to(priceObj, {
-        val: 178, duration: 1.4, ease: 'power2.out',
-        onUpdate: () => { priceEl.innerText = Math.floor(priceObj.val).toString(); }
-      }, 2.1);
+        val: 178, duration: 1.0, ease: 'power2.out',
+        onUpdate: function() { priceEl.textContent = Math.floor(priceObj.val); }
+      }, 1.5);
+      tl.to('.price-row .strike', { opacity: 1, duration: 0.3 }, 2.0);
 
-      // CTA button sweep effect
-      tl.to('.btn-cart .sweep', { x: '100%', duration: 0.6, ease: 'power2.inOut' }, 3.2);
+      // Size chips — stagger from left
+      tl.to('.sizes .chip', { x: 0, opacity: 1, duration: 0.3, stagger: 0.06, ease: 'power2.out' }, 1.8);
 
-      // CTA micro-interaction
-      tl.to({}, { duration: 0.2, onStart: () => {
-        const cartBtn = document.querySelector('.btn-cart');
-        const donateBtn = document.querySelector('.btn-donate');
-        gsap.fromTo(cartBtn, { x: 0 }, { x: -4, duration: 0.15, yoyo: true, repeat: 1, ease: 'power2.inOut' });
-        gsap.fromTo(donateBtn, { scale: 1 }, { scale: 1.15, duration: 0.3, yoyo: true, repeat: 1, ease: 'back.out(2)' });
-      }}, 3.5);
+      // CTA button grows from left
+      tl.to('.cta .btn', { scaleX: 1, duration: 0.4, ease: 'power3.out' }, 2.2);
+      tl.to('.cta .btn-heart', { scale: 1, duration: 0.3, ease: 'back.out(2)' }, 2.4);
 
-      // Exit — image card slides left with clipPath
-      tl.to('.left', { clipPath: 'inset(0 0 0 100%)', opacity: 0, duration: 0.5, ease: 'power3.in' }, 5.2);
-      tl.to('.right', { x: 80, opacity: 0, duration: 0.4, ease: 'power3.in' }, 5.3);
-      tl.to('.top-bar', { y: -20, opacity: 0, duration: 0.4, ease: 'power3.in' }, 5.4);
-      tl.to('.ribbon', { scaleX: 0, transformOrigin: 'right center', duration: 0.4, ease: 'power3.in' }, 5.5);
+      // Features slide up
+      tl.to('.features .feat', { y: 0, opacity: 1, duration: 0.3, stagger: 0.08, ease: 'power2.out' }, 2.5);
+
+      // === ACT 5: Badge stamps in (1.2s) ===
+      tl.to('.badge-donate', { scale: 1, rotation: 0, duration: 0.4, ease: 'back.out(2.5)' }, 1.2);
+
+      // === ACT 6: Stock counter clips in (1.6s) ===
+      tl.to('.stock', { clipPath: 'inset(0 0% 0 0)', duration: 0.4, ease: 'power2.out' }, 1.6);
+
+      // === EXIT ===
+      tl.to('.features .feat', { y: 15, opacity: 0, duration: 0.2, stagger: 0.03, ease: 'power2.in' }, 5.0);
+      tl.to('.cta', { opacity: 0, duration: 0.2, ease: 'power2.in' }, 5.1);
+      tl.to('.sizes .chip', { x: -15, opacity: 0, duration: 0.2, stagger: 0.03, ease: 'power2.in' }, 5.1);
+      tl.to('.price-row', { opacity: 0, duration: 0.2, ease: 'power2.in' }, 5.2);
+      tl.to('.title .line', { clipPath: 'inset(0 0 0 100%)', duration: 0.3, stagger: 0.05, ease: 'power3.in' }, 5.2);
+      tl.to('.crumbs', { clipPath: 'inset(0 0 0 100%)', duration: 0.3, ease: 'power2.in' }, 5.3);
+      tl.to('.v-line', { scaleY: 0, transformOrigin: 'bottom', duration: 0.3, ease: 'power2.in' }, 5.3);
+      tl.to('.badge-donate', { scale: 0, rotation: 15, duration: 0.2, ease: 'power2.in' }, 5.2);
+      tl.to('.stock', { clipPath: 'inset(0 0 0 100%)', duration: 0.2, ease: 'power2.in' }, 5.3);
+      tl.to('.left .bg', { scaleX: 0, transformOrigin: 'right', duration: 0.4, ease: 'power3.in' }, 5.4);
+      tl.to('.ribbon', { scaleX: 0, transformOrigin: 'right', duration: 0.2, ease: 'power2.in' }, 5.5);
 
       window.addEventListener('load', () => tl.play());
     })();

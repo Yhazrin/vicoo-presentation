@@ -11,77 +11,92 @@
   * { margin: 0; padding: 0; box-sizing: border-box; }
   html, body { width: 2560px; height: 1440px; overflow: hidden; background: #0A0A0A; color: #FFFFFF; font-family: 'Inter', -apple-system, sans-serif; -webkit-font-smoothing: antialiased; }
   .stage { position: absolute; top: 0; left: 0; width: 1920px; height: 1080px; transform: scale(1.3333333); transform-origin: top left; }
-  .page { position: absolute; inset: 0; }
-  .red-bar { position: absolute; top: 0; left: 0; right: 0; height: 8px; background: #E60012; }
+  .page { position: absolute; inset: 0; overflow: hidden; }
 
-  .content { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 80px; }
+  .red-bar { position: absolute; top: 0; left: 0; right: 0; height: 6px; background: #E60012; transform: scaleX(0); transform-origin: left; }
 
-  .eyebrow { font-family: 'JetBrains Mono', monospace; font-size: 14px; font-weight: 500; letter-spacing: 0.3em; text-transform: uppercase; color: #E60012; margin-bottom: 16px; }
-  .headline { font-family: 'Smiley Sans', sans-serif; font-weight: 400; font-size: 64px; line-height: 1.0; letter-spacing: -2px; color: #FFFFFF; text-align: center; margin-bottom: 60px; }
+  /* The big headline */
+  .headline {
+    position: absolute; left: 0; right: 0; top: 80px; text-align: center;
+    font-family: 'JetBrains Mono', monospace; font-size: 13px; font-weight: 500;
+    letter-spacing: 0.3em; text-transform: uppercase; color: #E60012;
+    clip-path: inset(0 100% 0 0);
+  }
 
-  .counters { display: flex; gap: 60px; max-width: 1400px; }
+  /* Three counter cards — staggered reveal */
+  .counters { position: absolute; left: 0; right: 0; top: 50%; transform: translateY(-50%); display: flex; justify-content: center; gap: 80px; }
   .counter { text-align: center; position: relative; }
-  .counter .num { font-family: 'Inter', sans-serif; font-weight: 900; font-size: 96px; line-height: 1; color: #FFFFFF; letter-spacing: -4px; }
-  .counter .num .red { color: #E60012; }
-  .counter .unit { font-family: 'JetBrains Mono', monospace; font-size: 16px; font-weight: 500; letter-spacing: 0.2em; text-transform: uppercase; color: rgba(255,255,255,0.6); margin-top: 12px; }
-  .counter .label { font-family: 'Noto Sans SC', sans-serif; font-size: 18px; color: rgba(255,255,255,0.5); margin-top: 8px; }
-  .counter .bar { width: 120px; height: 4px; background: rgba(255,255,255,0.1); margin: 16px auto 0; position: relative; overflow: hidden; }
-  .counter .bar .fill { height: 100%; background: #E60012; width: 0; }
+  .counter .num {
+    font-family: 'Inter', sans-serif; font-weight: 900; font-size: 100px;
+    line-height: 1; color: #FFFFFF; letter-spacing: -4px;
+    /* clipPath reveal: wipe from bottom */
+    clip-path: inset(100% 0 0 0);
+  }
+  .counter .unit {
+    font-family: 'JetBrains Mono', monospace; font-size: 14px; font-weight: 500;
+    letter-spacing: 0.2em; text-transform: uppercase; color: rgba(255,255,255,0.5);
+    margin-top: 8px; clip-path: inset(0 100% 0 0);
+  }
+  .counter .label {
+    font-family: 'Noto Sans SC', sans-serif; font-size: 16px; color: rgba(255,255,255,0.4);
+    margin-top: 8px; clip-path: inset(0 0 0 100%);
+  }
+  /* Red accent line under each counter */
+  .counter .accent { width: 60px; height: 3px; background: #E60012; margin: 16px auto 0; transform: scaleX(0); }
 
-  .stats-row { display: flex; gap: 40px; margin-top: 60px; }
-  .stat-item { padding: 16px 24px; background: rgba(255,255,255,0.05); text-align: center; }
-  .stat-item .val { font-family: 'Inter', sans-serif; font-weight: 800; font-size: 20px; color: #E60012; }
-  .stat-item .lbl { font-family: 'JetBrains Mono', monospace; font-size: 10px; color: rgba(255,255,255,0.5); letter-spacing: 0.1em; text-transform: uppercase; margin-top: 4px; }
+  /* Bottom stats bar */
+  .bottom-bar {
+    position: absolute; bottom: 60px; left: 0; right: 0;
+    display: flex; justify-content: center; gap: 40px;
+  }
+  .bottom-bar .item {
+    font-family: 'JetBrains Mono', monospace; font-size: 11px; font-weight: 500;
+    letter-spacing: 0.15em; text-transform: uppercase; color: #555;
+    clip-path: inset(0 100% 0 0);
+  }
+  .bottom-bar .item .red { color: #E60012; font-weight: 700; }
 
-  .divider { width: 80px; height: 2px; background: rgba(255,255,255,0.1); margin-top: 40px; }
-
-  /* Decorative elements */
-  .deco { position: absolute; border-radius: 50%; border: 1px solid rgba(230,0,18,0.2); }
-  .deco.d1 { width: 300px; height: 300px; top: -100px; right: -50px; }
-  .deco.d2 { width: 200px; height: 200px; bottom: -50px; left: -50px; }
+  /* Decorative horizontal rules */
+  .h-rule { position: absolute; left: 50%; height: 1px; background: rgba(255,255,255,0.06); transform: translateX(-50%); width: 0; }
+  .h-rule.top { top: 140px; }
+  .h-rule.bot { bottom: 120px; }
 </style>
 </head>
 <body>
   <div class="stage">
     <div class="page" data-composition-id="counters_burst" data-start="0" data-duration="4" data-width="1920" data-height="1080">
       <div class="red-bar"></div>
+      <div class="h-rule top"></div>
+      <div class="h-rule bot"></div>
 
-      <div class="deco d1"></div>
-      <div class="deco d2"></div>
+      <div class="headline">REAL IMPACT · REAL NUMBERS</div>
 
-      <div class="content">
-        <div class="eyebrow">IMPACT · REAL NUMBERS</div>
-        <div class="headline">Every number tells a child's story.</div>
-
-        <div class="counters">
-          <div class="counter">
-            <div class="num" data-count="1284560">0</div>
-            <div class="unit">CNY</div>
-            <div class="label">累计捐赠</div>
-            <div class="bar"><div class="fill" style="width: 85%;"></div></div>
-          </div>
-          <div class="counter">
-            <div class="num" data-count="12431">0</div>
-            <div class="unit">ARTWORKS</div>
-            <div class="label">儿童画作</div>
-            <div class="bar"><div class="fill" style="width: 72%;"></div></div>
-          </div>
-          <div class="counter">
-            <div class="num" data-count="4872">0</div>
-            <div class="unit">CHILDREN</div>
-            <div class="label">参与儿童</div>
-            <div class="bar"><div class="fill" style="width: 60%;"></div></div>
-          </div>
+      <div class="counters">
+        <div class="counter">
+          <div class="num" id="n1">0</div>
+          <div class="unit">CNY DONATED</div>
+          <div class="label">累计捐赠</div>
+          <div class="accent"></div>
         </div>
-
-        <div class="divider"></div>
-
-        <div class="stats-row">
-          <div class="stat-item"><div class="val">32</div><div class="lbl">Schools</div></div>
-          <div class="stat-item"><div class="val">98.7%</div><div class="lbl">Traceable</div></div>
-          <div class="stat-item"><div class="val">4.5kg</div><div class="lbl">Avg CO₂</div></div>
-          <div class="stat-item"><div class="val">28%</div><div class="lbl">Donation Rate</div></div>
+        <div class="counter">
+          <div class="num" id="n2">0</div>
+          <div class="unit">ARTWORKS</div>
+          <div class="label">儿童画作</div>
+          <div class="accent"></div>
         </div>
+        <div class="counter">
+          <div class="num" id="n3">0</div>
+          <div class="unit">CHILDREN</div>
+          <div class="label">参与儿童</div>
+          <div class="accent"></div>
+        </div>
+      </div>
+
+      <div class="bottom-bar">
+        <div class="item"><span class="red">32</span> SCHOOLS</div>
+        <div class="item"><span class="red">98.7%</span> TRACEABLE</div>
+        <div class="item"><span class="red">4.5 KG</span> AVG CO₂</div>
+        <div class="item"><span class="red">28%</span> DONATION RATE</div>
       </div>
     </div>
   </div>
@@ -93,57 +108,56 @@
       window.__timelines = window.__timelines || {};
       window.__timelines["counters_burst"] = tl;
 
-      gsap.set('.red-bar', { scaleX: 0, transformOrigin: 'left center' });
-      gsap.set('.eyebrow', { y: -20, opacity: 0 });
-      gsap.set('.headline', { y: 30, opacity: 0 });
-      gsap.set('.counter', { y: 40, opacity: 0, scale: 0.9 });
-      gsap.set('.counter .bar .fill', { scaleX: 0, transformOrigin: 'left' });
-      gsap.set('.stat-item', { y: 20, opacity: 0, scale: 0.9 });
-      gsap.set('.divider', { scaleX: 0, transformOrigin: 'center' });
-      gsap.set('.deco', { scale: 0, opacity: 0 });
+      // === ACT 1: Red bar + horizontal rules (0-0.4s) ===
+      tl.to('.red-bar', { scaleX: 1, duration: 0.25, ease: 'power4.in' }, 0);
+      tl.to('.h-rule.top', { width: 800, duration: 0.4, ease: 'power2.out' }, 0.15);
+      tl.to('.h-rule.bot', { width: 600, duration: 0.4, ease: 'power2.out' }, 0.25);
 
-      // Entry
-      tl.to('.red-bar', { scaleX: 1, duration: 0.4, ease: 'power4.inOut' }, 0);
+      // === ACT 2: Headline clips in (0.3-0.6s) ===
+      tl.to('.headline', { clipPath: 'inset(0 0% 0 0)', duration: 0.4, ease: 'power2.out' }, 0.3);
 
-      // Decorative circles
-      tl.to('.deco', { scale: 1, opacity: 1, duration: 0.8, stagger: 0.15, ease: 'back.out(1.2)' }, 0.1);
+      // === ACT 3: Counter numbers rise from bottom with clipPath (0.5-1.2s) ===
+      tl.to('.counter:nth-child(1) .num', { clipPath: 'inset(0% 0 0 0)', duration: 0.5, ease: 'power3.inOut' }, 0.5);
+      tl.to('.counter:nth-child(2) .num', { clipPath: 'inset(0% 0 0 0)', duration: 0.5, ease: 'power3.inOut' }, 0.7);
+      tl.to('.counter:nth-child(3) .num', { clipPath: 'inset(0% 0 0 0)', duration: 0.5, ease: 'power3.inOut' }, 0.9);
 
-      // Text reveals
-      tl.to('.eyebrow', { y: 0, opacity: 1, duration: 0.5, ease: 'power3.out' }, 0.2);
-      tl.to('.headline', { y: 0, opacity: 1, duration: 0.7, ease: 'expo.out' }, 0.4);
+      // Unit labels clip from left
+      tl.to('.counter .unit', { clipPath: 'inset(0 0% 0 0)', duration: 0.3, stagger: 0.1, ease: 'power2.out' }, 1.0);
 
-      // Counters — staggered pop with scale
-      tl.to('.counter', { y: 0, opacity: 1, scale: 1, duration: 0.6, stagger: 0.15, ease: 'back.out(1.4)' }, 0.8);
+      // Labels clip from right
+      tl.to('.counter .label', { clipPath: 'inset(0 0 0 0%)', duration: 0.3, stagger: 0.1, ease: 'power2.out' }, 1.2);
 
-      // Counting animation
-      document.querySelectorAll('.counter .num').forEach((el, i) => {
-        const target = parseInt(el.dataset.count);
-        const obj = { val: 0 };
-        tl.to(obj, {
-          val: target,
-          duration: 1.5,
-          ease: 'power2.out',
-          onUpdate: () => { el.textContent = Math.floor(obj.val).toLocaleString(); }
-        }, 1.0 + i * 0.15);
-      });
+      // Accent lines expand from center
+      tl.to('.counter .accent', { scaleX: 1, duration: 0.3, stagger: 0.1, ease: 'power3.out' }, 1.4);
 
-      // Bar fills
-      tl.to('.counter .bar .fill', { scaleX: 1, duration: 0.8, stagger: 0.1, ease: 'power3.inOut' }, 1.5);
+      // === ACT 4: Counting animation (1.0-2.5s) ===
+      const n1 = document.getElementById('n1');
+      const n2 = document.getElementById('n2');
+      const n3 = document.getElementById('n3');
+      const o1 = { v: 0 }, o2 = { v: 0 }, o3 = { v: 0 };
 
-      // Divider
-      tl.to('.divider', { scaleX: 1, duration: 0.5, ease: 'power3.inOut' }, 2.0);
+      tl.to(o1, { v: 1284560, duration: 1.5, ease: 'power2.out', onUpdate: function() {
+        n1.textContent = Math.floor(o1.v).toLocaleString();
+      }}, 1.0);
+      tl.to(o2, { v: 12431, duration: 1.3, ease: 'power2.out', onUpdate: function() {
+        n2.textContent = Math.floor(o2.v).toLocaleString();
+      }}, 1.2);
+      tl.to(o3, { v: 4872, duration: 1.1, ease: 'power2.out', onUpdate: function() {
+        n3.textContent = Math.floor(o3.v).toLocaleString();
+      }}, 1.4);
 
-      // Stats row
-      tl.to('.stat-item', { y: 0, opacity: 1, scale: 1, duration: 0.4, stagger: 0.08, ease: 'back.out(1.4)' }, 2.2);
+      // === ACT 5: Bottom bar clips in (2.2-2.8s) ===
+      tl.to('.bottom-bar .item', { clipPath: 'inset(0 0% 0 0)', duration: 0.3, stagger: 0.08, ease: 'power2.out' }, 2.2);
 
-      // Exit
-      tl.to('.stat-item', { y: -15, opacity: 0, duration: 0.3, ease: 'power3.in' }, 3.2);
-      tl.to('.divider', { scaleX: 0, duration: 0.2, ease: 'power3.in' }, 3.3);
-      tl.to('.counter', { y: -30, opacity: 0, duration: 0.3, stagger: 0.05, ease: 'power3.in' }, 3.3);
-      tl.to('.headline', { y: -20, opacity: 0, duration: 0.3, ease: 'power3.in' }, 3.5);
-      tl.to('.eyebrow', { y: -15, opacity: 0, duration: 0.3, ease: 'power3.in' }, 3.5);
-      tl.to('.deco', { scale: 0.5, opacity: 0, duration: 0.4, ease: 'power3.in' }, 3.4);
-      tl.to('.red-bar', { scaleX: 0, transformOrigin: 'right center', duration: 0.3 }, 3.5);
+      // === EXIT ===
+      tl.to('.bottom-bar .item', { clipPath: 'inset(0 0 0 100%)', duration: 0.2, stagger: 0.03, ease: 'power2.in' }, 3.2);
+      tl.to('.counter .accent', { scaleX: 0, duration: 0.2, ease: 'power2.in' }, 3.3);
+      tl.to('.counter .label', { clipPath: 'inset(0 0 0 100%)', duration: 0.2, ease: 'power2.in' }, 3.3);
+      tl.to('.counter .unit', { clipPath: 'inset(0 100% 0 0)', duration: 0.2, ease: 'power2.in' }, 3.4);
+      tl.to('.counter .num', { clipPath: 'inset(0 0 100% 0)', duration: 0.3, stagger: 0.05, ease: 'power3.in' }, 3.4);
+      tl.to('.headline', { clipPath: 'inset(0 0 0 100%)', duration: 0.3, ease: 'power2.in' }, 3.6);
+      tl.to('.h-rule', { width: 0, duration: 0.2, ease: 'power2.in' }, 3.6);
+      tl.to('.red-bar', { scaleX: 0, transformOrigin: 'right', duration: 0.2, ease: 'power2.in' }, 3.7);
 
       window.addEventListener('load', () => tl.play());
     })();

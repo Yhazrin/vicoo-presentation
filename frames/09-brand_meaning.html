@@ -11,79 +11,100 @@
   * { margin: 0; padding: 0; box-sizing: border-box; }
   html, body { width: 2560px; height: 1440px; overflow: hidden; background: #FFFFFF; color: #1A1A16; font-family: 'Inter', -apple-system, sans-serif; -webkit-font-smoothing: antialiased; }
   .stage { position: absolute; top: 0; left: 0; width: 1920px; height: 1080px; transform: scale(1.3333333); transform-origin: top left; }
-  .page { position: absolute; inset: 0; }
-  .red-bar { position: absolute; top: 0; left: 0; right: 0; height: 8px; background: #E60012; }
-  .top { position: absolute; top: 60px; left: 80px; right: 80px; display: flex; align-items: center; gap: 24px; }
-  .top .lbl { font-family: 'JetBrains Mono', monospace; font-size: 13px; font-weight: 500; letter-spacing: 0.2em; text-transform: uppercase; }
-  .top .lbl .red { color: #E60012; }
-  .top .rule { flex: 1; height: 1px; background: #1A1A16; }
-  .top .meta { font-family: 'JetBrains Mono', monospace; font-size: 13px; font-weight: 500; letter-spacing: 0.18em; text-transform: uppercase; color: #888; }
+  .page { position: absolute; inset: 0; overflow: hidden; }
 
-  .heading { position: absolute; top: 140px; left: 80px; right: 80px; }
-  .heading .kicker { font-family: 'JetBrains Mono', monospace; font-size: 13px; font-weight: 500; letter-spacing: 0.2em; text-transform: uppercase; color: #E60012; }
-  .heading h1 { font-family: 'Smiley Sans', sans-serif; font-weight: 400; font-size: 96px; line-height: 0.95; letter-spacing: -3px; color: #1A1A16; margin-top: 16px; max-width: 1100px; }
-  .heading h1 em { font-style: normal; color: #E60012; }
-  .heading .sub { font-family: 'Noto Sans SC', sans-serif; font-weight: 400; font-size: 20px; line-height: 1.5; color: #555; margin-top: 24px; max-width: 900px; }
+  .red-bar { position: absolute; top: 0; left: 0; right: 0; height: 6px; background: #E60012; transform: scaleX(0); transform-origin: left; }
 
-  .split { position: absolute; left: 80px; right: 80px; top: 460px; display: grid; grid-template-columns: 1fr 1px 1fr; gap: 60px; align-items: center; }
-  .split .rule { background: #1A1A16; height: 380px; transform: scaleY(0); transform-origin: top; }
-  .half .lbl { font-family: 'JetBrains Mono', monospace; font-size: 13px; font-weight: 500; letter-spacing: 0.2em; text-transform: uppercase; color: #E60012; }
-  .half .letters { font-family: 'Smiley Sans', sans-serif; font-weight: 400; font-size: 320px; line-height: 0.85; color: #1A1A16; margin-top: 8px; letter-spacing: -10px; }
+  /* Top metadata bar */
+  .meta-bar { position: absolute; top: 50px; left: 80px; right: 80px; display: flex; align-items: center; gap: 20px; }
+  .meta-bar .lbl { font-family: 'JetBrains Mono', monospace; font-size: 11px; font-weight: 500; letter-spacing: 0.2em; text-transform: uppercase; color: #E60012; clip-path: inset(0 100% 0 0); }
+  .meta-bar .rule { flex: 1; height: 1px; background: #E0E0E0; transform: scaleX(0); transform-origin: left; }
+  .meta-bar .page-num { font-family: 'JetBrains Mono', monospace; font-size: 11px; font-weight: 500; letter-spacing: 0.15em; color: #BBB; clip-path: inset(0 0 0 100%); }
+
+  /* The big split layout */
+  .split { position: absolute; left: 80px; right: 80px; top: 120px; bottom: 80px; display: grid; grid-template-columns: 1fr 1px 1fr; gap: 60px; }
+
+  /* Center divider */
+  .center-rule { background: #1A1A16; transform: scaleY(0); transform-origin: top; }
+
+  /* Left half: VI */
+  .half { display: flex; flex-direction: column; justify-content: center; }
+  .half .kicker { font-family: 'JetBrains Mono', monospace; font-size: 11px; font-weight: 500; letter-spacing: 0.25em; text-transform: uppercase; color: #E60012; }
+  .half .letters {
+    font-family: 'Smiley Sans', sans-serif; font-weight: 400;
+    line-height: 0.85; color: #1A1A16;
+    /* Giant letters with clipPath reveal */
+    font-size: 280px; letter-spacing: -10px;
+    clip-path: inset(100% 0 0 0);
+  }
+  .half .word { font-family: 'Smiley Sans', sans-serif; font-weight: 400; font-size: 48px; color: #1A1A16; margin-top: 8px; clip-path: inset(0 100% 0 0); }
+  .half .desc { font-family: 'Noto Sans SC', sans-serif; font-weight: 400; font-size: 18px; line-height: 1.7; color: #666; margin-top: 20px; max-width: 440px; }
+  .half .desc em { font-style: normal; color: #E60012; font-weight: 700; }
+
   .half.left .letters { text-align: left; }
-  .half.right .letters { text-align: right; }
-  .half .word { font-family: 'Smiley Sans', sans-serif; font-weight: 400; font-size: 56px; line-height: 1.05; color: #1A1A16; margin-top: 8px; }
   .half.left .word { text-align: left; }
-  .half.right .word { text-align: right; }
-  .half .desc { font-family: 'Noto Sans SC', sans-serif; font-weight: 400; font-size: 20px; line-height: 1.5; color: #555; margin-top: 24px; max-width: 460px; }
   .half.left .desc { text-align: left; }
+
+  .half.right { align-items: flex-end; }
+  .half.right .letters { text-align: right; clip-path: inset(0 0 100% 0); }
+  .half.right .word { text-align: right; clip-path: inset(0 0 0 100%); }
   .half.right .desc { text-align: right; margin-left: auto; }
 
   /* Animated circle motif */
-  .motif { position: absolute; right: 200px; top: 540px; width: 160px; height: 160px; border: 2px solid #E60012; border-radius: 50%; opacity: 0; }
-  .motif::after { content: ''; position: absolute; inset: 12px; border: 1px solid #E60012; border-radius: 50%; opacity: 0.5; }
-  .motif::before { content: ''; position: absolute; left: 50%; top: 50%; width: 12px; height: 12px; background: #E60012; border-radius: 50%; transform: translate(-50%, -50%); }
-  .motif .orbit { position: absolute; inset: -20px; border: 1px dashed rgba(230,0,18,0.3); border-radius: 50%; }
+  .circle-motif {
+    position: absolute; right: 180px; bottom: 120px;
+    width: 140px; height: 140px;
+    border: 2px solid #E60012; border-radius: 50%;
+    transform: scale(0) rotate(-180deg);
+  }
+  .circle-motif .inner {
+    position: absolute; inset: 16px; border: 1px solid rgba(230,0,18,0.4);
+    border-radius: 50%;
+  }
+  .circle-motif .dot {
+    position: absolute; left: 50%; top: 50%; width: 10px; height: 10px;
+    background: #E60012; border-radius: 50%; transform: translate(-50%, -50%);
+  }
 
-  /* Decorative line accents */
-  .accent-line { position: absolute; height: 1px; background: linear-gradient(90deg, transparent, #E60012, transparent); }
-  .accent-line.l1 { top: 420px; left: 80px; width: 300px; }
-  .accent-line.l2 { top: 420px; right: 80px; width: 300px; }
+  /* Horizontal accent lines */
+  .h-accent { position: absolute; left: 80px; height: 1px; background: rgba(230,0,18,0.25); width: 0; }
+  .h-accent.top { top: 110px; }
+  .h-accent.bot { bottom: 80px; right: 80px; left: auto; }
 </style>
 </head>
 <body>
   <div class="stage">
     <div class="page" data-composition-id="brand_meaning" data-start="0" data-duration="5" data-width="1920" data-height="1080">
       <div class="red-bar"></div>
-      <div class="accent-line l1"></div>
-      <div class="accent-line l2"></div>
-      <div class="top">
-        <div class="lbl">VICOO · <span class="red">THE NAME</span></div>
-        <div class="rule"></div>
-        <div class="meta">PP. 03 · ETYMOLOGY</div>
-      </div>
+      <div class="h-accent top"></div>
+      <div class="h-accent bot"></div>
 
-      <div class="heading">
-        <div class="kicker">CHAPTER 02 · AN ETYMOLOGY</div>
-        <h1>Every letter earns its place — <em>Visual</em> on the left, <em>Circle</em> on the right.</h1>
+      <div class="meta-bar">
+        <div class="lbl">VICOO · THE NAME</div>
+        <div class="rule"></div>
+        <div class="page-num">PP. 03 · ETYMOLOGY</div>
       </div>
 
       <div class="split">
         <div class="half left">
-          <div class="lbl">The First Two</div>
+          <div class="kicker">THE FIRST TWO</div>
           <div class="letters">VI</div>
           <div class="word">Visual</div>
-          <div class="desc">A child's drawing is not decoration. It is the first line of a visual argument — about who they are, what they see, what they wish the world were.</div>
+          <div class="desc">A child's drawing is not decoration. It is the first line of a visual argument — about <em>who they are</em>, what they see, what they wish the world were.</div>
         </div>
-        <div class="rule"></div>
+        <div class="center-rule"></div>
         <div class="half right">
-          <div class="lbl">The Last Three</div>
+          <div class="kicker">THE LAST THREE</div>
           <div class="letters">COO</div>
           <div class="word">Circle</div>
-          <div class="desc">Two round O's — one for the loop of giving and receiving, one for the loop of making and remaking. The circle has no end.</div>
+          <div class="desc">Two round O's — one for the loop of <em>giving and receiving</em>, one for the loop of <em>making and remaking</em>. The circle has no end.</div>
         </div>
       </div>
 
-      <div class="motif"><div class="orbit"></div></div>
+      <div class="circle-motif">
+        <div class="inner"></div>
+        <div class="dot"></div>
+      </div>
     </div>
   </div>
 
@@ -94,50 +115,47 @@
       window.__timelines = window.__timelines || {};
       window.__timelines["brand_meaning"] = tl;
 
-      gsap.set('.red-bar', { scaleX: 0, transformOrigin: 'left center' });
-      gsap.set('.top > *', { y: -20, opacity: 0 });
-      gsap.set('.heading > *', { y: 30, opacity: 0 });
-      gsap.set('.split .rule', { scaleY: 0 });
-      gsap.set('.half > *', { y: 20, opacity: 0 });
-      gsap.set('.half .letters', { y: 40, opacity: 0, scale: 0.8 });
-      gsap.set('.motif', { scale: 0, rotation: -90 });
-      gsap.set('.motif .orbit', { rotation: 0 });
-      gsap.set('.accent-line', { scaleX: 0, transformOrigin: 'center' });
+      // === ACT 1: Red bar + accent lines (0-0.4s) ===
+      tl.to('.red-bar', { scaleX: 1, duration: 0.3, ease: 'power4.in' }, 0);
+      tl.to('.h-accent.top', { width: 200, duration: 0.4, ease: 'power2.out' }, 0.15);
+      tl.to('.h-accent.bot', { width: 200, duration: 0.4, ease: 'power2.out' }, 0.25);
 
-      // Entry
-      tl.to('.red-bar', { scaleX: 1, duration: 0.4, ease: 'power4.inOut' }, 0);
-      tl.to('.top > *', { y: 0, opacity: 1, duration: 0.5, stagger: 0.06, ease: 'power3.out' }, 0.1);
+      // === ACT 2: Meta bar (0.3-0.7s) ===
+      tl.to('.meta-bar .lbl', { clipPath: 'inset(0 0% 0 0)', duration: 0.3, ease: 'power2.out' }, 0.3);
+      tl.to('.meta-bar .rule', { scaleX: 1, duration: 0.4, ease: 'power2.out' }, 0.4);
+      tl.to('.meta-bar .page-num', { clipPath: 'inset(0 0 0 0%)', duration: 0.3, ease: 'power2.out' }, 0.5);
 
-      // Accent lines wipe in
-      tl.to('.accent-line', { scaleX: 1, duration: 0.6, stagger: 0.1, ease: 'power3.inOut' }, 0.3);
+      // === ACT 3: Center divider grows (0.6-1.0s) ===
+      tl.to('.center-rule', { scaleY: 1, duration: 0.5, ease: 'power2.inOut' }, 0.6);
 
-      // Heading reveals
-      tl.to('.heading > *', { y: 0, opacity: 1, duration: 0.6, stagger: 0.1, ease: 'power3.out' }, 0.4);
+      // === ACT 4: VI letters rise from bottom (0.8-1.4s) ===
+      tl.to('.half.left .letters', { clipPath: 'inset(0% 0 0 0)', duration: 0.6, ease: 'power3.inOut' }, 0.8);
+      tl.to('.half.left .word', { clipPath: 'inset(0 0% 0 0)', duration: 0.4, ease: 'power2.out' }, 1.2);
+      tl.to('.half.left .desc', { opacity: 1, duration: 0.5, ease: 'power2.out' }, 1.4);
 
-      // Center rule grows
-      tl.to('.split .rule', { scaleY: 1, duration: 0.7, ease: 'power3.inOut' }, 1.0);
+      // === ACT 5: COO letters descend from top (1.0-1.6s) ===
+      tl.to('.half.right .letters', { clipPath: 'inset(0 0 0% 0)', duration: 0.6, ease: 'power3.inOut' }, 1.0);
+      tl.to('.half.right .word', { clipPath: 'inset(0 0 0 0%)', duration: 0.4, ease: 'power2.out' }, 1.4);
+      tl.to('.half.right .desc', { opacity: 1, duration: 0.5, ease: 'power2.out' }, 1.6);
 
-      // Letters — dramatic scale-in with bounce
-      tl.to('.half .letters', { y: 0, opacity: 1, scale: 1, duration: 0.8, stagger: 0.2, ease: 'back.out(1.6)' }, 1.2);
+      // === ACT 6: Circle motif spins in (2.0-2.8s) ===
+      tl.to('.circle-motif', { scale: 1, rotation: 0, duration: 0.8, ease: 'back.out(1.5)' }, 2.0);
 
-      // Other half content
-      tl.to('.half .lbl', { y: 0, opacity: 1, duration: 0.4, stagger: 0.1, ease: 'power3.out' }, 1.4);
-      tl.to('.half .word', { y: 0, opacity: 1, duration: 0.5, stagger: 0.1, ease: 'power3.out' }, 1.6);
-      tl.to('.half .desc', { y: 0, opacity: 1, duration: 0.5, stagger: 0.1, ease: 'power3.out' }, 1.8);
+      // Gentle orbit rotation
+      tl.to('.circle-motif', { rotation: 360, duration: 4, ease: 'none', repeat: -1 }, 2.8);
 
-      // Circle motif — elastic pop with rotation
-      tl.to('.motif', { scale: 1, rotation: 0, duration: 1.0, ease: 'back.out(1.8)' }, 2.4);
-
-      // Orbit rotation
-      tl.to('.motif .orbit', { rotation: 360, duration: 3.0, ease: 'none', repeat: -1 }, 2.5);
-
-      // Exit
-      tl.to('.motif', { scale: 0.5, opacity: 0, duration: 0.3, ease: 'power3.in' }, 4.3);
-      tl.to('.half > *', { y: -10, opacity: 0, duration: 0.3, stagger: 0.03, ease: 'power3.in' }, 4.4);
-      tl.to('.heading > *', { y: -20, opacity: 0, duration: 0.3, ease: 'power3.in' }, 4.5);
-      tl.to('.accent-line', { scaleX: 0, duration: 0.3, ease: 'power3.in' }, 4.4);
-      tl.to('.top', { y: -20, opacity: 0, duration: 0.3, ease: 'power3.in' }, 4.5);
-      tl.to('.red-bar', { scaleX: 0, transformOrigin: 'right center', duration: 0.3 }, 4.5);
+      // === EXIT ===
+      tl.to('.circle-motif', { scale: 0, rotation: -90, duration: 0.3, ease: 'power2.in' }, 4.2);
+      tl.to('.half.right .desc', { opacity: 0, duration: 0.2 }, 4.3);
+      tl.to('.half.right .word', { clipPath: 'inset(0 0 0 100%)', duration: 0.3, ease: 'power2.in' }, 4.3);
+      tl.to('.half.right .letters', { clipPath: 'inset(0 0 100% 0)', duration: 0.4, ease: 'power3.in' }, 4.3);
+      tl.to('.half.left .desc', { opacity: 0, duration: 0.2 }, 4.4);
+      tl.to('.half.left .word', { clipPath: 'inset(0 100% 0 0)', duration: 0.3, ease: 'power2.in' }, 4.4);
+      tl.to('.half.left .letters', { clipPath: 'inset(100% 0 0 0)', duration: 0.4, ease: 'power3.in' }, 4.4);
+      tl.to('.center-rule', { scaleY: 0, transformOrigin: 'bottom', duration: 0.3, ease: 'power2.in' }, 4.5);
+      tl.to('.meta-bar .lbl, .meta-bar .page-num', { opacity: 0, duration: 0.2 }, 4.5);
+      tl.to('.h-accent', { width: 0, duration: 0.2, ease: 'power2.in' }, 4.5);
+      tl.to('.red-bar', { scaleX: 0, transformOrigin: 'right', duration: 0.2, ease: 'power2.in' }, 4.6);
 
       window.addEventListener('load', () => tl.play());
     })();

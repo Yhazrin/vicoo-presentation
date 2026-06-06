@@ -11,92 +11,129 @@
   * { margin: 0; padding: 0; box-sizing: border-box; }
   html, body { width: 2560px; height: 1440px; overflow: hidden; background: #0A0A0A; color: #FFFFFF; font-family: 'Inter', -apple-system, sans-serif; -webkit-font-smoothing: antialiased; }
   .stage { position: absolute; top: 0; left: 0; width: 1920px; height: 1080px; transform: scale(1.3333333); transform-origin: top left; }
-  .page { position: absolute; inset: 0; }
-  .red-bar { position: absolute; top: 0; left: 0; right: 0; height: 8px; background: #E60012; }
-  .top { position: absolute; top: 60px; left: 80px; right: 80px; display: flex; align-items: center; gap: 24px; }
-  .top .lbl { font-family: 'JetBrains Mono', monospace; font-size: 13px; font-weight: 500; letter-spacing: 0.2em; text-transform: uppercase; color: #FFF; }
-  .top .lbl .red { color: #E60012; }
-  .top .rule { flex: 1; height: 1px; background: rgba(255,255,255,0.3); }
-  .top .meta { font-family: 'JetBrains Mono', monospace; font-size: 13px; font-weight: 500; letter-spacing: 0.18em; text-transform: uppercase; color: #888; }
+  .page { position: absolute; inset: 0; overflow: hidden; }
 
-  .content { position: absolute; left: 80px; right: 80px; top: 140px; bottom: 80px; display: grid; grid-template-columns: 1fr 1.2fr; gap: 60px; }
+  .red-bar { position: absolute; top: 0; left: 0; right: 0; height: 6px; background: #E60012; transform: scaleX(0); transformOrigin: left; }
 
-  .left { display: flex; flex-direction: column; justify-content: center; }
-  .left .kicker { font-family: 'JetBrains Mono', monospace; font-size: 12px; font-weight: 500; letter-spacing: 0.2em; text-transform: uppercase; color: #E60012; }
-  .left h1 { font-family: 'Smiley Sans', sans-serif; font-weight: 400; font-size: 52px; line-height: 1.0; letter-spacing: -2px; color: #FFFFFF; margin-top: 12px; }
+  /* Left: Title + description */
+  .left { position: absolute; left: 80px; top: 0; width: 480px; height: 100%; display: flex; flex-direction: column; justify-content: center; }
+  .left .kicker { font-family: 'JetBrains Mono', monospace; font-size: 11px; font-weight: 500; letter-spacing: 0.25em; text-transform: uppercase; color: #E60012; clip-path: inset(0 100% 0 0); }
+  .left h1 {
+    font-family: 'Smiley Sans', sans-serif; font-weight: 400; font-size: 48px; line-height: 1.05; letter-spacing: -2px; color: #FFFFFF; margin-top: 16px;
+    clip-path: inset(0 100% 0 0);
+  }
   .left h1 em { font-style: normal; color: #E60012; }
-  .left .body { font-family: 'Noto Sans SC', sans-serif; font-size: 18px; color: rgba(255,255,255,0.7); margin-top: 24px; line-height: 1.7; max-width: 480px; }
+  .left .desc { font-family: 'Noto Sans SC', sans-serif; font-size: 16px; line-height: 1.7; color: rgba(255,255,255,0.6); margin-top: 20px; clip-path: inset(0 100% 0 0); }
 
-  .stats { display: flex; gap: 24px; margin-top: 32px; }
-  .stat { padding: 16px; background: rgba(255,255,255,0.05); text-align: center; flex: 1; }
-  .stat .val { font-family: 'Inter', sans-serif; font-weight: 800; font-size: 28px; color: #E60012; }
-  .stat .lbl { font-family: 'JetBrains Mono', monospace; font-size: 10px; color: #888; letter-spacing: 0.1em; text-transform: uppercase; margin-top: 4px; }
+  /* Stats row */
+  .stats { display: flex; gap: 20px; margin-top: 32px; }
+  .stat { padding: 12px 16px; background: rgba(255,255,255,0.05); text-align: center; transform: translateY(15px); opacity: 0; }
+  .stat .val { font-family: 'Inter', sans-serif; font-weight: 800; font-size: 22px; color: #E60012; }
+  .stat .lbl { font-family: 'JetBrains Mono', monospace; font-size: 10px; color: rgba(255,255,255,0.4); letter-spacing: 0.1em; text-transform: uppercase; margin-top: 4px; }
 
-  .right { position: relative; display: flex; align-items: center; justify-content: center; }
-  .globe-container { position: relative; width: 500px; height: 500px; }
-  .globe { width: 100%; height: 100%; border-radius: 50%; border: 2px solid rgba(255,255,255,0.15); position: relative; background: radial-gradient(circle at 30% 30%, rgba(255,255,255,0.05) 0%, transparent 50%); }
-  .globe::before { content: ''; position: absolute; inset: 40px; border-radius: 50%; border: 1px solid rgba(255,255,255,0.08); }
-  .globe::after { content: ''; position: absolute; inset: 80px; border-radius: 50%; border: 1px solid rgba(255,255,255,0.05); }
+  /* Right: Globe visualization */
+  .globe-area { position: absolute; right: 0; top: 0; width: 55%; height: 100%; display: flex; align-items: center; justify-content: center; }
 
-  .globe-node { position: absolute; width: 16px; height: 16px; background: #E60012; border-radius: 50%; transform: translate(-50%, -50%); box-shadow: 0 0 12px rgba(230,0,18,0.5); z-index: 2; }
-  .globe-node::before { content: ''; position: absolute; inset: -8px; border-radius: 50%; border: 1px solid rgba(230,0,18,0.3); animation: pulse-ring 2s ease-out infinite; }
-  .globe-node .label { position: absolute; top: -28px; left: 50%; transform: translateX(-50%); font-family: 'JetBrains Mono', monospace; font-size: 10px; color: rgba(255,255,255,0.7); white-space: nowrap; }
+  /* The globe — CSS-only 3D sphere illusion */
+  .globe { position: relative; width: 440px; height: 440px; }
 
-  @keyframes pulse-ring { 0% { transform: scale(1); opacity: 1; } 100% { transform: scale(2); opacity: 0; } }
+  /* Globe base circle with gradient for 3D effect */
+  .globe-sphere {
+    position: absolute; inset: 0; border-radius: 50%;
+    background: radial-gradient(circle at 35% 35%, rgba(255,255,255,0.12) 0%, rgba(255,255,255,0.02) 50%, transparent 70%);
+    border: 1.5px solid rgba(255,255,255,0.12);
+    transform: scale(0); /* starts hidden */
+  }
 
-  .globe-arc { position: absolute; border: 1px solid rgba(230,0,18,0.3); border-radius: 50%; }
+  /* Latitude lines */
+  .lat-line { position: absolute; left: 10%; right: 10%; height: 1px; background: rgba(255,255,255,0.06); }
+  .lat-line.l1 { top: 25%; }
+  .lat-line.l2 { top: 50%; }
+  .lat-line.l3 { top: 75%; }
 
-  .side-timeline { position: absolute; right: -60px; top: 50px; bottom: 50px; width: 2px; background: rgba(255,255,255,0.1); }
-  .side-timeline .dot { position: absolute; left: -4px; width: 10px; height: 10px; background: #E60012; border-radius: 50%; }
-  .side-timeline .dot::after { content: attr(data-label); position: absolute; left: 16px; top: -4px; font-family: 'JetBrains Mono', monospace; font-size: 10px; color: rgba(255,255,255,0.6); white-space: nowrap; }
+  /* Longitude lines — ellipses */
+  .lon-line { position: absolute; top: 5%; bottom: 5%; border: 1px solid rgba(255,255,255,0.06); border-radius: 50%; }
+  .lon-line.l1 { left: 25%; right: 25%; }
+  .lon-line.l2 { left: 10%; right: 10%; }
+
+  /* Globe nodes — supply chain points */
+  .gnode { position: absolute; width: 14px; height: 14px; transform: translate(-50%, -50%) scale(0); }
+  .gnode .dot { width: 100%; height: 100%; background: #E60012; border-radius: 50%; box-shadow: 0 0 12px rgba(230,0,18,0.5); }
+  /* Pulse ring */
+  .gnode .ring {
+    position: absolute; inset: -6px; border-radius: 50%;
+    border: 1.5px solid rgba(230,0,18,0.4);
+    animation: pulseRing 2s ease-out infinite;
+  }
+  @keyframes pulseRing { 0% { transform: scale(1); opacity: 0.6; } 100% { transform: scale(2.5); opacity: 0; } }
+
+  .gnode .label {
+    position: absolute; top: -22px; left: 50%; transform: translateX(-50%);
+    font-family: 'JetBrains Mono', monospace; font-size: 9px; font-weight: 500;
+    color: rgba(255,255,255,0.6); white-space: nowrap; letter-spacing: 0.08em;
+    opacity: 0;
+  }
+
+  /* Arc connections between nodes */
+  .arc { position: absolute; border: 1px solid rgba(230,0,18,0.2); border-radius: 50%; opacity: 0; }
+
+  /* Side timeline */
+  .side-tl { position: absolute; right: -50px; top: 40px; bottom: 40px; width: 2px; background: rgba(255,255,255,0.08); transform: scaleY(0); transformOrigin: top; }
+  .side-tl .dot {
+    position: absolute; left: -4px; width: 10px; height: 10px; background: #E60012; border-radius: 50%;
+    transform: scale(0);
+  }
+  .side-tl .dot::after {
+    content: attr(data-label); position: absolute; left: 16px; top: -4px;
+    font-family: 'JetBrains Mono', monospace; font-size: 9px; color: rgba(255,255,255,0.5);
+    white-space: nowrap; letter-spacing: 0.08em;
+  }
 </style>
 </head>
 <body>
   <div class="stage">
     <div class="page" data-composition-id="globe_intro" data-start="0" data-duration="6" data-width="1920" data-height="1080">
       <div class="red-bar"></div>
-      <div class="top">
-        <div class="lbl">VICOO · <span class="red">TRACEABILITY</span></div>
-        <div class="rule"></div>
-        <div class="meta">PP. 11 · /globe</div>
+
+      <div class="left">
+        <div class="kicker">TRACEABILITY · 3D GLOBE</div>
+        <h1>See every <em>node</em> in the supply chain.</h1>
+        <div class="desc">3D 交互式地球，展示从棉花种植到成衣出厂的每一个节点。7 个国家，5 个阶段，每一步都可验证。</div>
+        <div class="stats">
+          <div class="stat"><div class="val">7</div><div class="lbl">Countries</div></div>
+          <div class="stat"><div class="val">5</div><div class="lbl">Stages</div></div>
+          <div class="stat"><div class="val">98.7%</div><div class="lbl">Traceable</div></div>
+        </div>
       </div>
 
-      <div class="content">
-        <div class="left">
-          <div class="kicker">TRACEABILITY · 3D GLOBE</div>
-          <h1>See every <em>node</em> in the supply chain.</h1>
-          <div class="body">3D 交互式地球，展示从棉花种植到成衣出厂的每一个节点。7 个国家，5 个阶段，每一步都可验证。</div>
+      <div class="globe-area">
+        <div class="globe">
+          <div class="globe-sphere"></div>
+          <div class="lat-line l1"></div>
+          <div class="lat-line l2"></div>
+          <div class="lat-line l3"></div>
+          <div class="lon-line l1"></div>
+          <div class="lon-line l2"></div>
 
-          <div class="stats">
-            <div class="stat"><div class="val">7</div><div class="lbl">Countries</div></div>
-            <div class="stat"><div class="val">5</div><div class="lbl">Stages</div></div>
-            <div class="stat"><div class="val">98.7%</div><div class="lbl">Traceable</div></div>
-          </div>
+          <div class="arc" style="width: 200px; height: 200px; top: 50%; left: 50%; transform: translate(-50%, -50%);"></div>
+          <div class="arc" style="width: 300px; height: 300px; top: 50%; left: 50%; transform: translate(-50%, -50%);"></div>
+          <div class="arc" style="width: 400px; height: 400px; top: 50%; left: 50%; transform: translate(-50%, -50%);"></div>
+
+          <div class="gnode" style="top: 30%; left: 65%;"><div class="dot"></div><div class="ring"></div><div class="label">CN · Xinjiang</div></div>
+          <div class="gnode" style="top: 38%; left: 70%;"><div class="dot"></div><div class="ring"></div><div class="label">CN · Shaoxing</div></div>
+          <div class="gnode" style="top: 35%; left: 75%;"><div class="dot"></div><div class="ring"></div><div class="label">CN · Suzhou</div></div>
+          <div class="gnode" style="top: 37%; left: 80%;"><div class="dot"></div><div class="ring"></div><div class="label">CN · Shanghai</div></div>
+          <div class="gnode" style="top: 28%; left: 45%;"><div class="dot"></div><div class="ring"></div><div class="label">TR · Istanbul</div></div>
+          <div class="gnode" style="top: 48%; left: 58%;"><div class="dot"></div><div class="ring"></div><div class="label">IN · Mumbai</div></div>
+          <div class="gnode" style="top: 25%; left: 38%;"><div class="dot"></div><div class="ring"></div><div class="label">FR · Paris</div></div>
         </div>
 
-        <div class="right">
-          <div class="globe-container">
-            <div class="globe">
-              <div class="globe-arc" style="width: 300px; height: 300px; top: 50%; left: 50%; transform: translate(-50%, -50%);"></div>
-              <div class="globe-arc" style="width: 400px; height: 400px; top: 50%; left: 50%; transform: translate(-50%, -50%);"></div>
-
-              <div class="globe-node" style="top: 35%; left: 65%;"><div class="label">CN · Xinjiang</div></div>
-              <div class="globe-node" style="top: 42%; left: 70%;"><div class="label">CN · Shaoxing</div></div>
-              <div class="globe-node" style="top: 38%; left: 75%;"><div class="label">CN · Suzhou</div></div>
-              <div class="globe-node" style="top: 40%; left: 80%;"><div class="label">CN · Shanghai</div></div>
-              <div class="globe-node" style="top: 32%; left: 48%;"><div class="label">TR · Istanbul</div></div>
-              <div class="globe-node" style="top: 50%; left: 60%;"><div class="label">IN · Mumbai</div></div>
-              <div class="globe-node" style="top: 30%; left: 42%;"><div class="label">FR · Paris</div></div>
-            </div>
-
-            <div class="side-timeline">
-              <div class="dot" style="top: 10%;" data-label="COTTON"></div>
-              <div class="dot" style="top: 30%;" data-label="SPINNING"></div>
-              <div class="dot" style="top: 50%;" data-label="DYEING"></div>
-              <div class="dot" style="top: 70%;" data-label="CUTTING"></div>
-              <div class="dot" style="top: 90%;" data-label="ASSEMBLY"></div>
-            </div>
-          </div>
+        <div class="side-tl">
+          <div class="dot" style="top: 10%;" data-label="COTTON"></div>
+          <div class="dot" style="top: 30%;" data-label="SPINNING"></div>
+          <div class="dot" style="top: 50%;" data-label="DYEING"></div>
+          <div class="dot" style="top: 70%;" data-label="CUTTING"></div>
+          <div class="dot" style="top: 90%;" data-label="ASSEMBLY"></div>
         </div>
       </div>
     </div>
@@ -109,55 +146,49 @@
       window.__timelines = window.__timelines || {};
       window.__timelines["globe_intro"] = tl;
 
-      gsap.set('.red-bar', { scaleX: 0, transformOrigin: 'left center' });
-      gsap.set('.top > *', { y: -20, opacity: 0 });
-      gsap.set('.left .kicker', { y: 20, opacity: 0 });
-      gsap.set('.left h1', { y: 30, opacity: 0 });
-      gsap.set('.left .body', { y: 20, opacity: 0 });
-      gsap.set('.stat', { y: 20, opacity: 0, scale: 0.9 });
-      gsap.set('.globe', { scale: 0.5, opacity: 0 });
-      gsap.set('.globe-arc', { scale: 0, opacity: 0 });
-      gsap.set('.globe-node', { scale: 0, opacity: 0 });
-      gsap.set('.side-timeline', { scaleY: 0, transformOrigin: 'top' });
-      gsap.set('.side-timeline .dot', { scale: 0, opacity: 0 });
+      // === ACT 1: Red bar (0-0.3s) ===
+      tl.to('.red-bar', { scaleX: 1, duration: 0.25, ease: 'power4.in' }, 0);
 
-      // Entry
-      tl.to('.red-bar', { scaleX: 1, duration: 0.4, ease: 'power4.inOut' }, 0);
-      tl.to('.top > *', { y: 0, opacity: 1, duration: 0.5, stagger: 0.06, ease: 'power3.out' }, 0.1);
+      // === ACT 2: Globe sphere appears with scale (0.2-0.8s) ===
+      tl.to('.globe-sphere', { scale: 1, duration: 0.6, ease: 'back.out(1.2)' }, 0.2);
 
-      // Left content
-      tl.to('.left .kicker', { y: 0, opacity: 1, duration: 0.5, ease: 'power3.out' }, 0.3);
-      tl.to('.left h1', { y: 0, opacity: 1, duration: 0.6, ease: 'expo.out' }, 0.5);
-      tl.to('.left .body', { y: 0, opacity: 1, duration: 0.5, ease: 'power3.out' }, 0.8);
-      tl.to('.stat', { y: 0, opacity: 1, scale: 1, duration: 0.5, stagger: 0.1, ease: 'back.out(1.4)' }, 1.0);
+      // === ACT 3: Grid lines fade in (0.5-1.0s) ===
+      tl.to('.lat-line', { opacity: 1, duration: 0.4, stagger: 0.08, ease: 'power2.out' }, 0.5);
+      tl.to('.lon-line', { opacity: 1, duration: 0.4, stagger: 0.08, ease: 'power2.out' }, 0.6);
 
-      // Globe — scale in with bounce
-      tl.to('.globe', { scale: 1, opacity: 1, duration: 0.8, ease: 'back.out(1.2)' }, 0.6);
+      // === ACT 4: Arcs expand from center (0.8-1.5s) ===
+      tl.to('.arc', { opacity: 1, duration: 0.5, stagger: 0.15, ease: 'power2.out' }, 0.8);
 
-      // Globe arcs
-      tl.to('.globe-arc', { scale: 1, opacity: 1, duration: 0.6, stagger: 0.15, ease: 'power3.out' }, 1.0);
+      // === ACT 5: Nodes pop in with pulse rings (1.0-2.0s) ===
+      tl.to('.gnode', { scale: 1, duration: 0.4, stagger: 0.1, ease: 'back.out(2.5)' }, 1.0);
+      tl.to('.gnode .label', { opacity: 1, duration: 0.3, stagger: 0.08, ease: 'power2.out' }, 1.5);
 
-      // Globe nodes — staggered pop
-      tl.to('.globe-node', { scale: 1, opacity: 1, duration: 0.4, stagger: 0.1, ease: 'back.out(2)' }, 1.4);
+      // === ACT 6: Left content reveals (0.8-1.8s) ===
+      tl.to('.left .kicker', { clipPath: 'inset(0 0% 0 0)', duration: 0.35, ease: 'power2.out' }, 0.8);
+      tl.to('.left h1', { clipPath: 'inset(0 0% 0 0)', duration: 0.5, ease: 'power3.inOut' }, 1.0);
+      tl.to('.left .desc', { clipPath: 'inset(0 0% 0 0)', duration: 0.4, ease: 'power2.out' }, 1.3);
+      tl.to('.stat', { y: 0, opacity: 1, duration: 0.3, stagger: 0.08, ease: 'power2.out' }, 1.5);
 
-      // Side timeline
-      tl.to('.side-timeline', { scaleY: 1, duration: 0.6, ease: 'power3.inOut' }, 1.8);
-      tl.to('.side-timeline .dot', { scale: 1, opacity: 1, duration: 0.4, stagger: 0.1, ease: 'back.out(1.4)' }, 2.0);
+      // === ACT 7: Side timeline (2.0-2.5s) ===
+      tl.to('.side-tl', { scaleY: 1, duration: 0.5, ease: 'power2.inOut' }, 2.0);
+      tl.to('.side-tl .dot', { scale: 1, duration: 0.3, stagger: 0.08, ease: 'back.out(2)' }, 2.2);
 
-      // Gentle globe rotation
-      tl.to('.globe', { rotation: 5, duration: 3.0, yoyo: true, repeat: 1, ease: 'sine.inOut' }, 2.5);
+      // === ACT 8: Gentle globe rotation (2.5s+) ===
+      tl.to('.globe', { rotation: 3, duration: 3, yoyo: true, repeat: 1, ease: 'sine.inOut' }, 2.5);
 
-      // Exit
-      tl.to('.side-timeline .dot', { scale: 0, opacity: 0, duration: 0.3, stagger: 0.05, ease: 'power3.in' }, 5.2);
-      tl.to('.side-timeline', { scaleY: 0, duration: 0.3, ease: 'power3.in' }, 5.3);
-      tl.to('.globe-node', { scale: 0, opacity: 0, duration: 0.3, stagger: 0.03, ease: 'power3.in' }, 5.2);
-      tl.to('.globe', { scale: 0.5, opacity: 0, duration: 0.4, ease: 'power3.in' }, 5.3);
-      tl.to('.stat', { y: -15, opacity: 0, duration: 0.3, ease: 'power3.in' }, 5.4);
-      tl.to('.left .body', { y: -15, opacity: 0, duration: 0.3, ease: 'power3.in' }, 5.4);
-      tl.to('.left h1', { y: -20, opacity: 0, duration: 0.3, ease: 'power3.in' }, 5.5);
-      tl.to('.left .kicker', { y: -10, opacity: 0, duration: 0.3, ease: 'power3.in' }, 5.5);
-      tl.to('.top', { y: -20, opacity: 0, duration: 0.3, ease: 'power3.in' }, 5.5);
-      tl.to('.red-bar', { scaleX: 0, transformOrigin: 'right center', duration: 0.3 }, 5.5);
+      // === EXIT ===
+      tl.to('.side-tl .dot', { scale: 0, duration: 0.2, stagger: 0.03, ease: 'power2.in' }, 5.0);
+      tl.to('.side-tl', { scaleY: 0, duration: 0.3, ease: 'power2.in' }, 5.1);
+      tl.to('.gnode .label', { opacity: 0, duration: 0.2, stagger: 0.02, ease: 'power2.in' }, 5.1);
+      tl.to('.gnode', { scale: 0, duration: 0.2, stagger: 0.03, ease: 'power2.in' }, 5.1);
+      tl.to('.arc', { opacity: 0, duration: 0.2, stagger: 0.05, ease: 'power2.in' }, 5.2);
+      tl.to('.lat-line, .lon-line', { opacity: 0, duration: 0.2, ease: 'power2.in' }, 5.3);
+      tl.to('.globe-sphere', { scale: 0, duration: 0.3, ease: 'power2.in' }, 5.3);
+      tl.to('.stat', { y: 10, opacity: 0, duration: 0.2, stagger: 0.03, ease: 'power2.in' }, 5.3);
+      tl.to('.left .desc', { clipPath: 'inset(0 0 0 100%)', duration: 0.2, ease: 'power2.in' }, 5.4);
+      tl.to('.left h1', { clipPath: 'inset(0 0 0 100%)', duration: 0.3, ease: 'power3.in' }, 5.4);
+      tl.to('.left .kicker', { clipPath: 'inset(0 0 0 100%)', duration: 0.2, ease: 'power2.in' }, 5.5);
+      tl.to('.red-bar', { scaleX: 0, transformOrigin: 'right', duration: 0.2, ease: 'power2.in' }, 5.5);
 
       window.addEventListener('load', () => tl.play());
     })();

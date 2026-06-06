@@ -28,8 +28,9 @@
   .left .body { font-family: 'Noto Sans SC', sans-serif; font-size: 18px; color: #555; margin-top: 24px; line-height: 1.7; max-width: 480px; }
 
   .actions { display: flex; gap: 16px; margin-top: 32px; }
-  .action-btn { display: flex; align-items: center; gap: 10px; padding: 14px 24px; font-family: 'Inter', sans-serif; font-weight: 700; font-size: 14px; }
+  .action-btn { display: flex; align-items: center; gap: 10px; padding: 14px 24px; font-family: 'Inter', sans-serif; font-weight: 700; font-size: 14px; position: relative; overflow: hidden; }
   .action-btn.primary { background: #E60012; color: #FFFFFF; }
+  .action-btn.primary .sweep { position: absolute; inset: 0; background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent); transform: translateX(-100%); }
   .action-btn.ghost { border: 2px solid #1A1A16; color: #1A1A16; }
 
   .right { display: flex; flex-direction: column; gap: 16px; }
@@ -60,7 +61,7 @@
           <h1>Save what you <em>love</em>, share what <em>matters</em>.</h1>
           <div class="body">收藏你喜欢的公益商品，分享给朋友——每多一个人看见，就多一份改变的可能。</div>
           <div class="actions">
-            <div class="action-btn primary">♡ MY WISHLIST</div>
+            <div class="action-btn primary"><div class="sweep"></div>♡ MY WISHLIST</div>
             <div class="action-btn ghost">↗ SHARE ALL</div>
           </div>
         </div>
@@ -102,14 +103,17 @@
       gsap.set('.left h1', { y: 30, opacity: 0 });
       gsap.set('.left .body', { y: 20, opacity: 0 });
       gsap.set('.actions .action-btn', { y: 20, opacity: 0 });
+      gsap.set('.actions .action-btn.primary .sweep', { x: '-100%' });
       gsap.set('.wishlist-item', { x: 30, opacity: 0 });
 
-      tl.to('.red-bar', { scaleX: 1, duration: 0.5, ease: 'power3.inOut' }, 0);
+      // Entry
+      tl.to('.red-bar', { scaleX: 1, duration: 0.4, ease: 'power4.inOut' }, 0);
       tl.to('.top > *', { y: 0, opacity: 1, duration: 0.5, stagger: 0.06, ease: 'power2.out' }, 0.1);
       tl.to('.left .kicker', { y: 0, opacity: 1, duration: 0.5, ease: 'power2.out' }, 0.3);
       tl.to('.left h1', { y: 0, opacity: 1, duration: 0.6, ease: 'expo.out' }, 0.5);
       tl.to('.left .body', { y: 0, opacity: 1, duration: 0.5, ease: 'power2.out' }, 0.8);
       tl.to('.actions .action-btn', { y: 0, opacity: 1, duration: 0.4, stagger: 0.1, ease: 'power2.out' }, 1.0);
+      tl.to('.actions .action-btn.primary .sweep', { x: '100%', duration: 0.6, ease: 'power2.inOut' }, 1.5);
       tl.to('.wishlist-item', { x: 0, opacity: 1, duration: 0.5, stagger: 0.15, ease: 'power2.out' }, 1.2);
 
       // Heart pulse

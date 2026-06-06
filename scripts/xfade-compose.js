@@ -9,7 +9,7 @@ const path = require('node:path');
 const fs = require('node:fs');
 
 const FRAMES_DIR = path.join(__dirname, 'frames');
-const OUT = path.join(__dirname, '..', '..', '..', '..', '..', 'videos', 'vicoo-promo.mp4');
+const OUT = path.join(__dirname, '..', 'videos', 'vicoo-promo.mp4');
 const XFADE_DURATION = 0.45; // seconds
 const TRANSITION = 'fade';
 

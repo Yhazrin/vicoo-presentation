@@ -143,7 +143,7 @@
       // Marquee animation — infinite scroll
       const track = document.querySelector('.marquee-track');
       const trackWidth = track.scrollWidth / 2;
-      tl.to(track, { x: -trackWidth, duration: 8.0, ease: 'none', repeat: -1 }, 1.0);
+      tl.to(track, { x: -trackWidth, duration: 8.0, ease: 'none', repeat: 1 }, 1.0);
 
       // Bottom bar stats
       tl.to('.bottom-bar .stat', { y: 0, opacity: 1, duration: 0.4, stagger: 0.08, ease: 'power3.out' }, 1.2);

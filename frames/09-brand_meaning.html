@@ -109,18 +109,8 @@
   </div>
 
   <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
-  <script src="../scripts/vfx-ambient.js"></script>
   <script>
     (function () {
-      // === Glow pulse on circle motif ===
-      const circle = document.querySelector('.circle-motif');
-      if (circle) VICOO_VFX.glowPulse(circle, { color: 'rgba(230,0,18,0.25)', size: 24, duration: 3 });
-
-      // === Word reveals on descriptions ===
-      document.querySelectorAll('.half .desc').forEach(desc => {
-        setTimeout(() => VICOO_VFX.wordReveal(desc, { delay: 1.5, stagger: 0.06 }), 50);
-      });
-
       const tl = gsap.timeline({ paused: true });
       window.__timelines = window.__timelines || {};
       window.__timelines["brand_meaning"] = tl;
@@ -151,8 +141,8 @@
       // === ACT 6: Circle motif spins in (2.0-2.8s) ===
       tl.to('.circle-motif', { scale: 1, rotation: 0, duration: 0.8, ease: 'back.out(1.5)' }, 2.0);
 
-      // Gentle orbit rotation
-      tl.to('.circle-motif', { rotation: 360, duration: 4, ease: 'none', repeat: -1 }, 2.8);
+      // Gentle orbit rotation (single pass for renderer stability)
+      tl.to('.circle-motif', { rotation: 360, duration: 4, ease: 'none' }, 2.8);
 
       // === EXIT ===
       tl.to('.circle-motif', { scale: 0, rotation: -90, duration: 0.3, ease: 'power2.in' }, 4.2);

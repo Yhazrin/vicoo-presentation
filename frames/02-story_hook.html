@@ -82,8 +82,26 @@
   </div>
 
   <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
+  <script src="../scripts/vfx-ambient.js"></script>
   <script>
     (function () {
+      // === Particle background ===
+      const page = document.querySelector('.page');
+      VICOO_VFX.particles(page, {
+        count: 40,
+        color: '#E60012',
+        maxSize: 2,
+        speed: 0.18,
+        connectDistance: 90,
+        opacity: 0.22,
+      });
+
+      // === Text scramble on eyebrow ===
+      setTimeout(() => VICOO_VFX.textScramble(document.querySelector('.eyebrow'), { duration: 1.0, delay: 0.3 }), 50);
+
+      // === Word-by-word reveal on quote ===
+      setTimeout(() => VICOO_VFX.wordReveal(document.querySelector('.quote'), { delay: 0.7, stagger: 0.08, blur: true }), 50);
+
       const tl = gsap.timeline({ paused: true });
       window.__timelines = window.__timelines || {};
       window.__timelines["story_hook"] = tl;

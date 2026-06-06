@@ -123,8 +123,21 @@
   </div>
 
   <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
+  <script src="../scripts/vfx-ambient.js"></script>
   <script>
     (function () {
+      // === Text scramble on tagline ===
+      setTimeout(() => VICOO_VFX.textScramble(document.querySelector('.tagline'), { duration: 1.2, delay: 0.8 }), 50);
+
+      // === Glow pulse on VICOO wordmark ===
+      const vicooEl = document.querySelector('.vicoo');
+      if (vicooEl) {
+        setTimeout(() => VICOO_VFX.glowPulse(vicooEl, { color: 'rgba(230,0,18,0.2)', size: 30, duration: 3 }), 800);
+      }
+
+      // === Word reveal on footer ===
+      setTimeout(() => VICOO_VFX.wordReveal(document.querySelector('.footer'), { delay: 2.6, stagger: 0.04, blur: false }), 50);
+
       const tl = gsap.timeline({ paused: true });
       window.__timelines = window.__timelines || {};
       window.__timelines["credits"] = tl;

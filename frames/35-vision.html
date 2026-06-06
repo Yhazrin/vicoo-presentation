@@ -51,9 +51,11 @@
       <div class="accent bl"></div>
       <div class="accent br"></div>
 
+      <canvas id="particleBg" style="position:absolute;inset:0;pointer-events:none;z-index:0;"></canvas>
+
       <div class="content">
         <div class="eyebrow">THE FUTURE WE'RE BUILDING</div>
-        <div class="headline">
+        <div class="headline" id="visionHeadline">
           A world where every child's <span class="red">imagination</span><br>
           becomes a force for <span class="red">change</span>.
         </div>
@@ -91,8 +93,29 @@
   </div>
 
   <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
+  <script src="../scripts/vfx-ambient.js"></script>
   <script>
     (function () {
+      // === Particle background (html-video inspired) ===
+      const page = document.querySelector('.page');
+      VICOO_VFX.particles(page, {
+        count: 45,
+        color: '#E60012',
+        maxSize: 2.5,
+        speed: 0.2,
+        connectDistance: 100,
+        opacity: 0.3,
+      });
+
+      // === Word-by-word headline reveal ===
+      const headline = document.getElementById('visionHeadline');
+      // Delay word reveal to sync with GSAP timeline
+      setTimeout(() => VICOO_VFX.wordReveal(headline, { delay: 0.3, stagger: 0.08 }), 100);
+
+      // === Text scramble on eyebrow ===
+      const eyebrow = document.querySelector('.eyebrow');
+      setTimeout(() => VICOO_VFX.textScramble(eyebrow, { duration: 1.0, delay: 0.1 }), 50);
+
       const tl = gsap.timeline({ paused: true });
       window.__timelines = window.__timelines || {};
       window.__timelines["vision"] = tl;

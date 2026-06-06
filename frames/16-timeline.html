@@ -9,49 +9,46 @@
 <style>
   @font-face { font-family: 'Smiley Sans'; src: url('SmileySans-Oblique.woff2') format('woff2'); font-weight: 400; font-style: normal; font-display: block; }
   * { margin: 0; padding: 0; box-sizing: border-box; }
-  html, body { width: 2560px; height: 1440px; overflow: hidden; background: #FFFFFF; color: #1A1A16; font-family: 'Inter', -apple-system, sans-serif; -webkit-font-smoothing: antialiased; }
+  html, body { width: 2560px; height: 1440px; overflow: hidden; background: #0A0A0A; color: #FFFFFF; font-family: 'Inter', -apple-system, sans-serif; -webkit-font-smoothing: antialiased; }
   .stage { position: absolute; top: 0; left: 0; width: 1920px; height: 1080px; transform: scale(1.3333333); transform-origin: top left; }
   .page { position: absolute; inset: 0; }
   .red-bar { position: absolute; top: 0; left: 0; right: 0; height: 8px; background: #E60012; }
   .top { position: absolute; top: 60px; left: 80px; right: 80px; display: flex; align-items: center; gap: 24px; }
-  .top .lbl { font-family: 'JetBrains Mono', monospace; font-size: 13px; font-weight: 500; letter-spacing: 0.2em; text-transform: uppercase; }
+  .top .lbl { font-family: 'JetBrains Mono', monospace; font-size: 13px; font-weight: 500; letter-spacing: 0.2em; text-transform: uppercase; color: #FFF; }
   .top .lbl .red { color: #E60012; }
-  .top .rule { flex: 1; height: 1px; background: #1A1A16; }
+  .top .rule { flex: 1; height: 1px; background: rgba(255,255,255,0.3); }
   .top .meta { font-family: 'JetBrains Mono', monospace; font-size: 13px; font-weight: 500; letter-spacing: 0.18em; text-transform: uppercase; color: #888; }
 
-  .heading { position: absolute; top: 130px; left: 80px; right: 80px; }
+  .content { position: absolute; left: 80px; right: 80px; top: 140px; bottom: 80px; display: flex; flex-direction: column; }
+
+  .heading { margin-bottom: 40px; }
   .heading .kicker { font-family: 'JetBrains Mono', monospace; font-size: 12px; font-weight: 500; letter-spacing: 0.2em; text-transform: uppercase; color: #E60012; }
-  .heading h1 { font-family: 'Smiley Sans', sans-serif; font-weight: 400; font-size: 64px; line-height: 0.95; letter-spacing: -2px; color: #1A1A16; margin-top: 12px; }
+  .heading h1 { font-family: 'Smiley Sans', sans-serif; font-weight: 400; font-size: 48px; line-height: 1.0; letter-spacing: -2px; color: #FFFFFF; margin-top: 12px; }
   .heading h1 em { font-style: normal; color: #E60012; }
 
-  /* Horizontal timeline */
-  .timeline { position: absolute; left: 80px; right: 80px; top: 320px; height: 320px; }
-  .track { position: absolute; left: 0; right: 0; top: 100px; height: 1px; background: #1A1A16; }
-  .stages { display: grid; grid-template-columns: repeat(5, 1fr); gap: 0; position: relative; }
-  .stage-item { position: relative; padding: 0 12px; }
-  .stage-item .dot { position: absolute; top: 92px; left: 50%; transform: translate(-50%, 0); width: 20px; height: 20px; background: #E60012; border: 4px solid #FFFFFF; box-shadow: 0 0 0 2px #E60012; }
-  .stage-item .no { font-family: 'JetBrains Mono', monospace; font-size: 12px; font-weight: 700; letter-spacing: 0.2em; color: #E60012; }
-  .stage-item .nm { font-family: 'Smiley Sans', sans-serif; font-weight: 400; font-size: 28px; line-height: 1; color: #1A1A16; margin-top: 8px; }
-  .stage-item .loc { font-family: 'Inter', sans-serif; font-weight: 600; font-size: 13px; color: #555; margin-top: 8px; }
-  .stage-item .date { font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: 0.15em; text-transform: uppercase; color: #888; margin-top: 4px; }
-  .stage-item .check { display: inline-flex; align-items: center; gap: 4px; margin-top: 6px; padding: 3px 8px; background: #1A1A16; color: #FFFFFF; font-family: 'JetBrains Mono', monospace; font-size: 9px; font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase; }
-  .stage-item .check .d { width: 6px; height: 6px; background: #00D26A; border-radius: 50%; }
+  .timeline { flex: 1; display: flex; flex-direction: column; justify-content: center; }
+  .timeline-track { display: flex; align-items: center; position: relative; }
+  .timeline-line { position: absolute; top: 50%; left: 0; right: 0; height: 4px; background: rgba(255,255,255,0.1); transform: translateY(-50%); }
+  .timeline-line .fill { height: 100%; background: #E60012; width: 0; }
 
-  /* Bottom: stage detail panel (selected stage) */
-  .detail { position: absolute; left: 80px; right: 80px; bottom: 80px; padding: 24px; background: #0A0A0A; color: #FFFFFF; display: grid; grid-template-columns: 1fr 1fr 1fr 1fr; gap: 24px; }
-  .detail .col .lbl { font-family: 'JetBrains Mono', monospace; font-size: 10px; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: #E60012; }
-  .detail .col .v { font-family: 'Smiley Sans', sans-serif; font-weight: 400; font-size: 22px; line-height: 1.1; color: #FFFFFF; margin-top: 8px; }
-  .detail .col .v.red { color: #E60012; }
-  .detail .col .v.green { color: #00D26A; }
-  .detail .col .v .small { font-family: 'Inter', sans-serif; font-size: 14px; font-weight: 500; color: #888; }
-  .detail .col .note { font-family: 'Noto Sans SC', sans-serif; font-size: 13px; color: #DDD; line-height: 1.5; margin-top: 6px; }
+  .timeline-stages { display: flex; justify-content: space-between; position: relative; z-index: 2; }
+  .stage { display: flex; flex-direction: column; align-items: center; gap: 16px; }
+  .stage .dot { width: 24px; height: 24px; background: #E60012; border-radius: 50%; box-shadow: 0 0 12px rgba(230,0,18,0.5); }
+  .stage .dot.active { width: 32px; height: 32px; box-shadow: 0 0 20px rgba(230,0,18,0.8); }
+  .stage .info { text-align: center; }
+  .stage .info .num { font-family: 'Inter', sans-serif; font-weight: 800; font-size: 20px; color: #E60012; }
+  .stage .info .name { font-family: 'JetBrains Mono', monospace; font-size: 11px; color: rgba(255,255,255,0.7); letter-spacing: 0.1em; text-transform: uppercase; margin-top: 4px; }
+  .stage .info .detail { font-family: 'Noto Sans SC', sans-serif; font-size: 13px; color: rgba(255,255,255,0.5); margin-top: 8px; max-width: 180px; }
+  .stage .info .carbon { font-family: 'JetBrains Mono', monospace; font-size: 10px; color: #E60012; margin-top: 4px; letter-spacing: 0.1em; }
 
-  /* Top progress line */
-  .progress { position: absolute; left: 80px; right: 80px; top: 270px; display: flex; align-items: center; gap: 12px; font-family: 'JetBrains Mono', monospace; font-size: 11px; font-weight: 500; letter-spacing: 0.2em; text-transform: uppercase; }
-  .progress .lbl { color: #888; }
-  .progress .bar { flex: 1; height: 2px; background: #EEE; }
-  .progress .fill { height: 100%; background: #E60012; transform: scaleX(0); transform-origin: left; }
-  .progress .pct { color: #1A1A16; font-weight: 800; }
+  .detail-panel { margin-top: 40px; padding: 24px; background: rgba(255,255,255,0.05); border-left: 3px solid #E60012; }
+  .detail-panel .stage-label { font-family: 'JetBrains Mono', monospace; font-size: 11px; font-weight: 500; letter-spacing: 0.15em; text-transform: uppercase; color: #E60012; }
+  .detail-panel h3 { font-family: 'Inter', sans-serif; font-weight: 800; font-size: 18px; margin-top: 8px; }
+  .detail-panel p { font-family: 'Noto Sans SC', sans-serif; font-size: 14px; color: rgba(255,255,255,0.7); margin-top: 8px; line-height: 1.5; }
+  .detail-panel .metrics { display: flex; gap: 24px; margin-top: 16px; }
+  .detail-panel .metric { text-align: center; }
+  .detail-panel .metric .val { font-family: 'Inter', sans-serif; font-weight: 800; font-size: 22px; color: #E60012; }
+  .detail-panel .metric .lbl { font-family: 'JetBrains Mono', monospace; font-size: 10px; color: #888; letter-spacing: 0.1em; text-transform: uppercase; }
 </style>
 </head>
 <body>
@@ -61,113 +58,128 @@
       <div class="top">
         <div class="lbl">VICOO · <span class="red">TIMELINE</span></div>
         <div class="rule"></div>
-        <div class="meta">PP. 10 · SUPPLY CHAIN</div>
+        <div class="meta">PP. 12 · /timeline</div>
       </div>
-      <div class="heading">
-        <div class="kicker">CHAPTER 04 · STAGES IN ORDER</div>
-        <h1>From <em>field</em> to your wardrobe — 5 stages, scroll-linked.</h1>
-      </div>
-      <div class="progress">
-        <span class="lbl">● STAGE 03 / 05</span>
-        <div class="bar"><div class="fill" id="pf"></div></div>
-        <span class="pct" id="pct">0%</span>
-      </div>
-      <div class="timeline">
-        <div class="track"></div>
-        <div class="stages">
-          <div class="stage-item">
-            <div class="no">STAGE 01</div>
-            <div class="nm">MATERIAL</div>
-            <div class="loc">Xinjiang · Awati</div>
-            <div class="date">2026-03-12</div>
-            <div class="check"><span class="d"></span>GOTS</div>
-          </div>
-          <div class="stage-item">
-            <div class="no">STAGE 02</div>
-            <div class="nm">MILL</div>
-            <div class="loc">Zhejiang · Shaoxing</div>
-            <div class="date">2026-03-25</div>
-            <div class="check"><span class="d"></span>BLUESIGN</div>
-          </div>
-          <div class="stage-item">
-            <div class="no">STAGE 03</div>
-            <div class="nm">CUT &amp; SEW</div>
-            <div class="loc">Jiangsu · Suzhou</div>
-            <div class="date">2026-04-08</div>
-            <div class="check"><span class="d"></span>FAIR-WAGE</div>
-          </div>
-          <div class="stage-item">
-            <div class="no">STAGE 04</div>
-            <div class="nm">PRINT</div>
-            <div class="loc">Shanghai · Minhang</div>
-            <div class="date">2026-04-15</div>
-            <div class="check"><span class="d"></span>OEKO-TEX</div>
-          </div>
-          <div class="stage-item">
-            <div class="no">STAGE 05</div>
-            <div class="nm">SHIP</div>
-            <div class="loc">Shanghai · Pudong</div>
-            <div class="date">2026-04-18</div>
-            <div class="check"><span class="d"></span>CARBON-NEUTRAL</div>
+
+      <div class="content">
+        <div class="heading">
+          <div class="kicker">TRACEABILITY · 5 STAGES</div>
+          <h1>From <em>cotton farm</em> to <em>your door</em>.</h1>
+        </div>
+
+        <div class="timeline">
+          <div class="timeline-track">
+            <div class="timeline-line"><div class="fill"></div></div>
+            <div class="timeline-stages">
+              <div class="stage">
+                <div class="dot"></div>
+                <div class="info">
+                  <div class="num">01</div>
+                  <div class="name">Cotton</div>
+                  <div class="detail">新疆阿瓦提</div>
+                  <div class="carbon">1.2 kg CO₂</div>
+                </div>
+              </div>
+              <div class="stage">
+                <div class="dot"></div>
+                <div class="info">
+                  <div class="num">02</div>
+                  <div class="name">Spinning</div>
+                  <div class="detail">浙江绍兴</div>
+                  <div class="carbon">0.8 kg CO₂</div>
+                </div>
+              </div>
+              <div class="stage">
+                <div class="dot active"></div>
+                <div class="info">
+                  <div class="num">03</div>
+                  <div class="name">Dyeing</div>
+                  <div class="detail">江苏苏州</div>
+                  <div class="carbon">0.8 kg CO₂</div>
+                </div>
+              </div>
+              <div class="stage">
+                <div class="dot"></div>
+                <div class="info">
+                  <div class="num">04</div>
+                  <div class="name">Cutting</div>
+                  <div class="detail">上海闵行</div>
+                  <div class="carbon">0.5 kg CO₂</div>
+                </div>
+              </div>
+              <div class="stage">
+                <div class="dot"></div>
+                <div class="info">
+                  <div class="num">05</div>
+                  <div class="name">Assembly</div>
+                  <div class="detail">上海浦东</div>
+                  <div class="carbon">1.2 kg CO₂</div>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
-      </div>
-      <div class="detail">
-        <div class="col">
-          <div class="lbl">STAGE 03 · CUT &amp; SEW</div>
-          <div class="v">Jiangsu · Suzhou</div>
-          <div class="note">苏州市吴江区盛泽镇 · 200+ 名本地工匠 · 拥有 15 年制衣经验。</div>
-        </div>
-        <div class="col">
-          <div class="lbl">PARTNER</div>
-          <div class="v">Suzhou Weiye</div>
-          <div class="note">Co., Ltd. · 2010 年成立 · 取得 BSCI 认证。</div>
-        </div>
-        <div class="col">
-          <div class="lbl">CARBON FOOTPRINT</div>
-          <div class="v green">1.5 <span class="small">kg CO₂e</span></div>
-          <div class="note">本阶段占整件商品碳足迹的 27%。</div>
-        </div>
-        <div class="col">
-          <div class="lbl">VERIFICATION</div>
-          <div class="v red">● INDEPENDENT</div>
-          <div class="note">已通过 SGS 2026-Q1 现场审核，证书号 SGS-CN-2026-0412-0789。</div>
+
+        <div class="detail-panel">
+          <div class="stage-label">STAGE 03 / 05 · DYEING</div>
+          <h3>浙江绍兴 · 无水染色工坊</h3>
+          <p>采用超临界 CO₂ 无水染色技术，相比传统工艺节水 95%。所有染料通过 OEKO-TEX® Standard 100 认证。</p>
+          <div class="metrics">
+            <div class="metric"><div class="val">95%</div><div class="lbl">Water Saved</div></div>
+            <div class="metric"><div class="val">0.8kg</div><div class="lbl">CO₂</div></div>
+            <div class="metric"><div class="val">A+</div><div class="lbl">Rating</div></div>
+          </div>
         </div>
       </div>
     </div>
   </div>
+
   <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
   <script>
     (function () {
       const tl = gsap.timeline({ paused: true });
       window.__timelines = window.__timelines || {};
       window.__timelines["timeline"] = tl;
+
       gsap.set('.red-bar', { scaleX: 0, transformOrigin: 'left center' });
       gsap.set('.top > *', { y: -20, opacity: 0 });
-      gsap.set('.heading > *', { y: 30, opacity: 0 });
-      gsap.set('.progress .fill', { scaleX: 0 });
-      gsap.set('.progress .pct', { innerText: '0%' });
-      gsap.set('.stage-item', { y: 20, opacity: 0 });
-      gsap.set('.stage-item .dot', { scale: 0 });
-      gsap.set('.detail .col', { y: 30, opacity: 0 });
-      tl.to('.red-bar', { scaleX: 1, duration: 0.5, ease: 'power3.inOut' }, 0);
-      tl.to('.top > *', { y: 0, opacity: 1, duration: 0.5, stagger: 0.06, ease: 'power2.out' }, 0.1);
-      tl.to('.heading > *', { y: 0, opacity: 1, duration: 0.6, stagger: 0.1, ease: 'power2.out' }, 0.4);
-      tl.to('.progress .fill', { scaleX: 0.6, duration: 1.0, ease: 'power2.out' }, 0.9);
-      // odometer for pct
-      const pctObj = { v: 0 };
-      tl.to(pctObj, { v: 60, duration: 1.0, ease: 'power2.out',
-        onUpdate: () => { document.getElementById('pct').innerText = Math.floor(pctObj.v) + '%'; }
-      }, 0.9);
-      tl.to('.stage-item', { y: 0, opacity: 1, duration: 0.5, stagger: 0.12, ease: 'power2.out' }, 1.1);
-      tl.to('.stage-item .dot', { scale: 1, duration: 0.4, stagger: 0.12, ease: 'back.out(1.7)' }, 1.4);
-      tl.to('.detail .col', { y: 0, opacity: 1, duration: 0.6, stagger: 0.1, ease: 'power2.out' }, 1.8);
+      gsap.set('.heading > *', { y: 20, opacity: 0 });
+      gsap.set('.timeline-line .fill', { scaleX: 0, transformOrigin: 'left' });
+      gsap.set('.stage .dot', { scale: 0, opacity: 0 });
+      gsap.set('.stage .info > *', { y: 15, opacity: 0 });
+      gsap.set('.detail-panel', { y: 20, opacity: 0 });
+      gsap.set('.detail-panel .metrics .metric', { y: 15, opacity: 0 });
+
+      // Entry
+      tl.to('.red-bar', { scaleX: 1, duration: 0.4, ease: 'power4.inOut' }, 0);
+      tl.to('.top > *', { y: 0, opacity: 1, duration: 0.5, stagger: 0.06, ease: 'power3.out' }, 0.1);
+
+      // Heading
+      tl.to('.heading > *', { y: 0, opacity: 1, duration: 0.5, stagger: 0.1, ease: 'power3.out' }, 0.3);
+
+      // Timeline line fill
+      tl.to('.timeline-line .fill', { scaleX: 1, duration: 1.5, ease: 'power3.inOut' }, 0.8);
+
+      // Stage dots — staggered pop
+      tl.to('.stage .dot', { scale: 1, opacity: 1, duration: 0.4, stagger: 0.15, ease: 'back.out(2)' }, 1.0);
+
+      // Stage info — staggered reveal
+      tl.to('.stage .info > *', { y: 0, opacity: 1, duration: 0.4, stagger: 0.05, ease: 'power3.out' }, 1.5);
+
+      // Detail panel
+      tl.to('.detail-panel', { y: 0, opacity: 1, duration: 0.5, ease: 'power3.out' }, 2.5);
+
+      // Detail metrics
+      tl.to('.detail-panel .metrics .metric', { y: 0, opacity: 1, duration: 0.4, stagger: 0.1, ease: 'back.out(1.4)' }, 2.8);
+
       // Exit
-      tl.to('.detail .col', { y: 30, opacity: 0, duration: 0.3, ease: 'power2.in' }, 4.2);
-      tl.to('.stage-item', { y: 20, opacity: 0, duration: 0.3, ease: 'power2.in' }, 4.3);
-      tl.to('.heading > *', { y: -20, opacity: 0, duration: 0.3, ease: 'power2.in' }, 4.4);
-      tl.to('.top', { y: -20, opacity: 0, duration: 0.3, ease: 'power2.in' }, 4.4);
+      tl.to('.detail-panel', { y: -15, opacity: 0, duration: 0.3, ease: 'power3.in' }, 4.2);
+      tl.to('.stage .info > *', { y: -10, opacity: 0, duration: 0.3, ease: 'power3.in' }, 4.3);
+      tl.to('.stage .dot', { scale: 0, opacity: 0, duration: 0.3, stagger: 0.05, ease: 'power3.in' }, 4.4);
+      tl.to('.heading > *', { y: -15, opacity: 0, duration: 0.3, ease: 'power3.in' }, 4.5);
+      tl.to('.top', { y: -20, opacity: 0, duration: 0.3, ease: 'power3.in' }, 4.5);
       tl.to('.red-bar', { scaleX: 0, transformOrigin: 'right center', duration: 0.3 }, 4.5);
+
       window.addEventListener('load', () => tl.play());
     })();
   </script>

@@ -28,10 +28,11 @@
   .left .body { font-family: 'Noto Sans SC', sans-serif; font-size: 18px; color: #555; margin-top: 24px; line-height: 1.7; max-width: 480px; }
 
   .features { display: flex; flex-direction: column; gap: 16px; margin-top: 32px; }
-  .feature { display: flex; gap: 16px; padding: 16px; background: #F5F5F5; }
+  .feature { display: flex; gap: 16px; padding: 16px; background: #F5F5F5; position: relative; overflow: hidden; }
   .feature .icon { font-size: 28px; }
   .feature .info h3 { font-family: 'Inter', sans-serif; font-weight: 700; font-size: 15px; }
   .feature .info p { font-family: 'Noto Sans SC', sans-serif; font-size: 13px; color: #888; margin-top: 4px; }
+  .feature .sweep { position: absolute; inset: 0; background: linear-gradient(90deg, transparent, rgba(230,0,18,0.1), transparent); transform: translateX(-100%); }
 
   .right { display: flex; align-items: center; justify-content: center; }
   .phone { width: 280px; height: 560px; background: #1A1A16; border-radius: 36px; padding: 12px; position: relative; }
@@ -66,9 +67,9 @@
           <div class="body">原生 Android 应用，Material Design 3 风格，支持 Kotlin + Jetpack Compose。随时随地浏览、购买、追踪。</div>
 
           <div class="features">
-            <div class="feature"><div class="icon">📱</div><div class="info"><h3>Native Experience</h3><p>Kotlin + Jetpack Compose，流畅原生体验</p></div></div>
-            <div class="feature"><div class="icon">🔔</div><div class="info"><h3>Push Notifications</h3><p>订单更新、活动提醒、投票通知</p></div></div>
-            <div class="feature"><div class="icon">📷</div><div class="info"><h3>Camera Upload</h3><p>直接拍照上传儿童画作</p></div></div>
+            <div class="feature"><div class="sweep"></div><div class="icon">📱</div><div class="info"><h3>Native Experience</h3><p>Kotlin + Jetpack Compose，流畅原生体验</p></div></div>
+            <div class="feature"><div class="sweep"></div><div class="icon">🔔</div><div class="info"><h3>Push Notifications</h3><p>订单更新、活动提醒、投票通知</p></div></div>
+            <div class="feature"><div class="sweep"></div><div class="icon">📷</div><div class="info"><h3>Camera Upload</h3><p>直接拍照上传儿童画作</p></div></div>
           </div>
         </div>
 
@@ -109,14 +110,17 @@
       gsap.set('.left h1', { y: 30, opacity: 0 });
       gsap.set('.left .body', { y: 20, opacity: 0 });
       gsap.set('.feature', { x: -20, opacity: 0 });
+      gsap.set('.feature .sweep', { x: '-100%' });
       gsap.set('.phone', { y: 50, opacity: 0, scale: 0.9 });
 
-      tl.to('.red-bar', { scaleX: 1, duration: 0.5, ease: 'power3.inOut' }, 0);
+      // Entry
+      tl.to('.red-bar', { scaleX: 1, duration: 0.4, ease: 'power4.inOut' }, 0);
       tl.to('.top > *', { y: 0, opacity: 1, duration: 0.5, stagger: 0.06, ease: 'power2.out' }, 0.1);
       tl.to('.left .kicker', { y: 0, opacity: 1, duration: 0.5, ease: 'power2.out' }, 0.3);
       tl.to('.left h1', { y: 0, opacity: 1, duration: 0.6, ease: 'expo.out' }, 0.5);
       tl.to('.left .body', { y: 0, opacity: 1, duration: 0.5, ease: 'power2.out' }, 0.8);
       tl.to('.feature', { x: 0, opacity: 1, duration: 0.4, stagger: 0.1, ease: 'power2.out' }, 1.0);
+      tl.to('.feature .sweep', { x: '100%', duration: 0.5, stagger: 0.1, ease: 'power2.inOut' }, 1.5);
       tl.to('.phone', { y: 0, opacity: 1, scale: 1, duration: 0.8, ease: 'back.out(1.2)' }, 0.8);
 
       // Phone tilt

@@ -21,13 +21,14 @@
   .headline .red { color: #E60012; }
 
   .impact-flow { display: flex; align-items: center; gap: 24px; max-width: 1400px; }
-  .impact-step { flex: 1; padding: 28px; background: rgba(255,255,255,0.05); text-align: center; position: relative; }
+  .impact-step { flex: 1; padding: 28px; background: rgba(255,255,255,0.05); text-align: center; position: relative; overflow: hidden; }
   .impact-step::after { content: '→'; position: absolute; right: -20px; top: 50%; transform: translateY(-50%); font-size: 24px; color: #E60012; }
   .impact-step:last-child::after { display: none; }
   .impact-step .icon { font-size: 40px; margin-bottom: 12px; }
   .impact-step h3 { font-family: 'Inter', sans-serif; font-weight: 800; font-size: 16px; letter-spacing: 0.05em; text-transform: uppercase; }
   .impact-step p { font-family: 'Noto Sans SC', sans-serif; font-size: 14px; color: rgba(255,255,255,0.6); margin-top: 8px; line-height: 1.4; }
   .impact-step .amount { font-family: 'Inter', sans-serif; font-weight: 900; font-size: 32px; color: #E60012; margin-top: 12px; }
+  .impact-step .sweep { position: absolute; inset: 0; background: linear-gradient(135deg, rgba(230,0,18,0.1) 0%, transparent 50%); opacity: 0; }
 
   .example { margin-top: 40px; padding: 24px 32px; background: rgba(255,255,255,0.05); border-left: 3px solid #E60012; max-width: 800px; }
   .example .title { font-family: 'JetBrains Mono', monospace; font-size: 11px; font-weight: 500; letter-spacing: 0.15em; text-transform: uppercase; color: #E60012; }
@@ -46,24 +47,28 @@
 
         <div class="impact-flow">
           <div class="impact-step">
+            <div class="sweep"></div>
             <div class="icon">🛍️</div>
             <h3>You Buy</h3>
             <p>购买一件联名款</p>
             <div class="amount">¥178</div>
           </div>
           <div class="impact-step">
+            <div class="sweep"></div>
             <div class="icon">💝</div>
             <h3>28% Donated</h3>
             <p>直接进入美育基金</p>
             <div class="amount">¥49.84</div>
           </div>
           <div class="impact-step">
+            <div class="sweep"></div>
             <div class="icon">🎨</div>
             <h3>Art Supplies</h3>
             <p>为 1 名学生提供 1 学期画材</p>
             <div class="amount">1 Student</div>
           </div>
           <div class="impact-step">
+            <div class="sweep"></div>
             <div class="icon">🏫</div>
             <h3>School Fund</h3>
             <p>支持驻校美育教师</p>
@@ -90,12 +95,18 @@
       gsap.set('.eyebrow', { y: -20, opacity: 0 });
       gsap.set('.headline', { y: 30, opacity: 0 });
       gsap.set('.impact-step', { y: 30, opacity: 0, scale: 0.9 });
+      gsap.set('.impact-step .sweep', { opacity: 0 });
       gsap.set('.example', { y: 20, opacity: 0 });
 
-      tl.to('.red-bar', { scaleX: 1, duration: 0.5, ease: 'power3.inOut' }, 0);
+      // Entry
+      tl.to('.red-bar', { scaleX: 1, duration: 0.4, ease: 'power4.inOut' }, 0);
       tl.to('.eyebrow', { y: 0, opacity: 1, duration: 0.5, ease: 'power2.out' }, 0.2);
       tl.to('.headline', { y: 0, opacity: 1, duration: 0.7, ease: 'expo.out' }, 0.4);
       tl.to('.impact-step', { y: 0, opacity: 1, scale: 1, duration: 0.6, stagger: 0.15, ease: 'back.out(1.2)' }, 0.8);
+
+      // Sweep effect on steps
+      tl.to('.impact-step .sweep', { opacity: 1, duration: 0.5, stagger: 0.1, ease: 'power2.out' }, 1.5);
+
       tl.to('.example', { y: 0, opacity: 1, duration: 0.5, ease: 'power2.out' }, 2.2);
 
       // Exit

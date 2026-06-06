@@ -36,11 +36,12 @@
 
   /* Right: 3 feature cards */
   .features { display: flex; flex-direction: column; gap: 20px; }
-  .feature { display: flex; gap: 20px; padding: 24px; background: #F5F5F5; }
+  .feature { display: flex; gap: 20px; padding: 24px; background: #F5F5F5; position: relative; overflow: hidden; }
   .feature .num { font-family: 'Smiley Sans', sans-serif; font-weight: 400; font-size: 48px; color: #E60012; line-height: 1; min-width: 60px; }
   .feature .info { flex: 1; }
-  .feature .info h3 { font-family: 'Inter', sans-serif; font-weight: 800; font-size: 18px; color: #1A1A16; }
+  .feature .info h3 { font-family: 'Inter', sans-serif; font-weight: 800; font-size: 18px; }
   .feature .info p { font-family: 'Noto Sans SC', sans-serif; font-size: 15px; color: #666; margin-top: 6px; line-height: 1.5; }
+  .feature .sweep { position: absolute; inset: 0; background: linear-gradient(90deg, transparent, rgba(230,0,18,0.1), transparent); transform: translateX(-100%); }
 
   .supply-chain { display: flex; align-items: center; gap: 8px; margin-top: 24px; }
   .supply-chain .node { padding: 8px 14px; background: #1A1A16; color: #FFFFFF; font-family: 'JetBrains Mono', monospace; font-size: 11px; font-weight: 500; letter-spacing: 0.1em; }
@@ -79,6 +80,7 @@
 
         <div class="features">
           <div class="feature">
+            <div class="sweep"></div>
             <div class="num">01</div>
             <div class="info">
               <h3>Full Traceability</h3>
@@ -86,6 +88,7 @@
             </div>
           </div>
           <div class="feature">
+            <div class="sweep"></div>
             <div class="num">02</div>
             <div class="info">
               <h3>28% Direct Donation</h3>
@@ -93,6 +96,7 @@
             </div>
           </div>
           <div class="feature">
+            <div class="sweep"></div>
             <div class="num">03</div>
             <div class="info">
               <h3>Children as Designers</h3>
@@ -118,7 +122,9 @@
       gsap.set('.left .body', { y: 20, opacity: 0 });
       gsap.set('.partnership-badge', { y: 20, opacity: 0, scale: 0.9 });
       gsap.set('.feature', { x: 40, opacity: 0 });
+      gsap.set('.feature .sweep', { x: '-100%' });
 
+      // Entry
       tl.to('.red-bar', { scaleX: 1, duration: 0.5, ease: 'power3.inOut' }, 0);
       tl.to('.top > *', { y: 0, opacity: 1, duration: 0.5, stagger: 0.06, ease: 'power2.out' }, 0.1);
       tl.to('.left .kicker', { y: 0, opacity: 1, duration: 0.5, ease: 'power2.out' }, 0.4);
@@ -126,6 +132,9 @@
       tl.to('.left .body', { y: 0, opacity: 1, duration: 0.6, ease: 'power2.out' }, 1.0);
       tl.to('.partnership-badge', { y: 0, opacity: 1, scale: 1, duration: 0.6, ease: 'back.out(1.4)' }, 1.4);
       tl.to('.feature', { x: 0, opacity: 1, duration: 0.5, stagger: 0.15, ease: 'power2.out' }, 1.6);
+
+      // Feature sweeps
+      tl.to('.feature .sweep', { x: '100%', duration: 0.6, stagger: 0.1, ease: 'power2.inOut' }, 2.2);
 
       // Exit
       tl.to('.feature', { x: 30, opacity: 0, duration: 0.3, stagger: 0.05, ease: 'power2.in' }, 4.2);

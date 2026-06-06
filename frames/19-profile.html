@@ -9,7 +9,7 @@
 <style>
   @font-face { font-family: 'Smiley Sans'; src: url('SmileySans-Oblique.woff2') format('woff2'); font-weight: 400; font-style: normal; font-display: block; }
   * { margin: 0; padding: 0; box-sizing: border-box; }
-  html, body { width: 2560px; height: 1440px; overflow: hidden; background: #F5F5F5; color: #1A1A16; font-family: 'Inter', -apple-system, sans-serif; -webkit-font-smoothing: antialiased; }
+  html, body { width: 2560px; height: 1440px; overflow: hidden; background: #FFFFFF; color: #1A1A16; font-family: 'Inter', -apple-system, sans-serif; -webkit-font-smoothing: antialiased; }
   .stage { position: absolute; top: 0; left: 0; width: 1920px; height: 1080px; transform: scale(1.3333333); transform-origin: top left; }
   .page { position: absolute; inset: 0; }
   .red-bar { position: absolute; top: 0; left: 0; right: 0; height: 8px; background: #E60012; }
@@ -19,57 +19,42 @@
   .top .rule { flex: 1; height: 1px; background: #1A1A16; }
   .top .meta { font-family: 'JetBrains Mono', monospace; font-size: 13px; font-weight: 500; letter-spacing: 0.18em; text-transform: uppercase; color: #888; }
 
-  .layout { position: absolute; left: 80px; right: 80px; top: 130px; bottom: 60px; display: grid; grid-template-columns: 320px 1fr; gap: 24px; }
+  .content { position: absolute; left: 80px; right: 80px; top: 140px; bottom: 80px; display: grid; grid-template-columns: 1fr 1.5fr; gap: 60px; }
 
-  /* Left: profile card */
-  .profile { background: #FFFFFF; border: 2px solid #1A1A16; padding: 32px; }
-  .profile .avatar { width: 96px; height: 96px; background: linear-gradient(135deg, #E60012 0%, #1A1A16 100%); display: flex; align-items: center; justify-content: center; font-family: 'Smiley Sans', sans-serif; font-size: 40px; color: #FFFFFF; }
-  .profile .name { font-family: 'Smiley Sans', sans-serif; font-weight: 400; font-size: 32px; color: #1A1A16; margin-top: 16px; }
-  .profile .role { display: inline-block; margin-top: 8px; padding: 4px 10px; background: #E60012; color: #FFFFFF; font-family: 'JetBrains Mono', monospace; font-size: 10px; font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase; }
-  .profile .email { font-family: 'Inter', sans-serif; font-size: 13px; color: #888; margin-top: 8px; }
-  .profile .stats { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 20px; padding-top: 20px; border-top: 1px solid #EEE; }
-  .profile .stat .v { font-family: 'Smiley Sans', sans-serif; font-weight: 400; font-size: 24px; color: #1A1A16; }
-  .profile .stat .v.red { color: #E60012; }
-  .profile .stat .l { font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: 0.15em; text-transform: uppercase; color: #888; margin-top: 2px; }
+  .left { display: flex; flex-direction: column; }
+  .left .avatar { width: 120px; height: 120px; background: #E60012; color: #FFFFFF; display: flex; align-items: center; justify-content: center; font-family: 'Smiley Sans', sans-serif; font-size: 48px; margin-bottom: 20px; }
+  .left .name { font-family: 'Smiley Sans', sans-serif; font-weight: 400; font-size: 36px; color: #1A1A16; }
+  .left .email { font-family: 'JetBrains Mono', monospace; font-size: 13px; color: #888; margin-top: 8px; }
 
-  .profile .menu { margin-top: 24px; padding-top: 20px; border-top: 1px solid #EEE; }
-  .profile .menu .item { display: flex; align-items: center; gap: 10px; padding: 10px 0; font-family: 'Inter', sans-serif; font-weight: 600; font-size: 14px; color: #1A1A16; }
-  .profile .menu .item.active { color: #E60012; }
-  .profile .menu .item .num { margin-left: auto; font-family: 'JetBrains Mono', monospace; font-size: 11px; color: #888; }
-  .profile .menu .item.red { color: #E60012; }
+  .left .stats { display: flex; gap: 24px; margin-top: 32px; }
+  .left .stats .stat { text-align: center; flex: 1; padding: 16px; background: #F5F5F5; }
+  .left .stats .stat .val { font-family: 'Inter', sans-serif; font-weight: 800; font-size: 24px; color: #E60012; }
+  .left .stats .stat .lbl { font-family: 'JetBrains Mono', monospace; font-size: 10px; color: #888; letter-spacing: 0.1em; text-transform: uppercase; margin-top: 4px; }
 
-  /* Right: content */
-  .content h1 { font-family: 'Smiley Sans', sans-serif; font-weight: 400; font-size: 48px; line-height: 0.95; letter-spacing: -2px; color: #1A1A16; }
-  .content h1 em { font-style: normal; color: #E60012; }
-  .content .greeting { font-family: 'Noto Sans SC', sans-serif; font-size: 16px; color: #666; margin-top: 8px; }
+  .left .nav { display: flex; flex-direction: column; gap: 8px; margin-top: 32px; }
+  .left .nav .item { padding: 14px 20px; background: #F5F5F5; display: flex; align-items: center; gap: 12px; font-family: 'Inter', sans-serif; font-weight: 600; font-size: 14px; cursor: pointer; transition: all 0.3s ease; }
+  .left .nav .item.active { background: #1A1A16; color: #FFFFFF; }
+  .left .nav .item .icon { font-size: 18px; }
 
-  /* Recent orders */
-  .content .orders { margin-top: 28px; }
-  .content .orders .head { display: flex; align-items: center; gap: 12px; margin-bottom: 12px; }
-  .content .orders h2 { font-family: 'Smiley Sans', sans-serif; font-weight: 400; font-size: 20px; color: #1A1A16; }
-  .content .orders .more { margin-left: auto; font-family: 'Inter', sans-serif; font-weight: 700; font-size: 12px; color: #1A1A16; text-decoration: underline; }
-  .content .order { background: #FFFFFF; border: 1px solid #DDD; padding: 16px; display: grid; grid-template-columns: 80px 1fr auto; gap: 16px; align-items: center; margin-bottom: 8px; }
-  .content .order .img { width: 80px; height: 80px; background: #F5F5F5; overflow: hidden; }
-  .content .order .img img { width: 100%; height: 100%; object-fit: cover; }
-  .content .order .info .name { font-family: 'Inter', sans-serif; font-weight: 700; font-size: 15px; color: #1A1A16; }
-  .content .order .info .meta { font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: 0.1em; color: #888; margin-top: 4px; }
-  .content .order .right { text-align: right; }
-  .content .order .price { font-family: 'Smiley Sans', sans-serif; font-weight: 400; font-size: 22px; color: #1A1A16; }
-  .content .order .status { display: inline-block; margin-top: 4px; padding: 3px 8px; background: #00D26A; color: #1A1A16; font-family: 'JetBrains Mono', monospace; font-size: 9px; font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase; }
-  .content .order .status.shipped { background: #1A1A16; color: #FFFFFF; }
-  .content .order .status.processing { background: #E60012; color: #FFFFFF; }
+  .right { display: flex; flex-direction: column; }
+  .right h3 { font-family: 'Inter', sans-serif; font-weight: 800; font-size: 18px; margin-bottom: 20px; }
 
-  /* Donations row */
-  .content .donations { margin-top: 28px; }
-  .content .donations .head { display: flex; align-items: center; gap: 12px; margin-bottom: 12px; }
-  .content .donations h2 { font-family: 'Smiley Sans', sans-serif; font-weight: 400; font-size: 20px; color: #1A1A16; }
-  .donations .row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
-  .donations .item { background: #FFFFFF; border: 1px solid #DDD; padding: 12px; }
-  .donations .item .v { font-family: 'Smiley Sans', sans-serif; font-weight: 400; font-size: 22px; color: #1A1A16; }
-  .donations .item .v.red { color: #E60012; }
-  .donations .item .l { font-family: 'Noto Sans SC', sans-serif; font-size: 12px; color: #555; margin-top: 4px; }
-  .donations .item .date { font-family: 'JetBrains Mono', monospace; font-size: 10px; color: #888; margin-top: 4px; }
-  .donations .item .cert { display: inline-block; margin-top: 6px; padding: 2px 6px; background: #0A0A0A; color: #FFFFFF; font-family: 'JetBrains Mono', monospace; font-size: 9px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; }
+  .orders { display: flex; flex-direction: column; gap: 16px; }
+  .order { padding: 20px; background: #F5F5F5; display: flex; gap: 20px; align-items: center; position: relative; overflow: hidden; }
+  .order .icon { font-size: 32px; }
+  .order .info { flex: 1; }
+  .order .info .id { font-family: 'JetBrains Mono', monospace; font-size: 12px; color: #888; }
+  .order .info .name { font-family: 'Noto Sans SC', sans-serif; font-weight: 700; font-size: 15px; margin-top: 4px; }
+  .order .info .price { font-family: 'Inter', sans-serif; font-weight: 800; font-size: 18px; margin-top: 4px; }
+  .order .status { padding: 8px 14px; background: #E60012; color: #FFFFFF; font-family: 'JetBrains Mono', monospace; font-size: 11px; font-weight: 500; letter-spacing: 0.1em; }
+  .order .sweep { position: absolute; inset: 0; background: linear-gradient(90deg, transparent, rgba(230,0,18,0.1), transparent); transform: translateX(-100%); }
+
+  .donations { margin-top: 24px; }
+  .donations h3 { font-family: 'Inter', sans-serif; font-weight: 800; font-size: 18px; margin-bottom: 16px; }
+  .cert { padding: 16px; background: #F5F0E8; display: flex; gap: 16px; align-items: center; margin-bottom: 12px; }
+  .cert .icon { font-size: 28px; }
+  .cert .info .id { font-family: 'JetBrains Mono', monospace; font-size: 11px; color: #888; }
+  .cert .info .amount { font-family: 'Inter', sans-serif; font-weight: 800; font-size: 18px; color: #E60012; margin-top: 4px; }
 </style>
 </head>
 <body>
@@ -79,122 +64,119 @@
       <div class="top">
         <div class="lbl">VICOO · <span class="red">PROFILE</span></div>
         <div class="rule"></div>
-        <div class="meta">PP. 14 · /profile</div>
+        <div class="meta">PP. 15 · /profile</div>
       </div>
-      <div class="layout">
-        <div class="profile">
+
+      <div class="content">
+        <div class="left">
           <div class="avatar">莉</div>
           <div class="name">朱莉华</div>
-          <div class="role">● REGISTERED USER</div>
           <div class="email">lihua@example.com</div>
+
           <div class="stats">
-            <div class="stat"><div class="v">12</div><div class="l">ORDERS</div></div>
-            <div class="stat"><div class="v red">¥1,440</div><div class="l">DONATED</div></div>
-            <div class="stat"><div class="v">3</div><div class="l">REVIEWS</div></div>
-            <div class="stat"><div class="v">8</div><div class="l">WISHLIST</div></div>
+            <div class="stat"><div class="val">3</div><div class="lbl">Orders</div></div>
+            <div class="stat"><div class="val">¥1,440</div><div class="lbl">Donated</div></div>
+            <div class="stat"><div class="val">3</div><div class="lbl">Certs</div></div>
           </div>
-          <div class="menu">
-            <div class="item active">● OVERVIEW</div>
-            <div class="item">ORDERS <span class="num">12</span></div>
-            <div class="item">DONATIONS <span class="num">¥1,440</span></div>
-            <div class="item">REVIEWS <span class="num">3</span></div>
-            <div class="item">ADDRESSES</div>
-            <div class="item">WISHLIST <span class="num">8</span></div>
-            <div class="item">SETTINGS</div>
-            <div class="item red">SIGN OUT</div>
+
+          <div class="nav">
+            <div class="item active"><div class="icon">📦</div>My Orders</div>
+            <div class="item"><div class="icon">💝</div>My Donations</div>
+            <div class="item"><div class="icon">🎨</div>My Artworks</div>
+            <div class="item"><div class="icon">⚙️</div>Settings</div>
           </div>
         </div>
-        <div class="content">
-          <h1>Hi, <em>莉华</em>.</h1>
-          <p class="greeting">这是您的 VICOO 账户概览。所有订单、捐赠、评价都在这里。</p>
+
+        <div class="right">
+          <h3>Recent Orders</h3>
           <div class="orders">
-            <div class="head"><h2>Recent Orders</h2><a class="more" href="#">VIEW ALL →</a></div>
             <div class="order">
-              <div class="img"><img src="https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?auto=format&fit=crop&w=200&q=80"/></div>
-              <div class="info">
-                <div class="name">春野·儿童画联名有机棉T恤</div>
-                <div class="meta">ORDER #VC-2026-0428-0192 · SIZE 110 · 2026-04-28</div>
-              </div>
-              <div class="right">
-                <div class="price">¥178</div>
-                <span class="status shipped">SHIPPED</span>
-              </div>
+              <div class="sweep"></div>
+              <div class="icon">📦</div>
+              <div class="info"><div class="id">VC-2026Q2-128456</div><div class="name">春野·儿童画联名T恤 × 1</div><div class="price">¥178</div></div>
+              <div class="status">SHIPPED</div>
             </div>
             <div class="order">
-              <div class="img"><img src="https://images.unsplash.com/photo-1583743814966-8936f5b7be1a?auto=format&fit=crop&w=200&q=80"/></div>
-              <div class="info">
-                <div class="name">有机棉松弛感圆领T恤</div>
-                <div class="meta">ORDER #VC-2026-0421-0156 · SIZE M · 2026-04-21</div>
-              </div>
-              <div class="right">
-                <div class="price">¥159</div>
-                <span class="status">DELIVERED</span>
-              </div>
+              <div class="sweep"></div>
+              <div class="icon">📦</div>
+              <div class="info"><div class="id">VC-2026Q1-987654</div><div class="name">再生羊毛V领针织衫 × 1</div><div class="price">¥329</div></div>
+              <div class="status">DELIVERED</div>
             </div>
             <div class="order">
-              <div class="img"><img src="https://images.unsplash.com/photo-1597484662317-9bd7bdda2907?auto=format&fit=crop&w=200&q=80"/></div>
-              <div class="info">
-                <div class="name">云岭·公益插画帆布托特</div>
-                <div class="meta">ORDER #VC-2026-0415-0098 · 2026-04-15</div>
-              </div>
-              <div class="right">
-                <div class="price">¥98</div>
-                <span class="status processing">PROCESSING</span>
-              </div>
+              <div class="sweep"></div>
+              <div class="icon">📦</div>
+              <div class="info"><div class="id">VC-2025Q4-654321</div><div class="name">轻量保暖外套 × 1</div><div class="price">¥499</div></div>
+              <div class="status">DELIVERED</div>
             </div>
           </div>
+
           <div class="donations">
-            <div class="head"><h2>Donations &amp; Certificates</h2><a class="more" href="#">VIEW ALL →</a></div>
-            <div class="row">
-              <div class="item">
-                <div class="v">¥500</div>
-                <div class="l">「春的色彩」美育基金</div>
-                <div class="date">2026-04-28</div>
-                <div class="cert">VC-2026Q2-128456</div>
-              </div>
-              <div class="item">
-                <div class="v red">¥200</div>
-                <div class="l">云岭乡村学校</div>
-                <div class="date">2026-03-12</div>
-                <div class="cert">VC-2026Q1-094321</div>
-              </div>
-              <div class="item">
-                <div class="v">¥740</div>
-                <div class="l">其他项目</div>
-                <div class="date">2026-02-08</div>
-                <div class="cert">VC-2026Q1-087652</div>
-              </div>
-            </div>
+            <h3>Donation Certificates</h3>
+            <div class="cert"><div class="icon">📜</div><div class="info"><div class="id">VC-2026Q2-128456-SH</div><div class="amount">¥49.84</div></div></div>
+            <div class="cert"><div class="icon">📜</div><div class="info"><div class="id">VC-2026Q1-987654-SH</div><div class="amount">¥92.12</div></div></div>
+            <div class="cert"><div class="icon">📜</div><div class="info"><div class="id">VC-2025Q4-654321-SH</div><div class="amount">¥139.72</div></div></div>
           </div>
         </div>
       </div>
     </div>
   </div>
+
   <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
   <script>
     (function () {
       const tl = gsap.timeline({ paused: true });
       window.__timelines = window.__timelines || {};
       window.__timelines["profile"] = tl;
+
       gsap.set('.red-bar', { scaleX: 0, transformOrigin: 'left center' });
       gsap.set('.top > *', { y: -20, opacity: 0 });
-      gsap.set('.profile', { x: -30, opacity: 0 });
-      gsap.set('.profile .avatar', { scale: 0, rotation: -90 });
-      gsap.set('.profile .stats, .profile .menu', { y: 20, opacity: 0 });
-      gsap.set('.content > *', { y: 30, opacity: 0 });
-      gsap.set('.order, .donations .item', { y: 20, opacity: 0 });
-      tl.to('.red-bar', { scaleX: 1, duration: 0.5, ease: 'power3.inOut' }, 0);
-      tl.to('.top > *', { y: 0, opacity: 1, duration: 0.5, stagger: 0.06, ease: 'power2.out' }, 0.1);
-      tl.to('.profile', { x: 0, opacity: 1, duration: 0.6, ease: 'power3.out' }, 0.4);
-      tl.to('.profile .avatar', { scale: 1, rotation: 0, duration: 0.7, ease: 'back.out(1.5)' }, 0.7);
-      tl.to('.profile .stats, .profile .menu', { y: 0, opacity: 1, duration: 0.5, stagger: 0.06, ease: 'power2.out' }, 0.9);
-      tl.to('.content > *', { y: 0, opacity: 1, duration: 0.5, stagger: 0.08, ease: 'power2.out' }, 1.1);
-      tl.to('.order', { y: 0, opacity: 1, duration: 0.4, stagger: 0.1, ease: 'power2.out' }, 1.4);
-      tl.to('.donations .item', { y: 0, opacity: 1, duration: 0.4, stagger: 0.08, ease: 'power2.out' }, 1.8);
+      gsap.set('.left .avatar', { scale: 0, opacity: 0 });
+      gsap.set('.left .name', { y: 20, opacity: 0 });
+      gsap.set('.left .email', { opacity: 0 });
+      gsap.set('.left .stats .stat', { y: 20, opacity: 0, scale: 0.9 });
+      gsap.set('.left .nav .item', { x: -20, opacity: 0 });
+      gsap.set('.right h3', { y: 15, opacity: 0 });
+      gsap.set('.order', { x: 30, opacity: 0 });
+      gsap.set('.order .sweep', { x: '-100%' });
+      gsap.set('.donations h3', { y: 15, opacity: 0 });
+      gsap.set('.cert', { x: 20, opacity: 0 });
+
+      // Entry
+      tl.to('.red-bar', { scaleX: 1, duration: 0.4, ease: 'power4.inOut' }, 0);
+      tl.to('.top > *', { y: 0, opacity: 1, duration: 0.5, stagger: 0.06, ease: 'power3.out' }, 0.1);
+
+      // Left content
+      tl.to('.left .avatar', { scale: 1, opacity: 1, duration: 0.6, ease: 'back.out(1.4)' }, 0.3);
+      tl.to('.left .name', { y: 0, opacity: 1, duration: 0.5, ease: 'power3.out' }, 0.5);
+      tl.to('.left .email', { opacity: 1, duration: 0.4, ease: 'power2.out' }, 0.6);
+      tl.to('.left .stats .stat', { y: 0, opacity: 1, scale: 1, duration: 0.5, stagger: 0.1, ease: 'back.out(1.4)' }, 0.8);
+      tl.to('.left .nav .item', { x: 0, opacity: 1, duration: 0.4, stagger: 0.08, ease: 'power3.out' }, 1.0);
+
+      // Right content
+      tl.to('.right h3', { y: 0, opacity: 1, duration: 0.4, ease: 'power3.out' }, 1.2);
+
+      // Orders — staggered slide
+      tl.to('.order', { x: 0, opacity: 1, duration: 0.5, stagger: 0.12, ease: 'power3.out' }, 1.4);
+
+      // Order sweeps
+      tl.to('.order .sweep', { x: '100%', duration: 0.6, stagger: 0.1, ease: 'power2.inOut' }, 2.0);
+
+      // Donations
+      tl.to('.donations h3', { y: 0, opacity: 1, duration: 0.4, ease: 'power3.out' }, 2.5);
+      tl.to('.cert', { x: 0, opacity: 1, duration: 0.4, stagger: 0.1, ease: 'power3.out' }, 2.7);
+
       // Exit
-      tl.to('.order, .donations .item, .content > *', { y: 20, opacity: 0, duration: 0.3, ease: 'power2.in' }, 5.2);
-      tl.to('.profile', { x: -30, opacity: 0, duration: 0.4, ease: 'power2.in' }, 5.4);
-      tl.to('.top', { y: -20, opacity: 0, duration: 0.3, ease: 'power2.in' }, 5.5);
+      tl.to('.cert', { x: 15, opacity: 0, duration: 0.3, stagger: 0.05, ease: 'power3.in' }, 5.2);
+      tl.to('.donations h3', { y: -10, opacity: 0, duration: 0.3, ease: 'power3.in' }, 5.3);
+      tl.to('.order', { x: 20, opacity: 0, duration: 0.3, stagger: 0.05, ease: 'power3.in' }, 5.3);
+      tl.to('.right h3', { y: -10, opacity: 0, duration: 0.3, ease: 'power3.in' }, 5.4);
+      tl.to('.left .nav .item', { x: -15, opacity: 0, duration: 0.3, stagger: 0.03, ease: 'power3.in' }, 5.3);
+      tl.to('.left .stats .stat', { y: -15, opacity: 0, duration: 0.3, ease: 'power3.in' }, 5.4);
+      tl.to('.left .avatar', { scale: 0.5, opacity: 0, duration: 0.3, ease: 'power3.in' }, 5.4);
+      tl.to('.left .name, .left .email', { opacity: 0, duration: 0.2, ease: 'power2.in' }, 5.5);
+      tl.to('.top', { y: -20, opacity: 0, duration: 0.3, ease: 'power3.in' }, 5.5);
+      tl.to('.red-bar', { scaleX: 0, transformOrigin: 'right center', duration: 0.3 }, 5.5);
+
       window.addEventListener('load', () => tl.play());
     })();
   </script>

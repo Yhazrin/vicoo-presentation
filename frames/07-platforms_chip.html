@@ -2,234 +2,92 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8" />
-<title>VICOO — Three Platforms (2K)</title>
+<title>VICOO — Three Platforms</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Noto+Sans+SC:wght@300;400;500;700;900&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
 <style>
-  @font-face {
-    font-family: 'Smiley Sans';
-    src: url('SmileySans-Oblique.woff2') format('woff2');
-    font-weight: 400; font-style: normal; font-display: block;
-  }
+  @font-face { font-family: 'Smiley Sans'; src: url('SmileySans-Oblique.woff2') format('woff2'); font-weight: 400; font-style: normal; font-display: block; }
   * { margin: 0; padding: 0; box-sizing: border-box; }
-  html, body {
-    width: 2560px; height: 1440px; overflow: hidden;
-    background: #FFFFFF; color: #1A1A16;
-    font-family: 'Inter', -apple-system, sans-serif;
-    -webkit-font-smoothing: antialiased;
-  }
-  .stage { position: absolute; top: 0; left: 0; width: 1920px; height: 1080px;
-    transform: scale(1.3333333); transform-origin: top left; }
-
+  html, body { width: 2560px; height: 1440px; overflow: hidden; background: #FFFFFF; color: #1A1A16; font-family: 'Inter', -apple-system, sans-serif; -webkit-font-smoothing: antialiased; }
+  .stage { position: absolute; top: 0; left: 0; width: 1920px; height: 1080px; transform: scale(1.3333333); transform-origin: top left; }
   .page { position: absolute; inset: 0; }
-  .grid { position: absolute; inset: 0; pointer-events: none; opacity: 0.04;
-    background-image: linear-gradient(to right, #000 1px, transparent 1px);
-    background-size: 80px 80px; }
-
-  /* red bar — matches the top bars from earlier frames for continuity */
   .red-bar { position: absolute; top: 0; left: 0; right: 0; height: 8px; background: #E60012; }
 
-  .top { position: absolute; top: 60px; left: 80px; right: 80px;
-    display: flex; align-items: center; gap: 24px; }
-  .top .lbl { font-family: 'JetBrains Mono', monospace; font-size: 13px; font-weight: 500;
-    letter-spacing: 0.2em; text-transform: uppercase; color: #1A1A16; }
-  .top .lbl .red { color: #E60012; }
-  .top .rule { flex: 1; height: 1px; background: #1A1A16; }
-  .top .meta { font-family: 'JetBrains Mono', monospace; font-size: 13px; font-weight: 500;
-    letter-spacing: 0.18em; text-transform: uppercase; color: #888; }
+  .content { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 80px; }
 
-  .title { position: absolute; left: 80px; top: 140px; }
-  .title .kicker { font-family: 'JetBrains Mono', monospace; font-size: 13px; font-weight: 500;
-    letter-spacing: 0.2em; text-transform: uppercase; color: #E60012; }
-  .title h1 { font-family: 'Smiley Sans', 'Inter', sans-serif; font-weight: 400;
-    font-size: 110px; line-height: 0.95; letter-spacing: -3px; color: #1A1A16; margin-top: 16px; }
-  .title h1 em { font-style: normal; color: #E60012; }
-  .title .sub { font-family: 'Noto Sans SC', sans-serif; font-weight: 400; font-size: 20px;
-    color: #666; margin-top: 24px; max-width: 720px; line-height: 1.5; }
+  .eyebrow { font-family: 'JetBrains Mono', monospace; font-size: 14px; font-weight: 500; letter-spacing: 0.3em; text-transform: uppercase; color: #E60012; margin-bottom: 16px; }
+  .headline { font-family: 'Smiley Sans', sans-serif; font-weight: 400; font-size: 64px; line-height: 1.0; letter-spacing: -2px; color: #1A1A16; text-align: center; margin-bottom: 48px; }
+  .headline em { font-style: normal; color: #E60012; }
 
-  .platforms { position: absolute; left: 80px; right: 80px; top: 480px; bottom: 120px;
-    display: grid; grid-template-columns: 1.3fr 1fr 1fr; gap: 20px; }
+  .platforms { display: flex; gap: 32px; max-width: 1200px; }
+  .platform { flex: 1; padding: 40px; background: #F5F5F5; text-align: center; position: relative; overflow: hidden; transition: all 0.3s ease; }
+  .platform::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 4px; background: #E60012; transform: scaleX(0); transform-origin: left; transition: transform 0.3s ease; }
+  .platform:hover::before { transform: scaleX(1); }
+  .platform .icon { font-size: 56px; margin-bottom: 20px; }
+  .platform h3 { font-family: 'Inter', sans-serif; font-weight: 800; font-size: 22px; letter-spacing: 0.05em; text-transform: uppercase; }
+  .platform .desc { font-family: 'Noto Sans SC', sans-serif; font-size: 16px; color: #666; margin-top: 12px; line-height: 1.5; }
+  .platform .stats { display: flex; justify-content: center; gap: 24px; margin-top: 20px; }
+  .platform .stats .stat { text-align: center; }
+  .platform .stats .stat .val { font-family: 'Inter', sans-serif; font-weight: 800; font-size: 20px; color: #E60012; }
+  .platform .stats .stat .lbl { font-family: 'JetBrains Mono', monospace; font-size: 10px; color: #888; letter-spacing: 0.1em; text-transform: uppercase; margin-top: 4px; }
+  .platform .sweep { position: absolute; inset: 0; background: linear-gradient(135deg, rgba(230,0,18,0.1) 0%, transparent 50%); opacity: 0; transition: opacity 0.3s ease; }
+  .platform:hover .sweep { opacity: 1; }
+  .platform .badge { position: absolute; top: 16px; right: 16px; background: #E60012; color: #FFFFFF; padding: 6px 12px; font-family: 'JetBrains Mono', monospace; font-size: 10px; font-weight: 500; letter-spacing: 0.1em; opacity: 0; transform: scale(0.8); transition: all 0.3s ease; }
+  .platform:hover .badge { opacity: 1; transform: scale(1); }
 
-  .plat { position: relative; background: #F5F5F5; padding: 32px;
-    display: flex; flex-direction: column; overflow: hidden;
-    border: 2px solid transparent; }
-  .plat::before { content: ''; position: absolute; top: 0; left: 0; width: 0; height: 4px;
-    background: #E60012; }
-  .plat.active::before { width: 100%; transition: width 1s ease-out; }
-
-  .plat .head { display: flex; align-items: center; gap: 16px; }
-  .plat .icon { width: 64px; height: 64px; background: #1A1A16; color: #FFFFFF;
-    display: flex; align-items: center; justify-content: center;
-    font-family: 'Smiley Sans', 'Inter', sans-serif; font-size: 32px; }
-  .plat.welfare .icon { background: #E60012; }
-  .plat.weapp .icon { background: #07C160; color: #FFFFFF; font-size: 28px; }
-  .plat.android .icon { background: #3DDC84; color: #FFFFFF; }
-
-  .plat .meta-block { display: flex; flex-direction: column; }
-  .plat .role { font-family: 'JetBrains Mono', monospace; font-size: 10px; font-weight: 500;
-    letter-spacing: 0.2em; text-transform: uppercase; color: #888; }
-  .plat .name { font-family: 'Inter', sans-serif; font-weight: 800; font-size: 24px;
-    color: #1A1A16; margin-top: 4px; letter-spacing: -0.5px; }
-
-  .plat .desc { font-family: 'Noto Sans SC', sans-serif; font-weight: 400; font-size: 15px;
-    line-height: 1.5; color: #444; margin-top: 24px; }
-
-  .plat .stack { font-family: 'JetBrains Mono', monospace; font-size: 11px; font-weight: 500;
-    letter-spacing: 0.15em; text-transform: uppercase; color: #888; margin-top: 12px; }
-
-  .plat .stats { display: flex; gap: 24px; margin-top: auto; padding-top: 24px;
-    border-top: 1px solid #DDD; }
-  .plat .stat { display: flex; flex-direction: column; }
-  .plat .stat .v { font-family: 'Inter', sans-serif; font-weight: 900; font-size: 28px;
-    color: #1A1A16; letter-spacing: -1px; }
-  .plat .stat .v .red { color: #E60012; }
-  .plat .stat .l { font-family: 'JetBrains Mono', monospace; font-size: 9px;
-    letter-spacing: 0.18em; text-transform: uppercase; color: #888; margin-top: 2px; }
-
-  .plat .status { position: absolute; top: 32px; right: 32px; display: flex;
-    align-items: center; gap: 6px; padding: 4px 10px; background: #FFFFFF;
-    border: 1px solid #DDD; font-family: 'JetBrains Mono', monospace; font-size: 10px;
-    font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; }
-  .plat .status .d { width: 6px; height: 6px; border-radius: 50%; background: #00D26A; }
-  .plat .status .d.warn { background: #FFB800; }
-  .plat .status .d.off { background: #999; }
-
-  .plat .device { position: absolute; right: 32px; bottom: 100px;
-    width: 180px; height: 280px; background: #1A1A16; border-radius: 16px;
-    padding: 8px; transform: rotate(8deg); }
-  .plat .device .screen { width: 100%; height: 100%; background: #FFFFFF;
-    border-radius: 10px; display: flex; flex-direction: column; padding: 10px; gap: 4px; }
-  .plat .device .red-head { height: 14px; background: #E60012; border-radius: 4px; }
-  .plat .device .green-head { height: 12px; background: #3DDC84; border-radius: 4px; }
-  .plat .device .line { height: 4px; background: #DDD; border-radius: 2px; }
-  .plat .device .img { flex: 1; background: linear-gradient(135deg, #E8E2D5 0%, #C9BFA9 100%);
-    border-radius: 4px; margin: 4px 0; }
-
-  .plat .qr { position: absolute; right: 32px; bottom: 100px; width: 80px; height: 80px;
-    background:
-      linear-gradient(45deg, #1A1A16 25%, transparent 25%, transparent 50%, #1A1A16 50%, #1A1A16 75%, transparent 75%),
-      linear-gradient(0deg, #1A1A16 25%, transparent 25%, transparent 50%, #1A1A16 50%, #1A1A16 75%, transparent 75%);
-    background-size: 12px 12px;
-    border: 4px solid #1A1A16; }
-  .plat .qr::after { content: ''; position: absolute; inset: 0; background: #FFFFFF;
-    clip-path: polygon(0 0, 25% 0, 25% 25%, 0 25%, 0 50%, 25% 50%, 25% 75%, 0 75%,
-                       50% 75%, 50% 50%, 75% 50%, 75% 25%, 50% 25%, 50% 0, 100% 0,
-                       100% 25%, 75% 25%, 75% 50%, 100% 50%, 100% 75%, 75% 75%,
-                       75% 100%, 50% 100%, 50% 75%, 25% 75%, 25% 100%, 0 100%); }
-
-  .plat .cta { position: absolute; bottom: 24px; right: 32px; padding: 8px 16px;
-    background: #1A1A16; color: #FFFFFF; font-family: 'Inter', sans-serif;
-    font-weight: 800; font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; }
-  .plat.welfare .cta { background: #E60012; }
-
-  .bot { position: absolute; bottom: 0; left: 0; right: 0; height: 56px; background: #1A1A16;
-    color: #FFFFFF; display: flex; align-items: center; padding: 0 80px; }
-  .bot .lbl { font-family: 'JetBrains Mono', monospace; font-size: 12px; font-weight: 500;
-    letter-spacing: 0.2em; text-transform: uppercase; }
-  .bot .lbl .red { color: #E60012; }
-  .bot .right { margin-left: auto; font-family: 'Inter', sans-serif; font-weight: 700;
-    font-size: 13px; letter-spacing: 0.1em; }
+  .divider { width: 80px; height: 2px; background: rgba(230,0,18,0.3); margin-top: 48px; }
+  .closing { font-family: 'Noto Sans SC', sans-serif; font-size: 20px; color: #888; margin-top: 24px; text-align: center; }
+  .closing em { font-style: normal; color: #E60012; font-weight: 700; }
 </style>
 </head>
 <body>
   <div class="stage">
     <div class="page" data-composition-id="platforms_chip" data-start="0" data-duration="4" data-width="1920" data-height="1080">
-      <div class="grid"></div>
       <div class="red-bar"></div>
 
-      <div class="top">
-        <div class="lbl">VICOO · <span class="red">ECOSYSTEM</span></div>
-        <div class="rule"></div>
-        <div class="meta">3 PLATFORMS · 1 VISUAL LANGUAGE</div>
-      </div>
+      <div class="content">
+        <div class="eyebrow">THREE PLATFORMS</div>
+        <div class="headline">One <em>mission</em>, three ways to access.</div>
 
-      <div class="title">
-        <div class="kicker">CHAPTER · CROSS-PLATFORM</div>
-        <h1>Three <em>surfaces</em>,<br/>one mission.</h1>
-        <p class="sub">在 Web、小程序、Android 三端，VICOO 保持同一套视觉语言：黑白 + 一点红。无论你从哪里进来，看到的都是同一本刊物。</p>
-      </div>
-
-      <div class="platforms">
-        <div class="plat welfare active">
-          <div class="status"><span class="d"></span>LIVE</div>
-          <div class="head">
-            <div class="icon">U</div>
-            <div class="meta-block">
-              <div class="role">FLAGSHIP · 2026</div>
-              <div class="name">WELFARE × ART WEB</div>
+        <div class="platforms">
+          <div class="platform">
+            <div class="sweep"></div>
+            <div class="badge">WEB</div>
+            <div class="icon">🌐</div>
+            <h3>React Web</h3>
+            <div class="desc">1990s 编辑杂志美学，沉浸式浏览体验</div>
+            <div class="stats">
+              <div class="stat"><div class="val">1,284</div><div class="lbl">Products</div></div>
+              <div class="stat"><div class="val">4,872</div><div class="lbl">Users</div></div>
             </div>
           </div>
-          <div class="desc">全功能编辑式电商。杂志风格的商品故事、捐赠流、订单管理、孩子作品墙、供应链账本。</div>
-          <div class="stack">REACT 18 · TYPESCRIPT · VITE · TAILWIND</div>
-          <div class="device">
-            <div class="screen">
-              <div class="red-head"></div>
-              <div class="line" style="width:80%"></div>
-              <div class="line" style="width:60%"></div>
-              <div class="img"></div>
-              <div class="line" style="width:80%"></div>
-              <div class="line" style="width:60%"></div>
+          <div class="platform">
+            <div class="sweep"></div>
+            <div class="badge">WECHAT</div>
+            <div class="icon">💬</div>
+            <h3>WeChat Mini</h3>
+            <div class="desc">微信小程序，扫码即用，无需下载</div>
+            <div class="stats">
+              <div class="stat"><div class="val">8,234</div><div class="lbl">Users</div></div>
+              <div class="stat"><div class="val">92%</div><div class="lbl">Retention</div></div>
             </div>
           </div>
-          <div class="stats">
-            <div class="stat"><div class="v">1,284</div><div class="l">PRODUCTS</div></div>
-            <div class="stat"><div class="v">¥1.2M</div><div class="l">DONATED</div></div>
-            <div class="stat"><div class="v">32</div><div class="l">SCHOOLS</div></div>
+          <div class="platform">
+            <div class="sweep"></div>
+            <div class="badge">ANDROID</div>
+            <div class="icon">📱</div>
+            <h3>Android App</h3>
+            <div class="desc">原生体验，Kotlin + Jetpack Compose</div>
+            <div class="stats">
+              <div class="stat"><div class="val">3,456</div><div class="lbl">Downloads</div></div>
+              <div class="stat"><div class="val">4.8★</div><div class="lbl">Rating</div></div>
+            </div>
           </div>
-          <div class="cta">VISIT →</div>
         </div>
 
-        <div class="plat weapp">
-          <div class="status"><span class="d"></span>BETA · 87%</div>
-          <div class="head">
-            <div class="icon">微</div>
-            <div class="meta-block">
-              <div class="role">SOCIAL · EMBEDDED</div>
-              <div class="name">WECHAT MINI PROGRAM</div>
-            </div>
-          </div>
-          <div class="desc">靠近孩子的入口。在微信内提交画作、参与投票、转发公益故事，两步完成。</div>
-          <div class="stack">WXML · WXSS · WXS · WECHAT OPEN API</div>
-          <div class="qr"></div>
-          <div class="stats">
-            <div class="stat"><div class="v">4,872</div><div class="l">ARTWORKS</div></div>
-            <div class="stat"><div class="v">12K<span class="red">★</span></div><div class="l">VOTES</div></div>
-          </div>
-          <div class="cta">SCAN →</div>
-        </div>
-
-        <div class="plat android">
-          <div class="status"><span class="d warn"></span>DEV</div>
-          <div class="head">
-            <div class="icon">▲</div>
-            <div class="meta-block">
-              <div class="role">MOBILE · NATIVE</div>
-              <div class="name">ANDROID APP</div>
-            </div>
-          </div>
-          <div class="desc">口袋里的画板。摄像头优先提交、离线草稿、同样的账本，原生体验。</div>
-          <div class="stack">KOTLIN · COMPOSE · MATERIAL 3</div>
-          <div class="device">
-            <div class="screen">
-              <div class="green-head"></div>
-              <div class="line" style="width:60%"></div>
-              <div class="img"></div>
-              <div class="line" style="width:80%"></div>
-              <div class="line" style="width:60%"></div>
-            </div>
-          </div>
-          <div class="stats">
-            <div class="stat"><div class="v">v0.7</div><div class="l">VERSION</div></div>
-            <div class="stat"><div class="v">Q3</div><div class="l">LAUNCH</div></div>
-          </div>
-          <div class="cta">GET IT →</div>
-        </div>
-      </div>
-
-      <div class="bot">
-        <div class="lbl">SAME <span class="red">VISUAL</span> LANGUAGE · SAME <span class="red">MISSION</span></div>
-        <div class="right">vicoo.org · wechat · play store</div>
+        <div class="divider"></div>
+        <div class="closing">三个平台，<em>同一个使命</em>——让每个孩子的画被世界看见。</div>
       </div>
     </div>
   </div>
@@ -242,64 +100,37 @@
       window.__timelines["platforms_chip"] = tl;
 
       gsap.set('.red-bar', { scaleX: 0, transformOrigin: 'left center' });
-      gsap.set('.top > *', { y: -20, opacity: 0 });
-      gsap.set('.title > *', { y: 30, opacity: 0 });
-      gsap.set('.plat', { y: 80, opacity: 0 });
-      gsap.set('.plat .icon', { rotation: -90, scale: 0 });
-      gsap.set('.plat .status', { x: 20, opacity: 0 });
-      gsap.set('.plat .device', { y: 30, opacity: 0, scale: 0.7 });
-      gsap.set('.plat .qr', { rotation: 90, scale: 0 });
+      gsap.set('.eyebrow', { y: -20, opacity: 0 });
+      gsap.set('.headline', { y: 30, opacity: 0 });
+      gsap.set('.platform', { y: 40, opacity: 0, scale: 0.9 });
+      gsap.set('.platform::before', { scaleX: 0 });
+      gsap.set('.divider', { scaleX: 0, transformOrigin: 'center' });
+      gsap.set('.closing', { y: 20, opacity: 0 });
 
-      tl.to('.red-bar', { scaleX: 1, duration: 0.5, ease: 'power3.inOut' }, 0);
-      tl.to('.top > *', { y: 0, opacity: 1, duration: 0.5, stagger: 0.06, ease: 'power2.out' }, 0.1);
-      tl.to('.title > *', { y: 0, opacity: 1, duration: 0.6, stagger: 0.1, ease: 'power2.out' }, 0.4);
-      tl.to('.plat', { y: 0, opacity: 1, duration: 0.8, stagger: 0.15, ease: 'power3.out' }, 0.8);
-      tl.to('.plat .icon', {
-        rotation: 0, scale: 1, duration: 0.7, stagger: 0.15, ease: 'back.out(1.7)'
-      }, 1.1);
-      tl.to('.plat .status', {
-        x: 0, opacity: 1, duration: 0.4, stagger: 0.15, ease: 'power2.out'
-      }, 1.4);
-      tl.to('.plat.welfare', { duration: 0.8, onStart: () => {
-        document.querySelector('.plat.welfare').classList.add('active');
-      }}, 1.6);
-      tl.to('.plat .device', {
-        y: 0, opacity: 1, scale: 1, duration: 0.7, stagger: 0.15, ease: 'back.out(1.5)'
-      }, 1.7);
-      tl.to('.plat .qr', {
-        rotation: 0, scale: 1, duration: 0.7, ease: 'back.out(1.5)'
-      }, 1.85);
+      // Entry
+      tl.to('.red-bar', { scaleX: 1, duration: 0.4, ease: 'power4.inOut' }, 0);
+      tl.to('.eyebrow', { y: 0, opacity: 1, duration: 0.5, ease: 'power3.out' }, 0.2);
+      tl.to('.headline', { y: 0, opacity: 1, duration: 0.7, ease: 'expo.out' }, 0.4);
 
-      const stats = [
-        { sel: '.plat.welfare .stats .stat:nth-child(1) .v', target: 1284, format: 'n' },
-        { sel: '.plat.welfare .stats .stat:nth-child(2) .v', target: 1.2, format: 'm' },
-        { sel: '.plat.welfare .stats .stat:nth-child(3) .v', target: 32, format: 'n' },
-        { sel: '.plat.weapp .stats .stat:nth-child(1) .v', target: 4872, format: 'n' },
-        { sel: '.plat.weapp .stats .stat:nth-child(2) .v', target: 12, format: 'k' },
-      ];
-      stats.forEach((s, i) => {
-        const el = document.querySelector(s.sel);
-        if (!el) return;
-        const obj = { v: 0 };
-        el.innerText = '0';
-        tl.to(obj, {
-          v: s.target, duration: 1.0, ease: 'power2.out',
-          onUpdate: () => {
-            if (s.format === 'n') el.innerText = Math.floor(obj.v).toLocaleString();
-            else if (s.format === 'k') el.innerText = Math.floor(obj.v) + 'K';
-            else if (s.format === 'm') el.innerText = '¥' + obj.v.toFixed(1) + 'M';
-          }
-        }, 2.1 + i * 0.06);
-      });
+      // Platforms — staggered pop with scale
+      tl.to('.platform', { y: 0, opacity: 1, scale: 1, duration: 0.6, stagger: 0.15, ease: 'back.out(1.4)' }, 0.8);
 
-      tl.to('.bot', { y: 0, duration: 0.5, ease: 'power3.out' }, 2.7);
+      // Top bar wipe on each platform
+      tl.to('.platform::before', { scaleX: 1, duration: 0.4, stagger: 0.1, ease: 'power3.inOut' }, 1.2);
 
-      // Exit — everything fades
-      tl.to('.red-bar', { scaleX: 0, transformOrigin: 'right center', duration: 0.4, ease: 'power2.in' }, 3.4);
-      tl.to('.top', { y: -20, opacity: 0, duration: 0.4, ease: 'power2.in' }, 3.4);
-      tl.to('.title', { y: -20, opacity: 0, duration: 0.4, ease: 'power2.in' }, 3.4);
-      tl.to('.platforms', { y: 30, opacity: 0, duration: 0.4, ease: 'power2.in' }, 3.4);
-      tl.to('.bot', { y: 56, duration: 0.4, ease: 'power2.in' }, 3.4);
+      // Divider
+      tl.to('.divider', { scaleX: 1, duration: 0.5, ease: 'power3.inOut' }, 1.8);
+
+      // Closing
+      tl.to('.closing', { y: 0, opacity: 1, duration: 0.5, ease: 'power3.out' }, 2.0);
+
+      // Exit
+      tl.to('.closing', { y: -15, opacity: 0, duration: 0.3, ease: 'power3.in' }, 3.2);
+      tl.to('.divider', { scaleX: 0, duration: 0.2, ease: 'power3.in' }, 3.3);
+      tl.to('.platform', { y: -30, opacity: 0, duration: 0.3, stagger: 0.05, ease: 'power3.in' }, 3.3);
+      tl.to('.headline', { y: -20, opacity: 0, duration: 0.3, ease: 'power3.in' }, 3.5);
+      tl.to('.eyebrow', { y: -15, opacity: 0, duration: 0.3, ease: 'power3.in' }, 3.5);
+      tl.to('.red-bar', { scaleX: 0, transformOrigin: 'right center', duration: 0.3 }, 3.5);
 
       window.addEventListener('load', () => tl.play());
     })();
